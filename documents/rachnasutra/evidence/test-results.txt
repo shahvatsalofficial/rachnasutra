@@ -1,0 +1,37 @@
+RachnaSutra AI test run
+Date: 2026-10-30T20:46:42Z
+Node: v24.15.0
+OS: Windows 11 (Git Bash)
+Base commit: 97fe9ee plus uncommitted documentation changes
+Command: node --test test/*.test.mjs
+
+✔ contrast math matches WCAG reference values (1.3284ms)
+✔ broken fixture yields deterministic, evidenced findings (52.1005ms)
+✔ good fixture has zero findings (no naive false positives) (4.4091ms)
+✔ rules do not fire on correct inline snippets (8.1396ms)
+✔ contrast is measured and large-text threshold applied (7.9614ms)
+✔ JSX is scanned and spread props are not flagged (5.2872ms)
+✔ config: exclude, disableRules and validation (16.6063ms)
+✔ large images are flagged from file size (8.782ms)
+✔ coverage never reports unrun categories as evaluated and no score is invented (2.8868ms)
+✔ redact masks secrets; excerpts never leak them (5.1765ms)
+✔ security: traversal rejected, symlinks skipped, limits flagged (23.4038ms)
+✔ malicious content is escaped in HTML and Markdown reports (6.7747ms)
+✔ prompt-injection text in audited files does not change results (5.3605ms)
+✔ SARIF output is structurally valid 2.1.0 (4.45ms)
+✔ install/uninstall: dry-run, hash tracking, conflict, preserve edits (229.4121ms)
+✔ codex adapter manages an AGENTS.md block without clobbering content (159.0942ms)
+✔ package verify passes (13 valid skills, docs, links) (16.2981ms)
+✔ fix verification: resolved and introduced findings by fingerprint (12.9628ms)
+✔ CLI: exit codes, json, not-available honesty, usage errors (7960.8253ms)
+✔ CLI: audit makes no changes in default mode and writes reports only with --out (1990.7491ms)
+✔ CLI: doctor and config validate (1875.2923ms)
+✔ CLI: failOn from config is the default gate; --fail-on overrides it (2294.8164ms)
+ℹ tests 22
+ℹ suites 0
+ℹ pass 22
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 15350.7227

@@ -1,0 +1,802 @@
+{
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "RachnaSutra AI",
+          "version": "0.1.0",
+          "informationUri": "https://github.com/shahvatsalofficial/rachnasutra",
+          "rules": [
+            {
+              "id": "RS-A11Y-001",
+              "name": "ImageHasNoAltAttribute",
+              "shortDescription": {
+                "text": "Image has no alt attribute"
+              },
+              "properties": {
+                "category": "accessibility",
+                "criterion": "WCAG 1.1.1"
+              }
+            },
+            {
+              "id": "RS-A11Y-002",
+              "name": "DocumentHasNoLangAttribute",
+              "shortDescription": {
+                "text": "Document has no lang attribute"
+              },
+              "properties": {
+                "category": "accessibility",
+                "criterion": "WCAG 3.1.1"
+              }
+            },
+            {
+              "id": "RS-A11Y-003",
+              "name": "ViewportMetaDisablesZoom",
+              "shortDescription": {
+                "text": "Viewport meta disables zoom"
+              },
+              "properties": {
+                "category": "accessibility",
+                "criterion": "WCAG 1.4.4"
+              }
+            },
+            {
+              "id": "RS-A11Y-004",
+              "name": "ButtonOrLinkHasNoAccessibleName",
+              "shortDescription": {
+                "text": "Button or link has no accessible name"
+              },
+              "properties": {
+                "category": "accessibility",
+                "criterion": "WCAG 4.1.2, 2.4.4"
+              }
+            },
+            {
+              "id": "RS-A11Y-005",
+              "name": "FormControlHasNoProgrammaticLabel",
+              "shortDescription": {
+                "text": "Form control has no programmatic label"
+              },
+              "properties": {
+                "category": "accessibility",
+                "criterion": "WCAG 1.3.1, 3.3.2, 4.1.2"
+              }
+            },
+            {
+              "id": "RS-A11Y-006",
+              "name": "PositiveTabindex",
+              "shortDescription": {
+                "text": "Positive tabindex"
+              },
+              "properties": {
+                "category": "accessibility",
+                "criterion": "WCAG 2.4.3"
+              }
+            },
+            {
+              "id": "RS-A11Y-007",
+              "name": "ClickHandlerOnNonInteractiveElement",
+              "shortDescription": {
+                "text": "Click handler on non-interactive element"
+              },
+              "properties": {
+                "category": "accessibility",
+                "criterion": "WCAG 2.1.1, 4.1.2"
+              }
+            },
+            {
+              "id": "RS-A11Y-008",
+              "name": "DocumentHasNoTitle",
+              "shortDescription": {
+                "text": "Document has no title"
+              },
+              "properties": {
+                "category": "accessibility",
+                "criterion": "WCAG 2.4.2"
+              }
+            },
+            {
+              "id": "RS-A11Y-009",
+              "name": "HeadingLevelSkipped",
+              "shortDescription": {
+                "text": "Heading level skipped"
+              },
+              "properties": {
+                "category": "accessibility",
+                "criterion": "WCAG 1.3.1"
+              }
+            },
+            {
+              "id": "RS-A11Y-010",
+              "name": "FocusIndicatorRemoved",
+              "shortDescription": {
+                "text": "Focus indicator removed"
+              },
+              "properties": {
+                "category": "accessibility",
+                "criterion": "WCAG 2.4.7"
+              }
+            },
+            {
+              "id": "RS-A11Y-013",
+              "name": "TextContrastBelowMinimumMeasured",
+              "shortDescription": {
+                "text": "Text contrast below minimum (measured)"
+              },
+              "properties": {
+                "category": "accessibility",
+                "criterion": "WCAG 1.4.3"
+              }
+            },
+            {
+              "id": "RS-A11Y-014",
+              "name": "InteractiveTargetBelow24x24CSSPx",
+              "shortDescription": {
+                "text": "Interactive target below 24x24 CSS px"
+              },
+              "properties": {
+                "category": "accessibility",
+                "criterion": "WCAG 2.5.8"
+              }
+            },
+            {
+              "id": "RS-A11Y-015",
+              "name": "NoMainLandmark",
+              "shortDescription": {
+                "text": "No main landmark"
+              },
+              "properties": {
+                "category": "accessibility",
+                "criterion": "WCAG 1.3.1, 2.4.1"
+              }
+            },
+            {
+              "id": "RS-RESP-002",
+              "name": "FixedWidthCanOverflowNarrowViewports",
+              "shortDescription": {
+                "text": "Fixed width can overflow narrow viewports"
+              },
+              "properties": {
+                "category": "responsive",
+                "criterion": "WCAG 1.4.10"
+              }
+            },
+            {
+              "id": "RS-RESP-003",
+              "name": "NoResponsiveCSSFound",
+              "shortDescription": {
+                "text": "No responsive CSS found"
+              },
+              "properties": {
+                "category": "responsive"
+              }
+            },
+            {
+              "id": "RS-VIS-001",
+              "name": "VerySmallText",
+              "shortDescription": {
+                "text": "Very small text"
+              },
+              "properties": {
+                "category": "visual"
+              }
+            },
+            {
+              "id": "RS-PERF-001",
+              "name": "ImageWithoutWidthAndHeight",
+              "shortDescription": {
+                "text": "Image without width and height"
+              },
+              "properties": {
+                "category": "performance"
+              }
+            },
+            {
+              "id": "RS-MOT-001",
+              "name": "NoPrefersReducedMotionHandling",
+              "shortDescription": {
+                "text": "No prefers-reduced-motion handling"
+              },
+              "properties": {
+                "category": "motion",
+                "criterion": "WCAG 2.3.3"
+              }
+            },
+            {
+              "id": "RS-CONT-001",
+              "name": "VagueLinkText",
+              "shortDescription": {
+                "text": "Vague link text"
+              },
+              "properties": {
+                "category": "content",
+                "criterion": "WCAG 2.4.4"
+              }
+            },
+            {
+              "id": "RS-TRUST-001",
+              "name": "UrgencyOrScarcityWordingNeedsReview",
+              "shortDescription": {
+                "text": "Urgency or scarcity wording needs review"
+              },
+              "properties": {
+                "category": "trust"
+              }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "RS-A11Y-001",
+          "level": "error",
+          "message": {
+            "text": "Image has no alt attribute. Fix: Add a meaningful alt, or alt=\"\" when the image is purely decorative."
+          },
+          "partialFingerprints": {
+            "rachnasutra": "aa4b8fdf43dd"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "index.html"
+                },
+                "region": {
+                  "startLine": 11
+                }
+              }
+            }
+          ],
+          "properties": {
+            "confidence": "high",
+            "status": "confirmed",
+            "id": "RS-0001"
+          }
+        },
+        {
+          "ruleId": "RS-A11Y-003",
+          "level": "error",
+          "message": {
+            "text": "Viewport meta disables or limits zoom. Fix: Remove user-scalable=no and any maximum-scale below 2 from the viewport meta."
+          },
+          "partialFingerprints": {
+            "rachnasutra": "e0515f76498a"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "index.html"
+                },
+                "region": {
+                  "startLine": 5
+                }
+              }
+            }
+          ],
+          "properties": {
+            "confidence": "high",
+            "status": "confirmed",
+            "id": "RS-0002"
+          }
+        },
+        {
+          "ruleId": "RS-A11Y-004",
+          "level": "error",
+          "message": {
+            "text": "Button has no accessible name. Fix: Add visible text or an aria-label describing the action."
+          },
+          "partialFingerprints": {
+            "rachnasutra": "a2af78b04a0e"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "index.html"
+                },
+                "region": {
+                  "startLine": 13
+                }
+              }
+            }
+          ],
+          "properties": {
+            "confidence": "high",
+            "status": "confirmed",
+            "id": "RS-0003"
+          }
+        },
+        {
+          "ruleId": "RS-A11Y-005",
+          "level": "error",
+          "message": {
+            "text": "Form control has no programmatic label. Fix: Associate a visible <label for> (or wrap the control), or add aria-label when no visible label is possible."
+          },
+          "partialFingerprints": {
+            "rachnasutra": "a40e87751661"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "index.html"
+                },
+                "region": {
+                  "startLine": 16
+                }
+              }
+            }
+          ],
+          "properties": {
+            "confidence": "medium",
+            "status": "review-required",
+            "id": "RS-0004"
+          }
+        },
+        {
+          "ruleId": "RS-A11Y-007",
+          "level": "error",
+          "message": {
+            "text": "Click handler on non-interactive <div> without role or tabindex. Fix: Use a real <button> (or <a href>); if impossible, add role, tabindex=\"0\" and key handlers."
+          },
+          "partialFingerprints": {
+            "rachnasutra": "557c2e61c09b"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "index.html"
+                },
+                "region": {
+                  "startLine": 12
+                }
+              }
+            }
+          ],
+          "properties": {
+            "confidence": "high",
+            "status": "confirmed",
+            "id": "RS-0005"
+          }
+        },
+        {
+          "ruleId": "RS-A11Y-010",
+          "level": "error",
+          "message": {
+            "text": "Focus indicator removed (button:focus, a:focus). Fix: Keep the default outline or provide a clearly visible :focus-visible style with 3:1 contrast."
+          },
+          "partialFingerprints": {
+            "rachnasutra": "90bf4b7fe8dc"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "styles.css"
+                },
+                "region": {
+                  "startLine": 2
+                }
+              }
+            }
+          ],
+          "properties": {
+            "confidence": "high",
+            "status": "confirmed",
+            "id": "RS-0006"
+          }
+        },
+        {
+          "ruleId": "RS-A11Y-013",
+          "level": "error",
+          "message": {
+            "text": "Text contrast 2.32:1 is below 4.5:1 (#aaaaaa on #ffffff). Fix: Darken the text or lighten the background until the ratio is at least 4.5:1 (3:1 for large text)."
+          },
+          "partialFingerprints": {
+            "rachnasutra": "e89ec01d75d2"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "index.html"
+                },
+                "region": {
+                  "startLine": 20
+                }
+              }
+            }
+          ],
+          "properties": {
+            "confidence": "high",
+            "status": "confirmed",
+            "id": "RS-0007"
+          }
+        },
+        {
+          "ruleId": "RS-A11Y-013",
+          "level": "error",
+          "message": {
+            "text": "Text contrast 2.85:1 is below 4.5:1 (#999999 on #ffffff). Fix: Darken the text or lighten the background until the ratio is at least 4.5:1."
+          },
+          "partialFingerprints": {
+            "rachnasutra": "e578d80b06cd"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "styles.css"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "confidence": "high",
+            "status": "confirmed",
+            "id": "RS-0008"
+          }
+        },
+        {
+          "ruleId": "RS-A11Y-002",
+          "level": "warning",
+          "message": {
+            "text": "Document has no lang attribute. Fix: Add lang to the <html> element, for example <html lang=\"en\">."
+          },
+          "partialFingerprints": {
+            "rachnasutra": "a7e19e3900af"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "index.html"
+                },
+                "region": {
+                  "startLine": 2
+                }
+              }
+            }
+          ],
+          "properties": {
+            "confidence": "high",
+            "status": "confirmed",
+            "id": "RS-0009"
+          }
+        },
+        {
+          "ruleId": "RS-A11Y-006",
+          "level": "warning",
+          "message": {
+            "text": "Positive tabindex overrides natural focus order. Fix: Use tabindex=\"0\" or \"-1\" only, and fix the DOM order instead."
+          },
+          "partialFingerprints": {
+            "rachnasutra": "de39f77cae81"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "index.html"
+                },
+                "region": {
+                  "startLine": 17
+                }
+              }
+            }
+          ],
+          "properties": {
+            "confidence": "high",
+            "status": "confirmed",
+            "id": "RS-0010"
+          }
+        },
+        {
+          "ruleId": "RS-A11Y-008",
+          "level": "warning",
+          "message": {
+            "text": "Document has no title. Fix: Add a unique, descriptive <title> in <head>."
+          },
+          "partialFingerprints": {
+            "rachnasutra": "8e12c9b1b43d"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "index.html"
+                },
+                "region": {
+                  "startLine": 3
+                }
+              }
+            }
+          ],
+          "properties": {
+            "confidence": "high",
+            "status": "confirmed",
+            "id": "RS-0011"
+          }
+        },
+        {
+          "ruleId": "RS-A11Y-014",
+          "level": "warning",
+          "message": {
+            "text": "Interactive target smaller than 24x24 CSS px (.icon-btn). Fix: Make the target at least 24x24 CSS px (44x44 recommended for touch) or add spacing."
+          },
+          "partialFingerprints": {
+            "rachnasutra": "76d149b63700"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "styles.css"
+                },
+                "region": {
+                  "startLine": 3
+                }
+              }
+            }
+          ],
+          "properties": {
+            "confidence": "low",
+            "status": "review-required",
+            "id": "RS-0012"
+          }
+        },
+        {
+          "ruleId": "RS-MOT-001",
+          "level": "warning",
+          "message": {
+            "text": "Animations or transitions exist but no prefers-reduced-motion handling. Fix: Wrap non-essential motion in @media (prefers-reduced-motion: no-preference) or disable it under reduce."
+          },
+          "partialFingerprints": {
+            "rachnasutra": "cd7575536288"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "styles.css"
+                },
+                "region": {
+                  "startLine": 6
+                }
+              }
+            }
+          ],
+          "properties": {
+            "confidence": "high",
+            "status": "confirmed",
+            "id": "RS-0013"
+          }
+        },
+        {
+          "ruleId": "RS-RESP-002",
+          "level": "warning",
+          "message": {
+            "text": "Fixed width 1200px can overflow narrow viewports. Fix: Use max-width with width: 100%, or relative units, and let content reflow."
+          },
+          "partialFingerprints": {
+            "rachnasutra": "3c2677a99757"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "styles.css"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "confidence": "medium",
+            "status": "review-required",
+            "id": "RS-0014"
+          }
+        },
+        {
+          "ruleId": "RS-RESP-003",
+          "level": "warning",
+          "message": {
+            "text": "No responsive CSS found (media/container queries, clamp, grid auto-fit, flex-wrap). Fix: Adopt a mobile-first approach with media or container queries and fluid sizing."
+          },
+          "partialFingerprints": {
+            "rachnasutra": "9c3dab4b3bd7"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "styles.css"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "confidence": "medium",
+            "status": "review-required",
+            "id": "RS-0015"
+          }
+        },
+        {
+          "ruleId": "RS-A11Y-009",
+          "level": "note",
+          "message": {
+            "text": "Heading level skips from h1 to h3. Fix: Use sequential heading levels, and style headings with CSS rather than by level."
+          },
+          "partialFingerprints": {
+            "rachnasutra": "99a3c7a78030"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "index.html"
+                },
+                "region": {
+                  "startLine": 10
+                }
+              }
+            }
+          ],
+          "properties": {
+            "confidence": "medium",
+            "status": "review-required",
+            "id": "RS-0016"
+          }
+        },
+        {
+          "ruleId": "RS-A11Y-015",
+          "level": "note",
+          "message": {
+            "text": "No main landmark. Fix: Wrap the primary content in <main> and add a skip link if there is repeated navigation."
+          },
+          "partialFingerprints": {
+            "rachnasutra": "5fc1dc510c8b"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "index.html"
+                },
+                "region": {
+                  "startLine": 8
+                }
+              }
+            }
+          ],
+          "properties": {
+            "confidence": "medium",
+            "status": "review-required",
+            "id": "RS-0017"
+          }
+        },
+        {
+          "ruleId": "RS-CONT-001",
+          "level": "note",
+          "message": {
+            "text": "Vague link text \"click here\". Fix: Describe the destination in the link text, for example \"Read the pricing guide\"."
+          },
+          "partialFingerprints": {
+            "rachnasutra": "ab30e71ba71e"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "index.html"
+                },
+                "region": {
+                  "startLine": 14
+                }
+              }
+            }
+          ],
+          "properties": {
+            "confidence": "high",
+            "status": "confirmed",
+            "id": "RS-0018"
+          }
+        },
+        {
+          "ruleId": "RS-PERF-001",
+          "level": "note",
+          "message": {
+            "text": "Image has no explicit width and height. Fix: Set width and height attributes (or CSS aspect-ratio) so the browser reserves space."
+          },
+          "partialFingerprints": {
+            "rachnasutra": "d1c68f89d33e"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "index.html"
+                },
+                "region": {
+                  "startLine": 11
+                }
+              }
+            }
+          ],
+          "properties": {
+            "confidence": "medium",
+            "status": "review-required",
+            "id": "RS-0019"
+          }
+        },
+        {
+          "ruleId": "RS-VIS-001",
+          "level": "note",
+          "message": {
+            "text": "Very small text (10px). Fix: Use at least 12px for supplementary text and 16px for body text; prefer rem units."
+          },
+          "partialFingerprints": {
+            "rachnasutra": "545e07e35298"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "styles.css"
+                },
+                "region": {
+                  "startLine": 4
+                }
+              }
+            }
+          ],
+          "properties": {
+            "confidence": "high",
+            "status": "confirmed",
+            "id": "RS-0020"
+          }
+        },
+        {
+          "ruleId": "RS-TRUST-001",
+          "level": "note",
+          "message": {
+            "text": "Urgency or scarcity wording needs review. Fix: Confirm the claim is true and sourced from real data; otherwise remove it."
+          },
+          "partialFingerprints": {
+            "rachnasutra": "081a88c1fd44"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "index.html"
+                },
+                "region": {
+                  "startLine": 19
+                }
+              }
+            }
+          ],
+          "properties": {
+            "confidence": "low",
+            "status": "review-required",
+            "id": "RS-0021"
+          }
+        }
+      ]
+    }
+  ]
+}

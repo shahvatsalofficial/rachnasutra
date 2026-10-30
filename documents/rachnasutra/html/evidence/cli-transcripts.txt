@@ -1,0 +1,84 @@
+# verify output
+PASS skills-present: 13 skill(s); missing: none
+PASS skill:rachnasutra-access: valid
+PASS skill:rachnasutra-adapt: valid
+PASS skill:rachnasutra-audit: valid
+PASS skill:rachnasutra-canvas: valid
+PASS skill:rachnasutra-content: valid
+PASS skill:rachnasutra-convert: valid
+PASS skill:rachnasutra-flow: valid
+PASS skill:rachnasutra-motion: valid
+PASS skill:rachnasutra-prime: valid
+PASS skill:rachnasutra-speed: valid
+PASS skill:rachnasutra-tokens: valid
+PASS skill:rachnasutra-verify: valid
+PASS skill:rachnasutra-vision: valid
+PASS file:README.md: present
+PASS file:LICENSE: present
+PASS file:AGENTS.md: present
+PASS file:CLAUDE.md: present
+PASS file:SECURITY.md: present
+PASS file:CONTRIBUTING.md: present
+PASS file:ROADMAP.md: present
+PASS file:llms.txt: present
+PASS file:docs/status.md: present
+PASS readme-links: all relative links resolve
+
+# doctor
+OK   node: Node 24.15.0
+OK   target: <project>\fixtures\good-ui
+     fix: Pass an existing project directory.
+OK   hosts-detected: none detected (use --host to choose)
+OK   canonical-skills: <project>\skills
+     fix: Reinstall rachnasutra; skills/ is missing.
+OK   capability:static-audit: available
+OK   capability:browser-audit: not-available (planned); not counted as failure
+OK   capability:visual-review: not-available (planned); not counted as failure
+OK   model-requirement: none for the CLI; skills use your IDE model
+
+# audit broken fixture
+RachnaSutra static audit of <project>\fixtures\intentionally-broken-ui
+Scanned 2 file(s). 21 finding(s): 0 critical, 8 high, 7 medium, 5 low, 1 info.
+  RS-0001 [high/confirmed] RS-A11Y-001 index.html:11 - Image has no alt attribute
+  RS-0002 [high/confirmed] RS-A11Y-003 index.html:5 - Viewport meta disables or limits zoom
+  RS-0003 [high/confirmed] RS-A11Y-004 index.html:13 - Button has no accessible name
+  RS-0004 [high/review-required] RS-A11Y-005 index.html:16 - Form control has no programmatic label
+  RS-0005 [high/confirmed] RS-A11Y-007 index.html:12 - Click handler on non-interactive <div> without role or tabindex
+  RS-0006 [high/confirmed] RS-A11Y-010 styles.css:2 - Focus indicator removed (button:focus, a:focus)
+  RS-0007 [high/confirmed] RS-A11Y-013 index.html:20 - Text contrast 2.32:1 is below 4.5:1 (#aaaaaa on #ffffff)
+  RS-0008 [high/confirmed] RS-A11Y-013 styles.css:1 - Text contrast 2.85:1 is below 4.5:1 (#999999 on #ffffff)
+  RS-0009 [medium/confirmed] RS-A11Y-002 index.html:2 - Document has no lang attribute
+  RS-0010 [medium/confirmed] RS-A11Y-006 index.html:17 - Positive tabindex overrides natural focus order
+  RS-0011 [medium/confirmed] RS-A11Y-008 index.html:3 - Document has no title
+  RS-0012 [medium/review-required] RS-A11Y-014 styles.css:3 - Interactive target smaller than 24x24 CSS px (.icon-btn)
+  RS-0013 [medium/confirmed] RS-MOT-001 styles.css:6 - Animations or transitions exist but no prefers-reduced-motion handling
+  RS-0014 [medium/review-required] RS-RESP-002 styles.css:1 - Fixed width 1200px can overflow narrow viewports
+  RS-0015 [medium/review-required] RS-RESP-003 styles.css:1 - No responsive CSS found (media/container queries, clamp, grid auto-fit, flex-wrap)
+  RS-0016 [low/review-required] RS-A11Y-009 index.html:10 - Heading level skips from h1 to h3
+  RS-0017 [low/review-required] RS-A11Y-015 index.html:8 - No main landmark
+  RS-0018 [low/confirmed] RS-CONT-001 index.html:14 - Vague link text "click here"
+  RS-0019 [low/review-required] RS-PERF-001 index.html:11 - Image has no explicit width and height
+  RS-0020 [low/confirmed] RS-VIS-001 styles.css:4 - Very small text (10px)
+  RS-0021 [info/review-required] RS-TRUST-001 index.html:19 - Urgency or scarcity wording needs review
+Not evaluated: browser runtime, visual review, screen-reader/keyboard testing, Core Web Vitals.
+Static review only; this is not a WCAG conformance statement.
+exit=0
+
+# audit good fixture
+RachnaSutra static audit of <project>\fixtures\good-ui
+Scanned 2 file(s). 0 finding(s): 0 critical, 0 high, 0 medium, 0 low, 0 info.
+Not evaluated: browser runtime, visual review, screen-reader/keyboard testing, Core Web Vitals.
+Static review only; this is not a WCAG conformance statement.
+exit=0
+
+# design-system inspect
+CSS custom properties: 4
+Literal colour share (literal vs var()): 56%
+Top colours: #0b5cadx2, #ffffffx2, #1d1b19x1
+Font sizes: 1remx1
+Spacing: none
+Radii: none
+
+# visual baseline (not available)
+Browser and visual audits are not available in this version (planned: see docs/status.md). No browser was launched and no screenshot was taken. Use `audit --mode static`.
+exit=3

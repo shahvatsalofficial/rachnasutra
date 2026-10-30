@@ -1,0 +1,131 @@
+{
+  "schemaVersion": "1.0.0",
+  "tool": {
+    "name": "rachnasutra",
+    "version": "0.1.0"
+  },
+  "generatedAt": "2026-10-30T20:46:41.847Z",
+  "root": "<project>\\fixtures\\good-ui",
+  "mode": "static",
+  "filesScanned": 2,
+  "fileTypes": {
+    ".html": 1,
+    ".css": 1
+  },
+  "skipped": {
+    "ignoredDirs": 0,
+    "tooLarge": 0,
+    "binary": 0,
+    "symlinks": 0,
+    "overBudget": 0,
+    "excluded": 0
+  },
+  "truncated": false,
+  "findings": [],
+  "coverage": [
+    {
+      "category": "accessibility (static)",
+      "state": "partial",
+      "checks": 15,
+      "detail": "Source patterns and measured literal colour contrast only. Keyboard, screen-reader and axe runtime checks were not run."
+    },
+    {
+      "category": "responsive (static)",
+      "state": "partial",
+      "checks": 3,
+      "detail": "Viewport meta, fixed widths and responsive CSS presence. No viewport was rendered."
+    },
+    {
+      "category": "design system",
+      "state": "partial",
+      "checks": 1,
+      "detail": "Token inventory from literal CSS values; no Figma, Storybook or component API inspection."
+    },
+    {
+      "category": "content",
+      "state": "partial",
+      "checks": 3,
+      "detail": "Link text, placeholder copy and urgency wording only. No tone or localisation review."
+    },
+    {
+      "category": "performance (static)",
+      "state": "partial",
+      "checks": 2,
+      "detail": "Image dimensions and asset size only. Core Web Vitals were not measured."
+    },
+    {
+      "category": "motion",
+      "state": "partial",
+      "checks": 1,
+      "detail": "CSS reduced-motion handling only."
+    },
+    {
+      "category": "browser runtime",
+      "state": "not-run",
+      "checks": 0,
+      "detail": "Not available in this version. Requires an authorized browser audit."
+    },
+    {
+      "category": "visual review",
+      "state": "not-run",
+      "checks": 0,
+      "detail": "Needs screenshots and a vision-capable host. No screenshot was taken."
+    },
+    {
+      "category": "screen-reader and keyboard testing",
+      "state": "not-run",
+      "checks": 0,
+      "detail": "Manual testing required."
+    },
+    {
+      "category": "Core Web Vitals (lab and field)",
+      "state": "not-run",
+      "checks": 0,
+      "detail": "No measurement taken."
+    }
+  ],
+  "tokens": {
+    "cssVariables": 4,
+    "colors": [
+      {
+        "value": "#0b5cad",
+        "count": 2
+      },
+      {
+        "value": "#ffffff",
+        "count": 2
+      },
+      {
+        "value": "#1d1b19",
+        "count": 1
+      }
+    ],
+    "fontSizes": [
+      {
+        "value": "1rem",
+        "count": 1
+      }
+    ],
+    "spacing": [],
+    "radii": [],
+    "hardcodedColorRatio": 0.56
+  },
+  "limitations": [
+    "Static analysis reads source text only. Nothing was rendered, executed or sent over a network.",
+    "Findings are review aids. Automated checks cannot establish WCAG conformance; manual testing is required.",
+    "CSS frameworks, CSS-in-JS and runtime-injected markup are only partly visible.",
+    "No numeric quality score is given because category coverage is partial."
+  ],
+  "summary": {
+    "bySeverity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "info": 0
+    },
+    "byCategory": {},
+    "confirmed": 0,
+    "reviewRequired": 0
+  }
+}

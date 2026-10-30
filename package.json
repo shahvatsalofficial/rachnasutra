@@ -56,6 +56,8 @@
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "npm run build && node --test \"test/*.test.mjs\"",
     "verify": "npm run build && node dist/cli.js verify",
+    "docs": "node scripts/build-docs.mjs",
+    "samples": "npm run build && node dist/cli.js audit fixtures/intentionally-broken-ui --format json,md,html,sarif --out samples/broken-ui && node dist/cli.js audit fixtures/good-ui --format json,md,html --out samples/good-ui && node scripts/sanitize-paths.mjs samples",
     "prepublishOnly": "npm test && npm run verify"
   },
   "devDependencies": {

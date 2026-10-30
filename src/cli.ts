@@ -2,7 +2,7 @@
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { HOSTS, detectHosts, doctor, install, packageRoot, planInstall, uninstall } from './adapters.js';
-import { CONFIG_FILE, SEVERITY_ORDER, runAudit, validateConfig } from './audit.js';
+import { CONFIG_FILE, SEVERITY_ORDER, loadConfig, runAudit, validateConfig } from './audit.js';
 import { exists } from './fsutil.js';
 import { renderHtml, renderJson, renderMarkdown, renderSarif } from './report.js';
 import type { AuditResult, Severity } from './types.js';
@@ -209,7 +209,8 @@ async function main(): Promise<number> {
         if (!args.flags.format) args.flags.json = true;
       }
       await emitAudit(res, args);
-      return failCode(res, (args.flags['fail-on'] as string | undefined) ?? (cmd === 'ci' ? 'confirmed-critical' : undefined));
+      const cfgFail = (await loadConfig(target)).failOn;
+      return failCode(res, (args.flags['fail-on'] as string | undefined) ?? cfgFail ?? (cmd === 'ci' ? 'confirmed-critical' : undefined));
     }
 
     case 'export': {

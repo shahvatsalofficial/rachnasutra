@@ -1,16 +1,30 @@
 # RachnaSutra AI
 
-> Open-source UI/UX design engineering and audit agent. 13 portable Agent Skills (led by RachnaSutra Prime) plus a keyless, deterministic CLI for accessibility (WCAG 2.2 AA oriented), responsive design, design-system, content and performance review. Works with Claude Code, Cursor, OpenAI Codex, GitHub Copilot and Gemini CLI using the IDE's own model; no extra API key. Created by Vatsal Shah. Apache-2.0.
+> Open-source UI/UX design engineering and audit agent. 13 portable Agent Skills (led by RachnaSutra Prime) plus a keyless, deterministic CLI for accessibility (WCAG 2.2 AA oriented), responsive design, design-system, content and performance review of front-end source code. Works with Claude Code, Cursor, OpenAI Codex, GitHub Copilot and Gemini CLI using the IDE's own model; no extra API key. Outputs JSON, Markdown, HTML and SARIF. Created by Vatsal Shah. Apache-2.0. Repository: https://github.com/shahvatsalofficial/rachnasutra
 
-## Docs
-- [README](README.md): overview, install, CLI, compatibility, limits
-- [Status](docs/status.md): what is implemented, tested, planned
-- [Compatibility](docs/compatibility.md): per-host support level
-- [CLI reference](docs/cli-reference.md): commands, flags, exit codes
-- [Audit rubric](docs/rubric.md): rules, severity, coverage, no-score policy
-- [Agent catalog](docs/agent-catalog.md): the 13 skills and when Prime uses each
-- [Privacy and security](docs/privacy-and-security.md): threat model and defaults
+## Start here
+- [README](README.md): overview, install, CLI, proof, FAQ, limits
+- [Documentation overview](documents/rachnasutra/00-overview.md): index of the full documentation set
+- [Executive summary](documents/rachnasutra/01-executive-summary.md): what it is, what is proven, what is not claimed
+
+## Documentation
+- [Functional specification](documents/rachnasutra/02-functional-specification.md): requirements and acceptance criteria
+- [Architecture](documents/rachnasutra/03-architecture.md): components, data flow, design decisions
+- [Technical reference](documents/rachnasutra/04-technical-reference.md): data model, algorithms, exit codes
+- [User guide](documents/rachnasutra/05-user-guide.md): install, run, fix, verify, CI
+- [Audit rules reference](documents/rachnasutra/06-audit-rules-reference.md): all 26 rules with limits
+- [Skills and agents](documents/rachnasutra/07-skills-and-agents.md): the 13 skills and orchestration
+- [Security and privacy](documents/rachnasutra/08-security-and-privacy.md): threat model and controls
+- [Legal and compliance](documents/rachnasutra/09-legal-and-compliance.md): licence, disclaimers, accessibility-law context
+- [Testing and evidence](documents/rachnasutra/10-testing-and-evidence.md): recorded results and samples
+- [Deployment and CI](documents/rachnasutra/11-deployment-and-ci.md): pipelines and gates
+- [Roadmap and status](documents/rachnasutra/12-roadmap-and-status.md): implemented vs planned
+- [FAQ and glossary](documents/rachnasutra/14-faq-and-glossary.md)
+
+## Reference
 - [Report schema](schemas/report.schema.json): machine-readable audit output
+- [Sample report, flawed UI](samples/broken-ui/latest.md)
+- [Compatibility](docs/compatibility.md): per-host support level
 
 ## Skills
 - [rachnasutra-prime](skills/rachnasutra-prime/SKILL.md): orchestrator
@@ -19,10 +33,13 @@
 - [rachnasutra-tokens](skills/rachnasutra-tokens/SKILL.md): design tokens
 - [rachnasutra-audit](skills/rachnasutra-audit/SKILL.md): full ranked audit
 - [rachnasutra-verify](skills/rachnasutra-verify/SKILL.md): fix verification
-- Also: vision, flow, canvas, motion, speed, content, convert (same folder pattern under skills/)
+- Also: vision, flow, canvas, motion, speed, content, convert
 
 ## Key facts
 - Install skills: `npx github:shahvatsalofficial/rachnasutra skills install --host <claude|cursor|codex|copilot|gemini> --target .`
 - Audit: `npx github:shahvatsalofficial/rachnasutra audit . --json`
-- Read-only by default, no telemetry, secrets redacted, no compliance claims, no invented scores.
-- Browser, screenshot, axe and Lighthouse audits are not implemented yet and are reported as not-available.
+- CI gate: `npx github:shahvatsalofficial/rachnasutra ci .` (exit 1 on confirmed high or critical findings)
+- Read-only by default; no network, telemetry or model calls from the CLI; secrets redacted in reports.
+- Static analysis only in 0.1.0. Browser, screenshot, axe and Lighthouse audits are not available yet and exit with code 3.
+- Not a WCAG, ADA or other conformance certification. No quality score is produced.
+- 22 automated tests pass; sample runs and raw outputs are in documents/rachnasutra/evidence/.

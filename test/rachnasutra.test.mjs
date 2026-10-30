@@ -265,3 +265,12 @@ test('CLI: doctor and config validate', async () => {
   await put(r, 'rachnasutra.config.json', '{"exclude":["x"]}');
   assert.equal(cli('config', 'validate', r).status, 0);
 });
+
+test('CLI: failOn from config is the default gate; --fail-on overrides it', async () => {
+  const r = await tmp('failon');
+  await put(r, 'index.html', '<html lang="en"><head><title>t</title><meta name="viewport" content="width=device-width"></head><body><main><img src="a.png" width="1" height="1"></main></body></html>');
+  assert.equal(cli('audit', r).status, 0);
+  await put(r, 'rachnasutra.config.json', '{"failOn":"high"}');
+  assert.equal(cli('audit', r).status, 1);
+  assert.equal(cli('audit', r, '--fail-on', 'critical').status, 0);
+});

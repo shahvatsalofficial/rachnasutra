@@ -2,6 +2,13 @@
 
 All notable changes follow [Semantic Versioning](https://semver.org/). Report schema version is tracked separately (`schemaVersion`).
 
+## Unreleased
+
+- `failOn` in `rachnasutra.config.json` is now the default gate for `audit` and `ci` (`--fail-on` overrides)
+- Full documentation set in `documents/rachnasutra/` (Markdown and generated HTML site), sample reports in `samples/`, recorded test evidence
+- `npm run docs`, `npm run samples`, `scripts/sanitize-paths.mjs`
+- README: proof, FAQ, legal sections; `CITATION.cff`
+
 ## 0.1.0
 
 Initial release.

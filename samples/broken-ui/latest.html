@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RachnaSutra AI audit report</title>
+<style>
+:root{--bg:#fbfaf8;--fg:#1d1b19;--muted:#5b564f;--card:#fff;--line:#d9d4cc;--accent:#8a3b12;--crit:#8f1d1d;--high:#a1400b;--med:#7a5a00;--low:#245c3a;--info:#33506b}
+@media (prefers-color-scheme:dark){:root{--bg:#141210;--fg:#f2eee8;--muted:#b8b0a5;--card:#1d1a17;--line:#3a352f;--accent:#f0a070;--crit:#ff9a9a;--high:#ffb27a;--med:#f0d070;--low:#8fd6a8;--info:#9cc4e8}}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:70rem;margin:0 auto;padding:1.5rem 1rem 4rem}
+h1{font-size:1.75rem;margin:.2rem 0}h2{margin-top:2.2rem;font-size:1.25rem;border-bottom:1px solid var(--line);padding-bottom:.3rem}
+.muted{color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(8rem,1fr));gap:.75rem}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:.6rem;padding:.7rem}.stat b{display:block;font-size:1.5rem}
+.tablewrap{overflow-x:auto}table{border-collapse:collapse;width:100%;background:var(--card)}th,td{border:1px solid var(--line);padding:.45rem .6rem;text-align:left;vertical-align:top}
+.sev{font-weight:600}.sev-critical{color:var(--crit)}.sev-high{color:var(--high)}.sev-medium{color:var(--med)}.sev-low{color:var(--low)}.sev-info{color:var(--info)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:.6rem;padding:.8rem 1rem;margin:.8rem 0}.card h3{margin:.1rem 0 .4rem;font-size:1.05rem}
+dt{font-weight:600;margin-top:.5rem}dd{margin:0}code,pre{font-family:ui-monospace,Consolas,monospace;font-size:.88em;white-space:pre-wrap;overflow-wrap:anywhere}pre{margin:.2rem 0}
+a:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+</style>
+</head>
+<body>
+<main>
+<h1>RachnaSutra AI audit report</h1>
+<p class="muted">Static mode &middot; read-only &middot; 2026-10-30T20:46:41.001Z &middot; rachnasutra 0.1.0</p>
+<h2>Summary</h2>
+<div class="grid" role="list">
+<div class="stat" role="listitem"><b>0</b>critical</div>
+<div class="stat" role="listitem"><b>8</b>high</div>
+<div class="stat" role="listitem"><b>7</b>medium</div>
+<div class="stat" role="listitem"><b>5</b>low</div>
+<div class="stat" role="listitem"><b>1</b>info</div>
+<div class="stat" role="listitem"><b>13</b>confirmed</div>
+<div class="stat" role="listitem"><b>8</b>review required</div>
+</div>
+<p>21 finding(s) across 2 scanned file(s). This static review does not certify WCAG conformance and gives no quality score because large areas were not evaluated.</p>
+<h2>Coverage</h2>
+<div class="tablewrap"><table><caption class="muted">What was and was not evaluated</caption><thead><tr><th scope="col">Area</th><th scope="col">State</th><th scope="col">Detail</th></tr></thead><tbody>
+<tr><th scope="row">accessibility (static)</th><td>partial</td><td>Source patterns and measured literal colour contrast only. Keyboard, screen-reader and axe runtime checks were not run.</td></tr>
+<tr><th scope="row">responsive (static)</th><td>partial</td><td>Viewport meta, fixed widths and responsive CSS presence. No viewport was rendered.</td></tr>
+<tr><th scope="row">design system</th><td>partial</td><td>Token inventory from literal CSS values; no Figma, Storybook or component API inspection.</td></tr>
+<tr><th scope="row">content</th><td>partial</td><td>Link text, placeholder copy and urgency wording only. No tone or localisation review.</td></tr>
+<tr><th scope="row">performance (static)</th><td>partial</td><td>Image dimensions and asset size only. Core Web Vitals were not measured.</td></tr>
+<tr><th scope="row">motion</th><td>partial</td><td>CSS reduced-motion handling only.</td></tr>
+<tr><th scope="row">browser runtime</th><td>not-run</td><td>Not available in this version. Requires an authorized browser audit.</td></tr>
+<tr><th scope="row">visual review</th><td>not-run</td><td>Needs screenshots and a vision-capable host. No screenshot was taken.</td></tr>
+<tr><th scope="row">screen-reader and keyboard testing</th><td>not-run</td><td>Manual testing required.</td></tr>
+<tr><th scope="row">Core Web Vitals (lab and field)</th><td>not-run</td><td>No measurement taken.</td></tr>
+</tbody></table></div>
+<h2>Findings</h2>
+<div class="tablewrap"><table><caption class="muted">All findings, most severe first</caption><thead><tr><th scope="col">ID</th><th scope="col">Severity</th><th scope="col">Rule</th><th scope="col">Title</th><th scope="col">Location</th><th scope="col">Status</th></tr></thead><tbody>
+<tr id="RS-0001"><th scope="row">RS-0001</th><td><span class="sev sev-high">high</span></td><td>RS-A11Y-001</td><td>Image has no alt attribute</td><td><code>index.html:11</code></td><td>confirmed</td></tr>
+<tr id="RS-0002"><th scope="row">RS-0002</th><td><span class="sev sev-high">high</span></td><td>RS-A11Y-003</td><td>Viewport meta disables or limits zoom</td><td><code>index.html:5</code></td><td>confirmed</td></tr>
+<tr id="RS-0003"><th scope="row">RS-0003</th><td><span class="sev sev-high">high</span></td><td>RS-A11Y-004</td><td>Button has no accessible name</td><td><code>index.html:13</code></td><td>confirmed</td></tr>
+<tr id="RS-0004"><th scope="row">RS-0004</th><td><span class="sev sev-high">high</span></td><td>RS-A11Y-005</td><td>Form control has no programmatic label</td><td><code>index.html:16</code></td><td>review-required</td></tr>
+<tr id="RS-0005"><th scope="row">RS-0005</th><td><span class="sev sev-high">high</span></td><td>RS-A11Y-007</td><td>Click handler on non-interactive &lt;div&gt; without role or tabindex</td><td><code>index.html:12</code></td><td>confirmed</td></tr>
+<tr id="RS-0006"><th scope="row">RS-0006</th><td><span class="sev sev-high">high</span></td><td>RS-A11Y-010</td><td>Focus indicator removed (button:focus, a:focus)</td><td><code>styles.css:2</code></td><td>confirmed</td></tr>
+<tr id="RS-0007"><th scope="row">RS-0007</th><td><span class="sev sev-high">high</span></td><td>RS-A11Y-013</td><td>Text contrast 2.32:1 is below 4.5:1 (#aaaaaa on #ffffff)</td><td><code>index.html:20</code></td><td>confirmed</td></tr>
+<tr id="RS-0008"><th scope="row">RS-0008</th><td><span class="sev sev-high">high</span></td><td>RS-A11Y-013</td><td>Text contrast 2.85:1 is below 4.5:1 (#999999 on #ffffff)</td><td><code>styles.css:1</code></td><td>confirmed</td></tr>
+<tr id="RS-0009"><th scope="row">RS-0009</th><td><span class="sev sev-medium">medium</span></td><td>RS-A11Y-002</td><td>Document has no lang attribute</td><td><code>index.html:2</code></td><td>confirmed</td></tr>
+<tr id="RS-0010"><th scope="row">RS-0010</th><td><span class="sev sev-medium">medium</span></td><td>RS-A11Y-006</td><td>Positive tabindex overrides natural focus order</td><td><code>index.html:17</code></td><td>confirmed</td></tr>
+<tr id="RS-0011"><th scope="row">RS-0011</th><td><span class="sev sev-medium">medium</span></td><td>RS-A11Y-008</td><td>Document has no title</td><td><code>index.html:3</code></td><td>confirmed</td></tr>
+<tr id="RS-0012"><th scope="row">RS-0012</th><td><span class="sev sev-medium">medium</span></td><td>RS-A11Y-014</td><td>Interactive target smaller than 24x24 CSS px (.icon-btn)</td><td><code>styles.css:3</code></td><td>review-required</td></tr>
+<tr id="RS-0013"><th scope="row">RS-0013</th><td><span class="sev sev-medium">medium</span></td><td>RS-MOT-001</td><td>Animations or transitions exist but no prefers-reduced-motion handling</td><td><code>styles.css:6</code></td><td>confirmed</td></tr>
+<tr id="RS-0014"><th scope="row">RS-0014</th><td><span class="sev sev-medium">medium</span></td><td>RS-RESP-002</td><td>Fixed width 1200px can overflow narrow viewports</td><td><code>styles.css:1</code></td><td>review-required</td></tr>
+<tr id="RS-0015"><th scope="row">RS-0015</th><td><span class="sev sev-medium">medium</span></td><td>RS-RESP-003</td><td>No responsive CSS found (media/container queries, clamp, grid auto-fit, flex-wrap)</td><td><code>styles.css:1</code></td><td>review-required</td></tr>
+<tr id="RS-0016"><th scope="row">RS-0016</th><td><span class="sev sev-low">low</span></td><td>RS-A11Y-009</td><td>Heading level skips from h1 to h3</td><td><code>index.html:10</code></td><td>review-required</td></tr>
+<tr id="RS-0017"><th scope="row">RS-0017</th><td><span class="sev sev-low">low</span></td><td>RS-A11Y-015</td><td>No main landmark</td><td><code>index.html:8</code></td><td>review-required</td></tr>
+<tr id="RS-0018"><th scope="row">RS-0018</th><td><span class="sev sev-low">low</span></td><td>RS-CONT-001</td><td>Vague link text &quot;click here&quot;</td><td><code>index.html:14</code></td><td>confirmed</td></tr>
+<tr id="RS-0019"><th scope="row">RS-0019</th><td><span class="sev sev-low">low</span></td><td>RS-PERF-001</td><td>Image has no explicit width and height</td><td><code>index.html:11</code></td><td>review-required</td></tr>
+<tr id="RS-0020"><th scope="row">RS-0020</th><td><span class="sev sev-low">low</span></td><td>RS-VIS-001</td><td>Very small text (10px)</td><td><code>styles.css:4</code></td><td>confirmed</td></tr>
+<tr id="RS-0021"><th scope="row">RS-0021</th><td><span class="sev sev-info">info</span></td><td>RS-TRUST-001</td><td>Urgency or scarcity wording needs review</td><td><code>index.html:19</code></td><td>review-required</td></tr>
+</tbody></table></div>
+<h2>Details</h2>
+<article class="card" aria-labelledby="h-RS-0001">
+<h3 id="h-RS-0001">RS-0001 &mdash; Image has no alt attribute</h3>
+<dl>
+<dt>Severity / confidence / status</dt><dd>high / high / confirmed</dd>
+<dt>Criterion</dt><dd>WCAG 2.2: 1.1.1 Non-text Content</dd>
+<dt>Evidence</dt><dd><code>index.html:11</code> <pre>&lt;img src=&quot;hero.jpg&quot;&gt;</pre></dd>
+<dt>User impact</dt><dd>Screen-reader users hear the file name or nothing, and lose the information the image carries.</dd>
+<dt>Recommended fix</dt><dd>Add a meaningful alt, or alt=&quot;&quot; when the image is purely decorative.</dd>
+<dt>Verification</dt><dd>Re-run `rachnasutra accessibility`, then check the image with a screen reader.</dd>
+<dt>Limitations</dt><dd>Whether the alt text is meaningful needs human review.</dd>
+</dl></article>
+<article class="card" aria-labelledby="h-RS-0002">
+<h3 id="h-RS-0002">RS-0002 &mdash; Viewport meta disables or limits zoom</h3>
+<dl>
+<dt>Severity / confidence / status</dt><dd>high / high / confirmed</dd>
+<dt>Criterion</dt><dd>WCAG 2.2: 1.4.4 Resize Text</dd>
+<dt>Evidence</dt><dd><code>index.html:5</code> <pre>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, user-scalable=no&quot;&gt;</pre></dd>
+<dt>User impact</dt><dd>Low-vision users cannot pinch-zoom to read text.</dd>
+<dt>Recommended fix</dt><dd>Remove user-scalable=no and any maximum-scale below 2 from the viewport meta.</dd>
+<dt>Verification</dt><dd>Pinch-zoom the page on a real device or emulator.</dd>
+<dt>Limitations</dt><dd>None for the declared value.</dd>
+</dl></article>
+<article class="card" aria-labelledby="h-RS-0003">
+<h3 id="h-RS-0003">RS-0003 &mdash; Button has no accessible name</h3>
+<dl>
+<dt>Severity / confidence / status</dt><dd>high / high / confirmed</dd>
+<dt>Criterion</dt><dd>WCAG 2.2: 4.1.2 Name, Role, Value</dd>
+<dt>Evidence</dt><dd><code>index.html:13</code> <pre>&lt;button class=&quot;icon-btn&quot;&gt;&lt;/button&gt;</pre></dd>
+<dt>User impact</dt><dd>Screen-reader users hear only &quot;button&quot; and cannot tell what it does.</dd>
+<dt>Recommended fix</dt><dd>Add visible text or an aria-label describing the action.</dd>
+<dt>Verification</dt><dd>Re-run the audit; check the accessible name in the browser accessibility tree.</dd>
+<dt>Limitations</dt><dd>Content injected at runtime would not be seen by static analysis.</dd>
+</dl></article>
+<article class="card" aria-labelledby="h-RS-0004">
+<h3 id="h-RS-0004">RS-0004 &mdash; Form control has no programmatic label</h3>
+<dl>
+<dt>Severity / confidence / status</dt><dd>high / medium / review-required</dd>
+<dt>Criterion</dt><dd>WCAG 2.2: 1.3.1 Info and Relationships, 3.3.2 Labels or Instructions, 4.1.2</dd>
+<dt>Evidence</dt><dd><code>index.html:16</code> <pre>&lt;input type=&quot;email&quot; placeholder=&quot;Email&quot;&gt;</pre></dd>
+<dt>User impact</dt><dd>Screen-reader and voice-control users cannot identify the field; a placeholder alone disappears on input.</dd>
+<dt>Recommended fix</dt><dd>Associate a visible &lt;label for&gt; (or wrap the control), or add aria-label when no visible label is possible.</dd>
+<dt>Verification</dt><dd>Click the label to focus the field; check the accessible name in the accessibility tree.</dd>
+<dt>Limitations</dt><dd>Labels supplied by a component wrapper or at runtime are not visible to a static scan.</dd>
+</dl></article>
+<article class="card" aria-labelledby="h-RS-0005">
+<h3 id="h-RS-0005">RS-0005 &mdash; Click handler on non-interactive &lt;div&gt; without role or tabindex</h3>
+<dl>
+<dt>Severity / confidence / status</dt><dd>high / high / confirmed</dd>
+<dt>Criterion</dt><dd>WCAG 2.2: 2.1.1 Keyboard, 4.1.2 Name, Role, Value</dd>
+<dt>Evidence</dt><dd><code>index.html:12</code> <pre>&lt;div class=&quot;card&quot; onclick=&quot;openCart()&quot;&gt;Open cart&lt;/div&gt;</pre></dd>
+<dt>User impact</dt><dd>Keyboard and assistive-technology users cannot reach or activate the control.</dd>
+<dt>Recommended fix</dt><dd>Use a real &lt;button&gt; (or &lt;a href&gt;); if impossible, add role, tabindex=&quot;0&quot; and key handlers.</dd>
+<dt>Verification</dt><dd>Operate the control with Tab, Enter and Space only.</dd>
+<dt>Limitations</dt><dd>Delegated key handlers elsewhere are not visible to a static scan.</dd>
+</dl></article>
+<article class="card" aria-labelledby="h-RS-0006">
+<h3 id="h-RS-0006">RS-0006 &mdash; Focus indicator removed (button:focus, a:focus)</h3>
+<dl>
+<dt>Severity / confidence / status</dt><dd>high / high / confirmed</dd>
+<dt>Criterion</dt><dd>WCAG 2.2: 2.4.7 Focus Visible</dd>
+<dt>Evidence</dt><dd><code>styles.css:2</code> <pre>button:focus, a:focus { outline: none; }</pre></dd>
+<dt>User impact</dt><dd>Keyboard users cannot see where focus is.</dd>
+<dt>Recommended fix</dt><dd>Keep the default outline or provide a clearly visible :focus-visible style with 3:1 contrast.</dd>
+<dt>Verification</dt><dd>Tab through the control and confirm a visible indicator.</dd>
+<dt>Limitations</dt><dd>A replacement style in another rule or file may exist.</dd>
+</dl></article>
+<article class="card" aria-labelledby="h-RS-0007">
+<h3 id="h-RS-0007">RS-0007 &mdash; Text contrast 2.32:1 is below 4.5:1 (#aaaaaa on #ffffff)</h3>
+<dl>
+<dt>Severity / confidence / status</dt><dd>high / high / confirmed</dd>
+<dt>Criterion</dt><dd>WCAG 2.2: 1.4.3 Contrast (Minimum)</dd>
+<dt>Evidence</dt><dd><code>index.html:20</code> <pre>&lt;p style=&quot;color:#aaaaaa;background:#ffffff&quot;&gt;Light grey inline text&lt;/p&gt;</pre></dd>
+<dt>User impact</dt><dd>Low-vision users and anyone in bright light may be unable to read this text.</dd>
+<dt>Recommended fix</dt><dd>Darken the text or lighten the background until the ratio is at least 4.5:1 (3:1 for large text).</dd>
+<dt>Verification</dt><dd>Re-run the audit; spot-check the rendered colour pair with a contrast tool.</dd>
+<dt>Limitations</dt><dd>Measured from literal inline declarations. Large-text exemption is not applied to inline styles.</dd>
+</dl></article>
+<article class="card" aria-labelledby="h-RS-0008">
+<h3 id="h-RS-0008">RS-0008 &mdash; Text contrast 2.85:1 is below 4.5:1 (#999999 on #ffffff)</h3>
+<dl>
+<dt>Severity / confidence / status</dt><dd>high / high / confirmed</dd>
+<dt>Criterion</dt><dd>WCAG 2.2: 1.4.3 Contrast (Minimum)</dd>
+<dt>Evidence</dt><dd><code>styles.css:1</code> <pre>.hero { width: 1200px; background: #ffffff; color: #999999; }</pre></dd>
+<dt>User impact</dt><dd>Low-vision users and anyone in bright light may be unable to read this text.</dd>
+<dt>Recommended fix</dt><dd>Darken the text or lighten the background until the ratio is at least 4.5:1.</dd>
+<dt>Verification</dt><dd>Re-run the audit; spot-check the rendered colour pair with a contrast tool.</dd>
+<dt>Limitations</dt><dd>Measured from literal declarations in one rule. Cascade, opacity, gradients and images are not resolved.</dd>
+</dl></article>
+<article class="card" aria-labelledby="h-RS-0009">
+<h3 id="h-RS-0009">RS-0009 &mdash; Document has no lang attribute</h3>
+<dl>
+<dt>Severity / confidence / status</dt><dd>medium / high / confirmed</dd>
+<dt>Criterion</dt><dd>WCAG 2.2: 3.1.1 Language of Page</dd>
+<dt>Evidence</dt><dd><code>index.html:2</code> <pre>&lt;html&gt;</pre></dd>
+<dt>User impact</dt><dd>Screen readers may pronounce content with the wrong language rules.</dd>
+<dt>Recommended fix</dt><dd>Add lang to the &lt;html&gt; element, for example &lt;html lang=&quot;en&quot;&gt;.</dd>
+<dt>Verification</dt><dd>Re-run the audit; confirm with a screen reader that pronunciation is correct.</dd>
+<dt>Limitations</dt><dd>None for the missing attribute; the right language code is a content decision.</dd>
+</dl></article>
+<article class="card" aria-labelledby="h-RS-0010">
+<h3 id="h-RS-0010">RS-0010 &mdash; Positive tabindex overrides natural focus order</h3>
+<dl>
+<dt>Severity / confidence / status</dt><dd>medium / high / confirmed</dd>
+<dt>Criterion</dt><dd>WCAG 2.2: 2.4.3 Focus Order</dd>
+<dt>Evidence</dt><dd><code>index.html:17</code> <pre>&lt;input type=&quot;text&quot; tabindex=&quot;3&quot; aria-label=&quot;Name&quot;&gt;</pre></dd>
+<dt>User impact</dt><dd>Keyboard users tab through elements in a surprising order.</dd>
+<dt>Recommended fix</dt><dd>Use tabindex=&quot;0&quot; or &quot;-1&quot; only, and fix the DOM order instead.</dd>
+<dt>Verification</dt><dd>Tab through the page and confirm the order matches the visual order.</dd>
+<dt>Limitations</dt><dd>None for the declared value.</dd>
+</dl></article>
+<article class="card" aria-labelledby="h-RS-0011">
+<h3 id="h-RS-0011">RS-0011 &mdash; Document has no title</h3>
+<dl>
+<dt>Severity / confidence / status</dt><dd>medium / high / confirmed</dd>
+<dt>Criterion</dt><dd>WCAG 2.2: 2.4.2 Page Titled</dd>
+<dt>Evidence</dt><dd><code>index.html:3</code> <pre>&lt;head&gt;</pre></dd>
+<dt>User impact</dt><dd>Users cannot tell tabs, history entries or search results apart.</dd>
+<dt>Recommended fix</dt><dd>Add a unique, descriptive &lt;title&gt; in &lt;head&gt;.</dd>
+<dt>Verification</dt><dd>Re-run the audit and check the browser tab.</dd>
+<dt>Limitations</dt><dd>A title may be set at runtime by a script.</dd>
+</dl></article>
+<article class="card" aria-labelledby="h-RS-0012">
+<h3 id="h-RS-0012">RS-0012 &mdash; Interactive target smaller than 24x24 CSS px (.icon-btn)</h3>
+<dl>
+<dt>Severity / confidence / status</dt><dd>medium / low / review-required</dd>
+<dt>Criterion</dt><dd>WCAG 2.2: 2.5.8 Target Size (Minimum)</dd>
+<dt>Evidence</dt><dd><code>styles.css:3</code> <pre>.icon-btn { width: 16px; height: 16px; }</pre></dd>
+<dt>User impact</dt><dd>Users with tremor or on touch screens may mis-tap.</dd>
+<dt>Recommended fix</dt><dd>Make the target at least 24x24 CSS px (44x44 recommended for touch) or add spacing.</dd>
+<dt>Verification</dt><dd>Measure the rendered bounding box in a browser at the target viewport.</dd>
+<dt>Limitations</dt><dd>Padding may enlarge the real target; selector-name match is heuristic.</dd>
+</dl></article>
+<article class="card" aria-labelledby="h-RS-0013">
+<h3 id="h-RS-0013">RS-0013 &mdash; Animations or transitions exist but no prefers-reduced-motion handling</h3>
+<dl>
+<dt>Severity / confidence / status</dt><dd>medium / high / confirmed</dd>
+<dt>Criterion</dt><dd>WCAG 2.2: 2.3.3 Animation from Interactions (AAA, best practice)</dd>
+<dt>Evidence</dt><dd><code>styles.css:6</code> <pre>.fade { transition: opacity 0.4s; animation: spin 2s infinite; }</pre></dd>
+<dt>User impact</dt><dd>Users with vestibular disorders may be made unwell by motion they asked the OS to reduce.</dd>
+<dt>Recommended fix</dt><dd>Wrap non-essential motion in @media (prefers-reduced-motion: no-preference) or disable it under reduce.</dd>
+<dt>Verification</dt><dd>Enable &quot;reduce motion&quot; in the OS and confirm motion stops.</dd>
+<dt>Limitations</dt><dd>Motion may be handled in JavaScript; only CSS was scanned.</dd>
+</dl></article>
+<article class="card" aria-labelledby="h-RS-0014">
+<h3 id="h-RS-0014">RS-0014 &mdash; Fixed width 1200px can overflow narrow viewports</h3>
+<dl>
+<dt>Severity / confidence / status</dt><dd>medium / medium / review-required</dd>
+<dt>Criterion</dt><dd>WCAG 2.2: 1.4.10 Reflow</dd>
+<dt>Evidence</dt><dd><code>styles.css:1</code> <pre>.hero { width: 1200px; background: #ffffff; color: #999999; }</pre></dd>
+<dt>User impact</dt><dd>On a 320px-wide screen this forces horizontal scrolling.</dd>
+<dt>Recommended fix</dt><dd>Use max-width with width: 100%, or relative units, and let content reflow.</dd>
+<dt>Verification</dt><dd>Render at 320x568 and confirm no horizontal scroll.</dd>
+<dt>Limitations</dt><dd>A parent container or media query may constrain the element; not rendered.</dd>
+</dl></article>
+<article class="card" aria-labelledby="h-RS-0015">
+<h3 id="h-RS-0015">RS-0015 &mdash; No responsive CSS found (media/container queries, clamp, grid auto-fit, flex-wrap)</h3>
+<dl>
+<dt>Severity / confidence / status</dt><dd>medium / medium / review-required</dd>
+
+<dt>Evidence</dt><dd><code>styles.css:1</code> <pre>.hero { width: 1200px; background: #ffffff; color: #999999; }</pre></dd>
+<dt>User impact</dt><dd>Layouts may not adapt to phones, tablets or large displays.</dd>
+<dt>Recommended fix</dt><dd>Adopt a mobile-first approach with media or container queries and fluid sizing.</dd>
+<dt>Verification</dt><dd>Render at 320, 390, 768, 1024 and 1440 widths and review each screenshot.</dd>
+<dt>Limitations</dt><dd>CSS frameworks (Tailwind, Bootstrap) supply responsive rules not visible in source CSS.</dd>
+</dl></article>
+<article class="card" aria-labelledby="h-RS-0016">
+<h3 id="h-RS-0016">RS-0016 &mdash; Heading level skips from h1 to h3</h3>
+<dl>
+<dt>Severity / confidence / status</dt><dd>low / medium / review-required</dd>
+<dt>Criterion</dt><dd>WCAG 2.2: 1.3.1 Info and Relationships</dd>
+<dt>Evidence</dt><dd><code>index.html:10</code> <pre>&lt;h3&gt;Featured&lt;/h3&gt;</pre></dd>
+<dt>User impact</dt><dd>Heading navigation implies a broken outline; users may miss that sections are related.</dd>
+<dt>Recommended fix</dt><dd>Use sequential heading levels, and style headings with CSS rather than by level.</dd>
+<dt>Verification</dt><dd>Inspect the heading outline in the browser accessibility tree.</dd>
+<dt>Limitations</dt><dd>Heading order across included partials is not visible to a single-file scan.</dd>
+</dl></article>
+<article class="card" aria-labelledby="h-RS-0017">
+<h3 id="h-RS-0017">RS-0017 &mdash; No main landmark</h3>
+<dl>
+<dt>Severity / confidence / status</dt><dd>low / medium / review-required</dd>
+<dt>Criterion</dt><dd>WCAG 2.2: 1.3.1 Info and Relationships, 2.4.1 Bypass Blocks</dd>
+<dt>Evidence</dt><dd><code>index.html:8</code> <pre>&lt;body&gt;</pre></dd>
+<dt>User impact</dt><dd>Keyboard and screen-reader users cannot jump straight to the primary content.</dd>
+<dt>Recommended fix</dt><dd>Wrap the primary content in &lt;main&gt; and add a skip link if there is repeated navigation.</dd>
+<dt>Verification</dt><dd>Check landmarks with a screen-reader landmark list or the browser accessibility tree.</dd>
+<dt>Limitations</dt><dd>A shared layout file may provide &lt;main&gt; for this page.</dd>
+</dl></article>
+<article class="card" aria-labelledby="h-RS-0018">
+<h3 id="h-RS-0018">RS-0018 &mdash; Vague link text &quot;click here&quot;</h3>
+<dl>
+<dt>Severity / confidence / status</dt><dd>low / high / confirmed</dd>
+<dt>Criterion</dt><dd>WCAG 2.2: 2.4.4 Link Purpose (In Context)</dd>
+<dt>Evidence</dt><dd><code>index.html:14</code> <pre>&lt;a href=&quot;/sale&quot;&gt;click here&lt;/a&gt;</pre></dd>
+<dt>User impact</dt><dd>Links listed out of context (screen-reader link lists) are indistinguishable.</dd>
+<dt>Recommended fix</dt><dd>Describe the destination in the link text, for example &quot;Read the pricing guide&quot;.</dd>
+<dt>Verification</dt><dd>Re-run the audit; review the page link list.</dd>
+<dt>Limitations</dt><dd>Surrounding context may make the purpose clear to sighted users.</dd>
+</dl></article>
+<article class="card" aria-labelledby="h-RS-0019">
+<h3 id="h-RS-0019">RS-0019 &mdash; Image has no explicit width and height</h3>
+<dl>
+<dt>Severity / confidence / status</dt><dd>low / medium / review-required</dd>
+
+<dt>Evidence</dt><dd><code>index.html:11</code> <pre>&lt;img src=&quot;hero.jpg&quot;&gt;</pre></dd>
+<dt>User impact</dt><dd>Late-loading images can shift layout (Cumulative Layout Shift) while the page renders.</dd>
+<dt>Recommended fix</dt><dd>Set width and height attributes (or CSS aspect-ratio) so the browser reserves space.</dd>
+<dt>Verification</dt><dd>Measure CLS in a lab run (Lighthouse) before and after; compare field data if available.</dd>
+<dt>Limitations</dt><dd>CSS elsewhere may already reserve the space; not measured at runtime.</dd>
+</dl></article>
+<article class="card" aria-labelledby="h-RS-0020">
+<h3 id="h-RS-0020">RS-0020 &mdash; Very small text (10px)</h3>
+<dl>
+<dt>Severity / confidence / status</dt><dd>low / high / confirmed</dd>
+<dt>Criterion</dt><dd>WCAG 2.2: 1.4.4 Resize Text (readability)</dd>
+<dt>Evidence</dt><dd><code>styles.css:4</code> <pre>.note { font-size: 10px; }</pre></dd>
+<dt>User impact</dt><dd>Small text is hard to read, especially on mobile and for low-vision users.</dd>
+<dt>Recommended fix</dt><dd>Use at least 12px for supplementary text and 16px for body text; prefer rem units.</dd>
+<dt>Verification</dt><dd>View on a real phone at normal distance.</dd>
+<dt>Limitations</dt><dd>Context (legal footers, labels) may justify small text; this is a readability signal.</dd>
+</dl></article>
+<article class="card" aria-labelledby="h-RS-0021">
+<h3 id="h-RS-0021">RS-0021 &mdash; Urgency or scarcity wording needs review</h3>
+<dl>
+<dt>Severity / confidence / status</dt><dd>info / low / review-required</dd>
+
+<dt>Evidence</dt><dd><code>index.html:19</code> <pre>&lt;p class=&quot;urgent&quot;&gt;Hurry! Only 3 left in stock.&lt;/p&gt;</pre></dd>
+<dt>User impact</dt><dd>False scarcity or urgency is a dark pattern that manipulates users.</dd>
+<dt>Recommended fix</dt><dd>Confirm the claim is true and sourced from real data; otherwise remove it.</dd>
+<dt>Verification</dt><dd>Human review of the data source behind the claim.</dd>
+<dt>Limitations</dt><dd>Wording alone does not prove the claim is false.</dd>
+</dl></article>
+<h2>Limitations</h2>
+<ul><li>Static analysis reads source text only. Nothing was rendered, executed or sent over a network.</li><li>Findings are review aids. Automated checks cannot establish WCAG conformance; manual testing is required.</li><li>CSS frameworks, CSS-in-JS and runtime-injected markup are only partly visible.</li><li>No numeric quality score is given because category coverage is partial.</li></ul>
+</main>
+</body>
+</html>

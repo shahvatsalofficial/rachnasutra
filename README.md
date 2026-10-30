@@ -2,6 +2,14 @@
 
 **Design Beautifully. Audit Precisely. Deliver Delight.**
 
+[![CI](https://github.com/shahvatsalofficial/rachnasutra/actions/workflows/ci.yml/badge.svg)](https://github.com/shahvatsalofficial/rachnasutra/actions/workflows/ci.yml)
+[![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
+![Node](https://img.shields.io/badge/node-%3E%3D20-brightgreen)
+![Runtime dependencies](https://img.shields.io/badge/runtime%20dependencies-0-brightgreen)
+![Tests](https://img.shields.io/badge/tests-22%20passing-brightgreen)
+
+**Quick links:** [Documentation](documents/rachnasutra/00-overview.md) | [Sample report](samples/broken-ui/latest.md) | [Test evidence](documents/rachnasutra/10-testing-and-evidence.md) | [Rules](documents/rachnasutra/06-audit-rules-reference.md) | [Legal and limits](documents/rachnasutra/09-legal-and-compliance.md)
+
 RachnaSutra AI is an open-source **UI/UX design engineering and auditing agent**: 13 portable [Agent Skills](https://agentskills.io/specification) led by **RachnaSutra Prime**, plus a **keyless CLI** that audits front-end code for accessibility (WCAG 2.2 AA oriented), responsive design, design-system, content and performance risks. Reports come out as JSON, Markdown, accessible HTML and SARIF 2.1.0.
 
 > **No extra API key.** Inside a supported AI IDE, the skills use that IDE's own model. The CLI is deterministic, offline and read-only: no model, no network, no telemetry.
@@ -99,6 +107,76 @@ Exit codes: `0` ok, `1` findings at or above threshold, `2` usage, `3` capabilit
 | Gemini CLI | experimental | `.gemini/skills/` |
 
 "Adapter" means the files follow the vendor's documented layout; they have not been smoke-tested inside each live host by this project yet. Details: [docs/compatibility.md](docs/compatibility.md). No tool can inject a model into an arbitrary IDE; RachnaSutra does not touch IDE credentials.
+
+## Proof, not promises
+
+Everything below is reproducible from this repository.
+
+| Evidence | Result | Where |
+|---|---|---|
+| Automated tests | **22 of 22 passing** (Node 24, Windows 11); CI matrix covers Windows, macOS, Linux on Node 20 and 22 | [test-results.txt](documents/rachnasutra/evidence/test-results.txt) |
+| Intentionally flawed fixture | **21 findings**, each with file and line; identical on every run | [sample report](samples/broken-ui/latest.md) |
+| Correct fixture | **0 findings** | [sample report](samples/good-ui/latest.md) |
+| Contrast maths | Matches WCAG reference ratios (21:1 black on white; 4.54:1 for `#767676` on white) | [tests](test/rachnasutra.test.mjs) |
+| Security tests | Secret redaction, path traversal, report escaping, prompt-injection text in audited files | [security doc](documents/rachnasutra/08-security-and-privacy.md) |
+| Unavailable features | Browser and visual audits exit with code 3 and say so | [CLI transcripts](documents/rachnasutra/evidence/cli-transcripts.txt) |
+
+Example output:
+
+```text
+Scanned 2 file(s). 21 finding(s): 0 critical, 8 high, 7 medium, 5 low, 1 info.
+  RS-0001 [high/confirmed] RS-A11Y-001 index.html:11 - Image has no alt attribute
+  RS-0007 [high/confirmed] RS-A11Y-013 index.html:20 - Text contrast 2.32:1 is below 4.5:1 (#aaaaaa on #ffffff)
+  RS-0006 [high/confirmed] RS-A11Y-010 styles.css:2 - Focus indicator removed (button:focus, a:focus)
+```
+
+## Documentation
+
+The full documentation set is in [`documents/rachnasutra/`](documents/rachnasutra/00-overview.md), as Markdown and as a self-contained, searchable HTML site (open `documents/rachnasutra/html/index.html`; it works offline, in light and dark themes, and on phones).
+
+| Audience | Document |
+|---|---|
+| Executives | [Executive summary](documents/rachnasutra/01-executive-summary.md) |
+| Product and design | [Functional specification](documents/rachnasutra/02-functional-specification.md), [User guide](documents/rachnasutra/05-user-guide.md) |
+| Engineers | [Architecture](documents/rachnasutra/03-architecture.md), [Technical reference](documents/rachnasutra/04-technical-reference.md), [Rules](documents/rachnasutra/06-audit-rules-reference.md) |
+| AI-agent users | [Skills and agents](documents/rachnasutra/07-skills-and-agents.md) |
+| Security and legal | [Security and privacy](documents/rachnasutra/08-security-and-privacy.md), [Legal and compliance](documents/rachnasutra/09-legal-and-compliance.md) |
+| Operations | [Deployment and CI](documents/rachnasutra/11-deployment-and-ci.md) |
+| Contributors | [Maintainer handbook](documents/rachnasutra/13-maintainer-handbook.md), [Roadmap](documents/rachnasutra/12-roadmap-and-status.md) |
+| Everyone | [FAQ and glossary](documents/rachnasutra/14-faq-and-glossary.md) |
+
+## Use in CI
+
+```yaml
+- run: npx --yes github:shahvatsalofficial/rachnasutra ci .
+```
+
+Fails the job on confirmed high or critical findings. See [Deployment and CI](documents/rachnasutra/11-deployment-and-ci.md) for SARIF upload and regression-only gating.
+
+## FAQ
+
+**Do I need an API key?** No. The CLI uses no model. The skills use your AI IDE's own model.
+
+**Does it send my code anywhere?** The CLI makes no network requests and has no telemetry.
+
+**Will it make my site WCAG compliant?** No tool can promise that. It finds common issues with evidence; conformance needs manual testing.
+
+**Why is there no score?** Static analysis covers only part of each category, and a score would hide that. A coverage table is shown instead.
+
+**How is it different from axe or Lighthouse?** Those run on rendered pages. RachnaSutra analyses source offline and adds agent skills for review, implementation and verification. Runtime integrations are planned as optional modules.
+
+More answers: [FAQ](documents/rachnasutra/14-faq-and-glossary.md).
+
+## Legal and disclaimers
+
+- Licensed under [Apache-2.0](LICENSE): free for commercial use, with attribution via [NOTICE](NOTICE). Provided "as is", without warranty.
+- Reports are review aids. They are **not** a WCAG, ADA, Section 508, EN 301 549 or European Accessibility Act conformance statement, a VPAT, or legal advice.
+- Independent project, not affiliated with or endorsed by W3C, Deque, Anthropic, OpenAI, Google, GitHub, Cursor or any IDE vendor. Product names are used only to describe compatibility. No trademark clearance has been performed.
+- Details: [Legal and compliance](documents/rachnasutra/09-legal-and-compliance.md).
+
+## Cite this project
+
+See [CITATION.cff](CITATION.cff), or use GitHub's "Cite this repository".
 
 ## Honest limits
 

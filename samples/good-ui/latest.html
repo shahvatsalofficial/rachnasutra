@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RachnaSutra AI audit report</title>
+<style>
+:root{--bg:#fbfaf8;--fg:#1d1b19;--muted:#5b564f;--card:#fff;--line:#d9d4cc;--accent:#8a3b12;--crit:#8f1d1d;--high:#a1400b;--med:#7a5a00;--low:#245c3a;--info:#33506b}
+@media (prefers-color-scheme:dark){:root{--bg:#141210;--fg:#f2eee8;--muted:#b8b0a5;--card:#1d1a17;--line:#3a352f;--accent:#f0a070;--crit:#ff9a9a;--high:#ffb27a;--med:#f0d070;--low:#8fd6a8;--info:#9cc4e8}}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:70rem;margin:0 auto;padding:1.5rem 1rem 4rem}
+h1{font-size:1.75rem;margin:.2rem 0}h2{margin-top:2.2rem;font-size:1.25rem;border-bottom:1px solid var(--line);padding-bottom:.3rem}
+.muted{color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(8rem,1fr));gap:.75rem}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:.6rem;padding:.7rem}.stat b{display:block;font-size:1.5rem}
+.tablewrap{overflow-x:auto}table{border-collapse:collapse;width:100%;background:var(--card)}th,td{border:1px solid var(--line);padding:.45rem .6rem;text-align:left;vertical-align:top}
+.sev{font-weight:600}.sev-critical{color:var(--crit)}.sev-high{color:var(--high)}.sev-medium{color:var(--med)}.sev-low{color:var(--low)}.sev-info{color:var(--info)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:.6rem;padding:.8rem 1rem;margin:.8rem 0}.card h3{margin:.1rem 0 .4rem;font-size:1.05rem}
+dt{font-weight:600;margin-top:.5rem}dd{margin:0}code,pre{font-family:ui-monospace,Consolas,monospace;font-size:.88em;white-space:pre-wrap;overflow-wrap:anywhere}pre{margin:.2rem 0}
+a:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+</style>
+</head>
+<body>
+<main>
+<h1>RachnaSutra AI audit report</h1>
+<p class="muted">Static mode &middot; read-only &middot; 2026-10-30T20:46:41.847Z &middot; rachnasutra 0.1.0</p>
+<h2>Summary</h2>
+<div class="grid" role="list">
+<div class="stat" role="listitem"><b>0</b>critical</div>
+<div class="stat" role="listitem"><b>0</b>high</div>
+<div class="stat" role="listitem"><b>0</b>medium</div>
+<div class="stat" role="listitem"><b>0</b>low</div>
+<div class="stat" role="listitem"><b>0</b>info</div>
+<div class="stat" role="listitem"><b>0</b>confirmed</div>
+<div class="stat" role="listitem"><b>0</b>review required</div>
+</div>
+<p>0 finding(s) across 2 scanned file(s). This static review does not certify WCAG conformance and gives no quality score because large areas were not evaluated.</p>
+<h2>Coverage</h2>
+<div class="tablewrap"><table><caption class="muted">What was and was not evaluated</caption><thead><tr><th scope="col">Area</th><th scope="col">State</th><th scope="col">Detail</th></tr></thead><tbody>
+<tr><th scope="row">accessibility (static)</th><td>partial</td><td>Source patterns and measured literal colour contrast only. Keyboard, screen-reader and axe runtime checks were not run.</td></tr>
+<tr><th scope="row">responsive (static)</th><td>partial</td><td>Viewport meta, fixed widths and responsive CSS presence. No viewport was rendered.</td></tr>
+<tr><th scope="row">design system</th><td>partial</td><td>Token inventory from literal CSS values; no Figma, Storybook or component API inspection.</td></tr>
+<tr><th scope="row">content</th><td>partial</td><td>Link text, placeholder copy and urgency wording only. No tone or localisation review.</td></tr>
+<tr><th scope="row">performance (static)</th><td>partial</td><td>Image dimensions and asset size only. Core Web Vitals were not measured.</td></tr>
+<tr><th scope="row">motion</th><td>partial</td><td>CSS reduced-motion handling only.</td></tr>
+<tr><th scope="row">browser runtime</th><td>not-run</td><td>Not available in this version. Requires an authorized browser audit.</td></tr>
+<tr><th scope="row">visual review</th><td>not-run</td><td>Needs screenshots and a vision-capable host. No screenshot was taken.</td></tr>
+<tr><th scope="row">screen-reader and keyboard testing</th><td>not-run</td><td>Manual testing required.</td></tr>
+<tr><th scope="row">Core Web Vitals (lab and field)</th><td>not-run</td><td>No measurement taken.</td></tr>
+</tbody></table></div>
+<h2>Findings</h2>
+<p>No findings from the static rules. This does not mean the UI is accessible or well designed.</p>
+<h2>Limitations</h2>
+<ul><li>Static analysis reads source text only. Nothing was rendered, executed or sent over a network.</li><li>Findings are review aids. Automated checks cannot establish WCAG conformance; manual testing is required.</li><li>CSS frameworks, CSS-in-JS and runtime-injected markup are only partly visible.</li><li>No numeric quality score is given because category coverage is partial.</li></ul>
+</main>
+</body>
+</html>
