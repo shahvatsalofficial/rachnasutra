@@ -1,0 +1,28 @@
+# RachnaSutra AI
+
+> Open-source UI/UX design engineering and audit agent. 13 portable Agent Skills (led by RachnaSutra Prime) plus a keyless, deterministic CLI for accessibility (WCAG 2.2 AA oriented), responsive design, design-system, content and performance review. Works with Claude Code, Cursor, OpenAI Codex, GitHub Copilot and Gemini CLI using the IDE's own model; no extra API key. Created by Vatsal Shah. Apache-2.0.
+
+## Docs
+- [README](README.md): overview, install, CLI, compatibility, limits
+- [Status](docs/status.md): what is implemented, tested, planned
+- [Compatibility](docs/compatibility.md): per-host support level
+- [CLI reference](docs/cli-reference.md): commands, flags, exit codes
+- [Audit rubric](docs/rubric.md): rules, severity, coverage, no-score policy
+- [Agent catalog](docs/agent-catalog.md): the 13 skills and when Prime uses each
+- [Privacy and security](docs/privacy-and-security.md): threat model and defaults
+- [Report schema](schemas/report.schema.json): machine-readable audit output
+
+## Skills
+- [rachnasutra-prime](skills/rachnasutra-prime/SKILL.md): orchestrator
+- [rachnasutra-access](skills/rachnasutra-access/SKILL.md): WCAG 2.2 AA review
+- [rachnasutra-adapt](skills/rachnasutra-adapt/SKILL.md): responsive, mobile, TV
+- [rachnasutra-tokens](skills/rachnasutra-tokens/SKILL.md): design tokens
+- [rachnasutra-audit](skills/rachnasutra-audit/SKILL.md): full ranked audit
+- [rachnasutra-verify](skills/rachnasutra-verify/SKILL.md): fix verification
+- Also: vision, flow, canvas, motion, speed, content, convert (same folder pattern under skills/)
+
+## Key facts
+- Install skills: `npx github:shahvatsalofficial/rachnasutra skills install --host <claude|cursor|codex|copilot|gemini> --target .`
+- Audit: `npx github:shahvatsalofficial/rachnasutra audit . --json`
+- Read-only by default, no telemetry, secrets redacted, no compliance claims, no invented scores.
+- Browser, screenshot, axe and Lighthouse audits are not implemented yet and are reported as not-available.

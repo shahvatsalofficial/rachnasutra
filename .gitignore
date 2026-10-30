@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.rachnasutra/
+reports/
+*.tgz
+.env
+.env.*
+!.env.example
+coverage/

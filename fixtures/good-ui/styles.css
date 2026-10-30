@@ -1,0 +1,8 @@
+:root { --fg: #1d1b19; --bg: #ffffff; --accent: #0b5cad; --space: 1rem; }
+body { color: var(--fg); background: var(--bg); font-size: 1rem; }
+.cta { background: #0b5cad; color: #ffffff; min-height: 44px; padding: var(--space); }
+.cta:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.cta:hover { filter: brightness(0.95); }
+.wrap { max-width: 60rem; width: 100%; }
+@media (min-width: 48rem) { .wrap { display: grid; grid-template-columns: 1fr 1fr; } }
+@media (prefers-reduced-motion: no-preference) { .cta { transition: filter 0.2s; } }

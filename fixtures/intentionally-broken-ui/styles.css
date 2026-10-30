@@ -1,0 +1,6 @@
+.hero { width: 1200px; background: #ffffff; color: #999999; }
+button:focus, a:focus { outline: none; }
+.icon-btn { width: 16px; height: 16px; }
+.note { font-size: 10px; }
+.card:hover { background: #eee; }
+.fade { transition: opacity 0.4s; animation: spin 2s infinite; }

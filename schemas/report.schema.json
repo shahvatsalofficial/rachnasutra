@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/shahvatsalofficial/rachnasutra/schemas/report.schema.json",
+  "title": "RachnaSutra audit report",
+  "type": "object",
+  "required": ["schemaVersion", "tool", "generatedAt", "root", "mode", "findings", "coverage", "limitations"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "tool": { "type": "object", "required": ["name", "version"] },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "root": { "type": "string" },
+    "mode": { "const": "static" },
+    "filesScanned": { "type": "integer", "minimum": 0 },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "rule", "category", "title", "severity", "confidence", "status", "file", "evidence", "user_impact", "recommended_fix", "verification", "limitations", "fingerprint"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^RS-[0-9]{4}$" },
+          "rule": { "type": "string" },
+          "severity": { "enum": ["critical", "high", "medium", "low", "info"] },
+          "confidence": { "enum": ["high", "medium", "low"] },
+          "status": { "enum": ["confirmed", "review-required"] },
+          "evidence": { "type": "array", "minItems": 1 },
+          "fingerprint": { "type": "string" }
+        }
+      }
+    },
+    "coverage": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["category", "state", "detail"],
+        "properties": { "state": { "enum": ["evaluated", "partial", "not-run", "not-applicable"] } }
+      }
+    },
+    "limitations": { "type": "array", "items": { "type": "string" } }
+  }
+}

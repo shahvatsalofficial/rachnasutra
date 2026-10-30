@@ -1,0 +1,65 @@
+{
+  "name": "rachnasutra",
+  "version": "0.1.0",
+  "description": "RachnaSutra AI: open-source UI/UX design, accessibility and responsive audit agent skills for Claude Code, Cursor, Codex, Copilot and Gemini CLI, plus an evidence-first, keyless CLI.",
+  "keywords": [
+    "ui-ux",
+    "ux-audit",
+    "accessibility",
+    "wcag",
+    "wcag-2-2",
+    "a11y",
+    "design-system",
+    "design-tokens",
+    "responsive-design",
+    "ai-agents",
+    "agent-skills",
+    "claude-code",
+    "cursor",
+    "codex",
+    "github-copilot",
+    "gemini-cli",
+    "sarif",
+    "cli"
+  ],
+  "license": "Apache-2.0",
+  "author": "Vatsal Shah",
+  "homepage": "https://github.com/shahvatsalofficial/rachnasutra#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shahvatsalofficial/rachnasutra.git"
+  },
+  "bugs": {
+    "url": "https://github.com/shahvatsalofficial/rachnasutra/issues"
+  },
+  "type": "module",
+  "bin": {
+    "rachnasutra": "dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "skills",
+    "templates",
+    "schemas",
+    "docs",
+    "README.md",
+    "LICENSE",
+    "NOTICE",
+    "llms.txt",
+    "CHANGELOG.md"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "npm run build && node --test \"test/*.test.mjs\"",
+    "verify": "npm run build && node dist/cli.js verify",
+    "prepublishOnly": "npm test && npm run verify"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.5",
+    "typescript": "^5.9.3"
+  }
+}
