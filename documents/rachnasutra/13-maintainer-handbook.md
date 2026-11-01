@@ -26,6 +26,7 @@ npm test               # build and run all tests
 npm run verify         # package integrity check (skills, docs, links)
 npm run docs           # rebuild the HTML documentation site
 npm run samples        # regenerate sample reports and sanitise paths
+npm run examples       # regenerate documents/rachnasutra/15-rule-examples.md from fixtures/rule-cases.mjs
 ```
 
 ## Adding a rule
@@ -34,7 +35,7 @@ npm run samples        # regenerate sample reports and sanitise paths
 2. Set `confidence: 'high'` only for deterministic patterns or measurements. Use `medium` or `low` for heuristics; these become `review-required`.
 3. Provide `user_impact`, `recommended_fix`, `verification` and honest `limitations`.
 4. Add an entry to `RULE_CATALOG` (also used to validate `disableRules` and to emit SARIF rule metadata).
-5. Add tests in `test/rachnasutra.test.mjs`: one input that must trigger the rule, one correct input that must not.
+5. Add a case to `fixtures/rule-cases.mjs` (one failing input, one passing input; the rule-coverage test fails without it) and false-positive guards for anything that looks wrong but is correct. Run `npm run examples`.
 6. Add the rule to [Audit rules reference](06-audit-rules-reference.md) and `docs/rubric.md`.
 7. Update `CHANGELOG.md`.
 
@@ -65,11 +66,15 @@ Features of the generated site: sticky navigation, per-page table of contents, c
 
 To publish later: copy `documents/rachnasutra/html/` to any static host or enable GitHub Pages from that folder. No build step is needed at the host.
 
+## Benchmarks
+
+Scripts live in `benchmarks/` and are opt-in (network or third-party tools). Run `node benchmarks/act.mjs` after any rule change and compare with the published numbers in [Validation and benchmarks](16-validation-and-benchmarks.md). When a rule is changed because of a benchmark finding, add a regression case so the fix is permanent, and say in the changelog that the benchmark is no longer blind for that rule.
+
 ## Refreshing evidence
 
 ```bash
 npm test
-node --test --test-reporter=spec "test/*.test.mjs" > documents/rachnasutra/evidence/test-results.txt
+node --test --test-reporter=spec test/ > documents/rachnasutra/evidence/test-results.txt
 node scripts/sanitize-paths.mjs documents/rachnasutra/evidence samples
 ```
 

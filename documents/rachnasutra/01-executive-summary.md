@@ -41,6 +41,19 @@ All items below are backed by automated tests or captured output. See [Testing a
 | Unavailable capabilities are reported as unavailable | Test "CLI: exit codes, json, not-available honesty, usage errors" |
 | A fix can be verified against a saved baseline | Test "fix verification: resolved and introduced findings by fingerprint" |
 
+## Independent validation
+
+Fixtures written by the author only prove the code does what the author intended, so the audit was also tested against inputs it did not write. Details, weaknesses included, are in [Validation and benchmarks](16-validation-and-benchmarks.md).
+
+| Check | Result |
+|---|---|
+| W3C ACT Rules test cases (154 cases, 10 rules) | Precision 71% and recall 65% after fixing defects the benchmark exposed (53% and 38% on the first run) |
+| axe-core 4.10.2 on the same 109 cases for 7 rules | axe-core is more accurate (92% / 83% against 81% / 73%); RachnaSutra is a complement that works on source files in CI |
+| 12 public repositories, 1,360 files | 767 findings; manual spot check of 95 findings: 77% strict and 93% lenient precision, 7 false-positive patterns found and fixed |
+| Before and after on a real template | 14 findings resolved, 0 introduced; axe-core agrees (12 link-name violations to 0) |
+
+The manual labelling was done by the project author with AI assistance and is not an independent audit; samples and labels are published for anyone to challenge.
+
 ## What is not claimed
 
 - It does **not** certify WCAG, ADA, EN 301 549 or any other legal conformance. Automated static checks cover only part of any standard.

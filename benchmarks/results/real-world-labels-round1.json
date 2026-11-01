@@ -1,0 +1,382 @@
+{
+ "RS-A11Y-001|jgthms_bulma|docs/documentation/elements/image.html|216": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-001|jgthms_bulma|docs/shop.html|467": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-001|jgthms_bulma|docs/documentation/layout/media-object.html|137": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-001|jgthms_bulma|docs/cyp/layout/media.html|63": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-001|jgthms_bulma|docs/documentation/elements/image.html|28": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-001|jgthms_bulma|docs/_includes/screenshot.html|6": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-002|mozilla_pdf.js|test/resources/reftest-analyzer.html|32": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-002|reactjs_react.dev|public/html/single-file-example.html|2": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-002|mozilla_pdf.js|examples/components/simpleviewer.html|17": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-002|mozilla_pdf.js|examples/mobile-viewer/viewer.html|17": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-002|mozilla_pdf.js|web/viewer-geckoview.html|23": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-002|mozilla_pdf.js|test/test_slave.html|17": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-003|mozilla_pdf.js|examples/mobile-viewer/viewer.html|20": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-003|mozilla_pdf.js|examples/components/pageviewer.html|20": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-003|mozilla_pdf.js|examples/image_decoders/jpeg_viewer.html|20": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-003|mozilla_pdf.js|test/components/simple-viewer.html|21": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-004|mozilla_pdf.js|web/viewer-geckoview.html|127": {
+  "label": "CD",
+  "note": "accessible name supplied at runtime by data-l10n-id"
+ },
+ "RS-A11Y-004|jgthms_bulma|docs/documentation/elements/delete.html|43": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-004|jgthms_bulma|docs/_includes/docs/elements/tw.html|36": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-004|mozilla_pdf.js|web/viewer.html|165": {
+  "label": "CD",
+  "note": "name supplied at runtime by data-l10n-id"
+ },
+ "RS-A11Y-004|mozilla_pdf.js|web/viewer.html|233": {
+  "label": "CD",
+  "note": "name supplied at runtime by data-l10n-id"
+ },
+ "RS-A11Y-004|jgthms_bulma|docs/_includes/global/header.html|44": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-005|mozilla_pdf.js|web/viewer.html|189": {
+  "label": "FP",
+  "note": "file input is inside a button that has a localized label span"
+ },
+ "RS-A11Y-005|ColorlibHQ_AdminLTE|src/html/pages/forms/layout.astro|212": {
+  "label": "CD",
+  "note": "placeholder only; WCAG practice flags it, ACT rule e086e5 accepts placeholder as a name"
+ },
+ "RS-A11Y-005|jgthms_bulma|docs/documentation/form/select.html|136": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-005|jgthms_bulma|docs/documentation/form/select.html|85": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-005|jgthms_bulma|docs/library/debug/debug.html|277": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-005|jgthms_bulma|docs/cyp/form/select.html|50": {
+  "label": "CD",
+  "note": "template placeholder {{ options }}"
+ },
+ "RS-A11Y-006|mozilla_pdf.js|test/components/simple-viewer.html|61": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-006|mozilla_pdf.js|examples/components/pageviewer.html|38": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-006|mozilla_pdf.js|examples/image_decoders/jpeg_viewer.html|35": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-008|jgthms_bulma|docs/_layouts/default.html|2": {
+  "label": "CD",
+  "note": "Jekyll layout; title comes from an included partial"
+ },
+ "RS-A11Y-008|h5bp_html5-boilerplate|src/index.html|2": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-008|jgthms_bulma|docs/documentation/components/navbar.html|942": {
+  "label": "FP",
+  "note": "<html> appears inside a documentation code sample, not a document"
+ },
+ "RS-A11Y-009|twbs_bootstrap|js/tests/visual/menu-submenu.html|423": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-009|twbs_bootstrap|js/tests/visual/menu.html|21": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-009|twbs_bootstrap|js/tests/visual/tab.html|18": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-009|twbs_bootstrap|js/tests/visual/menu-submenu.html|233": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-010|mozilla_pdf.js|web/annotation_editor_layer_builder.css|485": {
+  "label": "CD",
+  "note": "outline removed on a nested editor element; replacement may exist elsewhere"
+ },
+ "RS-A11Y-010|twbs_bootstrap|scss/forms/_form-control.scss|174": {
+  "label": "CD",
+  "note": "SCSS nested rule for plaintext form control; intentional"
+ },
+ "RS-A11Y-010|mozilla_pdf.js|web/annotation_editor_layer_builder.css|290": {
+  "label": "FP",
+  "note": "selector is :active, not focus; selector text also mis-parsed from nested SCSS"
+ },
+ "RS-A11Y-010|twbs_bootstrap|scss/forms/_switch.scss|74": {
+  "label": "CD",
+  "note": "custom switch control; own focus style likely"
+ },
+ "RS-A11Y-010|ColorlibHQ_AdminLTE|src/html/public/css/adminlte.css|2203": {
+  "label": "CD",
+  "note": "plaintext form control; intentional"
+ },
+ "RS-A11Y-010|twbs_bootstrap|site/src/assets/examples/list-groups/list-groups.css|15": {
+  "label": "CD",
+  "note": "contenteditable focus ring removal is a common pattern"
+ },
+ "RS-A11Y-011|shadcn-ui_taxonomy|styles/editor.css|10": {
+  "label": "CD",
+  "note": "project-level heuristic; other CSS may define focus"
+ },
+ "RS-A11Y-013|mozilla_pdf.js|docs/contents/css/bootstrap.min.css|6": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-014|mozilla_pdf.js|web/internal/tree_view.css|42": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-014|mozilla_pdf.js|web/menu.css|153": {
+  "label": "FP",
+  "note": "selector mis-parsed; target is a ::before pseudo-element"
+ },
+ "RS-A11Y-014|mozilla_pdf.js|docs/contents/css/bootstrap.min.css|6": {
+  "label": "FP",
+  "note": "icon element inside a larger control"
+ },
+ "RS-A11Y-014|mozilla_pdf.js|web/views_manager.css|285": {
+  "label": "FP",
+  "note": "::before pseudo-element, not an interactive target"
+ },
+ "RS-A11Y-015|jgthms_bulma|docs/_layouts/cypress.html|13": {
+  "label": "CD",
+  "note": "Jekyll layout; <main> may be in included content"
+ },
+ "RS-A11Y-015|mozilla_pdf.js|examples/learning/helloworld.html|7": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-015|mozilla_pdf.js|web/internal/debugger.html|24": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-015|reactjs_react.dev|public/html/single-file-example.html|12": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-015|jgthms_bulma|docs/cyp/base/generic.html|13": {
+  "label": "FP",
+  "note": "test fixture fragment, not a full document"
+ },
+ "RS-A11Y-015|jgthms_bulma|docs/library/debug/debug.html|9": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-CONT-001|twbs_bootstrap|js/tests/visual/menu.html|33": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-CONT-001|twbs_bootstrap|js/tests/visual/menu.html|56": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-CONT-001|twbs_bootstrap|site/src/assets/examples/drawer-navbar/index.astro|63": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-CONT-001|twbs_bootstrap|js/tests/visual/menu.html|53": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-CONT-001|jgthms_bulma|docs/documentation/components/navbar.html|47": {
+  "label": "CD",
+  "note": "dropdown trigger label; acceptable"
+ },
+ "RS-CONT-001|twbs_bootstrap|site/src/assets/examples/cheatsheet/index.astro|1198": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-CONT-002|jgthms_bulma|docs/documentation/components/message.html|25": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-CONT-002|jgthms_bulma|docs/cyp/layout/media.html|18": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-CONT-002|jgthms_bulma|docs/documentation/elements/notification.html|20": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-CONT-002|jgthms_bulma|docs/documentation/layout/media-object.html|27": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-CONT-002|jgthms_bulma|docs/_includes/library/components/modal.html|51": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-CONT-002|ColorlibHQ_AdminLTE|src/html/pages/widgets/social.astro|250": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-MOT-001|startbootstrap_startbootstrap-agency|src/scss/components/_navbar.scss|55": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-MOT-001|startbootstrap_startbootstrap-clean-blog|src/scss/components/_navbar.scss|74": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-PERF-001|ColorlibHQ_AdminLTE|src/html/components/dashboard/_sidenav-docs.astro|18": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-PERF-001|ColorlibHQ_AdminLTE|src/html/pages/docs/components/main-header.astro|177": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-PERF-001|ColorlibHQ_AdminLTE|src/html/pages/users.astro|352": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-PERF-001|jgthms_bulma|docs/cyp/grid/tiles.html|28": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-PERF-001|jgthms_bulma|docs/documentation/elements/image.html|78": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-PERF-001|jgthms_bulma|docs/_includes/library/elements/image.html|7": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-PERF-002|twbs_bootstrap|site/static/docs/[version]/assets/img/guides/<email>|0": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-PERF-002|twbs_bootstrap|site/static/docs/[version]/assets/img/guides/<email>|0": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-PERF-002|jgthms_bulma|docs/assets/images/extensions/bulma-carousel.png|0": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-PERF-002|jgthms_bulma|docs/assets/images/expo/uploadme-2688x1680.jpg|0": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-PERF-002|twbs_bootstrap|site/static/docs/[version]/assets/img/guides/<email>|0": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-PERF-002|jgthms_bulma|docs/assets/images/expo/mythril-2688x1680.jpg|0": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-RESP-001|mozilla_pdf.js|test/resources/reftest-analyzer.html|33": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-RESP-001|mozilla_pdf.js|test/test_slave.html|18": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-RESP-001|mozilla_pdf.js|examples/webpack/index.html|3": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-RESP-001|mozilla_pdf.js|test/font/font_test.html|3": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-RESP-001|mozilla_pdf.js|examples/learning/helloworld.html|3": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-RESP-001|mozilla_pdf.js|examples/learning/helloworld64.html|3": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-RESP-003|shadcn-ui_taxonomy|styles/editor.css|1": {
+  "label": "CD",
+  "note": "Tailwind utilities supply responsive rules"
+ },
+ "RS-VIS-001|mozilla_pdf.js|test/annotation_layer_builder_overrides.css|69": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-VIS-001|mozilla_pdf.js|web/digital_signature_properties.css|381": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-VIS-001|mozilla_pdf.js|web/annotation_editor_layer_builder.css|888": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-VIS-001|mozilla_pdf.js|web/dialog.css|144": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-VIS-001|mozilla_pdf.js|web/xfa_layer_builder.css|124": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-VIS-001|startbootstrap_startbootstrap-agency|src/scss/sections/_timeline.scss|72": {
+  "label": "TP",
+  "note": ""
+ }
+}

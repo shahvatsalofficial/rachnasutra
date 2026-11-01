@@ -1,3 +1,5 @@
+<p align="center"><img src="assets/logo.svg" width="96" height="96" alt="RachnaSutra AI logo"></p>
+
 # RachnaSutra AI - UI/UX Audit & Accessibility Agent for Claude Code, Cursor, Codex, Copilot & Gemini CLI
 
 **Design Beautifully. Audit Precisely. Deliver Delight.**
@@ -6,9 +8,9 @@
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 ![Node](https://img.shields.io/badge/node-%3E%3D20-brightgreen)
 ![Runtime dependencies](https://img.shields.io/badge/runtime%20dependencies-0-brightgreen)
-![Tests](https://img.shields.io/badge/tests-22%20passing-brightgreen)
+![Tests](https://img.shields.io/badge/tests-111%20passing-brightgreen)
 
-**Quick links:** [Documentation](documents/rachnasutra/00-overview.md) | [Sample report](samples/broken-ui/latest.md) | [Test evidence](documents/rachnasutra/10-testing-and-evidence.md) | [Rules](documents/rachnasutra/06-audit-rules-reference.md) | [Legal and limits](documents/rachnasutra/09-legal-and-compliance.md)
+**Quick links:** [Documentation](documents/rachnasutra/00-overview.md) | [Validation](documents/rachnasutra/16-validation-and-benchmarks.md) | [Sample report](samples/broken-ui/latest.md) | [Test evidence](documents/rachnasutra/10-testing-and-evidence.md) | [Rules](documents/rachnasutra/06-audit-rules-reference.md) | [Legal and limits](documents/rachnasutra/09-legal-and-compliance.md)
 
 RachnaSutra AI is an open-source **UI/UX design engineering and auditing agent**: 13 portable [Agent Skills](https://agentskills.io/specification) led by **RachnaSutra Prime**, plus a **keyless CLI** that audits front-end code for accessibility (WCAG 2.2 AA oriented), responsive design, design-system, content and performance risks. Reports come out as JSON, Markdown, accessible HTML and SARIF 2.1.0.
 
@@ -114,12 +116,19 @@ Everything below is reproducible from this repository.
 
 | Evidence | Result | Where |
 |---|---|---|
-| Automated tests | **22 of 22 passing** (Node 24, Windows 11); CI matrix covers Windows, macOS, Linux on Node 20 and 22 | [test-results.txt](documents/rachnasutra/evidence/test-results.txt) |
+| Automated tests | **111 of 111 passing** locally on Node 24 and Node 20 (Windows 11); the CI matrix runs Windows, macOS and Linux on Node 20 and 22 | [test-results.txt](documents/rachnasutra/evidence/test-results.txt) |
+| Every rule tested both ways | A failing and a passing input for all 26 rules, plus false-positive guards; the same inputs generate the docs | [rule examples](documents/rachnasutra/15-rule-examples.md) |
+| W3C ACT test cases | 154 cases, 10 rules: **71% precision, 65% recall** after fixing defects the benchmark found (first run: 53% and 38%) | [act.md](benchmarks/results/act.md) |
+| Comparison with axe-core | axe-core is **more accurate** (92% / 83% against 81% / 73% on 7 comparable rules); RachnaSutra works on source files, offline, in CI | [act-vs-axe.md](benchmarks/results/act-vs-axe.md) |
+| 12 public repositories | 1,360 files, 767 findings; manual check of 95 findings: **77% clearly real, 93% real or context-dependent**; 7 false-positive patterns found and fixed | [real-world.md](benchmarks/results/real-world.md) |
+| Before and after on a real template | 14 findings resolved, 0 introduced; axe-core agrees | [case study](case-studies/clean-blog/README.md) |
 | Intentionally flawed fixture | **21 findings**, each with file and line; identical on every run | [sample report](samples/broken-ui/latest.md) |
 | Correct fixture | **0 findings** | [sample report](samples/good-ui/latest.md) |
 | Contrast maths | Matches WCAG reference ratios (21:1 black on white; 4.54:1 for `#767676` on white) | [tests](test/rachnasutra.test.mjs) |
 | Security tests | Secret redaction, path traversal, report escaping, prompt-injection text in audited files | [security doc](documents/rachnasutra/08-security-and-privacy.md) |
 | Unavailable features | Browser and visual audits exit with code 3 and say so | [CLI transcripts](documents/rachnasutra/evidence/cli-transcripts.txt) |
+
+What is **not** proven: the skills have not yet been verified inside live AI IDEs ([protocol and status](documents/rachnasutra/17-host-smoke-tests.md)); manual labelling of findings was done by the author with AI assistance, not independently; browser, screenshot and screen-reader testing are not implemented. Full discussion: [Validation and benchmarks](documents/rachnasutra/16-validation-and-benchmarks.md).
 
 Example output:
 
@@ -143,6 +152,7 @@ The full documentation set is in [`documents/rachnasutra/`](documents/rachnasutr
 | Security and legal | [Security and privacy](documents/rachnasutra/08-security-and-privacy.md), [Legal and compliance](documents/rachnasutra/09-legal-and-compliance.md) |
 | Operations | [Deployment and CI](documents/rachnasutra/11-deployment-and-ci.md) |
 | Contributors | [Maintainer handbook](documents/rachnasutra/13-maintainer-handbook.md), [Roadmap](documents/rachnasutra/12-roadmap-and-status.md) |
+| Trust and validation | [Validation and benchmarks](documents/rachnasutra/16-validation-and-benchmarks.md), [Rule examples](documents/rachnasutra/15-rule-examples.md), [Host smoke tests](documents/rachnasutra/17-host-smoke-tests.md) |
 | Everyone | [FAQ and glossary](documents/rachnasutra/14-faq-and-glossary.md) |
 
 ## Use in CI

@@ -1,0 +1,186 @@
+{
+  "axeVersion": "4.10.2",
+  "generatedAt": "2026-11-01T17:09:57.357Z",
+  "rows": [
+    {
+      "act": "23a2a8",
+      "name": "Image has non-empty accessible name",
+      "axe": {
+        "TP": 4,
+        "FP": 0,
+        "FN": 1,
+        "TN": 13
+      },
+      "ours": {
+        "TP": 2,
+        "FP": 2,
+        "FN": 3,
+        "TN": 11
+      },
+      "cases": 18
+    },
+    {
+      "act": "b5c3f8",
+      "name": "HTML page has lang attribute",
+      "axe": {
+        "TP": 4,
+        "FP": 2,
+        "FN": 0,
+        "TN": 1
+      },
+      "ours": {
+        "TP": 4,
+        "FP": 0,
+        "FN": 0,
+        "TN": 3
+      },
+      "cases": 7
+    },
+    {
+      "act": "2779a5",
+      "name": "HTML page has non-empty title",
+      "axe": {
+        "TP": 5,
+        "FP": 1,
+        "FN": 0,
+        "TN": 5
+      },
+      "ours": {
+        "TP": 5,
+        "FP": 1,
+        "FN": 0,
+        "TN": 5
+      },
+      "cases": 11
+    },
+    {
+      "act": "b4f0c3",
+      "name": "Meta viewport allows for zoom",
+      "axe": {
+        "TP": 4,
+        "FP": 0,
+        "FN": 0,
+        "TN": 7
+      },
+      "ours": {
+        "TP": 3,
+        "FP": 0,
+        "FN": 1,
+        "TN": 7
+      },
+      "cases": 11
+    },
+    {
+      "act": "97a4e1",
+      "name": "Button has non-empty accessible name",
+      "axe": {
+        "TP": 4,
+        "FP": 0,
+        "FN": 1,
+        "TN": 12
+      },
+      "ours": {
+        "TP": 4,
+        "FP": 1,
+        "FN": 1,
+        "TN": 11
+      },
+      "cases": 17
+    },
+    {
+      "act": "c487ae",
+      "name": "Link has non-empty accessible name",
+      "axe": {
+        "TP": 10,
+        "FP": 0,
+        "FN": 1,
+        "TN": 17
+      },
+      "ours": {
+        "TP": 9,
+        "FP": 1,
+        "FN": 2,
+        "TN": 16
+      },
+      "cases": 28
+    },
+    {
+      "act": "e086e5",
+      "name": "Form field has non-empty accessible name",
+      "axe": {
+        "TP": 3,
+        "FP": 0,
+        "FN": 4,
+        "TN": 10
+      },
+      "ours": {
+        "TP": 3,
+        "FP": 2,
+        "FN": 4,
+        "TN": 8
+      },
+      "cases": 17
+    }
+  ],
+  "totals": {
+    "ours": {
+      "TP": 30,
+      "FP": 7,
+      "FN": 11,
+      "TN": 61
+    },
+    "axe": {
+      "TP": 34,
+      "FP": 3,
+      "FN": 7,
+      "TN": 65
+    }
+  },
+  "corpus": {
+    "corpusFiles": 509,
+    "agreement": {
+      "RS-A11Y-001": {
+        "both": 27,
+        "oursOnly": 2,
+        "axeOnly": 0,
+        "neither": 480
+      },
+      "RS-A11Y-002": {
+        "both": 23,
+        "oursOnly": 4,
+        "axeOnly": 357,
+        "neither": 125
+      },
+      "RS-A11Y-008": {
+        "both": 4,
+        "oursOnly": 0,
+        "axeOnly": 357,
+        "neither": 148
+      },
+      "RS-A11Y-003": {
+        "both": 8,
+        "oursOnly": 0,
+        "axeOnly": 0,
+        "neither": 501
+      },
+      "RS-A11Y-004:button": {
+        "both": 15,
+        "oursOnly": 0,
+        "axeOnly": 1,
+        "neither": 493
+      },
+      "RS-A11Y-004:link": {
+        "both": 13,
+        "oursOnly": 0,
+        "axeOnly": 2,
+        "neither": 494
+      },
+      "RS-A11Y-005": {
+        "both": 13,
+        "oursOnly": 29,
+        "axeOnly": 1,
+        "neither": 466
+      }
+    }
+  }
+}

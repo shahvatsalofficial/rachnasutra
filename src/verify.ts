@@ -83,7 +83,7 @@ export async function verifyPackage(pkg = packageRoot()): Promise<Check[]> {
     }
     checks.push({ id: `skill:${name}`, ok: !problems.length, message: problems.join('; ') || 'valid' });
   }
-  for (const f of ['README.md', 'LICENSE', 'AGENTS.md', 'CLAUDE.md', 'SECURITY.md', 'CONTRIBUTING.md', 'ROADMAP.md', 'llms.txt', 'docs/status.md']) {
+  for (const f of ['README.md', 'LICENSE', 'AGENTS.md', 'CLAUDE.md', 'SECURITY.md', 'CONTRIBUTING.md', 'ROADMAP.md', 'llms.txt', 'docs/status.md', 'CITATION.cff', 'assets/logo.svg', 'benchmarks/README.md', 'documents/rachnasutra/00-overview.md', 'documents/rachnasutra/16-validation-and-benchmarks.md']) {
     checks.push({ id: `file:${f}`, ok: await exists(path.join(pkg, f)), message: (await exists(path.join(pkg, f))) ? 'present' : 'missing' });
   }
   // relative links in README resolve

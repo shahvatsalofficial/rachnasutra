@@ -6,7 +6,7 @@
       "tool": {
         "driver": {
           "name": "RachnaSutra AI",
-          "version": "0.1.0",
+          "version": "0.2.0",
           "informationUri": "https://github.com/shahvatsalofficial/rachnasutra",
           "rules": [
             {
@@ -506,7 +506,7 @@
             "text": "Document has no title. Fix: Add a unique, descriptive <title> in <head>."
           },
           "partialFingerprints": {
-            "rachnasutra": "8e12c9b1b43d"
+            "rachnasutra": "6fc5c1505df4"
           },
           "locations": [
             {
@@ -515,7 +515,7 @@
                   "uri": "index.html"
                 },
                 "region": {
-                  "startLine": 3
+                  "startLine": 2
                 }
               }
             }

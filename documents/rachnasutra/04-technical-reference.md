@@ -9,7 +9,7 @@
 | Runtime dependencies | None |
 | Dev dependencies | `typescript`, `@types/node` |
 | Entry point | `dist/cli.js` (bin `rachnasutra`) |
-| Tests | `node --test` over `test/*.test.mjs` |
+| Tests | `node --test` (runs `test/*.test.mjs`); 111 tests |
 | Build | `npm run build` (`tsc`) |
 
 ## Result model

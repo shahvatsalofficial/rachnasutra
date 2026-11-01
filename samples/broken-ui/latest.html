@@ -22,7 +22,7 @@ a:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-of
 <body>
 <main>
 <h1>RachnaSutra AI audit report</h1>
-<p class="muted">Static mode &middot; read-only &middot; 2026-10-30T20:46:41.001Z &middot; rachnasutra 0.1.0</p>
+<p class="muted">Static mode &middot; read-only &middot; 2026-11-01T17:25:21.784Z &middot; rachnasutra 0.2.0</p>
 <h2>Summary</h2>
 <div class="grid" role="list">
 <div class="stat" role="listitem"><b>0</b>critical</div>
@@ -59,7 +59,7 @@ a:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-of
 <tr id="RS-0008"><th scope="row">RS-0008</th><td><span class="sev sev-high">high</span></td><td>RS-A11Y-013</td><td>Text contrast 2.85:1 is below 4.5:1 (#999999 on #ffffff)</td><td><code>styles.css:1</code></td><td>confirmed</td></tr>
 <tr id="RS-0009"><th scope="row">RS-0009</th><td><span class="sev sev-medium">medium</span></td><td>RS-A11Y-002</td><td>Document has no lang attribute</td><td><code>index.html:2</code></td><td>confirmed</td></tr>
 <tr id="RS-0010"><th scope="row">RS-0010</th><td><span class="sev sev-medium">medium</span></td><td>RS-A11Y-006</td><td>Positive tabindex overrides natural focus order</td><td><code>index.html:17</code></td><td>confirmed</td></tr>
-<tr id="RS-0011"><th scope="row">RS-0011</th><td><span class="sev sev-medium">medium</span></td><td>RS-A11Y-008</td><td>Document has no title</td><td><code>index.html:3</code></td><td>confirmed</td></tr>
+<tr id="RS-0011"><th scope="row">RS-0011</th><td><span class="sev sev-medium">medium</span></td><td>RS-A11Y-008</td><td>Document has no title</td><td><code>index.html:2</code></td><td>confirmed</td></tr>
 <tr id="RS-0012"><th scope="row">RS-0012</th><td><span class="sev sev-medium">medium</span></td><td>RS-A11Y-014</td><td>Interactive target smaller than 24x24 CSS px (.icon-btn)</td><td><code>styles.css:3</code></td><td>review-required</td></tr>
 <tr id="RS-0013"><th scope="row">RS-0013</th><td><span class="sev sev-medium">medium</span></td><td>RS-MOT-001</td><td>Animations or transitions exist but no prefers-reduced-motion handling</td><td><code>styles.css:6</code></td><td>confirmed</td></tr>
 <tr id="RS-0014"><th scope="row">RS-0014</th><td><span class="sev sev-medium">medium</span></td><td>RS-RESP-002</td><td>Fixed width 1200px can overflow narrow viewports</td><td><code>styles.css:1</code></td><td>review-required</td></tr>
@@ -187,7 +187,7 @@ a:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-of
 <dl>
 <dt>Severity / confidence / status</dt><dd>medium / high / confirmed</dd>
 <dt>Criterion</dt><dd>WCAG 2.2: 2.4.2 Page Titled</dd>
-<dt>Evidence</dt><dd><code>index.html:3</code> <pre>&lt;head&gt;</pre></dd>
+<dt>Evidence</dt><dd><code>index.html:2</code> <pre>&lt;html&gt;</pre></dd>
 <dt>User impact</dt><dd>Users cannot tell tabs, history entries or search results apart.</dd>
 <dt>Recommended fix</dt><dd>Add a unique, descriptive &lt;title&gt; in &lt;head&gt;.</dd>
 <dt>Verification</dt><dd>Re-run the audit and check the browser tab.</dd>

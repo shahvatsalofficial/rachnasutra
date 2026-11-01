@@ -1,10 +1,12 @@
 # Implementation status
 
-Last updated for 0.1.0. Statuses: **implemented** (code + test), **adapter** (files follow documented layout, not smoke-tested in the live host), **planned** (no code), **not-available** (CLI reports it honestly).
+Last updated for 0.2.0. Statuses: **implemented** (code + test), **adapter** (files follow documented layout, not smoke-tested in the live host), **planned** (no code), **not-available** (CLI reports it honestly).
 
 | Area | Status | Notes |
 |---|---|---|
-| Static audit CLI, 26 rules | implemented | `test/rachnasutra.test.mjs` |
+| Static audit CLI, 26 rules | implemented | 111 tests; failing and passing case per rule in `fixtures/rule-cases.mjs` |
+| Validation: ACT, axe-core, 12 real repositories, case study | implemented | `benchmarks/`, `documents/rachnasutra/16-validation-and-benchmarks.md` |
+| Live host smoke tests | not done | `documents/rachnasutra/17-host-smoke-tests.md` |
 | Measured contrast (literal CSS pairs, inline styles) | implemented | cascade, gradients, images not resolved |
 | JSON / Markdown / HTML / SARIF reports | implemented | HTML escaping tested |
 | Report schema + validation | implemented | `schemas/report.schema.json`, `validateReport` |

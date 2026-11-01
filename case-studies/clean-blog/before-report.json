@@ -1,0 +1,1055 @@
+{
+  "schemaVersion": "1.0.0",
+  "tool": {
+    "name": "rachnasutra",
+    "version": "0.1.0"
+  },
+  "generatedAt": "2026-11-01T17:13:47.278Z",
+  "root": "<case>/before",
+  "mode": "static",
+  "filesScanned": 5,
+  "fileTypes": {
+    ".html": 4,
+    ".css": 1
+  },
+  "skipped": {
+    "ignoredDirs": 0,
+    "tooLarge": 0,
+    "binary": 1,
+    "symlinks": 0,
+    "overBudget": 0,
+    "excluded": 0
+  },
+  "truncated": false,
+  "findings": [
+    {
+      "id": "RS-0001",
+      "rule": "RS-A11Y-004",
+      "category": "accessibility",
+      "title": "Link has no accessible name",
+      "severity": "high",
+      "confidence": "medium",
+      "criterion": "WCAG 2.2: 2.4.4 Link Purpose, 4.1.2 Name, Role, Value",
+      "user_impact": "Screen-reader users hear only \"link\" and cannot tell where it goes.",
+      "recommended_fix": "Add link text or an aria-label.",
+      "verification": "Re-run the audit; check the accessible name in the browser accessibility tree.",
+      "limitations": "Content injected at runtime would not be seen by static analysis.",
+      "file": "about.html",
+      "line": 69,
+      "evidence": [
+        {
+          "path": "about.html",
+          "line": 69,
+          "excerpt": "<a href=\"#!\">"
+        }
+      ],
+      "platform": "web",
+      "status": "review-required",
+      "fingerprint": "b42eb6da0354"
+    },
+    {
+      "id": "RS-0002",
+      "rule": "RS-A11Y-004",
+      "category": "accessibility",
+      "title": "Link has no accessible name",
+      "severity": "high",
+      "confidence": "medium",
+      "criterion": "WCAG 2.2: 2.4.4 Link Purpose, 4.1.2 Name, Role, Value",
+      "user_impact": "Screen-reader users hear only \"link\" and cannot tell where it goes.",
+      "recommended_fix": "Add link text or an aria-label.",
+      "verification": "Re-run the audit; check the accessible name in the browser accessibility tree.",
+      "limitations": "Content injected at runtime would not be seen by static analysis.",
+      "file": "about.html",
+      "line": 77,
+      "evidence": [
+        {
+          "path": "about.html",
+          "line": 77,
+          "excerpt": "<a href=\"#!\">"
+        }
+      ],
+      "platform": "web",
+      "status": "review-required",
+      "fingerprint": "b42eb6da0354"
+    },
+    {
+      "id": "RS-0003",
+      "rule": "RS-A11Y-004",
+      "category": "accessibility",
+      "title": "Link has no accessible name",
+      "severity": "high",
+      "confidence": "medium",
+      "criterion": "WCAG 2.2: 2.4.4 Link Purpose, 4.1.2 Name, Role, Value",
+      "user_impact": "Screen-reader users hear only \"link\" and cannot tell where it goes.",
+      "recommended_fix": "Add link text or an aria-label.",
+      "verification": "Re-run the audit; check the accessible name in the browser accessibility tree.",
+      "limitations": "Content injected at runtime would not be seen by static analysis.",
+      "file": "about.html",
+      "line": 85,
+      "evidence": [
+        {
+          "path": "about.html",
+          "line": 85,
+          "excerpt": "<a href=\"#!\">"
+        }
+      ],
+      "platform": "web",
+      "status": "review-required",
+      "fingerprint": "b42eb6da0354"
+    },
+    {
+      "id": "RS-0004",
+      "rule": "RS-A11Y-004",
+      "category": "accessibility",
+      "title": "Link has no accessible name",
+      "severity": "high",
+      "confidence": "medium",
+      "criterion": "WCAG 2.2: 2.4.4 Link Purpose, 4.1.2 Name, Role, Value",
+      "user_impact": "Screen-reader users hear only \"link\" and cannot tell where it goes.",
+      "recommended_fix": "Add link text or an aria-label.",
+      "verification": "Re-run the audit; check the accessible name in the browser accessibility tree.",
+      "limitations": "Content injected at runtime would not be seen by static analysis.",
+      "file": "contact.html",
+      "line": 119,
+      "evidence": [
+        {
+          "path": "contact.html",
+          "line": 119,
+          "excerpt": "<a href=\"#!\">"
+        }
+      ],
+      "platform": "web",
+      "status": "review-required",
+      "fingerprint": "6448b741070e"
+    },
+    {
+      "id": "RS-0005",
+      "rule": "RS-A11Y-004",
+      "category": "accessibility",
+      "title": "Link has no accessible name",
+      "severity": "high",
+      "confidence": "medium",
+      "criterion": "WCAG 2.2: 2.4.4 Link Purpose, 4.1.2 Name, Role, Value",
+      "user_impact": "Screen-reader users hear only \"link\" and cannot tell where it goes.",
+      "recommended_fix": "Add link text or an aria-label.",
+      "verification": "Re-run the audit; check the accessible name in the browser accessibility tree.",
+      "limitations": "Content injected at runtime would not be seen by static analysis.",
+      "file": "contact.html",
+      "line": 127,
+      "evidence": [
+        {
+          "path": "contact.html",
+          "line": 127,
+          "excerpt": "<a href=\"#!\">"
+        }
+      ],
+      "platform": "web",
+      "status": "review-required",
+      "fingerprint": "6448b741070e"
+    },
+    {
+      "id": "RS-0006",
+      "rule": "RS-A11Y-004",
+      "category": "accessibility",
+      "title": "Link has no accessible name",
+      "severity": "high",
+      "confidence": "medium",
+      "criterion": "WCAG 2.2: 2.4.4 Link Purpose, 4.1.2 Name, Role, Value",
+      "user_impact": "Screen-reader users hear only \"link\" and cannot tell where it goes.",
+      "recommended_fix": "Add link text or an aria-label.",
+      "verification": "Re-run the audit; check the accessible name in the browser accessibility tree.",
+      "limitations": "Content injected at runtime would not be seen by static analysis.",
+      "file": "contact.html",
+      "line": 135,
+      "evidence": [
+        {
+          "path": "contact.html",
+          "line": 135,
+          "excerpt": "<a href=\"#!\">"
+        }
+      ],
+      "platform": "web",
+      "status": "review-required",
+      "fingerprint": "6448b741070e"
+    },
+    {
+      "id": "RS-0007",
+      "rule": "RS-A11Y-004",
+      "category": "accessibility",
+      "title": "Link has no accessible name",
+      "severity": "high",
+      "confidence": "medium",
+      "criterion": "WCAG 2.2: 2.4.4 Link Purpose, 4.1.2 Name, Role, Value",
+      "user_impact": "Screen-reader users hear only \"link\" and cannot tell where it goes.",
+      "recommended_fix": "Add link text or an aria-label.",
+      "verification": "Re-run the audit; check the accessible name in the browser accessibility tree.",
+      "limitations": "Content injected at runtime would not be seen by static analysis.",
+      "file": "index.html",
+      "line": 119,
+      "evidence": [
+        {
+          "path": "index.html",
+          "line": 119,
+          "excerpt": "<a href=\"#!\">"
+        }
+      ],
+      "platform": "web",
+      "status": "review-required",
+      "fingerprint": "e7e7a9a884ac"
+    },
+    {
+      "id": "RS-0008",
+      "rule": "RS-A11Y-004",
+      "category": "accessibility",
+      "title": "Link has no accessible name",
+      "severity": "high",
+      "confidence": "medium",
+      "criterion": "WCAG 2.2: 2.4.4 Link Purpose, 4.1.2 Name, Role, Value",
+      "user_impact": "Screen-reader users hear only \"link\" and cannot tell where it goes.",
+      "recommended_fix": "Add link text or an aria-label.",
+      "verification": "Re-run the audit; check the accessible name in the browser accessibility tree.",
+      "limitations": "Content injected at runtime would not be seen by static analysis.",
+      "file": "index.html",
+      "line": 127,
+      "evidence": [
+        {
+          "path": "index.html",
+          "line": 127,
+          "excerpt": "<a href=\"#!\">"
+        }
+      ],
+      "platform": "web",
+      "status": "review-required",
+      "fingerprint": "e7e7a9a884ac"
+    },
+    {
+      "id": "RS-0009",
+      "rule": "RS-A11Y-004",
+      "category": "accessibility",
+      "title": "Link has no accessible name",
+      "severity": "high",
+      "confidence": "medium",
+      "criterion": "WCAG 2.2: 2.4.4 Link Purpose, 4.1.2 Name, Role, Value",
+      "user_impact": "Screen-reader users hear only \"link\" and cannot tell where it goes.",
+      "recommended_fix": "Add link text or an aria-label.",
+      "verification": "Re-run the audit; check the accessible name in the browser accessibility tree.",
+      "limitations": "Content injected at runtime would not be seen by static analysis.",
+      "file": "index.html",
+      "line": 135,
+      "evidence": [
+        {
+          "path": "index.html",
+          "line": 135,
+          "excerpt": "<a href=\"#!\">"
+        }
+      ],
+      "platform": "web",
+      "status": "review-required",
+      "fingerprint": "e7e7a9a884ac"
+    },
+    {
+      "id": "RS-0010",
+      "rule": "RS-A11Y-004",
+      "category": "accessibility",
+      "title": "Link has no accessible name",
+      "severity": "high",
+      "confidence": "medium",
+      "criterion": "WCAG 2.2: 2.4.4 Link Purpose, 4.1.2 Name, Role, Value",
+      "user_impact": "Screen-reader users hear only \"link\" and cannot tell where it goes.",
+      "recommended_fix": "Add link text or an aria-label.",
+      "verification": "Re-run the audit; check the accessible name in the browser accessibility tree.",
+      "limitations": "Content injected at runtime would not be seen by static analysis.",
+      "file": "post.html",
+      "line": 93,
+      "evidence": [
+        {
+          "path": "post.html",
+          "line": 93,
+          "excerpt": "<a href=\"#!\">"
+        }
+      ],
+      "platform": "web",
+      "status": "review-required",
+      "fingerprint": "53c0c1c53e5d"
+    },
+    {
+      "id": "RS-0011",
+      "rule": "RS-A11Y-004",
+      "category": "accessibility",
+      "title": "Link has no accessible name",
+      "severity": "high",
+      "confidence": "medium",
+      "criterion": "WCAG 2.2: 2.4.4 Link Purpose, 4.1.2 Name, Role, Value",
+      "user_impact": "Screen-reader users hear only \"link\" and cannot tell where it goes.",
+      "recommended_fix": "Add link text or an aria-label.",
+      "verification": "Re-run the audit; check the accessible name in the browser accessibility tree.",
+      "limitations": "Content injected at runtime would not be seen by static analysis.",
+      "file": "post.html",
+      "line": 101,
+      "evidence": [
+        {
+          "path": "post.html",
+          "line": 101,
+          "excerpt": "<a href=\"#!\">"
+        }
+      ],
+      "platform": "web",
+      "status": "review-required",
+      "fingerprint": "53c0c1c53e5d"
+    },
+    {
+      "id": "RS-0012",
+      "rule": "RS-A11Y-004",
+      "category": "accessibility",
+      "title": "Link has no accessible name",
+      "severity": "high",
+      "confidence": "medium",
+      "criterion": "WCAG 2.2: 2.4.4 Link Purpose, 4.1.2 Name, Role, Value",
+      "user_impact": "Screen-reader users hear only \"link\" and cannot tell where it goes.",
+      "recommended_fix": "Add link text or an aria-label.",
+      "verification": "Re-run the audit; check the accessible name in the browser accessibility tree.",
+      "limitations": "Content injected at runtime would not be seen by static analysis.",
+      "file": "post.html",
+      "line": 109,
+      "evidence": [
+        {
+          "path": "post.html",
+          "line": 109,
+          "excerpt": "<a href=\"#!\">"
+        }
+      ],
+      "platform": "web",
+      "status": "review-required",
+      "fingerprint": "53c0c1c53e5d"
+    },
+    {
+      "id": "RS-0013",
+      "rule": "RS-A11Y-010",
+      "category": "accessibility",
+      "title": "Focus indicator removed (.form-control-plaintext:focus)",
+      "severity": "high",
+      "confidence": "medium",
+      "criterion": "WCAG 2.2: 2.4.7 Focus Visible",
+      "user_impact": "Keyboard users cannot see where focus is.",
+      "recommended_fix": "Keep the default outline or provide a clearly visible :focus-visible style with 3:1 contrast.",
+      "verification": "Tab through the control and confirm a visible indicator.",
+      "limitations": "A replacement style in another rule or file may exist.",
+      "file": "css/styles.css",
+      "line": 2078,
+      "evidence": [
+        {
+          "path": "css/styles.css",
+          "line": 2078,
+          "excerpt": "outline: 0;"
+        }
+      ],
+      "platform": "web",
+      "status": "review-required",
+      "fingerprint": "19c43532da98"
+    },
+    {
+      "id": "RS-0014",
+      "rule": "RS-A11Y-010",
+      "category": "accessibility",
+      "title": "Focus indicator removed (.form-range:focus)",
+      "severity": "high",
+      "confidence": "medium",
+      "criterion": "WCAG 2.2: 2.4.7 Focus Visible",
+      "user_impact": "Keyboard users cannot see where focus is.",
+      "recommended_fix": "Keep the default outline or provide a clearly visible :focus-visible style with 3:1 contrast.",
+      "verification": "Tab through the control and confirm a visible indicator.",
+      "limitations": "A replacement style in another rule or file may exist.",
+      "file": "css/styles.css",
+      "line": 2325,
+      "evidence": [
+        {
+          "path": "css/styles.css",
+          "line": 2325,
+          "excerpt": "outline: 0;"
+        }
+      ],
+      "platform": "web",
+      "status": "review-required",
+      "fingerprint": "19c43532da98"
+    },
+    {
+      "id": "RS-0015",
+      "rule": "RS-A11Y-010",
+      "category": "accessibility",
+      "title": "Focus indicator removed (.modal-content)",
+      "severity": "high",
+      "confidence": "medium",
+      "criterion": "WCAG 2.2: 2.4.7 Focus Visible",
+      "user_impact": "Keyboard users cannot see where focus is.",
+      "recommended_fix": "Keep the default outline or provide a clearly visible :focus-visible style with 3:1 contrast.",
+      "verification": "Tab through the control and confirm a visible indicator.",
+      "limitations": "A replacement style in another rule or file may exist.",
+      "file": "css/styles.css",
+      "line": 5079,
+      "evidence": [
+        {
+          "path": "css/styles.css",
+          "line": 5079,
+          "excerpt": "outline: 0;"
+        }
+      ],
+      "platform": "web",
+      "status": "review-required",
+      "fingerprint": "19c43532da98"
+    },
+    {
+      "id": "RS-0016",
+      "rule": "RS-A11Y-010",
+      "category": "accessibility",
+      "title": "Focus indicator removed (.carousel-control-prev:hover, .carousel-control-pr)",
+      "severity": "high",
+      "confidence": "medium",
+      "criterion": "WCAG 2.2: 2.4.7 Focus Visible",
+      "user_impact": "Keyboard users cannot see where focus is.",
+      "recommended_fix": "Keep the default outline or provide a clearly visible :focus-visible style with 3:1 contrast.",
+      "verification": "Tab through the control and confirm a visible indicator.",
+      "limitations": "A replacement style in another rule or file may exist.",
+      "file": "css/styles.css",
+      "line": 5612,
+      "evidence": [
+        {
+          "path": "css/styles.css",
+          "line": 5612,
+          "excerpt": "outline: 0;"
+        }
+      ],
+      "platform": "web",
+      "status": "review-required",
+      "fingerprint": "19c43532da98"
+    },
+    {
+      "id": "RS-0017",
+      "rule": "RS-A11Y-010",
+      "category": "accessibility",
+      "title": "Focus indicator removed (.offcanvas-sm)",
+      "severity": "high",
+      "confidence": "medium",
+      "criterion": "WCAG 2.2: 2.4.7 Focus Visible",
+      "user_impact": "Keyboard users cannot see where focus is.",
+      "recommended_fix": "Keep the default outline or provide a clearly visible :focus-visible style with 3:1 contrast.",
+      "verification": "Tab through the control and confirm a visible indicator.",
+      "limitations": "A replacement style in another rule or file may exist.",
+      "file": "css/styles.css",
+      "line": 5800,
+      "evidence": [
+        {
+          "path": "css/styles.css",
+          "line": 5800,
+          "excerpt": "outline: 0;"
+        }
+      ],
+      "platform": "web",
+      "status": "review-required",
+      "fingerprint": "19c43532da98"
+    },
+    {
+      "id": "RS-0018",
+      "rule": "RS-A11Y-010",
+      "category": "accessibility",
+      "title": "Focus indicator removed (.offcanvas-md)",
+      "severity": "high",
+      "confidence": "medium",
+      "criterion": "WCAG 2.2: 2.4.7 Focus Visible",
+      "user_impact": "Keyboard users cannot see where focus is.",
+      "recommended_fix": "Keep the default outline or provide a clearly visible :focus-visible style with 3:1 contrast.",
+      "verification": "Tab through the control and confirm a visible indicator.",
+      "limitations": "A replacement style in another rule or file may exist.",
+      "file": "css/styles.css",
+      "line": 5888,
+      "evidence": [
+        {
+          "path": "css/styles.css",
+          "line": 5888,
+          "excerpt": "outline: 0;"
+        }
+      ],
+      "platform": "web",
+      "status": "review-required",
+      "fingerprint": "19c43532da98"
+    },
+    {
+      "id": "RS-0019",
+      "rule": "RS-A11Y-010",
+      "category": "accessibility",
+      "title": "Focus indicator removed (.offcanvas-lg)",
+      "severity": "high",
+      "confidence": "medium",
+      "criterion": "WCAG 2.2: 2.4.7 Focus Visible",
+      "user_impact": "Keyboard users cannot see where focus is.",
+      "recommended_fix": "Keep the default outline or provide a clearly visible :focus-visible style with 3:1 contrast.",
+      "verification": "Tab through the control and confirm a visible indicator.",
+      "limitations": "A replacement style in another rule or file may exist.",
+      "file": "css/styles.css",
+      "line": 5976,
+      "evidence": [
+        {
+          "path": "css/styles.css",
+          "line": 5976,
+          "excerpt": "outline: 0;"
+        }
+      ],
+      "platform": "web",
+      "status": "review-required",
+      "fingerprint": "19c43532da98"
+    },
+    {
+      "id": "RS-0020",
+      "rule": "RS-A11Y-010",
+      "category": "accessibility",
+      "title": "Focus indicator removed (.offcanvas-xl)",
+      "severity": "high",
+      "confidence": "medium",
+      "criterion": "WCAG 2.2: 2.4.7 Focus Visible",
+      "user_impact": "Keyboard users cannot see where focus is.",
+      "recommended_fix": "Keep the default outline or provide a clearly visible :focus-visible style with 3:1 contrast.",
+      "verification": "Tab through the control and confirm a visible indicator.",
+      "limitations": "A replacement style in another rule or file may exist.",
+      "file": "css/styles.css",
+      "line": 6064,
+      "evidence": [
+        {
+          "path": "css/styles.css",
+          "line": 6064,
+          "excerpt": "outline: 0;"
+        }
+      ],
+      "platform": "web",
+      "status": "review-required",
+      "fingerprint": "19c43532da98"
+    },
+    {
+      "id": "RS-0021",
+      "rule": "RS-A11Y-010",
+      "category": "accessibility",
+      "title": "Focus indicator removed (.offcanvas-xxl)",
+      "severity": "high",
+      "confidence": "medium",
+      "criterion": "WCAG 2.2: 2.4.7 Focus Visible",
+      "user_impact": "Keyboard users cannot see where focus is.",
+      "recommended_fix": "Keep the default outline or provide a clearly visible :focus-visible style with 3:1 contrast.",
+      "verification": "Tab through the control and confirm a visible indicator.",
+      "limitations": "A replacement style in another rule or file may exist.",
+      "file": "css/styles.css",
+      "line": 6152,
+      "evidence": [
+        {
+          "path": "css/styles.css",
+          "line": 6152,
+          "excerpt": "outline: 0;"
+        }
+      ],
+      "platform": "web",
+      "status": "review-required",
+      "fingerprint": "19c43532da98"
+    },
+    {
+      "id": "RS-0022",
+      "rule": "RS-A11Y-010",
+      "category": "accessibility",
+      "title": "Focus indicator removed (.offcanvas)",
+      "severity": "high",
+      "confidence": "medium",
+      "criterion": "WCAG 2.2: 2.4.7 Focus Visible",
+      "user_impact": "Keyboard users cannot see where focus is.",
+      "recommended_fix": "Keep the default outline or provide a clearly visible :focus-visible style with 3:1 contrast.",
+      "verification": "Tab through the control and confirm a visible indicator.",
+      "limitations": "A replacement style in another rule or file may exist.",
+      "file": "css/styles.css",
+      "line": 6239,
+      "evidence": [
+        {
+          "path": "css/styles.css",
+          "line": 6239,
+          "excerpt": "outline: 0;"
+        }
+      ],
+      "platform": "web",
+      "status": "review-required",
+      "fingerprint": "19c43532da98"
+    },
+    {
+      "id": "RS-0023",
+      "rule": "RS-A11Y-013",
+      "category": "accessibility",
+      "title": "Text contrast 4.34:1 is below 4.5:1 (#087990 on #cff4fc)",
+      "severity": "medium",
+      "confidence": "high",
+      "criterion": "WCAG 2.2: 1.4.3 Contrast (Minimum)",
+      "user_impact": "Low-vision users and anyone in bright light may be unable to read this text.",
+      "recommended_fix": "Darken the text or lighten the background until the ratio is at least 4.5:1.",
+      "verification": "Re-run the audit; spot-check the rendered colour pair with a contrast tool.",
+      "limitations": "Measured from literal declarations in one rule. Cascade, opacity, gradients and images are not resolved.",
+      "file": "css/styles.css",
+      "line": 4830,
+      "evidence": [
+        {
+          "path": "css/styles.css",
+          "line": 4830,
+          "excerpt": "color: #087990;"
+        }
+      ],
+      "platform": "web",
+      "status": "confirmed",
+      "fingerprint": "a1386063edf0"
+    },
+    {
+      "id": "RS-0024",
+      "rule": "RS-A11Y-013",
+      "category": "accessibility",
+      "title": "Text contrast 3.48:1 is below 4.5:1 (#087990 on #badce3)",
+      "severity": "medium",
+      "confidence": "high",
+      "criterion": "WCAG 2.2: 1.4.3 Contrast (Minimum)",
+      "user_impact": "Low-vision users and anyone in bright light may be unable to read this text.",
+      "recommended_fix": "Darken the text or lighten the background until the ratio is at least 4.5:1.",
+      "verification": "Re-run the audit; spot-check the rendered colour pair with a contrast tool.",
+      "limitations": "Measured from literal declarations in one rule. Cascade, opacity, gradients and images are not resolved.",
+      "file": "css/styles.css",
+      "line": 4834,
+      "evidence": [
+        {
+          "path": "css/styles.css",
+          "line": 4834,
+          "excerpt": "color: #087990;"
+        }
+      ],
+      "platform": "web",
+      "status": "confirmed",
+      "fingerprint": "a1386063edf0"
+    },
+    {
+      "id": "RS-0025",
+      "rule": "RS-A11Y-013",
+      "category": "accessibility",
+      "title": "Text contrast 3.90:1 is below 4.5:1 (#997404 on #fff3cd)",
+      "severity": "medium",
+      "confidence": "high",
+      "criterion": "WCAG 2.2: 1.4.3 Contrast (Minimum)",
+      "user_impact": "Low-vision users and anyone in bright light may be unable to read this text.",
+      "recommended_fix": "Darken the text or lighten the background until the ratio is at least 4.5:1.",
+      "verification": "Re-run the audit; spot-check the rendered colour pair with a contrast tool.",
+      "limitations": "Measured from literal declarations in one rule. Cascade, opacity, gradients and images are not resolved.",
+      "file": "css/styles.css",
+      "line": 4844,
+      "evidence": [
+        {
+          "path": "css/styles.css",
+          "line": 4844,
+          "excerpt": "color: #997404;"
+        }
+      ],
+      "platform": "web",
+      "status": "confirmed",
+      "fingerprint": "224ce8f213fe"
+    },
+    {
+      "id": "RS-0026",
+      "rule": "RS-A11Y-013",
+      "category": "accessibility",
+      "title": "Text contrast 3.13:1 is below 4.5:1 (#997404 on #e6dbb9)",
+      "severity": "medium",
+      "confidence": "high",
+      "criterion": "WCAG 2.2: 1.4.3 Contrast (Minimum)",
+      "user_impact": "Low-vision users and anyone in bright light may be unable to read this text.",
+      "recommended_fix": "Darken the text or lighten the background until the ratio is at least 4.5:1.",
+      "verification": "Re-run the audit; spot-check the rendered colour pair with a contrast tool.",
+      "limitations": "Measured from literal declarations in one rule. Cascade, opacity, gradients and images are not resolved.",
+      "file": "css/styles.css",
+      "line": 4848,
+      "evidence": [
+        {
+          "path": "css/styles.css",
+          "line": 4848,
+          "excerpt": "color: #997404;"
+        }
+      ],
+      "platform": "web",
+      "status": "confirmed",
+      "fingerprint": "224ce8f213fe"
+    },
+    {
+      "id": "RS-0027",
+      "rule": "RS-A11Y-013",
+      "category": "accessibility",
+      "title": "Text contrast 4.33:1 is below 4.5:1 (#fff on #997404)",
+      "severity": "medium",
+      "confidence": "high",
+      "criterion": "WCAG 2.2: 1.4.3 Contrast (Minimum)",
+      "user_impact": "Low-vision users and anyone in bright light may be unable to read this text.",
+      "recommended_fix": "Darken the text or lighten the background until the ratio is at least 4.5:1.",
+      "verification": "Re-run the audit; spot-check the rendered colour pair with a contrast tool.",
+      "limitations": "Measured from literal declarations in one rule. Cascade, opacity, gradients and images are not resolved.",
+      "file": "css/styles.css",
+      "line": 4852,
+      "evidence": [
+        {
+          "path": "css/styles.css",
+          "line": 4852,
+          "excerpt": "color: #fff;"
+        }
+      ],
+      "platform": "web",
+      "status": "confirmed",
+      "fingerprint": "e77f58243a29"
+    },
+    {
+      "id": "RS-0028",
+      "rule": "RS-A11Y-015",
+      "category": "accessibility",
+      "title": "No main landmark",
+      "severity": "low",
+      "confidence": "medium",
+      "criterion": "WCAG 2.2: 1.3.1 Info and Relationships, 2.4.1 Bypass Blocks",
+      "user_impact": "Keyboard and screen-reader users cannot jump straight to the primary content.",
+      "recommended_fix": "Wrap the primary content in <main> and add a skip link if there is repeated navigation.",
+      "verification": "Check landmarks with a screen-reader landmark list or the browser accessibility tree.",
+      "limitations": "A shared layout file may provide <main> for this page.",
+      "file": "index.html",
+      "line": 18,
+      "evidence": [
+        {
+          "path": "index.html",
+          "line": 18,
+          "excerpt": "<body>"
+        }
+      ],
+      "platform": "web",
+      "status": "review-required",
+      "fingerprint": "5fc1dc510c8b"
+    },
+    {
+      "id": "RS-0029",
+      "rule": "RS-A11Y-015",
+      "category": "accessibility",
+      "title": "No main landmark",
+      "severity": "low",
+      "confidence": "medium",
+      "criterion": "WCAG 2.2: 1.3.1 Info and Relationships, 2.4.1 Bypass Blocks",
+      "user_impact": "Keyboard and screen-reader users cannot jump straight to the primary content.",
+      "recommended_fix": "Wrap the primary content in <main> and add a skip link if there is repeated navigation.",
+      "verification": "Check landmarks with a screen-reader landmark list or the browser accessibility tree.",
+      "limitations": "A shared layout file may provide <main> for this page.",
+      "file": "post.html",
+      "line": 18,
+      "evidence": [
+        {
+          "path": "post.html",
+          "line": 18,
+          "excerpt": "<body>"
+        }
+      ],
+      "platform": "web",
+      "status": "review-required",
+      "fingerprint": "a81a416166e6"
+    },
+    {
+      "id": "RS-0030",
+      "rule": "RS-CONT-002",
+      "category": "content",
+      "title": "Placeholder text present",
+      "severity": "low",
+      "confidence": "high",
+      "user_impact": "Unfinished copy can ship and erodes trust.",
+      "recommended_fix": "Replace with real content.",
+      "verification": "Search the built site for placeholder text.",
+      "limitations": "May be an intentional fixture or story.",
+      "file": "about.html",
+      "line": 55,
+      "evidence": [
+        {
+          "path": "about.html",
+          "line": 55,
+          "excerpt": "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe nostrum ullam eveniet pariatur voluptates odit, fuga atque ea nobis sit soluta odio, adipisci..."
+        }
+      ],
+      "platform": "web",
+      "status": "confirmed",
+      "fingerprint": "400649b0f16b"
+    },
+    {
+      "id": "RS-0031",
+      "rule": "RS-PERF-001",
+      "category": "performance",
+      "title": "Image has no explicit width and height",
+      "severity": "low",
+      "confidence": "medium",
+      "user_impact": "Late-loading images can shift layout (Cumulative Layout Shift) while the page renders.",
+      "recommended_fix": "Set width and height attributes (or CSS aspect-ratio) so the browser reserves space.",
+      "verification": "Measure CLS in a lab run (Lighthouse) before and after; compare field data if available.",
+      "limitations": "CSS elsewhere may already reserve the space; not measured at runtime.",
+      "file": "post.html",
+      "line": 72,
+      "evidence": [
+        {
+          "path": "post.html",
+          "line": 72,
+          "excerpt": "<a href=\"#!\"><img class=\"img-fluid\" src=\"assets/img/post-sample-image.jpg\" alt=\"...\" /></a>"
+        }
+      ],
+      "platform": "web",
+      "status": "review-required",
+      "fingerprint": "7c8477fad700"
+    }
+  ],
+  "coverage": [
+    {
+      "category": "accessibility (static)",
+      "state": "partial",
+      "checks": 15,
+      "detail": "Source patterns and measured literal colour contrast only. Keyboard, screen-reader and axe runtime checks were not run."
+    },
+    {
+      "category": "responsive (static)",
+      "state": "partial",
+      "checks": 3,
+      "detail": "Viewport meta, fixed widths and responsive CSS presence. No viewport was rendered."
+    },
+    {
+      "category": "design system",
+      "state": "partial",
+      "checks": 1,
+      "detail": "Token inventory from literal CSS values; no Figma, Storybook or component API inspection."
+    },
+    {
+      "category": "content",
+      "state": "partial",
+      "checks": 3,
+      "detail": "Link text, placeholder copy and urgency wording only. No tone or localisation review."
+    },
+    {
+      "category": "performance (static)",
+      "state": "partial",
+      "checks": 2,
+      "detail": "Image dimensions and asset size only. Core Web Vitals were not measured."
+    },
+    {
+      "category": "motion",
+      "state": "partial",
+      "checks": 1,
+      "detail": "CSS reduced-motion handling only."
+    },
+    {
+      "category": "browser runtime",
+      "state": "not-run",
+      "checks": 0,
+      "detail": "Not available in this version. Requires an authorized browser audit."
+    },
+    {
+      "category": "visual review",
+      "state": "not-run",
+      "checks": 0,
+      "detail": "Needs screenshots and a vision-capable host. No screenshot was taken."
+    },
+    {
+      "category": "screen-reader and keyboard testing",
+      "state": "not-run",
+      "checks": 0,
+      "detail": "Manual testing required."
+    },
+    {
+      "category": "Core Web Vitals (lab and field)",
+      "state": "not-run",
+      "checks": 0,
+      "detail": "No measurement taken."
+    }
+  ],
+  "tokens": {
+    "cssVariables": 898,
+    "colors": [
+      {
+        "value": "#fff",
+        "count": 91
+      },
+      {
+        "value": "#000",
+        "count": 61
+      },
+      {
+        "value": "#212529",
+        "count": 37
+      },
+      {
+        "value": "#6c757d",
+        "count": 35
+      },
+      {
+        "value": "#0085a1",
+        "count": 33
+      },
+      {
+        "value": "#198754",
+        "count": 23
+      },
+      {
+        "value": "#dc3545",
+        "count": 23
+      },
+      {
+        "value": "#f8f9fa",
+        "count": 17
+      },
+      {
+        "value": "#0dcaf0",
+        "count": 15
+      },
+      {
+        "value": "#dee2e6",
+        "count": 15
+      },
+      {
+        "value": "#ffc107",
+        "count": 15
+      },
+      {
+        "value": "#e9ecef",
+        "count": 12
+      }
+    ],
+    "fontSizes": [
+      {
+        "value": "0.875rem",
+        "count": 14
+      },
+      {
+        "value": "1.25rem",
+        "count": 14
+      },
+      {
+        "value": "0.875em",
+        "count": 10
+      },
+      {
+        "value": "1rem",
+        "count": 10
+      },
+      {
+        "value": "1.5rem",
+        "count": 5
+      },
+      {
+        "value": "0.75rem",
+        "count": 3
+      },
+      {
+        "value": "2.25rem",
+        "count": 3
+      },
+      {
+        "value": "2.5rem",
+        "count": 3
+      },
+      {
+        "value": "0.75em",
+        "count": 2
+      },
+      {
+        "value": "1.75rem",
+        "count": 2
+      },
+      {
+        "value": "1.875rem",
+        "count": 2
+      },
+      {
+        "value": "1em",
+        "count": 2
+      }
+    ],
+    "spacing": [
+      {
+        "value": "0.5rem",
+        "count": 150
+      },
+      {
+        "value": "1rem",
+        "count": 150
+      },
+      {
+        "value": "0.25rem",
+        "count": 131
+      },
+      {
+        "value": "3rem",
+        "count": 119
+      },
+      {
+        "value": "1.5rem",
+        "count": 115
+      },
+      {
+        "value": "0.75rem",
+        "count": 11
+      },
+      {
+        "value": "0.375rem",
+        "count": 9
+      },
+      {
+        "value": "0.625rem",
+        "count": 8
+      },
+      {
+        "value": "1.25rem",
+        "count": 7
+      },
+      {
+        "value": "0.255em",
+        "count": 5
+      },
+      {
+        "value": "2.125rem",
+        "count": 4
+      },
+      {
+        "value": "0.1rem",
+        "count": 2
+      }
+    ],
+    "radii": [
+      {
+        "value": "0.375rem",
+        "count": 15
+      },
+      {
+        "value": "0.5rem",
+        "count": 4
+      },
+      {
+        "value": "50%",
+        "count": 3
+      },
+      {
+        "value": "0.25rem",
+        "count": 2
+      }
+    ],
+    "hardcodedColorRatio": 0.46
+  },
+  "limitations": [
+    "Static analysis reads source text only. Nothing was rendered, executed or sent over a network.",
+    "Findings are review aids. Automated checks cannot establish WCAG conformance; manual testing is required.",
+    "CSS frameworks, CSS-in-JS and runtime-injected markup are only partly visible.",
+    "No numeric quality score is given because category coverage is partial."
+  ],
+  "summary": {
+    "bySeverity": {
+      "critical": 0,
+      "high": 22,
+      "medium": 5,
+      "low": 4,
+      "info": 0
+    },
+    "byCategory": {
+      "accessibility": 29,
+      "content": 1,
+      "performance": 1
+    },
+    "confirmed": 6,
+    "reviewRequired": 25
+  }
+}

@@ -10,14 +10,14 @@ Each rule lists the trigger, the reason it matters, how to fix it, and what it c
 
 ### RS-A11Y-001 Image has no alt attribute
 
-- **Trigger:** an `<img>` with no `alt` attribute and no prop spread.
+- **Trigger:** an `<img>` with no `alt` attribute and no prop spread, that is not hidden (`aria-hidden`, `hidden`, `display:none`), not presentational (`role="presentation"` or `none`) and has no `title`, `aria-label` or `aria-labelledby`.
 - **Why:** screen-reader users lose the information the image carries (1.1.1).
 - **Fix:** add meaningful alt text, or `alt=""` if purely decorative.
 - **Cannot see:** whether alt text is meaningful. **Confidence:** high.
 
 ### RS-A11Y-002 Document has no lang attribute
 
-- **Trigger:** an `<html>` element in an `.html` file without `lang`.
+- **Trigger:** an `<html>` element in an `.html` file with no `lang` or an empty `lang=""`. `<html>` text inside `<pre>`, `<code>` or highlight blocks is ignored.
 - **Why:** assistive technology may use wrong pronunciation (3.1.1).
 - **Fix:** `<html lang="en">` or the correct code. **Confidence:** high.
 
@@ -29,10 +29,10 @@ Each rule lists the trigger, the reason it matters, how to fix it, and what it c
 
 ### RS-A11Y-004 Button or link has no accessible name
 
-- **Trigger:** `<button></button>` or `<a href></a>` with no content, `aria-label`, `aria-labelledby` or `title`.
+- **Trigger:** a `<button>` or `<a href>` whose content gives no name (empty, or only icons and images with empty alt) and which has no `aria-label`, `aria-labelledby`, `title` or `<label for>`. Hidden elements are skipped, and content that comes from templates (`{{ }}`, `{% %}`) or runtime localisation (`data-l10n-id`, `data-i18n`) is treated as unknown.
 - **Why:** announced as just "button" or "link" (4.1.2, 2.4.4).
 - **Fix:** visible text or an `aria-label`.
-- **Cannot see:** content injected at runtime. **Confidence:** high.
+- **Cannot see:** content injected at runtime. **Confidence:** high when the element is empty, medium (review-required) when it has child elements but none provides a name.
 
 ### RS-A11Y-005 Form control has no programmatic label
 
@@ -56,7 +56,7 @@ Each rule lists the trigger, the reason it matters, how to fix it, and what it c
 
 ### RS-A11Y-008 Document has no title
 
-- **Trigger:** an HTML document with `<head>` and no non-empty `<title>`.
+- **Trigger:** an HTML document (an `<html>` element, a `<head>` or a doctype) with no non-empty `<title>` in the head area. Skipped when the head contains template syntax, which may include the title.
 - **Why:** users cannot distinguish tabs or results (2.4.2). **Confidence:** high.
 
 ### RS-A11Y-009 Heading level skipped
@@ -66,7 +66,7 @@ Each rule lists the trigger, the reason it matters, how to fix it, and what it c
 
 ### RS-A11Y-010 Focus indicator removed
 
-- **Trigger:** a rule that sets `outline: none` or `0` without a `box-shadow` replacement, and not inside a `:focus-visible` selector.
+- **Trigger:** a rule that sets `outline: none` or `0` without a `box-shadow` replacement, whose selector concerns focus (`:focus`) or has no `:active`, `:hover`, `:disabled` or pseudo-element part, and is not a `:focus-visible` selector. Comments and SCSS interpolation are removed before the selector is read.
 - **Why:** keyboard users cannot see focus (2.4.7).
 - **Cannot see:** replacement styles in other rules. **Confidence:** high, lowered to medium when the project has any `:focus-visible` rule.
 
@@ -78,24 +78,26 @@ Each rule lists the trigger, the reason it matters, how to fix it, and what it c
 ### RS-A11Y-012 Media autoplays without muted or controls
 
 - **Trigger:** `<video>` or `<audio>` with `autoplay`, no `muted`, no `controls`.
-- **Why:** uncontrolled audio interferes with screen readers (1.4.2). **Confidence:** high.
+- **Why:** uncontrolled audio interferes with screen readers (1.4.2).
+- **Cannot see:** whether the media has an audio track or plays for under 3 seconds. **Confidence:** medium (review).
 
 ### RS-A11Y-013 Text contrast below minimum (measured)
 
 - **Trigger:** a rule block, or an inline style, with literal text and background colours whose ratio is below 4.5:1 (3:1 for large text).
 - **Why:** low-vision users cannot read the text (1.4.3).
 - **Fix:** darken text or lighten background to reach the threshold.
-- **Cannot see:** cascade, opacity, gradients, background images. **Confidence:** high for the declared pair.
+- **Skipped when** the same rule has `text-shadow`, `opacity`, a gradient, `filter`, `mix-blend-mode` or a background image, because the real contrast then differs from the declared pair.
+- **Cannot see:** the cascade, inherited colours, CSS variables. **Confidence:** high for the declared pair.
 
 ### RS-A11Y-014 Interactive target smaller than 24x24 CSS px
 
-- **Trigger:** a selector naming button, btn, link or icon with an explicit width or height under 24 px.
+- **Trigger:** a selector naming a button, btn, link or `[role=button]` with an explicit width or height under 24 px. Pseudo-elements (`::before`, `::after`) and names containing spacer, separator, divider or splitter are skipped.
 - **Why:** hard to hit for users with tremor or on touch (2.5.8).
 - **Cannot see:** padding that enlarges the target. **Confidence:** low (review).
 
 ### RS-A11Y-015 No main landmark
 
-- **Trigger:** an HTML document with `<body>` and no `<main>` or `role="main"`.
+- **Trigger:** an HTML document (with `<html>`, `<head>` or a doctype) that has a `<body>` and no `<main>` or `role="main"`. Skipped when the body uses template placeholders such as `{{ content }}` or `<slot>`.
 - **Why:** users cannot skip to primary content (1.3.1, 2.4.1).
 - **Cannot see:** layouts that inject `<main>`. **Confidence:** medium (review).
 

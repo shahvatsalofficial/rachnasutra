@@ -33,16 +33,26 @@
 | API or local-model provider modes | planned | Skills use the host model today |
 | Report viewer dashboard | partial | Self-contained HTML report only |
 | Gujarati README | planned | |
+| Rule examples and per-rule tests | implemented | 26 rules, 111 tests |
+| ACT, axe-core and real-world validation | implemented | see [Validation and benchmarks](16-validation-and-benchmarks.md) |
+| Live host smoke tests | not done | protocol in [Host smoke tests](17-host-smoke-tests.md) |
+| Blind re-test on new repositories | planned | |
 
 ## Milestones
 
 ### Next: rule depth and confidence
 
-1. Dedicated true-positive and false-positive tests for every rule.
+1. ~~Dedicated true-positive and false-positive tests for every rule~~ (done in 0.2.0).
 2. JSX style-object and basic CSS-in-JS contrast analysis.
 3. CSS variable resolution within a file for contrast.
 4. Honour `failOn` from config in gating commands (done; tested).
 5. Tagged releases and a published package.
+
+### Evidence and trust
+
+1. A blind re-test on repositories not used to tune the rules, and independent labelling of findings.
+2. Live smoke tests of each host adapter.
+3. Rules for `role="img"` elements, CSS-variable contrast and JSX style objects, informed by the ACT misses.
 
 ### Then: runtime evidence
 
@@ -70,10 +80,9 @@ Semantic versioning. The report `schemaVersion` changes independently. Rule addi
 
 | Gap | Impact | Plan |
 |---|---|---|
-| Not every rule has its own isolated test | Some rules are verified only through fixtures | Next milestone item 1 |
-| No cross-platform CI results published yet | Only Windows with Node 24 was run locally | Check the Actions tab |
+| Cross-platform results | Local runs: Windows with Node 24 and Node 20; Linux and macOS only through CI | Check the Actions tab |
 | Spec folders (`packages/`, `workflows/`, `rules/`, `adapters/`) not created | None functionally; avoids empty modules | Split when browser module lands |
-| No logo or social-preview artwork | Less recognisable listing | Add original or licensed artwork |
+| Social preview image must be uploaded in the GitHub UI | Link previews show the default image until then | `assets/social-preview.png` is ready to upload |
 | Host adapters unverified live | Install may need path tweaks for some hosts | Live smoke tests |
 
 ## How priorities are set

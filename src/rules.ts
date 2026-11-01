@@ -58,6 +58,40 @@ const attrVal = (attrs: string, name: string): string | undefined => {
   return m ? (m[1] ?? m[2] ?? m[3]) : undefined;
 };
 const hasSpread = (attrs: string): boolean => /\{\s*\.\.\./.test(attrs);
+/** Element is removed from the accessibility tree or not rendered, so name rules do not apply. */
+const isHidden = (attrs: string): boolean =>
+  /\baria-hidden\s*=\s*["']?true/i.test(attrs) || /(^|[\s"'])hidden(\s|=|$|\/)/i.test(attrs) || /display\s*:\s*none|visibility\s*:\s*hidden/i.test(attrs);
+const nonEmptyAttr = (attrs: string, name: string): boolean => {
+  const v = attrVal(attrs, name);
+  return v !== undefined && v.trim() !== '';
+};
+/** True when the index sits inside <pre>, <code>, a Jekyll highlight block or a Markdown fence (a code sample, not a document). */
+function insideCode(t: string, index: number): boolean {
+  const before = t.slice(0, index);
+  const count = (re: RegExp): number => (before.match(re) ?? []).length;
+  return count(/<(pre|code)\b/gi) > count(/<\/(pre|code)>/gi) || count(/\{%\s*highlight/g) > count(/\{%\s*endhighlight/g) || count(/```/g) % 2 === 1;
+}
+/** Template or runtime-localisation syntax means the final text or markup is not visible to a static scan. */
+const TEMPLATED = /\{%|\{\{|<%|<\?|@include|@yield|@section|\$\{/;
+/** Comments and preceding declarations can leak into the selector text of nested (SCSS) or minified CSS. */
+function cleanSelector(raw: string): string {
+  let s = raw.replace(/#\{[^}]*\}/g, 'X').replace(/\/\*[\s\S]*?\*\//g, ' ').replace(/(^|\n)\s*\/\/[^\n]*/g, '\n');
+  const cut = Math.max(s.lastIndexOf(';'), s.lastIndexOf('}'));
+  if (cut >= 0) s = s.slice(cut + 1);
+  return s.trim().replace(/\s+/g, ' ');
+}
+/** What a static scan can tell about the name an element's content provides. */
+function contentName(inner: string): 'named' | 'unknown' | 'empty' | 'no-text' {
+  if (TEMPLATED.test(inner) || /data-l10n|data-i18n|\bi18n\b|\bv-t\b/i.test(inner)) return 'unknown';
+  if (/\{[^{}]*\}/.test(inner) || /<[A-Z][A-Za-z0-9.]*/.test(inner)) return 'unknown';
+  const imgs = [...inner.matchAll(/<img\b([^>]*)>/gi)];
+  if (imgs.some((m) => nonEmptyAttr(m[1], 'alt') || nonEmptyAttr(m[1], 'aria-label') || nonEmptyAttr(m[1], 'title'))) return 'named';
+  if (/<svg\b[^>]*aria-label\s*=\s*["'][^"']+["']/i.test(inner) || /<svg\b[\s\S]*?<title\b[^>]*>\s*[^<\s]/i.test(inner)) return 'named';
+  if (/\baria-label\s*=\s*["'][^"']+["']/i.test(inner)) return 'named';
+  const text = inner.replace(/<!--[\s\S]*?-->/g, '').replace(/<[^>]*>/g, '').replace(/&nbsp;|\s/g, '');
+  if (text) return 'named';
+  return /<[a-z]/i.test(inner) ? 'no-text' : 'empty';
+}
 
 export interface RuleCtx {
   docs: Doc[];
@@ -103,7 +137,9 @@ export function runRules(ctx: RuleCtx): RawHit[] {
 
     for (const m of t.matchAll(tagRe('img'))) {
       if (hasSpread(m[2])) continue;
-      if (!hasAttr(m[2], 'alt')) {
+      const decorative = /\brole\s*=\s*["'](presentation|none)["']/i.test(m[2]);
+      const named = nonEmptyAttr(m[2], 'aria-label') || nonEmptyAttr(m[2], 'aria-labelledby') || nonEmptyAttr(m[2], 'title');
+      if (!hasAttr(m[2], 'alt') && !isHidden(m[2]) && !decorative && !named) {
         push(mk(d, m.index, {
           rule: 'RS-A11Y-001', category: 'accessibility', title: 'Image has no alt attribute', severity: 'high', confidence: 'high',
           criterion: 'WCAG 2.2: 1.1.1 Non-text Content',
@@ -126,7 +162,8 @@ export function runRules(ctx: RuleCtx): RawHit[] {
 
     if (d.isHtmlDoc) {
       for (const m of t.matchAll(/<html\b([^>]*)>/gi)) {
-        if (!hasAttr(m[1], 'lang')) {
+        if (insideCode(t, m.index)) continue;
+        if (!hasAttr(m[1], 'lang') || attrVal(m[1], 'lang')?.trim() === '') {
           push(mk(d, m.index, {
             rule: 'RS-A11Y-002', category: 'accessibility', title: 'Document has no lang attribute', severity: 'medium', confidence: 'high',
             criterion: 'WCAG 2.2: 3.1.1 Language of Page',
@@ -137,8 +174,14 @@ export function runRules(ctx: RuleCtx): RawHit[] {
           }));
         }
       }
-      if (!/<title\b[^>]*>\s*[^<\s][\s\S]*?<\/title>/i.test(t) && /<head\b/i.test(t)) {
-        const idx = Math.max(0, t.search(/<head\b/i));
+      const htmlTag = [...t.matchAll(/<html\b/gi)].find((x) => !insideCode(t, x.index));
+      const shell = Boolean(htmlTag) || /<!doctype html/i.test(t) || /<head\b/i.test(t);
+      const bodyAt = t.search(/<body\b/i);
+      const headEnd = t.search(/<\/head>/i);
+      const headRegion = t.slice(0, headEnd >= 0 ? headEnd : bodyAt >= 0 ? bodyAt : t.length);
+      const templatedHead = TEMPLATED.test(headRegion);
+      if (shell && !templatedHead && !/<title\b[^>]*>\s*[^<\s][\s\S]*?<\/title>/i.test(headRegion)) {
+        const idx = Math.max(0, t.search(/<head\b|<html\b/i));
         push(mk(d, idx, {
           rule: 'RS-A11Y-008', category: 'accessibility', title: 'Document has no title', severity: 'medium', confidence: 'high',
           criterion: 'WCAG 2.2: 2.4.2 Page Titled',
@@ -148,7 +191,7 @@ export function runRules(ctx: RuleCtx): RawHit[] {
           limitations: 'A title may be set at runtime by a script.',
         }));
       }
-      if (/<head\b/i.test(t) && !/<meta\b[^>]*name\s*=\s*["']viewport["']/i.test(t)) {
+      if (/<head\b/i.test(t) && !templatedHead && !/<meta\b[^>]*name\s*=\s*["']viewport["']/i.test(t)) {
         const idx = Math.max(0, t.search(/<head\b/i));
         push(mk(d, idx, {
           rule: 'RS-RESP-001', category: 'responsive', title: 'No viewport meta tag', severity: 'medium', confidence: 'high',
@@ -159,7 +202,8 @@ export function runRules(ctx: RuleCtx): RawHit[] {
           limitations: 'A framework layout may inject the tag at build time.',
         }));
       }
-      if (/<body\b/i.test(t) && !/<main\b|role\s*=\s*["']main["']/i.test(t)) {
+      const bodyTemplated = bodyAt >= 0 && /\{\{\s*content|\{%\s*(block|include|yield)|<slot|\{children\}|<%=?\s*yield|@yield|\{\{\{?\s*(body|yield)/.test(t.slice(bodyAt));
+      if (shell && bodyAt >= 0 && !bodyTemplated && !/<main\b|role\s*=\s*["']main["']/i.test(t)) {
         push(mk(d, Math.max(0, t.search(/<body\b/i)), {
           rule: 'RS-A11Y-015', category: 'accessibility', title: 'No main landmark', severity: 'low', confidence: 'medium',
           criterion: 'WCAG 2.2: 1.3.1 Info and Relationships, 2.4.1 Bypass Blocks',
@@ -201,29 +245,32 @@ export function runRules(ctx: RuleCtx): RawHit[] {
       }
     }
 
-    for (const m of t.matchAll(/<button\b([^>]*)>\s*<\/button>/gi)) {
-      if (!hasAttr(m[1], 'aria-label') && !hasAttr(m[1], 'aria-labelledby') && !hasAttr(m[1], 'title') && !hasSpread(m[1])) {
-        push(mk(d, m.index, {
-          rule: 'RS-A11Y-004', category: 'accessibility', title: 'Button has no accessible name', severity: 'high', confidence: 'high',
-          criterion: 'WCAG 2.2: 4.1.2 Name, Role, Value',
-          user_impact: 'Screen-reader users hear only "button" and cannot tell what it does.',
-          recommended_fix: 'Add visible text or an aria-label describing the action.',
-          verification: 'Re-run the audit; check the accessible name in the browser accessibility tree.',
-          limitations: 'Content injected at runtime would not be seen by static analysis.',
-        }));
-      }
+    const labelledIds = new Set([...t.matchAll(/<label\b[^>]*\b(?:for|htmlFor)\s*=\s*["']([^"']+)["']/gi)].map((x) => x[1]));
+    for (const m of t.matchAll(/<button\b([^>]*)>([\s\S]{0,2000}?)<\/button>/gi)) {
+      if (labelledIds.has(attrVal(m[1], 'id') ?? '\u0000') || hasSpread(m[1]) || isHidden(m[1]) || nonEmptyAttr(m[1], 'aria-label') || nonEmptyAttr(m[1], 'aria-labelledby') || nonEmptyAttr(m[1], 'title')) continue;
+      const cn = contentName(m[2]);
+      if (cn === 'named' || cn === 'unknown') continue;
+      push(mk(d, m.index, {
+        rule: 'RS-A11Y-004', category: 'accessibility', title: 'Button has no accessible name', severity: 'high', confidence: cn === 'empty' ? 'high' : 'medium',
+        criterion: 'WCAG 2.2: 4.1.2 Name, Role, Value',
+        user_impact: 'Screen-reader users hear only "button" and cannot tell what it does.',
+        recommended_fix: 'Add visible text or an aria-label describing the action.',
+        verification: 'Re-run the audit; check the accessible name in the browser accessibility tree.',
+        limitations: 'Content injected at runtime would not be seen by static analysis.',
+      }));
     }
-    for (const m of t.matchAll(/<a\b([^>]*)>\s*<\/a>/gi)) {
-      if (hasAttr(m[1], 'href') && !hasAttr(m[1], 'aria-label') && !hasAttr(m[1], 'aria-labelledby') && !hasSpread(m[1])) {
-        push(mk(d, m.index, {
-          rule: 'RS-A11Y-004', category: 'accessibility', title: 'Link has no accessible name', severity: 'high', confidence: 'high',
-          criterion: 'WCAG 2.2: 2.4.4 Link Purpose, 4.1.2 Name, Role, Value',
-          user_impact: 'Screen-reader users hear only "link" and cannot tell where it goes.',
-          recommended_fix: 'Add link text or an aria-label.',
-          verification: 'Re-run the audit; check the accessible name in the browser accessibility tree.',
-          limitations: 'Content injected at runtime would not be seen by static analysis.',
-        }));
-      }
+    for (const m of t.matchAll(/<a\b([^>]*)>([\s\S]{0,2000}?)<\/a>/gi)) {
+      if (!hasAttr(m[1], 'href') || hasSpread(m[1]) || isHidden(m[1]) || nonEmptyAttr(m[1], 'aria-label') || nonEmptyAttr(m[1], 'aria-labelledby') || nonEmptyAttr(m[1], 'title')) continue;
+      const cn = contentName(m[2]);
+      if (cn === 'named' || cn === 'unknown') continue;
+      push(mk(d, m.index, {
+        rule: 'RS-A11Y-004', category: 'accessibility', title: 'Link has no accessible name', severity: 'high', confidence: cn === 'empty' ? 'high' : 'medium',
+        criterion: 'WCAG 2.2: 2.4.4 Link Purpose, 4.1.2 Name, Role, Value',
+        user_impact: 'Screen-reader users hear only "link" and cannot tell where it goes.',
+        recommended_fix: 'Add link text or an aria-label.',
+        verification: 'Re-run the audit; check the accessible name in the browser accessibility tree.',
+        limitations: 'Content injected at runtime would not be seen by static analysis.',
+      }));
     }
 
     // vague link text
@@ -246,7 +293,7 @@ export function runRules(ctx: RuleCtx): RawHit[] {
       const a = m[2];
       const type = (attrVal(a, 'type') ?? 'text').toLowerCase();
       if (m[1].toLowerCase() === 'input' && ['hidden', 'submit', 'button', 'reset', 'image'].includes(type)) continue;
-      if (hasSpread(a) || hasAttr(a, 'aria-label') || hasAttr(a, 'aria-labelledby') || hasAttr(a, 'title')) continue;
+      if (hasSpread(a) || isHidden(a) || nonEmptyAttr(a, 'aria-label') || nonEmptyAttr(a, 'aria-labelledby') || nonEmptyAttr(a, 'title')) continue;
       const id = attrVal(a, 'id');
       if (id && labelFor.has(id)) continue;
       if (/htmlFor/.test(t) && id) continue;
@@ -254,6 +301,8 @@ export function runRules(ctx: RuleCtx): RawHit[] {
       const lastOpen = Math.max(before.lastIndexOf('<label'), before.lastIndexOf('<Label'));
       const lastClose = Math.max(before.lastIndexOf('</label'), before.lastIndexOf('</Label'));
       if (lastOpen > lastClose) continue;
+      // a control nested in a button or summary is named by that element's content
+      if (Math.max(before.lastIndexOf('<button'), before.lastIndexOf('<summary')) > Math.max(before.lastIndexOf('</button'), before.lastIndexOf('</summary'))) continue;
       push(mk(d, m.index, {
         rule: 'RS-A11Y-005', category: 'accessibility', title: 'Form control has no programmatic label', severity: 'high', confidence: 'medium',
         criterion: 'WCAG 2.2: 1.3.1 Info and Relationships, 3.3.2 Labels or Instructions, 4.1.2',
@@ -293,12 +342,12 @@ export function runRules(ctx: RuleCtx): RawHit[] {
       if (hasAttr(m[2], 'autoplay') || hasAttr(m[2], 'autoPlay')) {
         if (!hasAttr(m[2], 'muted') && !hasAttr(m[2], 'controls')) {
           push(mk(d, m.index, {
-            rule: 'RS-A11Y-012', category: 'accessibility', title: 'Media autoplays without muted or controls', severity: 'medium', confidence: 'high',
+            rule: 'RS-A11Y-012', category: 'accessibility', title: 'Media autoplays without muted or controls', severity: 'medium', confidence: 'medium',
             criterion: 'WCAG 2.2: 1.4.2 Audio Control',
             user_impact: 'Unexpected audio interferes with screen readers and cannot be stopped.',
             recommended_fix: 'Remove autoplay, or mute it and provide visible controls.',
             verification: 'Load the page with a screen reader running.',
-            limitations: 'Browsers may block autoplay; not observed at runtime.',
+            limitations: 'Whether the media has an audio track, or plays for under 3 seconds, cannot be seen statically. Browsers may also block autoplay.',
           }));
         }
       }
@@ -361,8 +410,9 @@ export function runRules(ctx: RuleCtx): RawHit[] {
       colors.set(k, (colors.get(k) ?? 0) + 1);
     }
 
-    for (const m of b.text.matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
-      const selector = m[1].trim().replace(/\s+/g, ' ');
+    // SCSS interpolation (#{...}) contains braces; blank it out with same-length filler so offsets stay valid
+    for (const m of b.text.replace(/#\{[^{}]*\}/g, (x) => 'X'.repeat(x.length)).matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
+      const selector = cleanSelector(m[1]);
       const body = m[2];
       const bodyAt = m.index + m[0].indexOf('{') + 1;
       if (/^@/.test(selector) && !/^@media|^@supports|^@container/.test(selector)) continue;
@@ -370,7 +420,7 @@ export function runRules(ctx: RuleCtx): RawHit[] {
       // contrast
       const fg = /(?:^|[;\s])color\s*:\s*(#[0-9a-fA-F]{3,6}\b|rgb\([^)]*\)|[a-zA-Z]+)\s*(?:!important)?\s*(?:;|$)/.exec(body);
       const bg = /(?:^|[;\s])background(?:-color)?\s*:\s*(#[0-9a-fA-F]{3,6}\b|rgb\([^)]*\)|(?:white|black|red|gray|grey|silver|yellow|lightgray|lightgrey|orange|blue|green)\b)/.exec(body);
-      if (fg && bg) {
+      if (fg && bg && !/text-shadow|opacity|gradient|filter|mix-blend|background-image/i.test(body)) {
         const f = parseColor(fg[1]);
         const g = parseColor(bg[1]);
         if (f && g) {
@@ -396,7 +446,8 @@ export function runRules(ctx: RuleCtx): RawHit[] {
       }
 
       // focus outline removal
-      if (/outline\s*:\s*(none|0)\b|outline-width\s*:\s*0/.test(body) && !/:focus-visible/.test(selector) && !/:not\(:focus/.test(selector)) {
+      if (/outline\s*:\s*(none|0)\b|outline-width\s*:\s*0/.test(body) && !/:focus-visible/.test(selector) && !/:not\(:focus/.test(selector)
+        && (/:focus/.test(selector) || !/:active|:hover|:disabled|::|:before|:after/.test(selector))) {
         const replaced = /box-shadow\s*:\s*(?!none)/.test(body) || /border(-color)?\s*:/.test(body) && /:focus/.test(selector);
         if (!replaced) {
           hit(bodyAt + body.search(/outline/), {
@@ -438,7 +489,7 @@ export function runRules(ctx: RuleCtx): RawHit[] {
       }
 
       // small targets
-      if (/button|btn|(^|[\s.#])a($|[\s:.,])|icon/i.test(selector)) {
+      if (/button|btn|(^|[\s.#])a($|[\s:.,])|role=.?button/i.test(selector) && !/::?(before|after)|spacer|separator|divider|splitter/i.test(selector)) {
         const hh = /(?:^|[;\s])(?:height|min-height)\s*:\s*(\d+)px/.exec(body);
         const ww = /(?:^|[;\s])(?:width|min-width)\s*:\s*(\d+)px/.exec(body);
         const small = (hh && +hh[1] < 24) || (ww && +ww[1] < 24);
@@ -504,7 +555,7 @@ export function runRules(ctx: RuleCtx): RawHit[] {
       const body = m[1];
       const fg = /(?:^|;)\s*color\s*:\s*(#[0-9a-fA-F]{3,6}\b|rgb\([^)]*\))/.exec(body);
       const bg = /(?:^|;)\s*background(?:-color)?\s*:\s*(#[0-9a-fA-F]{3,6}\b|rgb\([^)]*\))/.exec(body);
-      if (!fg || !bg) continue;
+      if (!fg || !bg || /text-shadow|opacity|gradient|filter|mix-blend|background-image/i.test(body)) continue;
       const f = parseColor(fg[1]);
       const g = parseColor(bg[1]);
       if (!f || !g) continue;

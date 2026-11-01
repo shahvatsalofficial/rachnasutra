@@ -1,0 +1,54 @@
+{
+ "RS-A11Y-004|jgthms_bulma|docs/documentation/layout/media-object.html|47": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-004|jgthms_bulma|docs/_includes/global/navbar.html|13": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-004|jgthms_bulma|docs/documentation/elements/delete.html|30": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-004|jgthms_bulma|docs/_includes/docs/elements/tw.html|36": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-004|jgthms_bulma|docs/_includes/global/navbar.html|7": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-004|jgthms_bulma|docs/_includes/global/navbar.html|45": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-010|ColorlibHQ_AdminLTE|src/html/public/css/adminlte.rtl.min.css|6": {
+  "label": "CD",
+  "note": "plaintext or custom-wrapped control; own focus treatment likely"
+ },
+ "RS-A11Y-010|twbs_bootstrap|scss/forms/_form-control.scss|174": {
+  "label": "CD",
+  "note": "plaintext or custom-wrapped control; own focus treatment likely"
+ },
+ "RS-A11Y-010|ColorlibHQ_AdminLTE|src/html/public/css/adminlte.css|2203": {
+  "label": "CD",
+  "note": "plaintext or custom-wrapped control; own focus treatment likely"
+ },
+ "RS-A11Y-010|twbs_bootstrap|site/src/assets/examples/list-groups/list-groups.css|15": {
+  "label": "CD",
+  "note": "plaintext or custom-wrapped control; own focus treatment likely"
+ },
+ "RS-A11Y-010|ColorlibHQ_AdminLTE|src/html/public/css/adminlte.min.css|6": {
+  "label": "CD",
+  "note": "plaintext or custom-wrapped control; own focus treatment likely"
+ },
+ "RS-A11Y-010|jgthms_bulma|docs/assets/css/custom.css|470": {
+  "label": "CD",
+  "note": "plaintext or custom-wrapped control; own focus treatment likely"
+ },
+ "RS-A11Y-014|mozilla_pdf.js|web/internal/tree_view.css|42": {
+  "label": "TP",
+  "note": ""
+ }
+}

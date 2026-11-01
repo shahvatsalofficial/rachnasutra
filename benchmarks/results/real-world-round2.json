@@ -1,0 +1,316 @@
+{
+  "generatedAt": "2026-11-01T17:09:58.699Z",
+  "tool": "rachnasutra",
+  "seed": 777,
+  "repos": [
+    {
+      "repo": "ColorlibHQ/AdminLTE",
+      "commit": "e13df78a4d0c287e5fa57308e293f63e44e9dd0f",
+      "filesScanned": 168,
+      "fileTypes": {
+        ".html": 1,
+        ".astro": 101,
+        ".css": 20,
+        ".scss": 46
+      },
+      "truncated": false,
+      "findings": 103,
+      "bySeverity": {
+        "high": 19,
+        "medium": 5,
+        "low": 79
+      },
+      "byRule": {
+        "RS-A11Y-004": 6,
+        "RS-A11Y-005": 5,
+        "RS-A11Y-010": 8,
+        "RS-A11Y-002": 1,
+        "RS-PERF-002": 4,
+        "RS-A11Y-015": 1,
+        "RS-CONT-001": 4,
+        "RS-CONT-002": 3,
+        "RS-PERF-001": 71
+      },
+      "ms": 662
+    },
+    {
+      "repo": "alphagov/accessible-autocomplete",
+      "commit": "298f94b73cf25fb6ccd08114c557509ee97530f7",
+      "filesScanned": 7,
+      "fileTypes": {
+        ".html": 6,
+        ".css": 1
+      },
+      "truncated": false,
+      "findings": 1,
+      "bySeverity": {
+        "medium": 1
+      },
+      "byRule": {
+        "RS-A11Y-011": 1
+      },
+      "ms": 57
+    },
+    {
+      "repo": "gatsbyjs/gatsby-starter-blog",
+      "commit": "d75052245100ae3c98807c5f38c6e7ec68910e74",
+      "filesScanned": 3,
+      "fileTypes": {
+        ".css": 2,
+        ".tsx": 1
+      },
+      "truncated": false,
+      "findings": 1,
+      "bySeverity": {
+        "medium": 1
+      },
+      "byRule": {
+        "RS-PERF-002": 1
+      },
+      "ms": 31
+    },
+    {
+      "repo": "h5bp/html5-boilerplate",
+      "commit": "b6597338e695dc4a8165c5abcb2bfffa586c3ee5",
+      "filesScanned": 2,
+      "fileTypes": {
+        ".html": 2
+      },
+      "truncated": false,
+      "findings": 4,
+      "bySeverity": {
+        "medium": 2,
+        "low": 2
+      },
+      "byRule": {
+        "RS-A11Y-002": 1,
+        "RS-A11Y-008": 1,
+        "RS-A11Y-015": 2
+      },
+      "ms": 50
+    },
+    {
+      "repo": "jgthms/bulma",
+      "commit": "c5cd04baf0258cfcc77b4e8610488a0d439effa2",
+      "filesScanned": 536,
+      "fileTypes": {
+        ".scss": 124,
+        ".css": 13,
+        ".html": 356,
+        ".jsx": 43
+      },
+      "truncated": false,
+      "findings": 451,
+      "bySeverity": {
+        "high": 283,
+        "medium": 18,
+        "low": 150
+      },
+      "byRule": {
+        "RS-A11Y-001": 67,
+        "RS-A11Y-004": 61,
+        "RS-A11Y-005": 145,
+        "RS-A11Y-010": 9,
+        "RS-A11Y-013": 1,
+        "RS-A11Y-002": 3,
+        "RS-A11Y-008": 2,
+        "RS-MOT-001": 1,
+        "RS-PERF-002": 12,
+        "RS-A11Y-009": 1,
+        "RS-A11Y-015": 6,
+        "RS-CONT-001": 9,
+        "RS-CONT-002": 25,
+        "RS-PERF-001": 109
+      },
+      "ms": 1585
+    },
+    {
+      "repo": "mozilla/pdf.js",
+      "commit": "0a4153349dc473ba950fc17941c5ca7eda43c1de",
+      "filesScanned": 74,
+      "fileTypes": {
+        ".css": 45,
+        ".html": 29
+      },
+      "truncated": false,
+      "findings": 95,
+      "bySeverity": {
+        "high": 30,
+        "medium": 34,
+        "low": 31
+      },
+      "byRule": {
+        "RS-A11Y-003": 8,
+        "RS-A11Y-004": 9,
+        "RS-A11Y-005": 9,
+        "RS-A11Y-010": 4,
+        "RS-A11Y-002": 16,
+        "RS-A11Y-006": 5,
+        "RS-A11Y-013": 1,
+        "RS-A11Y-014": 2,
+        "RS-RESP-001": 10,
+        "RS-A11Y-015": 19,
+        "RS-VIS-001": 12
+      },
+      "ms": 3417
+    },
+    {
+      "repo": "reactjs/react.dev",
+      "commit": "0821e7d9428a6c58c922765b891bbffba9ed6249",
+      "filesScanned": 115,
+      "fileTypes": {
+        ".html": 1,
+        ".tsx": 110,
+        ".css": 4
+      },
+      "truncated": false,
+      "findings": 10,
+      "bySeverity": {
+        "high": 1,
+        "medium": 7,
+        "low": 2
+      },
+      "byRule": {
+        "RS-A11Y-010": 1,
+        "RS-A11Y-002": 1,
+        "RS-MOT-001": 1,
+        "RS-PERF-002": 4,
+        "RS-RESP-001": 1,
+        "RS-A11Y-015": 1,
+        "RS-PERF-001": 1
+      },
+      "ms": 1272
+    },
+    {
+      "repo": "shadcn-ui/taxonomy",
+      "commit": "298a8857c7128a0d121e7f699dfd729f23b3966d",
+      "filesScanned": 97,
+      "fileTypes": {
+        ".tsx": 94,
+        ".css": 3
+      },
+      "truncated": false,
+      "findings": 2,
+      "bySeverity": {
+        "medium": 2
+      },
+      "byRule": {
+        "RS-A11Y-011": 1,
+        "RS-RESP-003": 1
+      },
+      "ms": 279
+    },
+    {
+      "repo": "startbootstrap/startbootstrap-agency",
+      "commit": "b2d5d5c6b1396bc5b0e8dd92c693b106cfb7cee1",
+      "filesScanned": 13,
+      "fileTypes": {
+        ".scss": 13
+      },
+      "truncated": false,
+      "findings": 2,
+      "bySeverity": {
+        "medium": 1,
+        "low": 1
+      },
+      "byRule": {
+        "RS-MOT-001": 1,
+        "RS-VIS-001": 1
+      },
+      "ms": 73
+    },
+    {
+      "repo": "startbootstrap/startbootstrap-clean-blog",
+      "commit": "1ebc4f8f3b6194335df237a2a7837955a5a4a9aa",
+      "filesScanned": 15,
+      "fileTypes": {
+        ".scss": 15
+      },
+      "truncated": false,
+      "findings": 4,
+      "bySeverity": {
+        "medium": 4
+      },
+      "byRule": {
+        "RS-MOT-001": 1,
+        "RS-PERF-002": 3
+      },
+      "ms": 63
+    },
+    {
+      "repo": "twbs/bootstrap",
+      "commit": "e93ba5e5267ac2f74d5d35f1c11bb476957de94b",
+      "filesScanned": 284,
+      "fileTypes": {
+        ".html": 16,
+        ".scss": 137,
+        ".astro": 106,
+        ".css": 25
+      },
+      "truncated": false,
+      "findings": 98,
+      "bySeverity": {
+        "high": 23,
+        "medium": 5,
+        "low": 70
+      },
+      "byRule": {
+        "RS-A11Y-001": 2,
+        "RS-A11Y-005": 17,
+        "RS-A11Y-010": 4,
+        "RS-PERF-002": 5,
+        "RS-A11Y-009": 6,
+        "RS-A11Y-015": 16,
+        "RS-CONT-001": 38,
+        "RS-CONT-002": 1,
+        "RS-PERF-001": 9
+      },
+      "ms": 1174
+    },
+    {
+      "repo": "vercel/commerce",
+      "commit": "f7521d57d29f0eb3d23c1399cf9bb299d61fcd21",
+      "filesScanned": 46,
+      "fileTypes": {
+        ".tsx": 45,
+        ".css": 1
+      },
+      "truncated": false,
+      "findings": 2,
+      "bySeverity": {
+        "high": 2
+      },
+      "byRule": {
+        "RS-A11Y-005": 2
+      },
+      "ms": 124
+    }
+  ],
+  "totals": {
+    "findings": 773,
+    "files": 1360
+  },
+  "byRule": {
+    "RS-A11Y-004": 76,
+    "RS-A11Y-005": 178,
+    "RS-A11Y-010": 26,
+    "RS-A11Y-002": 22,
+    "RS-PERF-002": 29,
+    "RS-A11Y-015": 45,
+    "RS-CONT-001": 51,
+    "RS-CONT-002": 29,
+    "RS-PERF-001": 190,
+    "RS-A11Y-011": 2,
+    "RS-A11Y-008": 3,
+    "RS-A11Y-001": 69,
+    "RS-A11Y-013": 2,
+    "RS-MOT-001": 4,
+    "RS-A11Y-009": 7,
+    "RS-A11Y-003": 8,
+    "RS-A11Y-006": 5,
+    "RS-A11Y-014": 2,
+    "RS-RESP-001": 11,
+    "RS-VIS-001": 13,
+    "RS-RESP-003": 1
+  }
+}

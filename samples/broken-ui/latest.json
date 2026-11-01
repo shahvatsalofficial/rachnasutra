@@ -2,9 +2,9 @@
   "schemaVersion": "1.0.0",
   "tool": {
     "name": "rachnasutra",
-    "version": "0.1.0"
+    "version": "0.2.0"
   },
-  "generatedAt": "2026-10-30T20:46:41.001Z",
+  "generatedAt": "2026-11-01T17:25:21.784Z",
   "root": "<project>\\fixtures\\intentionally-broken-ui",
   "mode": "static",
   "filesScanned": 2,
@@ -285,17 +285,17 @@
       "verification": "Re-run the audit and check the browser tab.",
       "limitations": "A title may be set at runtime by a script.",
       "file": "index.html",
-      "line": 3,
+      "line": 2,
       "evidence": [
         {
           "path": "index.html",
-          "line": 3,
-          "excerpt": "<head>"
+          "line": 2,
+          "excerpt": "<html>"
         }
       ],
       "platform": "web",
       "status": "confirmed",
-      "fingerprint": "8e12c9b1b43d"
+      "fingerprint": "6fc5c1505df4"
     },
     {
       "id": "RS-0012",

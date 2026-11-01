@@ -19,6 +19,9 @@
 - [Testing and evidence](documents/rachnasutra/10-testing-and-evidence.md): recorded results and samples
 - [Deployment and CI](documents/rachnasutra/11-deployment-and-ci.md): pipelines and gates
 - [Roadmap and status](documents/rachnasutra/12-roadmap-and-status.md): implemented vs planned
+- [Rule examples](documents/rachnasutra/15-rule-examples.md): failing and passing input for every rule
+- [Validation and benchmarks](documents/rachnasutra/16-validation-and-benchmarks.md): ACT test cases, axe-core comparison, real-world audit, case study
+- [Host smoke tests](documents/rachnasutra/17-host-smoke-tests.md): what is verified in live AI IDEs
 - [FAQ and glossary](documents/rachnasutra/14-faq-and-glossary.md)
 
 ## Reference
@@ -42,4 +45,6 @@
 - Read-only by default; no network, telemetry or model calls from the CLI; secrets redacted in reports.
 - Static analysis only in 0.1.0. Browser, screenshot, axe and Lighthouse audits are not available yet and exit with code 3.
 - Not a WCAG, ADA or other conformance certification. No quality score is produced.
-- 22 automated tests pass; sample runs and raw outputs are in documents/rachnasutra/evidence/.
+- 111 automated tests pass (Node 20 and 24); sample runs and raw outputs are in documents/rachnasutra/evidence/.
+- Validated against W3C ACT test cases (71% precision, 65% recall after fixes), compared with axe-core (which is more accurate), and audited on 12 public repositories; results and weaknesses are published in benchmarks/results/.
+- AI IDE skill loading has not yet been verified in live hosts.

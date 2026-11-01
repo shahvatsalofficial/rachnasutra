@@ -1,0 +1,134 @@
+{
+ "RS-A11Y-002|mozilla_pdf.js|examples/components/pageviewer.html|17": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-002|mozilla_pdf.js|test/resources/reftest-analyzer.html|32": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-002|mozilla_pdf.js|examples/text-only/index.html|2": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-002|mozilla_pdf.js|test/test_slave.html|17": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-002|mozilla_pdf.js|extensions/chromium/options/options.html|17": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-002|mozilla_pdf.js|web/viewer-geckoview.html|23": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-004|jgthms_bulma|docs/documentation/elements/button.html|312": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-004|jgthms_bulma|docs/_includes/docs/elements/github-item.html|4": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-004|mozilla_pdf.js|web/viewer.html|1099": {
+  "label": "FP",
+  "note": "button is named by a <label for> element (rule bug, fixed after this round)"
+ },
+ "RS-A11Y-004|jgthms_bulma|docs/documentation/elements/tag.html|416": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-004|mozilla_pdf.js|web/viewer.html|1153": {
+  "label": "CD",
+  "note": "multi-line button; name source not visible in the excerpt"
+ },
+ "RS-A11Y-004|jgthms_bulma|docs/_includes/global/header.html|20": {
+  "label": "CD",
+  "note": "icon button; name may come from a parent or script"
+ },
+ "RS-A11Y-005|jgthms_bulma|docs/documentation/elements/block.html|95": {
+  "label": "CD",
+  "note": "placeholder only; WCAG practice flags it, ACT rule e086e5 accepts placeholder as a name"
+ },
+ "RS-A11Y-005|jgthms_bulma|docs/_includes/global/header.html|107": {
+  "label": "CD",
+  "note": "placeholder only"
+ },
+ "RS-A11Y-005|jgthms_bulma|docs/library/debug/debug.html|259": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-005|jgthms_bulma|docs/documentation/form/select.html|53": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-005|jgthms_bulma|docs/documentation/form/select.html|216": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-005|jgthms_bulma|docs/documentation/layout/level.html|27": {
+  "label": "CD",
+  "note": "placeholder only"
+ },
+ "RS-A11Y-008|h5bp_html5-boilerplate|src/index.html|2": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-008|jgthms_bulma|docs/library/debug/debug.html|2": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-010|jgthms_bulma|css/versions/bulma-no-helpers.min.css|3": {
+  "label": "CD",
+  "note": "minified framework CSS; component styles its own focus state"
+ },
+ "RS-A11Y-010|mozilla_pdf.js|docs/contents/css/bootstrap.min.css|6": {
+  "label": "CD",
+  "note": "tabindex=-1 programmatic focus target; outline removal is conventional"
+ },
+ "RS-A11Y-010|jgthms_bulma|docs/assets/css/custom.css|96": {
+  "label": "CD",
+  "note": "component styles its own focus state"
+ },
+ "RS-A11Y-010|jgthms_bulma|docs/_sass/docs/cupcake.scss|55": {
+  "label": "CD",
+  "note": "documentation UI element"
+ },
+ "RS-A11Y-010|twbs_bootstrap|scss/forms/_switch.scss|74": {
+  "label": "CD",
+  "note": "custom switch control; own focus style likely"
+ },
+ "RS-A11Y-010|jgthms_bulma|sass/utilities/controls.scss|64": {
+  "label": "FP",
+  "note": "selector is :active / .is-active, not focus (SCSS interpolation mis-parse, fixed after this round)"
+ },
+ "RS-A11Y-014|mozilla_pdf.js|web/viewer.css|1758": {
+  "label": "FP",
+  "note": "spacer element, not interactive (fixed after this round)"
+ },
+ "RS-A11Y-015|twbs_bootstrap|js/tests/visual/menu.html|9": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-015|twbs_bootstrap|js/tests/visual/tab.html|14": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-015|jgthms_bulma|docs/_react/bulma-customizer/index.html|13": {
+  "label": "CD",
+  "note": "single-page app mount point; landmarks rendered at runtime"
+ },
+ "RS-A11Y-015|twbs_bootstrap|js/tests/visual/tooltip.html|19": {
+  "label": "TP",
+  "note": ""
+ },
+ "RS-A11Y-015|mozilla_pdf.js|web/viewer-geckoview.html|103": {
+  "label": "CD",
+  "note": "landmarks may be added at runtime"
+ },
+ "RS-A11Y-015|mozilla_pdf.js|examples/components/simpleviewer.html|44": {
+  "label": "CD",
+  "note": "landmarks may be added at runtime"
+ }
+}

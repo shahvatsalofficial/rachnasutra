@@ -22,6 +22,11 @@ PASS file:CONTRIBUTING.md: present
 PASS file:ROADMAP.md: present
 PASS file:llms.txt: present
 PASS file:docs/status.md: present
+PASS file:CITATION.cff: present
+PASS file:assets/logo.svg: present
+PASS file:benchmarks/README.md: present
+PASS file:documents/rachnasutra/00-overview.md: present
+PASS file:documents/rachnasutra/16-validation-and-benchmarks.md: present
 PASS readme-links: all relative links resolve
 
 # doctor
@@ -49,7 +54,7 @@ Scanned 2 file(s). 21 finding(s): 0 critical, 8 high, 7 medium, 5 low, 1 info.
   RS-0008 [high/confirmed] RS-A11Y-013 styles.css:1 - Text contrast 2.85:1 is below 4.5:1 (#999999 on #ffffff)
   RS-0009 [medium/confirmed] RS-A11Y-002 index.html:2 - Document has no lang attribute
   RS-0010 [medium/confirmed] RS-A11Y-006 index.html:17 - Positive tabindex overrides natural focus order
-  RS-0011 [medium/confirmed] RS-A11Y-008 index.html:3 - Document has no title
+  RS-0011 [medium/confirmed] RS-A11Y-008 index.html:2 - Document has no title
   RS-0012 [medium/review-required] RS-A11Y-014 styles.css:3 - Interactive target smaller than 24x24 CSS px (.icon-btn)
   RS-0013 [medium/confirmed] RS-MOT-001 styles.css:6 - Animations or transitions exist but no prefers-reduced-motion handling
   RS-0014 [medium/review-required] RS-RESP-002 styles.css:1 - Fixed width 1200px can overflow narrow viewports

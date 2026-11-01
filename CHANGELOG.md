@@ -2,12 +2,27 @@
 
 All notable changes follow [Semantic Versioning](https://semver.org/). Report schema version is tracked separately (`schemaVersion`).
 
-## Unreleased
+## 0.2.0
 
+Validation release. Rule behaviour changed as a result of testing against inputs the author did not write.
+
+- Added a failing and a passing test for every rule plus false-positive guards (111 tests); rule examples are generated from the same data
+- Added benchmarks: W3C ACT test cases, axe-core comparison, real-world audit of 12 repositories with manual spot checks, and a before/after case study (`benchmarks/`, `case-studies/`)
+- Fixed false positives and misses found by those runs:
+  - RS-A11Y-001: images named by `title`/`aria-label`, hidden, or presentational are no longer reported
+  - RS-A11Y-002, RS-A11Y-008: empty `lang`, documents without a `<head>` are detected; `<html>` inside code samples and templated heads are ignored
+  - RS-A11Y-004: links and buttons whose content gives no name (empty-alt images, icons) are detected; hidden elements, runtime or template text and `<label for>` names are respected; low-confidence cases are now `review-required`
+  - RS-A11Y-005: controls nested in a button or summary and hidden controls are not reported
+  - RS-A11Y-010: `:active`, `:hover` and pseudo-element selectors are not treated as focus removal; SCSS comments and interpolation no longer corrupt selectors
+  - RS-A11Y-012: now medium confidence (audio presence cannot be known statically)
+  - RS-A11Y-013: pairs affected by text-shadow, opacity or gradients are not judged
+  - RS-A11Y-014: pseudo-elements, spacers and icons inside controls are not reported
+  - RS-A11Y-015: fragments, templated bodies are not reported
 - `failOn` in `rachnasutra.config.json` is now the default gate for `audit` and `ci` (`--fail-on` overrides)
-- Full documentation set in `documents/rachnasutra/` (Markdown and generated HTML site), sample reports in `samples/`, recorded test evidence
-- `npm run docs`, `npm run samples`, `scripts/sanitize-paths.mjs`
-- README: proof, FAQ, legal sections; `CITATION.cff`
+- `npm test` uses plain `node --test` so it also works on Node 20 (the glob form failed there in CI); `prepare` builds on `npx github:...` installs
+- Full documentation set in `documents/rachnasutra/` (Markdown and generated HTML), sample reports in `samples/`, recorded test evidence, `CITATION.cff`
+- Added OpenSSF Scorecard workflow, Dependabot, CODEOWNERS, logo and social preview artwork
+- `npm run docs`, `npm run samples`, `npm run examples`
 
 ## 0.1.0
 

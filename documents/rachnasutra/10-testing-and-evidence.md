@@ -6,14 +6,14 @@ This page contains the recorded results of the automated test suite and sample r
 
 | Item | Value |
 |---|---|
-| Command | `npm test` (build, then `node --test test/*.test.mjs`) |
-| Node.js | v24.15.0 |
+| Command | `npm test` (build, then `node --test test/`) |
+| Node.js | v24.15.0 (the same suite also passed 111 of 111 on Node v20.20.2 locally) |
 | Operating system | Windows 11 (Git Bash) |
-| Tests | 22 |
-| Passed | 22 |
+| Tests | 111 |
+| Passed | 111 |
 | Failed | 0 |
 | Skipped | 0 |
-| Duration | about 12.7 seconds |
+| Duration | about 14 seconds |
 | Raw output | [test-results.txt](evidence/test-results.txt) |
 
 Typecheck (`npm run typecheck`) and package verification (`node dist/cli.js verify`, 24 PASS lines, 0 FAIL) were also run clean on the same commit.
@@ -46,6 +46,10 @@ Typecheck (`npm run typecheck`) and package verification (`node dist/cli.js veri
 | 20 | CLI: audit makes no changes in default mode and writes reports only with --out | Source unchanged; no `reports/` directory unless requested; all four formats written |
 | 21 | CLI: doctor and config validate | `doctor` lists capabilities; invalid config exits 2 |
 | 22 | CLI: failOn from config is the default gate | Config threshold applies when no flag is given; `--fail-on` overrides it |
+
+## Per-rule tests (added in 0.2.0)
+
+Tests 23 to 111 come from `fixtures/rule-cases.mjs`: for each of the 26 rules a failing input (the rule must fire, with file and line evidence) and a passing input (the rule must stay silent), plus 21 guard inputs that look wrong but are correct, including regressions found by the benchmarks. The same inputs generate [Rule examples](15-rule-examples.md). Independent validation beyond the author's own fixtures is on [Validation and benchmarks](16-validation-and-benchmarks.md).
 
 ## Sample run 1: intentionally broken fixture
 
@@ -108,7 +112,7 @@ node dist/cli.js verify
 node dist/cli.js audit fixtures/intentionally-broken-ui --format json,md,html,sarif --out reports
 ```
 
-Expected: 22 tests pass; `verify` prints only PASS lines; four report files are written.
+Expected: 111 tests pass; `verify` prints only PASS lines; four report files are written.
 
 ## Coverage of the test suite
 
@@ -116,12 +120,12 @@ Expected: 22 tests pass; `verify` prints only PASS lines; four report files are 
 |---|---|
 | Rules, true positives | Yes, for 14 rules through the broken fixture and for several more through inline cases |
 | Rules, false positives | Good fixture and inline snippet tests |
-| Not every rule has its own dedicated inline test yet | Gaps: RS-A11Y-011, 012, 014, 015, RS-RESP-001, 003, RS-TOK-001, RS-CONT-002 are exercised only by fixtures or not individually asserted |
+| Every rule has a failing and a passing case | Yes, since 0.2.0 |
 | Security | Redaction, traversal, limits, escaping, injection |
 | CLI | Exit codes, formats, read-only behaviour |
 | Not covered | Cross-platform runs (CI only), live IDE behaviour, browser features (not implemented) |
 
-Closing the individual-rule gaps is on the [roadmap](12-roadmap-and-status.md).
+Remaining gaps: cross-platform runs are visible only in CI, live IDE behaviour is covered in [Host smoke tests](17-host-smoke-tests.md), and browser features are not implemented.
 
 ## Evidence integrity
 

@@ -1,10 +1,10 @@
 # RachnaSutra AI - UI/UX audit report
 
-- Generated: 2026-10-30T20:46:41.001Z
+- Generated: 2026-11-01T17:25:21.784Z
 - Mode: static (read-only, no network, no model)
 - Root: `<project>\fixtures\intentionally-broken-ui`
 - Files scanned: 2 (.html: 1, .css: 1)
-- Tool: rachnasutra 0.1.0
+- Tool: rachnasutra 0.2.0
 
 ## Executive summary
 
@@ -144,8 +144,8 @@ This is a static review. It does not certify WCAG conformance and gives no quali
 
 - Rule: RS-A11Y-008 | Category: accessibility | Severity: **medium** | Confidence: high | Status: confirmed
 - Criterion: WCAG 2.2: 2.4.2 Page Titled
-- Location: `index.html:3`
-- Evidence: `<head>`
+- Location: `index.html:2`
+- Evidence: `<html>`
 - User impact: Users cannot tell tabs, history entries or search results apart.
 - Fix: Add a unique, descriptive <title> in <head>.
 - Verify: Re-run the audit and check the browser tab.

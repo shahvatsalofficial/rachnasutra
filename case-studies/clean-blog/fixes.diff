@@ -1,0 +1,172 @@
+--- a/dist/index.html
++++ b/dist/index.html
+@@ -47,7 +47,8 @@
+                 </div>
+             </div>
+         </header>
+-        <!-- Main Content-->
++        <main>
++<!-- Main Content-->
+         <div class="container px-4 px-lg-5">
+             <div class="row gx-4 gx-lg-5 justify-content-center">
+                 <div class="col-md-10 col-lg-8 col-xl-7">
+@@ -108,7 +109,8 @@
+                     <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a></div>
+                 </div>
+             </div>
+-        </div>
++        </div>
++        </main>
+         <!-- Footer-->
+         <footer class="border-top">
+             <div class="container px-4 px-lg-5">
+@@ -116,24 +118,24 @@
+                     <div class="col-md-10 col-lg-8 col-xl-7">
+                         <ul class="list-inline text-center">
+                             <li class="list-inline-item">
+-                                <a href="#!">
+-                                    <span class="fa-stack fa-lg">
++                                <a href="#!" aria-label="Twitter">
++                                    <span class="fa-stack fa-lg" aria-hidden="true">
+                                         <i class="fas fa-circle fa-stack-2x"></i>
+                                         <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                                     </span>
+                                 </a>
+                             </li>
+                             <li class="list-inline-item">
+-                                <a href="#!">
+-                                    <span class="fa-stack fa-lg">
++                                <a href="#!" aria-label="Facebook">
++                                    <span class="fa-stack fa-lg" aria-hidden="true">
+                                         <i class="fas fa-circle fa-stack-2x"></i>
+                                         <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                                     </span>
+                                 </a>
+                             </li>
+                             <li class="list-inline-item">
+-                                <a href="#!">
+-                                    <span class="fa-stack fa-lg">
++                                <a href="#!" aria-label="GitHub">
++                                    <span class="fa-stack fa-lg" aria-hidden="true">
+                                         <i class="fas fa-circle fa-stack-2x"></i>
+                                         <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                                     </span>
+--- a/dist/about.html
++++ b/dist/about.html
+@@ -66,24 +66,24 @@
+                     <div class="col-md-10 col-lg-8 col-xl-7">
+                         <ul class="list-inline text-center">
+                             <li class="list-inline-item">
+-                                <a href="#!">
+-                                    <span class="fa-stack fa-lg">
++                                <a href="#!" aria-label="Twitter">
++                                    <span class="fa-stack fa-lg" aria-hidden="true">
+                                         <i class="fas fa-circle fa-stack-2x"></i>
+                                         <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                                     </span>
+                                 </a>
+                             </li>
+                             <li class="list-inline-item">
+-                                <a href="#!">
+-                                    <span class="fa-stack fa-lg">
++                                <a href="#!" aria-label="Facebook">
++                                    <span class="fa-stack fa-lg" aria-hidden="true">
+                                         <i class="fas fa-circle fa-stack-2x"></i>
+                                         <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                                     </span>
+                                 </a>
+                             </li>
+                             <li class="list-inline-item">
+-                                <a href="#!">
+-                                    <span class="fa-stack fa-lg">
++                                <a href="#!" aria-label="GitHub">
++                                    <span class="fa-stack fa-lg" aria-hidden="true">
+                                         <i class="fas fa-circle fa-stack-2x"></i>
+                                         <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                                     </span>
+--- a/dist/contact.html
++++ b/dist/contact.html
+@@ -116,24 +116,24 @@
+                     <div class="col-md-10 col-lg-8 col-xl-7">
+                         <ul class="list-inline text-center">
+                             <li class="list-inline-item">
+-                                <a href="#!">
+-                                    <span class="fa-stack fa-lg">
++                                <a href="#!" aria-label="Twitter">
++                                    <span class="fa-stack fa-lg" aria-hidden="true">
+                                         <i class="fas fa-circle fa-stack-2x"></i>
+                                         <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                                     </span>
+                                 </a>
+                             </li>
+                             <li class="list-inline-item">
+-                                <a href="#!">
+-                                    <span class="fa-stack fa-lg">
++                                <a href="#!" aria-label="Facebook">
++                                    <span class="fa-stack fa-lg" aria-hidden="true">
+                                         <i class="fas fa-circle fa-stack-2x"></i>
+                                         <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                                     </span>
+                                 </a>
+                             </li>
+                             <li class="list-inline-item">
+-                                <a href="#!">
+-                                    <span class="fa-stack fa-lg">
++                                <a href="#!" aria-label="GitHub">
++                                    <span class="fa-stack fa-lg" aria-hidden="true">
+                                         <i class="fas fa-circle fa-stack-2x"></i>
+                                         <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                                     </span>
+--- a/dist/post.html
++++ b/dist/post.html
+@@ -52,7 +52,8 @@
+                 </div>
+             </div>
+         </header>
+-        <!-- Post Content-->
++        <main>
++<!-- Post Content-->
+         <article class="mb-4">
+             <div class="container px-4 px-lg-5">
+                 <div class="row gx-4 gx-lg-5 justify-content-center">
+@@ -82,7 +83,8 @@
+                     </div>
+                 </div>
+             </div>
+-        </article>
++        </article>
++        </main>
+         <!-- Footer-->
+         <footer class="border-top">
+             <div class="container px-4 px-lg-5">
+@@ -90,24 +92,24 @@
+                     <div class="col-md-10 col-lg-8 col-xl-7">
+                         <ul class="list-inline text-center">
+                             <li class="list-inline-item">
+-                                <a href="#!">
+-                                    <span class="fa-stack fa-lg">
++                                <a href="#!" aria-label="Twitter">
++                                    <span class="fa-stack fa-lg" aria-hidden="true">
+                                         <i class="fas fa-circle fa-stack-2x"></i>
+                                         <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                                     </span>
+                                 </a>
+                             </li>
+                             <li class="list-inline-item">
+-                                <a href="#!">
+-                                    <span class="fa-stack fa-lg">
++                                <a href="#!" aria-label="Facebook">
++                                    <span class="fa-stack fa-lg" aria-hidden="true">
+                                         <i class="fas fa-circle fa-stack-2x"></i>
+                                         <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                                     </span>
+                                 </a>
+                             </li>
+                             <li class="list-inline-item">
+-                                <a href="#!">
+-                                    <span class="fa-stack fa-lg">
++                                <a href="#!" aria-label="GitHub">
++                                    <span class="fa-stack fa-lg" aria-hidden="true">
+                                         <i class="fas fa-circle fa-stack-2x"></i>
+                                         <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                                     </span>
