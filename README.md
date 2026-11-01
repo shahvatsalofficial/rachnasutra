@@ -116,7 +116,7 @@ Everything below is reproducible from this repository.
 
 | Evidence | Result | Where |
 |---|---|---|
-| Automated tests | **111 of 111 passing** locally on Node 24 and Node 20 (Windows 11); the CI matrix runs Windows, macOS and Linux on Node 20 and 22 | [test-results.txt](documents/rachnasutra/evidence/test-results.txt) |
+| Automated tests | **111 of 111 passing** locally on Node 20, 22, 24 and 26 (Windows 11); the CI matrix runs Windows, macOS and Linux on Node 20, 22, 24 and 26 | [test-results.txt](documents/rachnasutra/evidence/test-results.txt) |
 | Every rule tested both ways | A failing and a passing input for all 26 rules, plus false-positive guards; the same inputs generate the docs | [rule examples](documents/rachnasutra/15-rule-examples.md) |
 | W3C ACT test cases | 154 cases, 10 rules: **71% precision, 65% recall** after fixing defects the benchmark found (first run: 53% and 38%) | [act.md](benchmarks/results/act.md) |
 | Comparison with axe-core | axe-core is **more accurate** (92% / 83% against 81% / 73% on 7 comparable rules); RachnaSutra works on source files, offline, in CI | [act-vs-axe.md](benchmarks/results/act-vs-axe.md) |
