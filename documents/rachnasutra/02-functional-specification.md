@@ -4,9 +4,9 @@
 
 This document states what RachnaSutra AI does from a user's point of view, which requirements are met in version 0.1.0, and how each is verified.
 
-**In scope (0.1.0):** static analysis of web front-end source; report generation; fix planning and verification against a baseline; installation of Agent Skills into AI IDE projects; CI gating.
+**In scope (0.2.0):** static analysis of web front-end source; report generation; fix planning and verification against a baseline; installation of Agent Skills into AI IDE projects; CI gating.
 
-**Out of scope (0.1.0):** rendering, screenshots, browser automation, axe-core, Lighthouse, native mobile and TV runtime testing, model-backed inference from the CLI.
+**Out of scope (0.2.0):** rendering, screenshots, browser automation, axe-core, Lighthouse, native mobile and TV runtime testing, model-backed inference from the CLI.
 
 ## Users and personas
 
@@ -97,7 +97,7 @@ Each finding has: ID (`RS-0001` style), rule ID, category, title, severity, conf
 | Capability not implemented | Exit code 3 with a message; no partial result |
 | Install conflict | Blocked unless `--force`; original is backed up |
 
-## Acceptance criteria for 0.1.0
+## Acceptance criteria (met in 0.1.0, still met in 0.2.0)
 
 | Criterion | Result |
 |---|---|

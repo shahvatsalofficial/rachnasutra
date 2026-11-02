@@ -85,7 +85,7 @@ No. There is no account, server or telemetry.
 | Contrast ratio | A measure of luminance difference between text and background; 4.5:1 is the AA minimum for normal text |
 | Design token | A named design value such as a colour, spacing step or radius |
 | Reflow | Content adapting to narrow viewports without two-dimensional scrolling (320 CSS px) |
-| Core Web Vitals | Google's LCP, INP and CLS user-experience metrics; not measured in 0.1.0 |
+| Core Web Vitals | Google's LCP, INP and CLS user-experience metrics; not measured in 0.2.0 |
 | Host adapter | Code that installs skills into a specific AI IDE's folder layout |
 | Install manifest | The file recording installed paths and hashes at `.rachnasutra/install-manifest.json` |
 | Static analysis | Examining source text without running the program |

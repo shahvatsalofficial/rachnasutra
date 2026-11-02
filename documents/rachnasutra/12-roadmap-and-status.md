@@ -10,7 +10,7 @@
 | planned | No code yet |
 | not-available | The CLI states it is unavailable and exits with code 3 |
 
-## Capability status (0.1.0)
+## Capability status (0.2.0)
 
 | Area | Status | Notes |
 |---|---|---|
@@ -76,11 +76,11 @@ Telemetry, hosted accounts, mandatory API keys, automatic global installs, numer
 
 Semantic versioning. The report `schemaVersion` changes independently. Rule additions are minor changes; changing a rule's default severity or removing a rule is called out in `CHANGELOG.md`.
 
-## Known gaps in 0.1.0
+## Known gaps in 0.2.0
 
 | Gap | Impact | Plan |
 |---|---|---|
-| Cross-platform results | Local runs: Windows with Node 24 and Node 20; Linux and macOS only through CI | Check the Actions tab |
+| Cross-platform results | Local runs: Windows with Node 20, 22, 24 and 26; Linux and macOS through the CI matrix | Check the Actions tab |
 | Spec folders (`packages/`, `workflows/`, `rules/`, `adapters/`) not created | None functionally; avoids empty modules | Split when browser module lands |
 | Social preview image must be uploaded in the GitHub UI | Link previews show the default image until then | `assets/social-preview.png` is ready to upload |
 | Host adapters unverified live | Install may need path tweaks for some hosts | Live smoke tests |

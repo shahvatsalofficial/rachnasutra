@@ -62,7 +62,7 @@ See [Technical reference](04-technical-reference.md). In scripts, treat 0 as suc
 
 ## Containers (planned)
 
-A Dockerfile is not included in 0.1.0. The CLI already runs headlessly, so a minimal image is a Node 22 slim base with the package installed, running as a non-root user with the project mounted read-only. When added it will pin the base image digest and document memory and time limits.
+A Dockerfile is not included in 0.2.0. The CLI already runs headlessly, so a minimal image is a Node 22 slim base with the package installed, running as a non-root user with the project mounted read-only. When added it will pin the base image digest and document memory and time limits.
 
 ## Resource guidance
 

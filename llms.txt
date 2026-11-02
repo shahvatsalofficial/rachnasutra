@@ -43,8 +43,8 @@
 - Audit: `npx github:shahvatsalofficial/rachnasutra audit . --json`
 - CI gate: `npx github:shahvatsalofficial/rachnasutra ci .` (exit 1 on confirmed high or critical findings)
 - Read-only by default; no network, telemetry or model calls from the CLI; secrets redacted in reports.
-- Static analysis only in 0.1.0. Browser, screenshot, axe and Lighthouse audits are not available yet and exit with code 3.
+- Static analysis only in 0.2.0. Browser, screenshot, axe and Lighthouse audits are not available yet and exit with code 3.
 - Not a WCAG, ADA or other conformance certification. No quality score is produced.
-- 111 automated tests pass (Node 20 and 24); sample runs and raw outputs are in documents/rachnasutra/evidence/.
+- 111 automated tests pass (Node 20, 22, 24 and 26); sample runs and raw outputs are in documents/rachnasutra/evidence/.
 - Validated against W3C ACT test cases (71% precision, 65% recall after fixes), compared with axe-core (which is more accurate), and audited on 12 public repositories; results and weaknesses are published in benchmarks/results/.
 - AI IDE skill loading has not yet been verified in live hosts.

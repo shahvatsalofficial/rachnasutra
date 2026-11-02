@@ -14,7 +14,7 @@ Severity reflects user impact first (blocks a task, degrades it, polish), then s
 
 No numeric score is produced. Most categories are `partial` in static mode, so a score would reward a narrow scan. Read the coverage table.
 
-## Rules (0.1.0)
+## Rules (0.2.0)
 
 | ID | Rule | Default severity | Criterion |
 |---|---|---|---|
