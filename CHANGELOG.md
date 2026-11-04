@@ -7,7 +7,7 @@ All notable changes follow [Semantic Versioning](https://semver.org/). Report sc
 - `rachnasutra audit` (and `accessibility`) now writes easy-to-read **Markdown, HTML and JSON reports** to `./rachnasutra-reports/` by default and prints the path to open. Use `--no-report` to print a summary only, `--json` or `--format` without `--out` to print to the terminal, `--out <dir>` and `--format json,md,html,sarif` to choose. `ci` and `export` still print to stdout.
 - Reports start with a short "Fix these first" list (up to five confirmed findings with the recommended fix)
 - `rachnasutra-reports/` is git-ignored and never scanned
-- CI: macOS jobs run Node 22 and 26 only (Node 20 and 24 stay on Linux and Windows), because macOS runner capacity left the other jobs queued for days and blocked the required checks
+- CI: the blocking matrix is Linux and Windows on Node 20, 22, 24 and 26 (8 jobs). macOS (Node 22, 26) moved to a weekly and on-demand workflow because GitHub macOS runner capacity left jobs queued until cancelled, which marked every run as failed
 
 ## 0.2.0
 

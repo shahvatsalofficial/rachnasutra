@@ -17,12 +17,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest, windows-latest]
         node: [20, 22, 24, 26]
-        exclude:
-          # macOS runners are scarce and queue for a long time; keep the oldest-supported-adjacent and newest Node there
-          - { os: macos-latest, node: 20 }
-          - { os: macos-latest, node: 24 }
     runs-on: ${{ matrix.os }}
     timeout-minutes: 15
     steps:
@@ -36,12 +32,12 @@ jobs:
       - run: npm test
       - run: npm run verify
       - name: Good fixture must have no findings
-        run: node dist/cli.js audit fixtures/good-ui --fail-on info
+        run: node dist/cli.js audit fixtures/good-ui --no-report --fail-on info
       - name: Broken fixture must fail the gate
         shell: bash
         run: |
           set +e
-          node dist/cli.js audit fixtures/intentionally-broken-ui --fail-on high > /dev/null
+          node dist/cli.js audit fixtures/intentionally-broken-ui --no-report --fail-on high > /dev/null
           test $? -eq 1
       - name: Production dependencies must be empty
         run: npm ls --omit=dev --depth=0

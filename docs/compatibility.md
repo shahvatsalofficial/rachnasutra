@@ -9,7 +9,8 @@
 | Gemini CLI | experimental | `.gemini/skills/` | path unconfirmed | https://github.com/google-gemini/gemini-cli |
 | Windsurf, Kiro, others | unsupported | copy `skills/` manually | - | - |
 | Headless Linux / CI | CLI works | - | JSON output, exit codes | - |
-| Windows / macOS / Linux | CLI works (Node 20+) | - | CI matrix in `.github/workflows/ci.yml` | - |
+| Windows / Linux | CLI works (Node 20+), tested in blocking CI | - | `.github/workflows/ci.yml` | - |
+| macOS | CLI works (Node 20+) | - | weekly non-blocking run, `.github/workflows/macos.yml` | - |
 
 Support labels: `adapter` = files follow the vendor's documented layout; `experimental` = layout unconfirmed; `unsupported` = no adapter. Nothing is marked "verified" because live-host smoke tests have not been done yet.
 

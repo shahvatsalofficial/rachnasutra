@@ -18,7 +18,7 @@ This page contains the recorded results of the automated test suite and sample r
 
 Typecheck (`npm run typecheck`) and package verification (`node dist/cli.js verify`, 24 PASS lines, 0 FAIL) were also run clean on the same commit.
 
-> **Note:** Locally the suite was run on Windows with Node 20, 22, 24 and 26. The CI workflow defines Windows, macOS and Linux with Node 20, 22, 24 and 26. Check the repository's Actions tab for those results; none are claimed here.
+> **Note:** Locally the suite was run on Windows with Node 20, 22, 24 and 26. The blocking CI matrix is Windows and Linux on Node 20, 22, 24 and 26; macOS (Node 22, 26) runs in a separate weekly, non-blocking workflow. Check the repository's Actions tab for those results; none are claimed here.
 
 ## What each test proves
 
