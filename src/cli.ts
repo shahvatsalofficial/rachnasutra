@@ -10,6 +10,7 @@ import { compareToReport, verifyPackage } from './verify.js';
 
 const EXIT = { ok: 0, findings: 1, usage: 2, notAvailable: 3, verifyFailed: 4, error: 5 } as const;
 const NOT_AVAILABLE = ['visual', 'browser'];
+const DEFAULT_REPORT_DIR = 'rachnasutra-reports';
 
 const HELP = `RachnaSutra AI - Design Beautifully. Audit Precisely. Deliver Delight.
 
@@ -22,7 +23,8 @@ Deterministic commands (no AI, no network, read-only unless noted):
   skills list                 list bundled skills
   skills install --host <id>  install skills into a project (--target, --dry-run, --force)
   skills uninstall --host <id>  remove files RachnaSutra installed
-  audit [path]                static UI/UX audit (--format json,md,html,sarif; --out <dir> writes files)
+  audit [path]                static UI/UX audit; writes Markdown, HTML and JSON reports to ./rachnasutra-reports
+                              (--format json,md,html,sarif and --out <dir> to choose; --no-report to only print a summary)
   accessibility [path]        static accessibility rules only (WCAG 2.2 AA oriented)
   design-system inspect [path]  token inventory (colours, type, spacing, radii)
   plan-fixes --report <file>  prioritised fix plan from a saved JSON report
@@ -37,7 +39,7 @@ Not available in this version (exit 3, nothing is faked):
   visual baseline|compare, audit --mode browser
 
 Options:
-  --json  --dry-run  --force  --host <id>  --target <dir>  --out <dir>  --format <list>
+  --json  --no-report  --dry-run  --force  --host <id>  --target <dir>  --out <dir>  --format <list>
   --fail-on <sev|confirmed-critical>  --verbose  --version  --help
 
 Exit codes: 0 ok | 1 findings at/above threshold | 2 usage | 3 not available | 4 verify failed | 5 error
@@ -108,7 +110,9 @@ async function emitAudit(res: AuditResult, args: Args): Promise<void> {
     if (!args.flags['dry-run']) await fs.writeFile(path.join(outDir, names[f]), files[f], 'utf8');
     written.push(path.join(outDir, names[f]));
   }
-  write(`${args.flags['dry-run'] ? 'Would write' : 'Wrote'}:\n${written.map((w) => `  ${w}`).join('\n')}\n${textSummary(res)}`);
+  const html = written.find((w) => w.endsWith('.html'));
+  const hint = html && !args.flags['dry-run'] ? `\n\nOpen the report in your browser: ${html}` : '';
+  write(`${args.flags['dry-run'] ? 'Would write' : 'Wrote'}:\n${written.map((w) => `  ${w}`).join('\n')}\n${textSummary(res)}${hint}`);
 }
 
 async function main(): Promise<number> {
@@ -207,6 +211,10 @@ async function main(): Promise<number> {
       const res = await runAudit(target, cmd === 'accessibility' ? { categories: ['accessibility'] } : {});
       if (cmd === 'ci') {
         if (!args.flags.format) args.flags.json = true;
+      } else if (!args.flags.json && !args.flags.format && !args.flags.out && !args.flags['no-report']) {
+        // default: easy-to-read Markdown + HTML (+ JSON) report files next to where the command is run
+        args.flags.format = 'md,html,json';
+        args.flags.out = DEFAULT_REPORT_DIR;
       }
       await emitAudit(res, args);
       const cfgFail = (await loadConfig(target)).failOn;

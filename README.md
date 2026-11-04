@@ -27,7 +27,7 @@ Created by **[Vatsal Shah](https://github.com/shahvatsalofficial)**. Licensed un
 | **Measured** text contrast (WCAG 1.4.3) from literal CSS colour pairs | `rachnasutra audit` | No |
 | Responsive checks: viewport meta, fixed widths, responsive CSS | `rachnasutra audit` | No |
 | Design-token inventory (colours, type, spacing, radii) | `rachnasutra design-system inspect` | No |
-| JSON, Markdown, accessible HTML, SARIF reports | `rachnasutra audit --format json,md,html,sarif --out reports` | No |
+| JSON, Markdown, accessible HTML, SARIF reports | `rachnasutra audit` (writes Markdown, HTML, JSON to `./rachnasutra-reports`) | No |
 | Fix plan and fix verification against a saved baseline | `rachnasutra plan-fixes`, `rachnasutra verify --report` | No |
 | CI gate with stable exit codes | `rachnasutra ci` | No |
 | Visual critique, flows, copy, redesign proposals, implementation | the `rachnasutra-*` skills | Yes (your IDE's model) |
@@ -38,11 +38,13 @@ Created by **[Vatsal Shah](https://github.com/shahvatsalofficial)**. Licensed un
 Requires Node.js 20 or newer.
 
 ```bash
-# audit a project (read-only; no network; no API key)
+# audit a project: no network, no API key, source files are never changed.
+# Writes easy-to-read Markdown + HTML + JSON reports to ./rachnasutra-reports and prints the path to open.
 npx github:shahvatsalofficial/rachnasutra audit .
 
-# write reports
-npx github:shahvatsalofficial/rachnasutra audit . --format json,md,html,sarif --out reports
+# summary only, no files / other formats and folder
+npx github:shahvatsalofficial/rachnasutra audit . --no-report
+npx github:shahvatsalofficial/rachnasutra audit . --format json,md,html,sarif --out my-reports
 
 # install the skills for your AI IDE (dry run first)
 npx github:shahvatsalofficial/rachnasutra skills install --host claude --target . --dry-run
@@ -85,12 +87,12 @@ Prime selects only the specialists a task needs. See [docs/agent-catalog.md](doc
 ```text
 rachnasutra init | doctor | hosts
 rachnasutra skills list | install --host <id> | uninstall --host <id>
-rachnasutra audit [path] [--format json,md,html,sarif] [--out dir] [--fail-on high]
+rachnasutra audit [path] [--no-report] [--format json,md,html,sarif] [--out dir] [--fail-on high]   # default: MD + HTML + JSON in ./rachnasutra-reports
 rachnasutra accessibility [path]
 rachnasutra design-system inspect [path]
-rachnasutra plan-fixes --report reports/latest.json
+rachnasutra plan-fixes --report rachnasutra-reports/latest.json
 rachnasutra verify                       # package integrity
-rachnasutra verify --report reports/latest.json [path]   # did the fixes work?
+rachnasutra verify --report rachnasutra-reports/latest.json [path]   # did the fixes work?
 rachnasutra export --format sarif [path]
 rachnasutra ci [path] [--fail-on confirmed-critical]
 rachnasutra config validate [path]
@@ -197,7 +199,7 @@ See [CITATION.cff](CITATION.cff), or use GitHub's "Cite this repository".
 
 ## Privacy and safety
 
-Read-only by default. No telemetry, no network, no model calls from the CLI. Symlinks are not followed, writes are path-contained, excerpts are secret-redacted, reports escape HTML. Install records SHA-256 hashes so uninstall never deletes files you edited. See [docs/privacy-and-security.md](docs/privacy-and-security.md) and [SECURITY.md](SECURITY.md).
+Your source files are never modified; the only files written are the report files (default `./rachnasutra-reports`, skip with `--no-report`) and, when you ask, installed skills. No telemetry, no network, no model calls from the CLI. Symlinks are not followed, writes are path-contained, excerpts are secret-redacted, reports escape HTML. Install records SHA-256 hashes so uninstall never deletes files you edited. See [docs/privacy-and-security.md](docs/privacy-and-security.md) and [SECURITY.md](SECURITY.md).
 
 ## Contributing
 

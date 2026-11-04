@@ -45,7 +45,7 @@ These personas are **assumed**, not the result of user research.
 | ID | Requirement | How it is met |
 |---|---|---|
 | NFR-01 | Privacy | No network, telemetry or model calls; secret redaction in excerpts |
-| NFR-02 | Safety | Read-only default; writes only for install, uninstall and `--out`; path containment |
+| NFR-02 | Safety | Audited files are never modified; writes only report files, install and uninstall; path containment |
 | NFR-03 | Determinism | Rules are pure functions of file contents; output is sorted; test asserts identical results across runs |
 | NFR-04 | Portability | Node.js 20 or newer; no shell dependencies; CI matrix for Windows, macOS, Linux |
 | NFR-05 | Resource bounds | Limits on file count, file size and time; truncation is reported |
@@ -59,14 +59,14 @@ These personas are **assumed**, not the result of user research.
 
 1. The developer runs `rachnasutra audit .`.
 2. The tool prints a summary: counts by severity and a list of findings with locations.
-3. The developer runs the same command with `--format json,md,html,sarif --out reports` and opens the HTML report.
+3. The tool has already written Markdown, HTML and JSON reports to `./rachnasutra-reports`; the developer opens `latest.html`.
 4. The developer picks a finding, reads the evidence and fix, and edits the code.
 
 ### Journey 2: fix and verify
 
-1. Save a baseline: `rachnasutra audit . --format json --out reports`.
+1. Save a baseline: `rachnasutra audit .` (writes `rachnasutra-reports/latest.json`).
 2. Fix issues in code.
-3. Run `rachnasutra verify --report reports/latest.json .`.
+3. Run `rachnasutra verify --report rachnasutra-reports/latest.json .`.
 4. The tool lists resolved, remaining and introduced findings. It exits with code 4 if new findings appeared.
 
 ### Journey 3: AI-assisted review in an IDE

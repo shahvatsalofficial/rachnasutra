@@ -10,7 +10,7 @@ RachnaSutra is designed so that running it cannot send your code anywhere and ca
 |---|---|
 | Source code | Read locally; never transmitted by the CLI |
 | Report excerpts | Truncated to 160 characters; secrets masked |
-| Reports | Written only when `--out` is given; `reports/` is git-ignored |
+| Reports | Written by `audit` and `accessibility` to `./rachnasutra-reports` (or `--out`); skip with `--no-report`; the folder is git-ignored and never scanned |
 | Telemetry | None |
 | Network | None; the package contains no network code |
 | Credentials | Never requested, stored or read by the CLI |
@@ -36,7 +36,7 @@ When skills run inside an AI IDE, the code the assistant reads is processed by t
 
 ## Controls in detail
 
-1. **Read-only by default.** The only write paths are `skills install`, `skills uninstall` and `audit --out`.
+1. **Audited files are never modified.** The only write paths are report files from `audit` and `accessibility`, `skills install` and `skills uninstall`.
 2. **Path containment.** `safeJoin` rejects any resolved path outside the root.
 3. **Bounded work.** Defaults of 5,000 files, 512 KB per file and 15 seconds.
 4. **Redaction patterns.** AWS keys, GitHub tokens (classic and fine-grained), OpenAI-style keys, Slack tokens, Google API keys, private key headers and quoted credential assignments.

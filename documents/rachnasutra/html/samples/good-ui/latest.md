@@ -1,10 +1,10 @@
 # RachnaSutra AI - UI/UX audit report
 
-- Generated: 2026-11-01T17:25:24.090Z
+- Generated: 2026-11-04T18:07:38.329Z
 - Mode: static (read-only, no network, no model)
 - Root: `<project>\fixtures\good-ui`
 - Files scanned: 2 (.html: 1, .css: 1)
-- Tool: rachnasutra 0.2.0
+- Tool: rachnasutra 0.3.0
 
 ## Executive summary
 
@@ -12,6 +12,10 @@
 0 confirmed by deterministic pattern or measurement; 0 need human or runtime review.
 
 This is a static review. It does not certify WCAG conformance and gives no quality score, because large areas were not evaluated (see Coverage).
+
+## Fix these first
+
+No confirmed findings. Review the items marked review-required, and complete the manual tests listed under Limitations.
 
 ## Coverage
 

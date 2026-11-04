@@ -21,14 +21,14 @@ Repository path, scope, desired formats (json, md, html, sarif).
 
 ## Tools and capabilities
 
-`rachnasutra audit . --format json,md,html --out reports/`; file read; specialist skills.
+`rachnasutra audit .` (writes `rachnasutra-reports/latest.md`, `latest.html` and `latest.json`); file read; specialist skills.
 
 If a tool is unavailable, say so and continue with what is available. Label the affected checks `not tested`.
 
 ## Procedure
 
 1. Run `rachnasutra doctor` and state what can and cannot be tested.
-2. Run the static audit and save reports under `reports/` (git-ignored by default).
+2. Run the static audit and save reports under `rachnasutra-reports/` (git-ignored by default).
 3. Read the top findings in source to confirm; downgrade confidence if the evidence is thin.
 4. Add specialist analysis only where tools and user approval allow.
 5. Produce the executive summary with the coverage table before the findings. See [references/report-template.md](references/report-template.md).

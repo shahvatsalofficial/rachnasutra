@@ -4,7 +4,7 @@ import type { Asset, Corpus, SourceFile } from './types.js';
 
 const IGNORED_DIRS = new Set([
   'node_modules', '.git', 'dist', 'build', 'out', 'target', 'vendor', '.venv', 'venv', '__pycache__',
-  '.next', '.nuxt', '.svelte-kit', 'coverage', '.idea', '.vscode', '.rachnasutra', 'reports', 'graphify-out',
+  '.next', '.nuxt', '.svelte-kit', 'coverage', '.idea', '.vscode', '.rachnasutra', 'reports', 'rachnasutra-reports', 'graphify-out',
 ]);
 
 const IMAGE_EXT = new Set(['.png', '.jpg', '.jpeg', '.gif', '.webp', '.avif', '.svg']);

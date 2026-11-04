@@ -24,6 +24,10 @@ export function summarize(r: AuditResult): { bySeverity: Record<string, number>;
   };
 }
 
+
+/** The few findings worth doing first: confirmed ones, already sorted most severe first. */
+const topFixes = (r: AuditResult): Finding[] => r.findings.filter((f) => f.status === 'confirmed').slice(0, 5);
+
 export function renderJson(r: AuditResult): string {
   return JSON.stringify({ ...r, summary: summarize(r) }, null, 2);
 }
@@ -41,6 +45,11 @@ export function renderMarkdown(r: AuditResult): string {
   lines.push(`${r.findings.length} finding(s): ${SEVERITY_ORDER.map((k) => `${s.bySeverity[k]} ${k}`).join(', ')}.`);
   lines.push(`${s.confirmed} confirmed by deterministic pattern or measurement; ${s.reviewRequired} need human or runtime review.`, '');
   lines.push('This is a static review. It does not certify WCAG conformance and gives no quality score, because large areas were not evaluated (see Coverage).', '');
+  lines.push('## Fix these first', '');
+  const first = topFixes(r);
+  if (!first.length) lines.push('No confirmed findings. Review the items marked review-required, and complete the manual tests listed under Limitations.', '');
+  first.forEach((f, i) => lines.push(`${i + 1}. **${escMd(f.title)}** at \`${escMd(f.file)}${f.line ? `:${f.line}` : ''}\`. ${escMd(f.recommended_fix)}`));
+  if (first.length) lines.push('');
   lines.push('## Coverage', '', '| Area | State | Detail |', '|---|---|---|');
   for (const c of r.coverage) lines.push(`| ${escMd(c.category)} | ${c.state} | ${escMd(c.detail)} |`);
   lines.push('', '## Findings', '');
@@ -113,6 +122,8 @@ ${SEVERITY_ORDER.map((k) => `<div class="stat" role="listitem"><b>${s.bySeverity
 <div class="stat" role="listitem"><b>${s.reviewRequired}</b>review required</div>
 </div>
 <p>${r.findings.length} finding(s) across ${r.filesScanned} scanned file(s). This static review does not certify WCAG conformance and gives no quality score because large areas were not evaluated.</p>
+<h2>Fix these first</h2>
+${topFixes(r).length ? `<ol>${topFixes(r).map((f) => `<li><strong>${escHtml(f.title)}</strong> at <code>${escHtml(f.file)}${f.line ? `:${f.line}` : ''}</code>. ${escHtml(f.recommended_fix)}</li>`).join('')}</ol>` : '<p>No confirmed findings. Review the items marked review-required and complete the manual tests listed under Limitations.</p>'}
 <h2>Coverage</h2>
 <div class="tablewrap"><table><caption class="muted">What was and was not evaluated</caption><thead><tr><th scope="col">Area</th><th scope="col">State</th><th scope="col">Detail</th></tr></thead><tbody>
 ${cov}

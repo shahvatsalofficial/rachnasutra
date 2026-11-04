@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { mkdtemp, mkdir, writeFile, readFile, rm } from 'node:fs/promises';
-import { existsSync } from 'node:fs';
+import { existsSync, mkdtempSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -26,7 +26,9 @@ async function put(root, rel, content) {
   await mkdir(path.dirname(abs), { recursive: true });
   await writeFile(abs, content, 'utf8');
 }
-const cli = (...args) => spawnSync(process.execPath, [CLI, ...args], { encoding: 'utf8' });
+// run from a scratch directory so default report files never land in the repository
+const SCRATCH = mkdtempSync(path.join(tmpdir(), 'rachnasutra-cwd-'));
+const cli = (...args) => spawnSync(process.execPath, [CLI, ...args], { encoding: 'utf8', cwd: SCRATCH });
 const rules = (res) => new Set(res.findings.map((f) => f.rule));
 
 test('contrast math matches WCAG reference values', () => {
@@ -238,13 +240,28 @@ test('CLI: exit codes, json, not-available honesty, usage errors', async () => {
   assert.ok(acc.findings.every((f) => f.category === 'accessibility'));
 });
 
-test('CLI: audit makes no changes in default mode and writes reports only with --out', async () => {
+test('CLI: audit writes Markdown, HTML and JSON reports by default and never touches source', async () => {
   const r = await tmp('ro');
   await put(r, 'index.html', '<img src="a.png">');
   const before = await readFile(path.join(r, 'index.html'), 'utf8');
-  cli('audit', r);
+  const def = path.join(SCRATCH, 'rachnasutra-reports');
+  await rm(def, { recursive: true, force: true });
+  const run = cli('audit', r);
+  assert.equal(run.status, 0);
+  for (const f of ['latest.md', 'latest.html', 'latest.json']) assert.ok(existsSync(path.join(def, f)), f);
+  assert.ok(!existsSync(path.join(def, 'latest.sarif')));
+  assert.match(run.stdout, /Open the report in your browser/);
+  assert.match(await readFile(path.join(def, 'latest.html'), 'utf8'), /<table/);
   assert.equal(await readFile(path.join(r, 'index.html'), 'utf8'), before);
-  assert.ok(!existsSync(path.join(r, 'reports')));
+  assert.ok(!existsSync(path.join(r, 'rachnasutra-reports')));
+  // --no-report prints a summary only
+  await rm(def, { recursive: true, force: true });
+  assert.equal(cli('audit', r, '--no-report').status, 0);
+  assert.ok(!existsSync(def));
+  // explicit --json still goes to stdout and writes nothing
+  assert.equal(cli('audit', r, '--json').status, 0);
+  assert.ok(!existsSync(def));
+  // explicit --out and --format
   const out = path.join(r, 'reports');
   const w = cli('audit', r, '--format', 'json,md,html,sarif', '--out', out);
   assert.equal(w.status, 0);
@@ -252,6 +269,10 @@ test('CLI: audit makes no changes in default mode and writes reports only with -
   const v = cli('verify', '--report', path.join(out, 'latest.json'), r);
   assert.equal(v.status, 0);
   assert.match(v.stdout, /Introduced: 0/);
+  // ci stays stdout-only
+  await rm(def, { recursive: true, force: true });
+  cli('ci', r);
+  assert.ok(!existsSync(def));
   await rm(r, { recursive: true, force: true });
 });
 

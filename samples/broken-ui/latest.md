@@ -1,10 +1,10 @@
 # RachnaSutra AI - UI/UX audit report
 
-- Generated: 2026-11-01T17:25:21.784Z
+- Generated: 2026-11-04T18:07:37.274Z
 - Mode: static (read-only, no network, no model)
 - Root: `<project>\fixtures\intentionally-broken-ui`
 - Files scanned: 2 (.html: 1, .css: 1)
-- Tool: rachnasutra 0.2.0
+- Tool: rachnasutra 0.3.0
 
 ## Executive summary
 
@@ -12,6 +12,14 @@
 13 confirmed by deterministic pattern or measurement; 8 need human or runtime review.
 
 This is a static review. It does not certify WCAG conformance and gives no quality score, because large areas were not evaluated (see Coverage).
+
+## Fix these first
+
+1. **Image has no alt attribute** at `index.html:11`. Add a meaningful alt, or alt="" when the image is purely decorative.
+2. **Viewport meta disables or limits zoom** at `index.html:5`. Remove user-scalable=no and any maximum-scale below 2 from the viewport meta.
+3. **Button has no accessible name** at `index.html:13`. Add visible text or an aria-label describing the action.
+4. **Click handler on non-interactive <div> without role or tabindex** at `index.html:12`. Use a real <button> (or <a href>); if impossible, add role, tabindex="0" and key handlers.
+5. **Focus indicator removed (button:focus, a:focus)** at `styles.css:2`. Keep the default outline or provide a clearly visible :focus-visible style with 3:1 contrast.
 
 ## Coverage
 

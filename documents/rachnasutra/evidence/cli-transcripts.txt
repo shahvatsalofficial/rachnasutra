@@ -41,7 +41,7 @@ OK   capability:browser-audit: not-available (planned); not counted as failure
 OK   capability:visual-review: not-available (planned); not counted as failure
 OK   model-requirement: none for the CLI; skills use your IDE model
 
-# audit broken fixture
+# audit broken fixture (summary only)
 RachnaSutra static audit of <project>\fixtures\intentionally-broken-ui
 Scanned 2 file(s). 21 finding(s): 0 critical, 8 high, 7 medium, 5 low, 1 info.
   RS-0001 [high/confirmed] RS-A11Y-001 index.html:11 - Image has no alt attribute
@@ -69,7 +69,7 @@ Not evaluated: browser runtime, visual review, screen-reader/keyboard testing, C
 Static review only; this is not a WCAG conformance statement.
 exit=0
 
-# audit good fixture
+# audit good fixture (summary only)
 RachnaSutra static audit of <project>\fixtures\good-ui
 Scanned 2 file(s). 0 finding(s): 0 critical, 0 high, 0 medium, 0 low, 0 info.
 Not evaluated: browser runtime, visual review, screen-reader/keyboard testing, Core Web Vitals.

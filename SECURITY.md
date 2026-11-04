@@ -15,7 +15,7 @@ Only the latest `0.x` release receives fixes.
 
 ## Security model
 
-- The CLI is read-only except for `skills install`, `skills uninstall` and `audit --out`, which write only inside the chosen directory.
+- The CLI never modifies audited files. It writes only report files (`audit` and `accessibility`, default `./rachnasutra-reports`; skip with `--no-report`) and, on request, `skills install` and `skills uninstall`, all through a path-containment check.
 - No network access, telemetry or model calls.
 - Symlinks are not followed. Writes go through a path-containment check.
 - Finding excerpts are secret-redacted. HTML reports escape all dynamic content.

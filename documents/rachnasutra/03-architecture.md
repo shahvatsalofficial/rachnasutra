@@ -72,7 +72,7 @@ RachnaSutra AI is a single TypeScript package with no runtime dependencies. It c
 7. **Sort** by severity, rule, file and line; **deduplicate** by fingerprint and line.
 8. **Assign** stable IDs `RS-0001...` and status from confidence.
 9. **Assemble** coverage entries, token inventory and limitations.
-10. **Render** requested formats and write only if `--out` is given.
+10. **Render** the requested formats. With no format flags, `audit` writes Markdown, HTML and JSON to `./rachnasutra-reports`; `--json` or `--format` without `--out` print to stdout; `--no-report` prints only a summary.
 11. **Exit** with a code based on `--fail-on`.
 
 ## Key design decisions

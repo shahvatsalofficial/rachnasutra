@@ -2,6 +2,7 @@ node_modules/
 dist/
 .rachnasutra/
 reports/
+rachnasutra-reports/
 *.tgz
 .env
 .env.*

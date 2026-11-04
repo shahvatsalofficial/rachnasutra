@@ -6,7 +6,7 @@
 - No network, telemetry or model calls from the CLI.
 - Excerpts pass through secret redaction (cloud keys, GitHub tokens, private keys, credential assignments).
 - HTML report escapes all dynamic values; Markdown escapes table-breaking characters.
-- Writes: `skills install|uninstall` and `audit --out` only; `safeJoin` rejects paths outside the root.
+- Writes: report files from `audit` and `accessibility` (default `./rachnasutra-reports`, or `--out`), and `skills install|uninstall`; audited files are never changed; `safeJoin` rejects paths outside the root.
 - Installs record SHA-256 hashes; uninstall keeps files you changed.
 
 ## Threat model (short)

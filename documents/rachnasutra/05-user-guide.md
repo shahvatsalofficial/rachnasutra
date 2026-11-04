@@ -34,13 +34,20 @@ Scanned 2 file(s). 21 finding(s): 0 critical, 8 high, 7 medium, 5 low, 1 info.
 
 Each line shows the ID, `[severity/status]`, rule, location and title. The last lines remind you what was not evaluated.
 
-## Write reports
+## Reports
 
 ```bash
-rachnasutra audit . --format json,md,html,sarif --out reports
+rachnasutra audit .
 ```
 
-Open `reports/latest.html` in a browser. The directory `reports/` is git-ignored because reports contain code excerpts. Pre-generated examples are in `samples/`.
+By default this writes **Markdown, HTML and JSON** reports to `./rachnasutra-reports/` (`latest.md`, `latest.html`, `latest.json`) and prints the path to open. Open `latest.html` in a browser for the easiest read; it starts with a "Fix these first" list. The folder is git-ignored because reports contain code excerpts. Pre-generated examples are in `samples/`.
+
+| Want | Use |
+|---|---|
+| Only a summary in the terminal, no files | `--no-report` |
+| Machine-readable output on stdout | `--json` |
+| A different folder or formats | `--out <dir> --format json,md,html,sarif` |
+| SARIF for code scanning | `rachnasutra export --format sarif .` |
 
 ### Reading a finding
 
@@ -57,10 +64,10 @@ Open `reports/latest.html` in a browser. The directory `reports/` is git-ignored
 ## Fix and verify
 
 ```bash
-rachnasutra audit . --format json --out reports        # baseline
-rachnasutra plan-fixes --report reports/latest.json    # ordered proposal; changes nothing
+rachnasutra audit .                                    # baseline: writes rachnasutra-reports/latest.json
+rachnasutra plan-fixes --report rachnasutra-reports/latest.json    # ordered proposal; changes nothing
 # ... edit your code ...
-rachnasutra verify --report reports/latest.json .      # resolved / remaining / introduced
+rachnasutra verify --report rachnasutra-reports/latest.json .      # resolved / remaining / introduced
 ```
 
 `verify --report` exits with code 4 if your changes introduced new findings. It re-checks only what static rules can see. Still test with a keyboard and a screen reader.

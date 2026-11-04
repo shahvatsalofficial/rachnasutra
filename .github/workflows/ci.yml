@@ -19,6 +19,10 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
         node: [20, 22, 24, 26]
+        exclude:
+          # macOS runners are scarce and queue for a long time; keep the oldest-supported-adjacent and newest Node there
+          - { os: macos-latest, node: 20 }
+          - { os: macos-latest, node: 24 }
     runs-on: ${{ matrix.os }}
     timeout-minutes: 15
     steps:

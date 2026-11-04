@@ -10,8 +10,8 @@
 | `skills list` | list bundled skills | no |
 | `skills install --host <id> [--target dir] [--dry-run] [--force]` | install skills; conflicting files block unless `--force` (backup kept) | yes, inside target |
 | `skills uninstall --host <id>` | remove only unmodified files it installed | yes |
-| `audit` | static audit; `--format json,md,html,sarif`, `--out dir`, `--json`, `--fail-on <sev>` | only with `--out` |
-| `accessibility` | audit limited to the accessibility category | no |
+| `audit` | static audit; writes `latest.md`, `latest.html`, `latest.json` to `./rachnasutra-reports` by default; `--no-report`, `--format json,md,html,sarif`, `--out dir`, `--json`, `--fail-on <sev>` | yes, report files (skip with `--no-report`, `--json` or `--format` without `--out`) |
+| `accessibility` | audit limited to the accessibility category; same report files as `audit` | yes (same options) |
 | `design-system inspect` | token inventory | no |
 | `plan-fixes --report file` | ordered fix proposal | no |
 | `verify` | validate package skills, docs and links | no |
