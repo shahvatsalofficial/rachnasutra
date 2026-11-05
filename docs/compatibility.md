@@ -10,7 +10,7 @@
 | Windsurf, Kiro, others | unsupported | copy `skills/` manually | - | - |
 | Headless Linux / CI | CLI works | - | JSON output, exit codes | - |
 | Windows / Linux | CLI works (Node 20+), tested in blocking CI | - | `.github/workflows/ci.yml` | - |
-| macOS | CLI works (Node 20+) | - | weekly and on-demand, `macos-15`, Node 22 and 26, not a required check | - |
+| macOS | CLI should work (Node 20+). Not run in CI | - | GitHub cancels queued macOS jobs before any step. No result is claimed | - |
 
 Support labels: `adapter` = files follow the vendor's documented layout; `experimental` = layout unconfirmed; `unsupported` = no adapter. Nothing is marked "verified" because live-host smoke tests have not been done yet.
 

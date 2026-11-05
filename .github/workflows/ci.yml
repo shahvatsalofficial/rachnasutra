@@ -1,8 +1,8 @@
 name: CI
 
 # Required status checks on main must be exactly these eight jobs.
-# macOS runs in macos.yml (weekly and on demand) and must not be required:
-# queued macOS runners used to cancel the run and leave main pending.
+# macOS is not in CI. GitHub cancels queued macOS jobs after about 15 minutes
+# with zero steps (run 42096695892). That red workflow was removed.
 
 on:
   push:

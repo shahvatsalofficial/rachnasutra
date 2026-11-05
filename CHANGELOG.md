@@ -5,7 +5,7 @@ All notable changes follow [Semantic Versioning](https://semver.org/). Report sc
 ## Unreleased
 
 - Published on npm as `rachnasutra` (public, account `shahvatsal`). Install with `npx rachnasutra` or `npm install --save-dev rachnasutra`.
-- macOS workflow uses `macos-15` (Node 22 and 26). `macos-14` was retired on 2026-11-02, so that label is cancelled before a runner starts. `macos-latest` is macOS 26 and was left queued with no machine. This workflow is not a required check. Linux and Windows CI remains the gate. No Mac is required to review that gate.
+- Removed `.github/workflows/macos.yml`. Run 42096695892 queued for 15 minutes on `macos-15`, then GitHub cancelled both jobs with zero steps. That red check was not a test failure. Linux and Windows CI stays the gate. No macOS result is claimed.
 
 ## 0.4.0
 

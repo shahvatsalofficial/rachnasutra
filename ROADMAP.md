@@ -21,7 +21,7 @@ Status of each item is tracked in [docs/status.md](docs/status.md). Dates are in
 4a. Blind re-test of the rules on new repositories, with independent labelling
 5. JSX style-object and CSS-in-JS contrast analysis
 6. Optional Lighthouse integration with lab-vs-field separation
-7. Windows, macOS and Linux CI matrix for installers (workflow exists; results to be published)
+7. macOS CI, when GitHub assigns a runner. Linux and Windows already run in `.github/workflows/ci.yml`. A macOS job was removed after GitHub cancelled it with zero steps.
 
 ## Not planned
 Telemetry, hosted accounts, mandatory API keys, automatic global installs.
