@@ -2,6 +2,10 @@
 
 All notable changes follow [Semantic Versioning](https://semver.org/). Report schema version is tracked separately (`schemaVersion`).
 
+## Unreleased
+
+- macOS workflow uses `macos-15` (Node 22 and 26). `macos-14` was retired on 2026-11-02, so that label is cancelled before a runner starts. `macos-latest` is macOS 26 and was left queued with no machine. This workflow is not a required check. Linux and Windows CI remains the gate. No Mac is required to review that gate.
+
 ## 0.4.0
 
 - `plan-fixes`, `verify --report` and `design-system inspect` now write a Markdown file and an HTML file, same idea as `audit`. Fix plan and verification land next to the JSON report (`fix-plan.md`, `fix-plan.html`, `verify.md`, `verify.html`). The token inventory lands in `./rachnasutra-reports/` (`tokens.md`, `tokens.html`). `--no-report` and `--json` still print only. Audit reports gained a short "How to read this" section.

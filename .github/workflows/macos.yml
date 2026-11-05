@@ -1,7 +1,8 @@
 name: macOS (non-blocking)
 
-# macOS runners queue for days when GitHub is short of capacity, which used to leave the main CI run
-# cancelled. macOS therefore runs here, on a schedule and on demand, and is not a required check.
+# Not a required check. A missing macOS runner must not fail the Linux and Windows CI workflow.
+# macos-14 was retired on 2026-11-02, so that label is cancelled before any step runs.
+# macos-latest is macOS 26 and often sits in the queue with no machine. macos-15 is the supported image.
 on:
   schedule:
     - cron: '17 3 * * 1'
@@ -16,7 +17,7 @@ jobs:
       fail-fast: false
       matrix:
         node: [22, 26]
-    runs-on: macos-latest
+    runs-on: macos-15
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7

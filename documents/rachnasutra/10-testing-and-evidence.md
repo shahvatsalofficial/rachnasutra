@@ -18,7 +18,7 @@ This page contains the recorded results of the automated test suite and sample r
 
 Typecheck (`npm run typecheck`) and package verification (`node dist/cli.js verify`, 24 PASS lines, 0 FAIL) were also run clean on the same commit.
 
-> **Note:** Locally the suite was run on Windows with Node 20, 22, 24 and 26. The blocking CI matrix is Windows and Linux on Node 20, 22, 24 and 26; macOS (Node 22, 26) runs in a separate weekly, non-blocking workflow. Check the repository's Actions tab for those results; none are claimed here.
+> **Note:** Locally the suite was run on Windows with Node 20, 22, 24 and 26. The blocking CI matrix is Windows and Linux on Node 20, 22, 24 and 26. macOS does not need a Mac on your desk: GitHub Actions runs Node 22 and 26 on `macos-15` in `.github/workflows/macos.yml`, weekly and on demand, and that workflow is not a required check. `macos-14` was retired on 2026-11-02 (those jobs are cancelled before a runner starts). `macos-latest` is macOS 26 and was left queued with no machine. A cancelled or queued macOS job is a runner shortage, not a failed test. Do not read it as a product failure. Check the Actions tab before claiming a macOS result.
 
 ## What each test proves
 

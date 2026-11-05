@@ -80,7 +80,7 @@ Semantic versioning. The report `schemaVersion` changes independently. Rule addi
 
 | Gap | Impact | Plan |
 |---|---|---|
-| Cross-platform results | Local runs: Windows with Node 20, 22, 24 and 26; Linux and macOS through the CI matrix | Check the Actions tab |
+| Cross-platform results | Local runs: Windows with Node 20, 22, 24 and 26. Linux is in the blocking CI matrix. macOS is `macos-15` in the non-blocking workflow | Check the Actions tab |
 | Spec folders (`packages/`, `workflows/`, `rules/`, `adapters/`) not created | None functionally; avoids empty modules | Split when browser module lands |
 | Social preview image must be uploaded in the GitHub UI | Link previews show the default image until then | `assets/social-preview.png` is ready to upload |
 | Host adapters unverified live | Install may need path tweaks for some hosts | Live smoke tests |
