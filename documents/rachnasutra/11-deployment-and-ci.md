@@ -4,7 +4,7 @@
 
 | Mode | How | Network | Model |
 |---|---|---|---|
-| Local developer | `npx github:shahvatsalofficial/rachnasutra audit .` | Only to fetch the package | None |
+| Local developer | `npx rachnasutra audit .` | Only to fetch the package | None |
 | Cloned source | `npm install && npm run build && node dist/cli.js ...` | Only to install dev dependencies | None |
 | CI | `rachnasutra ci .` in a pipeline | Only to fetch the package | None |
 | IDE-assisted | Skills installed into the project | Per the IDE | The IDE's own model |
@@ -27,10 +27,10 @@ jobs:
         with:
           node-version: 22
       - name: Audit
-        run: npx --yes github:shahvatsalofficial/rachnasutra ci . > rachnasutra.json
+        run: npx --yes rachnasutra ci . > rachnasutra.json
       - name: SARIF
         if: always()
-        run: npx --yes github:shahvatsalofficial/rachnasutra export --format sarif . > rachnasutra.sarif
+        run: npx --yes rachnasutra export --format sarif . > rachnasutra.sarif
       - uses: github/codeql-action/upload-sarif@v3
         if: always()
         with:
@@ -75,7 +75,24 @@ The tool is single-threaded and uses memory proportional to the largest files it
 
 ## Release and distribution
 
-Current: install straight from GitHub with `npx github:...`. Planned: tagged releases and an npm package. Publishing to npm needs an authenticated maintainer and is a manual, reviewed step. Package name `rachnasutra` and a scoped alternative `@vatsalshah/rachnasutra` are proposals; availability has not been checked.
+Install from npm. Node 20 or newer. No API key.
+
+```bash
+npx rachnasutra audit .
+npm install --save-dev rachnasutra
+```
+
+The package name is `rachnasutra`. It is public. The npm account that publishes it is `shahvatsal`. GitHub install still works: `npx github:shahvatsalofficial/rachnasutra audit .`.
+
+Maintainer publish, from a clean `main` after CI is green:
+
+1. `node --version` is 20 or newer. `npm whoami` prints `shahvatsal`. If it does not, run `npm login` in a terminal. Do not paste the token into chat.
+2. `npm view rachnasutra version` must be the previous release, or 404 for the first publish. Do not publish a version that already exists.
+3. Bump `version` in `package.json` and `toolVersion()` in `src/audit.ts`. Add a `CHANGELOG.md` section. Commit and push. Wait until the Linux and Windows CI run is green.
+4. `npm publish --access public`. `prepublishOnly` runs `npm test` and `npm run verify`. If either fails, npm does not publish. If npm asks for a one-time password, enter it in that terminal.
+5. `npm view rachnasutra version` must print the version you just published. Tag it on GitHub if that tag does not exist: `git tag -a vX.Y.Z -m "vX.Y.Z"` then `git push origin vX.Y.Z`.
+
+Unpublish is only available for 72 hours, and only if nothing else depends on the version. Prefer a new patch version over an unpublish.
 
 ## Upgrade and rollback
 

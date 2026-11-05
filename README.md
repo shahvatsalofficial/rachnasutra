@@ -40,15 +40,15 @@ Requires Node.js 20 or newer.
 ```bash
 # audit a project: no network, no API key, source files are never changed.
 # Writes easy-to-read Markdown + HTML + JSON reports to ./rachnasutra-reports and prints the path to open.
-npx github:shahvatsalofficial/rachnasutra audit .
+npx rachnasutra audit .
 
 # summary only, no files / other formats and folder
-npx github:shahvatsalofficial/rachnasutra audit . --no-report
-npx github:shahvatsalofficial/rachnasutra audit . --format json,md,html,sarif --out my-reports
+npx rachnasutra audit . --no-report
+npx rachnasutra audit . --format json,md,html,sarif --out my-reports
 
 # install the skills for your AI IDE (dry run first)
-npx github:shahvatsalofficial/rachnasutra skills install --host claude --target . --dry-run
-npx github:shahvatsalofficial/rachnasutra skills install --host claude --target .
+npx rachnasutra skills install --host claude --target . --dry-run
+npx rachnasutra skills install --host claude --target .
 ```
 
 Then ask your assistant: *"Use rachnasutra-prime to review this project's UI and suggest the most valuable accessible and responsive improvements with source evidence."*
@@ -160,7 +160,7 @@ The full documentation set is in [`documents/rachnasutra/`](documents/rachnasutr
 ## Use in CI
 
 ```yaml
-- run: npx --yes github:shahvatsalofficial/rachnasutra ci .
+- run: npx --yes rachnasutra ci .
 ```
 
 Fails the job on confirmed high or critical findings. See [Deployment and CI](documents/rachnasutra/11-deployment-and-ci.md) for SARIF upload and regression-only gating.

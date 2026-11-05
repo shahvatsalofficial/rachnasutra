@@ -24,6 +24,9 @@
   ],
   "license": "Apache-2.0",
   "author": "Vatsal Shah",
+  "publishConfig": {
+    "access": "public"
+  },
   "homepage": "https://github.com/shahvatsalofficial/rachnasutra#readme",
   "repository": {
     "type": "git",

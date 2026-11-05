@@ -4,6 +4,7 @@ All notable changes follow [Semantic Versioning](https://semver.org/). Report sc
 
 ## Unreleased
 
+- Published on npm as `rachnasutra` (public, account `shahvatsal`). Install with `npx rachnasutra` or `npm install --save-dev rachnasutra`.
 - macOS workflow uses `macos-15` (Node 22 and 26). `macos-14` was retired on 2026-11-02, so that label is cancelled before a runner starts. `macos-latest` is macOS 26 and was left queued with no machine. This workflow is not a required check. Linux and Windows CI remains the gate. No Mac is required to review that gate.
 
 ## 0.4.0
