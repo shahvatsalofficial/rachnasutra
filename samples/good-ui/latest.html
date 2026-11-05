@@ -15,6 +15,7 @@ h1{font-size:1.75rem;margin:.2rem 0}h2{margin-top:2.2rem;font-size:1.25rem;borde
 .tablewrap{overflow-x:auto}table{border-collapse:collapse;width:100%;background:var(--card)}th,td{border:1px solid var(--line);padding:.45rem .6rem;text-align:left;vertical-align:top}
 .sev{font-weight:600}.sev-critical{color:var(--crit)}.sev-high{color:var(--high)}.sev-medium{color:var(--med)}.sev-low{color:var(--low)}.sev-info{color:var(--info)}
 .card{background:var(--card);border:1px solid var(--line);border-radius:.6rem;padding:.8rem 1rem;margin:.8rem 0}.card h3{margin:.1rem 0 .4rem;font-size:1.05rem}
+.note{background:var(--card);border:1px solid var(--line);border-radius:.6rem;padding:.8rem 1rem}
 dt{font-weight:600;margin-top:.5rem}dd{margin:0}code,pre{font-family:ui-monospace,Consolas,monospace;font-size:.88em;white-space:pre-wrap;overflow-wrap:anywhere}pre{margin:.2rem 0}
 a:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 </style>
@@ -22,7 +23,14 @@ a:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-of
 <body>
 <main>
 <h1>RachnaSutra AI audit report</h1>
-<p class="muted">Static mode &middot; read-only &middot; 2026-11-04T18:07:38.329Z &middot; rachnasutra 0.3.0</p>
+<p class="muted">Static mode &middot; read-only &middot; 2026-11-05T19:28:06.609Z &middot; rachnasutra 0.4.0</p>
+<h2>How to read this</h2>
+<ul>
+<li><strong>Confirmed</strong> means the tool saw this in the file. Fix it.</li>
+<li><strong>Review required</strong> means a person should check. It may be fine.</li>
+<li>Start with <strong>Fix these first</strong>. The table lists every finding.</li>
+<li>This is a static review. It is not a WCAG certificate and it has no quality score.</li>
+</ul>
 <h2>Summary</h2>
 <div class="grid" role="list">
 <div class="stat" role="listitem"><b>0</b>critical</div>

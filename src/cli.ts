@@ -4,7 +4,7 @@ import path from 'node:path';
 import { HOSTS, detectHosts, doctor, install, packageRoot, planInstall, uninstall } from './adapters.js';
 import { CONFIG_FILE, SEVERITY_ORDER, loadConfig, runAudit, validateConfig } from './audit.js';
 import { exists } from './fsutil.js';
-import { renderHtml, renderJson, renderMarkdown, renderSarif } from './report.js';
+import { renderFixPlanHtml, renderFixPlanMarkdown, renderHtml, renderJson, renderMarkdown, renderSarif, renderTokensHtml, renderTokensMarkdown, renderVerifyHtml, renderVerifyMarkdown } from './report.js';
 import type { AuditResult, Severity } from './types.js';
 import { compareToReport, verifyPackage } from './verify.js';
 
@@ -26,10 +26,10 @@ Deterministic commands (no AI, no network, read-only unless noted):
   audit [path]                static UI/UX audit; writes Markdown, HTML and JSON reports to ./rachnasutra-reports
                               (--format json,md,html,sarif and --out <dir> to choose; --no-report to only print a summary)
   accessibility [path]        static accessibility rules only (WCAG 2.2 AA oriented)
-  design-system inspect [path]  token inventory (colours, type, spacing, radii)
-  plan-fixes --report <file>  prioritised fix plan from a saved JSON report
+  design-system inspect [path]  token inventory; writes tokens.md and tokens.html to ./rachnasutra-reports
+  plan-fixes --report <file>  fix plan as fix-plan.md and fix-plan.html next to the JSON report
   verify                      validate the package: skills, docs, links
-  verify --report <file> [path]  re-audit and compare to a saved report (fix verification)
+  verify --report <file> [path]  re-audit; writes verify.md and verify.html next to the JSON report
   export --format sarif [path]  print SARIF 2.1.0
   ci [path]                   audit with CI exit codes (--fail-on confirmed-critical|<severity>)
   config validate [path]      validate ${CONFIG_FILE}
@@ -113,6 +113,17 @@ async function emitAudit(res: AuditResult, args: Args): Promise<void> {
   const html = written.find((w) => w.endsWith('.html'));
   const hint = html && !args.flags['dry-run'] ? `\n\nOpen the report in your browser: ${html}` : '';
   write(`${args.flags['dry-run'] ? 'Would write' : 'Wrote'}:\n${written.map((w) => `  ${w}`).join('\n')}\n${textSummary(res)}${hint}`);
+}
+
+async function writeReadable(dir: string, base: string, md: string, html: string, dry: boolean): Promise<void> {
+  const mdPath = path.join(dir, `${base}.md`);
+  const htmlPath = path.join(dir, `${base}.html`);
+  if (!dry) {
+    await fs.mkdir(dir, { recursive: true });
+    await fs.writeFile(mdPath, md, 'utf8');
+    await fs.writeFile(htmlPath, html, 'utf8');
+  }
+  write(`${dry ? 'Would write' : 'Wrote'}:\n  ${mdPath}\n  ${htmlPath}\n\nOpen the report in your browser: ${htmlPath}`);
 }
 
 async function main(): Promise<number> {
@@ -238,6 +249,10 @@ async function main(): Promise<number> {
       }
       const res = await runAudit(target);
       const t = res.tokens;
+      if (!json && !args.flags['no-report']) {
+        const dir = path.resolve(String(args.flags.out ?? DEFAULT_REPORT_DIR));
+        await writeReadable(dir, 'tokens', renderTokensMarkdown(t), renderTokensHtml(t), dry);
+      }
       write(json ? JSON.stringify(t, null, 2) : [
         `CSS custom properties: ${t.cssVariables}`,
         `Literal colour share (literal vs var()): ${Math.round(t.hardcodedColorRatio * 100)}%`,
@@ -255,10 +270,15 @@ async function main(): Promise<number> {
         process.stderr.write('plan-fixes requires --report <file>\n');
         return EXIT.usage;
       }
-      const rep = JSON.parse(await fs.readFile(path.resolve(rp), 'utf8')) as AuditResult;
+      const reportPath = path.resolve(rp);
+      const rep = JSON.parse(await fs.readFile(reportPath, 'utf8')) as AuditResult;
       const effort = (sev: string): string => (sev === 'low' || sev === 'info' ? 'S' : 'S-M');
       const order = [...rep.findings].sort((a, b) => SEVERITY_ORDER.indexOf(a.severity) - SEVERITY_ORDER.indexOf(b.severity));
-      write(['# Fix plan (proposal only; no files were changed)', '', 'Order: severity, then confirmed before review-required. Apply only after approval, then run `rachnasutra verify --report <file>`.', '',
+      if (!args.flags['no-report'] && !json) {
+        const dir = args.flags.out ? path.resolve(String(args.flags.out)) : path.dirname(reportPath);
+        await writeReadable(dir, 'fix-plan', renderFixPlanMarkdown(rep.findings), renderFixPlanHtml(rep.findings), dry);
+      }
+      write(['# Fix plan (proposal only; no source files were changed)', '', 'Order: severity. Apply only after approval, then run `rachnasutra verify --report <file>`. Full plan: fix-plan.md and fix-plan.html.', '',
         ...order.map((f, i) => `${i + 1}. [${f.severity}] ${f.id} ${f.file}${f.line ? `:${f.line}` : ''} - ${f.recommended_fix} (effort ${effort(f.severity)}, ${f.status})`),
         '', 'Effort labels are rough assumptions: S = under an hour, M = a few hours per component.'].join('\n'));
       return EXIT.ok;
@@ -272,6 +292,11 @@ async function main(): Promise<number> {
           return EXIT.verifyFailed;
         }
         const c = comparison;
+        if (!json && !args.flags['no-report']) {
+          const reportPath = path.resolve(String(args.flags.report));
+          const dir = args.flags.out ? path.resolve(String(args.flags.out)) : path.dirname(reportPath);
+          await writeReadable(dir, 'verify', renderVerifyMarkdown(c), renderVerifyHtml(c), dry);
+        }
         write(json ? JSON.stringify(c, null, 2) : [
           `Baseline ${c.baselineTotal} -> current ${c.currentTotal}`,
           `Resolved: ${c.resolved.length}  Remaining: ${c.remaining.length}  Introduced: ${c.introduced.length}`,

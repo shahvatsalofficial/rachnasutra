@@ -1,5 +1,9 @@
 name: CI
 
+# Required status checks on main must be exactly these eight jobs.
+# macOS runs in macos.yml (weekly and on demand) and must not be required:
+# queued macOS runners used to cancel the run and leave main pending.
+
 on:
   push:
     branches: [main]

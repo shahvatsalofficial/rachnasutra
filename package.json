@@ -1,6 +1,6 @@
 {
   "name": "rachnasutra",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "RachnaSutra AI: open-source UI/UX design, accessibility and responsive audit agent skills for Claude Code, Cursor, Codex, Copilot and Gemini CLI, plus an evidence-first, keyless CLI.",
   "keywords": [
     "ui-ux",

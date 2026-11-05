@@ -1,10 +1,10 @@
 # RachnaSutra AI - UI/UX audit report
 
-- Generated: 2026-11-04T18:07:38.329Z
+- Generated: 2026-11-05T19:28:06.609Z
 - Mode: static (read-only, no network, no model)
 - Root: `<project>\fixtures\good-ui`
 - Files scanned: 2 (.html: 1, .css: 1)
-- Tool: rachnasutra 0.3.0
+- Tool: rachnasutra 0.4.0
 
 ## Executive summary
 
@@ -12,6 +12,13 @@
 0 confirmed by deterministic pattern or measurement; 0 need human or runtime review.
 
 This is a static review. It does not certify WCAG conformance and gives no quality score, because large areas were not evaluated (see Coverage).
+
+## How to read this
+
+- **Confirmed** means the tool saw this in the file. Fix it.
+- **Review required** means a person should check. It may be fine.
+- Start with **Fix these first**. The list after that is everything else.
+- This is a static review. It is not a WCAG certificate and it has no quality score.
 
 ## Fix these first
 

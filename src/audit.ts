@@ -10,7 +10,7 @@ export const SEVERITY_ORDER: Severity[] = ['critical', 'high', 'medium', 'low', 
 export const CONFIG_FILE = 'rachnasutra.config.json';
 
 export function toolVersion(): string {
-  return '0.3.0';
+  return '0.4.0';
 }
 
 export async function loadConfig(root: string): Promise<AuditConfig> {

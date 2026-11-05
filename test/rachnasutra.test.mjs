@@ -269,8 +269,25 @@ test('CLI: audit writes Markdown, HTML and JSON reports by default and never tou
   const v = cli('verify', '--report', path.join(out, 'latest.json'), r);
   assert.equal(v.status, 0);
   assert.match(v.stdout, /Introduced: 0/);
-  // ci stays stdout-only
+  assert.ok(existsSync(path.join(out, 'verify.md')));
+  assert.match(await readFile(path.join(out, 'verify.html'), 'utf8'), /fix verification/);
+  const plan = cli('plan-fixes', '--report', path.join(out, 'latest.json'));
+  assert.equal(plan.status, 0);
+  assert.match(await readFile(path.join(out, 'fix-plan.md'), 'utf8'), /fix plan/);
+  assert.match(await readFile(path.join(out, 'fix-plan.html'), 'utf8'), /<h1>RachnaSutra AI fix plan/);
+  const skipped = path.join(r, 'skipped-plan');
+  assert.equal(cli('plan-fixes', '--report', path.join(out, 'latest.json'), '--no-report', '--out', skipped).status, 0);
+  assert.ok(!existsSync(skipped));
+  // token inventory writes Markdown and HTML; --json stays on stdout
   await rm(def, { recursive: true, force: true });
+  const tokens = cli('design-system', 'inspect', GOOD);
+  assert.equal(tokens.status, 0);
+  assert.match(await readFile(path.join(def, 'tokens.md'), 'utf8'), /design token inventory/);
+  assert.match(await readFile(path.join(def, 'tokens.html'), 'utf8'), /<table/);
+  await rm(def, { recursive: true, force: true });
+  assert.equal(cli('design-system', 'inspect', GOOD, '--json').status, 0);
+  assert.ok(!existsSync(def));
+  // ci stays stdout-only
   cli('ci', r);
   assert.ok(!existsSync(def));
   await rm(r, { recursive: true, force: true });

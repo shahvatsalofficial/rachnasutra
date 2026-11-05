@@ -12,10 +12,10 @@
 | `skills uninstall --host <id>` | remove only unmodified files it installed | yes |
 | `audit` | static audit; writes `latest.md`, `latest.html`, `latest.json` to `./rachnasutra-reports` by default; `--no-report`, `--format json,md,html,sarif`, `--out dir`, `--json`, `--fail-on <sev>` | yes, report files (skip with `--no-report`, `--json` or `--format` without `--out`) |
 | `accessibility` | audit limited to the accessibility category; same report files as `audit` | yes (same options) |
-| `design-system inspect` | token inventory | no |
-| `plan-fixes --report file` | ordered fix proposal | no |
+| `design-system inspect` | token inventory; writes `tokens.md` and `tokens.html` to `./rachnasutra-reports` (`--out`, `--no-report`, `--json`) | yes, unless `--no-report` or `--json` |
+| `plan-fixes --report file` | ordered fix proposal; writes `fix-plan.md` and `fix-plan.html` next to the JSON report (`--out`, `--no-report`) | yes, unless `--no-report` or `--json` |
 | `verify` | validate package skills, docs and links | no |
-| `verify --report file [path]` | re-audit and compare to a baseline | no |
+| `verify --report file [path]` | re-audit and compare to a baseline; writes `verify.md` and `verify.html` next to the JSON report (`--out`, `--no-report`, `--json`) | yes, unless `--no-report` or `--json` |
 | `export --format sarif` | SARIF 2.1.0 to stdout | no |
 | `ci` | audit with JSON default, default gate `confirmed-critical` | no |
 | `config validate` | validate `rachnasutra.config.json` | no |

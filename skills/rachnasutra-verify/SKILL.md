@@ -21,7 +21,7 @@ Baseline report JSON, the changed files, test commands.
 
 ## Tools and capabilities
 
-`rachnasutra verify --report reports/latest.json .`; project test runner; browser only if authorized.
+`rachnasutra verify --report rachnasutra-reports/latest.json .` (writes `verify.md` and `verify.html` next to the JSON report); project test runner; browser only if authorized.
 
 If a tool is unavailable, say so and continue with what is available. Label the affected checks `not tested`.
 
@@ -39,7 +39,7 @@ Only measured differences count as improvements. "Not re-tested" is stated expli
 
 ## Outputs
 
-A before/after table, regression list, remaining items and rollback instructions.
+`verify.md` and `verify.html` (resolved, still open, new findings), plus a before/after note and rollback instructions.
 
 ## Escalation
 

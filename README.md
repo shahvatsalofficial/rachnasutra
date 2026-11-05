@@ -26,9 +26,9 @@ Created by **[Vatsal Shah](https://github.com/shahvatsalofficial)**. Licensed un
 | Accessibility rules: alt text, labels, names, focus, tabindex, lang, zoom, landmarks, target size | `rachnasutra accessibility` | No |
 | **Measured** text contrast (WCAG 1.4.3) from literal CSS colour pairs | `rachnasutra audit` | No |
 | Responsive checks: viewport meta, fixed widths, responsive CSS | `rachnasutra audit` | No |
-| Design-token inventory (colours, type, spacing, radii) | `rachnasutra design-system inspect` | No |
+| Design-token inventory (colours, type, spacing, radii) | `rachnasutra design-system inspect` (writes `tokens.md` and `tokens.html`) | No |
 | JSON, Markdown, accessible HTML, SARIF reports | `rachnasutra audit` (writes Markdown, HTML, JSON to `./rachnasutra-reports`) | No |
-| Fix plan and fix verification against a saved baseline | `rachnasutra plan-fixes`, `rachnasutra verify --report` | No |
+| Fix plan and fix verification against a saved baseline | `rachnasutra plan-fixes`, `rachnasutra verify --report` (each writes Markdown and HTML next to the JSON report) | No |
 | CI gate with stable exit codes | `rachnasutra ci` | No |
 | Visual critique, flows, copy, redesign proposals, implementation | the `rachnasutra-*` skills | Yes (your IDE's model) |
 | Browser, screenshot, axe and Lighthouse audits | **not available yet** | planned, see [docs/status.md](docs/status.md) |
@@ -89,10 +89,10 @@ rachnasutra init | doctor | hosts
 rachnasutra skills list | install --host <id> | uninstall --host <id>
 rachnasutra audit [path] [--no-report] [--format json,md,html,sarif] [--out dir] [--fail-on high]   # default: MD + HTML + JSON in ./rachnasutra-reports
 rachnasutra accessibility [path]
-rachnasutra design-system inspect [path]
-rachnasutra plan-fixes --report rachnasutra-reports/latest.json
+rachnasutra design-system inspect [path]             # tokens.md + tokens.html in ./rachnasutra-reports
+rachnasutra plan-fixes --report rachnasutra-reports/latest.json   # fix-plan.md + fix-plan.html
 rachnasutra verify                       # package integrity
-rachnasutra verify --report rachnasutra-reports/latest.json [path]   # did the fixes work?
+rachnasutra verify --report rachnasutra-reports/latest.json [path]   # verify.md + verify.html
 rachnasutra export --format sarif [path]
 rachnasutra ci [path] [--fail-on confirmed-critical]
 rachnasutra config validate [path]

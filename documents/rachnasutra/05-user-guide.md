@@ -64,13 +64,13 @@ By default this writes **Markdown, HTML and JSON** reports to `./rachnasutra-rep
 ## Fix and verify
 
 ```bash
-rachnasutra audit .                                    # baseline: writes rachnasutra-reports/latest.json
-rachnasutra plan-fixes --report rachnasutra-reports/latest.json    # ordered proposal; changes nothing
+rachnasutra audit .                                    # baseline: latest.md, latest.html, latest.json
+rachnasutra plan-fixes --report rachnasutra-reports/latest.json    # writes fix-plan.md and fix-plan.html; changes no source
 # ... edit your code ...
-rachnasutra verify --report rachnasutra-reports/latest.json .      # resolved / remaining / introduced
+rachnasutra verify --report rachnasutra-reports/latest.json .      # writes verify.md and verify.html
 ```
 
-`verify --report` exits with code 4 if your changes introduced new findings. It re-checks only what static rules can see. Still test with a keyboard and a screen reader.
+Open `fix-plan.html` to see what to change, in order, with the fix and how to check it. Open `verify.html` afterwards: resolved, still open, and new findings are separate. `verify --report` exits with code 4 if your changes introduced new findings. It re-checks only what static rules can see. Still test with a keyboard and a screen reader.
 
 ## Token inventory
 
@@ -78,7 +78,7 @@ rachnasutra verify --report rachnasutra-reports/latest.json .      # resolved / 
 rachnasutra design-system inspect .
 ```
 
-Shows the number of CSS custom properties, the share of colour usage that is hard-coded, and the most common colours, font sizes, spacing values and radii. Use it to plan a token system.
+Writes `rachnasutra-reports/tokens.md` and `tokens.html`, and prints the same summary. The HTML page shows CSS custom properties, the share of colour usage that is hard-coded, and the most common colours, font sizes, spacing values and radii. Use it to plan a token system. `--no-report` prints the summary only.
 
 ## Accessibility-only view
 

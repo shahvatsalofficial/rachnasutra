@@ -2,6 +2,11 @@
 
 All notable changes follow [Semantic Versioning](https://semver.org/). Report schema version is tracked separately (`schemaVersion`).
 
+## 0.4.0
+
+- `plan-fixes`, `verify --report` and `design-system inspect` now write a Markdown file and an HTML file, same idea as `audit`. Fix plan and verification land next to the JSON report (`fix-plan.md`, `fix-plan.html`, `verify.md`, `verify.html`). The token inventory lands in `./rachnasutra-reports/` (`tokens.md`, `tokens.html`). `--no-report` and `--json` still print only. Audit reports gained a short "How to read this" section.
+- GitHub branch protection on `main` required four macOS jobs (`macos-latest` on Node 20, 22, 24 and 26) that CI no longer runs. Those checks never reported, so every push stayed pending. Required checks are now the eight Linux and Windows jobs in `.github/workflows/ci.yml`. macOS stays on the weekly workflow and is not required.
+
 ## 0.3.0
 
 - `rachnasutra audit` (and `accessibility`) now writes easy-to-read **Markdown, HTML and JSON reports** to `./rachnasutra-reports/` by default and prints the path to open. Use `--no-report` to print a summary only, `--json` or `--format` without `--out` to print to the terminal, `--out <dir>` and `--format json,md,html,sarif` to choose. `ci` and `export` still print to stdout.

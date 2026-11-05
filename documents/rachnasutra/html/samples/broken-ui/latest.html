@@ -15,6 +15,7 @@ h1{font-size:1.75rem;margin:.2rem 0}h2{margin-top:2.2rem;font-size:1.25rem;borde
 .tablewrap{overflow-x:auto}table{border-collapse:collapse;width:100%;background:var(--card)}th,td{border:1px solid var(--line);padding:.45rem .6rem;text-align:left;vertical-align:top}
 .sev{font-weight:600}.sev-critical{color:var(--crit)}.sev-high{color:var(--high)}.sev-medium{color:var(--med)}.sev-low{color:var(--low)}.sev-info{color:var(--info)}
 .card{background:var(--card);border:1px solid var(--line);border-radius:.6rem;padding:.8rem 1rem;margin:.8rem 0}.card h3{margin:.1rem 0 .4rem;font-size:1.05rem}
+.note{background:var(--card);border:1px solid var(--line);border-radius:.6rem;padding:.8rem 1rem}
 dt{font-weight:600;margin-top:.5rem}dd{margin:0}code,pre{font-family:ui-monospace,Consolas,monospace;font-size:.88em;white-space:pre-wrap;overflow-wrap:anywhere}pre{margin:.2rem 0}
 a:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 </style>
@@ -22,7 +23,14 @@ a:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-of
 <body>
 <main>
 <h1>RachnaSutra AI audit report</h1>
-<p class="muted">Static mode &middot; read-only &middot; 2026-11-04T18:07:37.274Z &middot; rachnasutra 0.3.0</p>
+<p class="muted">Static mode &middot; read-only &middot; 2026-11-05T19:28:05.857Z &middot; rachnasutra 0.4.0</p>
+<h2>How to read this</h2>
+<ul>
+<li><strong>Confirmed</strong> means the tool saw this in the file. Fix it.</li>
+<li><strong>Review required</strong> means a person should check. It may be fine.</li>
+<li>Start with <strong>Fix these first</strong>. The table lists every finding.</li>
+<li>This is a static review. It is not a WCAG certificate and it has no quality score.</li>
+</ul>
 <h2>Summary</h2>
 <div class="grid" role="list">
 <div class="stat" role="listitem"><b>0</b>critical</div>
@@ -51,27 +59,27 @@ a:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-of
 </tbody></table></div>
 <h2>Findings</h2>
 <div class="tablewrap"><table><caption class="muted">All findings, most severe first</caption><thead><tr><th scope="col">ID</th><th scope="col">Severity</th><th scope="col">Rule</th><th scope="col">Title</th><th scope="col">Location</th><th scope="col">Status</th></tr></thead><tbody>
-<tr id="RS-0001"><th scope="row">RS-0001</th><td><span class="sev sev-high">high</span></td><td>RS-A11Y-001</td><td>Image has no alt attribute</td><td><code>index.html:11</code></td><td>confirmed</td></tr>
-<tr id="RS-0002"><th scope="row">RS-0002</th><td><span class="sev sev-high">high</span></td><td>RS-A11Y-003</td><td>Viewport meta disables or limits zoom</td><td><code>index.html:5</code></td><td>confirmed</td></tr>
-<tr id="RS-0003"><th scope="row">RS-0003</th><td><span class="sev sev-high">high</span></td><td>RS-A11Y-004</td><td>Button has no accessible name</td><td><code>index.html:13</code></td><td>confirmed</td></tr>
-<tr id="RS-0004"><th scope="row">RS-0004</th><td><span class="sev sev-high">high</span></td><td>RS-A11Y-005</td><td>Form control has no programmatic label</td><td><code>index.html:16</code></td><td>review-required</td></tr>
-<tr id="RS-0005"><th scope="row">RS-0005</th><td><span class="sev sev-high">high</span></td><td>RS-A11Y-007</td><td>Click handler on non-interactive &lt;div&gt; without role or tabindex</td><td><code>index.html:12</code></td><td>confirmed</td></tr>
-<tr id="RS-0006"><th scope="row">RS-0006</th><td><span class="sev sev-high">high</span></td><td>RS-A11Y-010</td><td>Focus indicator removed (button:focus, a:focus)</td><td><code>styles.css:2</code></td><td>confirmed</td></tr>
-<tr id="RS-0007"><th scope="row">RS-0007</th><td><span class="sev sev-high">high</span></td><td>RS-A11Y-013</td><td>Text contrast 2.32:1 is below 4.5:1 (#aaaaaa on #ffffff)</td><td><code>index.html:20</code></td><td>confirmed</td></tr>
-<tr id="RS-0008"><th scope="row">RS-0008</th><td><span class="sev sev-high">high</span></td><td>RS-A11Y-013</td><td>Text contrast 2.85:1 is below 4.5:1 (#999999 on #ffffff)</td><td><code>styles.css:1</code></td><td>confirmed</td></tr>
-<tr id="RS-0009"><th scope="row">RS-0009</th><td><span class="sev sev-medium">medium</span></td><td>RS-A11Y-002</td><td>Document has no lang attribute</td><td><code>index.html:2</code></td><td>confirmed</td></tr>
-<tr id="RS-0010"><th scope="row">RS-0010</th><td><span class="sev sev-medium">medium</span></td><td>RS-A11Y-006</td><td>Positive tabindex overrides natural focus order</td><td><code>index.html:17</code></td><td>confirmed</td></tr>
-<tr id="RS-0011"><th scope="row">RS-0011</th><td><span class="sev sev-medium">medium</span></td><td>RS-A11Y-008</td><td>Document has no title</td><td><code>index.html:2</code></td><td>confirmed</td></tr>
-<tr id="RS-0012"><th scope="row">RS-0012</th><td><span class="sev sev-medium">medium</span></td><td>RS-A11Y-014</td><td>Interactive target smaller than 24x24 CSS px (.icon-btn)</td><td><code>styles.css:3</code></td><td>review-required</td></tr>
-<tr id="RS-0013"><th scope="row">RS-0013</th><td><span class="sev sev-medium">medium</span></td><td>RS-MOT-001</td><td>Animations or transitions exist but no prefers-reduced-motion handling</td><td><code>styles.css:6</code></td><td>confirmed</td></tr>
-<tr id="RS-0014"><th scope="row">RS-0014</th><td><span class="sev sev-medium">medium</span></td><td>RS-RESP-002</td><td>Fixed width 1200px can overflow narrow viewports</td><td><code>styles.css:1</code></td><td>review-required</td></tr>
-<tr id="RS-0015"><th scope="row">RS-0015</th><td><span class="sev sev-medium">medium</span></td><td>RS-RESP-003</td><td>No responsive CSS found (media/container queries, clamp, grid auto-fit, flex-wrap)</td><td><code>styles.css:1</code></td><td>review-required</td></tr>
-<tr id="RS-0016"><th scope="row">RS-0016</th><td><span class="sev sev-low">low</span></td><td>RS-A11Y-009</td><td>Heading level skips from h1 to h3</td><td><code>index.html:10</code></td><td>review-required</td></tr>
-<tr id="RS-0017"><th scope="row">RS-0017</th><td><span class="sev sev-low">low</span></td><td>RS-A11Y-015</td><td>No main landmark</td><td><code>index.html:8</code></td><td>review-required</td></tr>
-<tr id="RS-0018"><th scope="row">RS-0018</th><td><span class="sev sev-low">low</span></td><td>RS-CONT-001</td><td>Vague link text &quot;click here&quot;</td><td><code>index.html:14</code></td><td>confirmed</td></tr>
-<tr id="RS-0019"><th scope="row">RS-0019</th><td><span class="sev sev-low">low</span></td><td>RS-PERF-001</td><td>Image has no explicit width and height</td><td><code>index.html:11</code></td><td>review-required</td></tr>
-<tr id="RS-0020"><th scope="row">RS-0020</th><td><span class="sev sev-low">low</span></td><td>RS-VIS-001</td><td>Very small text (10px)</td><td><code>styles.css:4</code></td><td>confirmed</td></tr>
-<tr id="RS-0021"><th scope="row">RS-0021</th><td><span class="sev sev-info">info</span></td><td>RS-TRUST-001</td><td>Urgency or scarcity wording needs review</td><td><code>index.html:19</code></td><td>review-required</td></tr>
+<tr id="RS-0001"><th scope="row"><a href="#h-RS-0001">RS-0001</a></th><td><span class="sev sev-high">high</span></td><td>RS-A11Y-001</td><td>Image has no alt attribute</td><td><code>index.html:11</code></td><td>confirmed</td></tr>
+<tr id="RS-0002"><th scope="row"><a href="#h-RS-0002">RS-0002</a></th><td><span class="sev sev-high">high</span></td><td>RS-A11Y-003</td><td>Viewport meta disables or limits zoom</td><td><code>index.html:5</code></td><td>confirmed</td></tr>
+<tr id="RS-0003"><th scope="row"><a href="#h-RS-0003">RS-0003</a></th><td><span class="sev sev-high">high</span></td><td>RS-A11Y-004</td><td>Button has no accessible name</td><td><code>index.html:13</code></td><td>confirmed</td></tr>
+<tr id="RS-0004"><th scope="row"><a href="#h-RS-0004">RS-0004</a></th><td><span class="sev sev-high">high</span></td><td>RS-A11Y-005</td><td>Form control has no programmatic label</td><td><code>index.html:16</code></td><td>review-required</td></tr>
+<tr id="RS-0005"><th scope="row"><a href="#h-RS-0005">RS-0005</a></th><td><span class="sev sev-high">high</span></td><td>RS-A11Y-007</td><td>Click handler on non-interactive &lt;div&gt; without role or tabindex</td><td><code>index.html:12</code></td><td>confirmed</td></tr>
+<tr id="RS-0006"><th scope="row"><a href="#h-RS-0006">RS-0006</a></th><td><span class="sev sev-high">high</span></td><td>RS-A11Y-010</td><td>Focus indicator removed (button:focus, a:focus)</td><td><code>styles.css:2</code></td><td>confirmed</td></tr>
+<tr id="RS-0007"><th scope="row"><a href="#h-RS-0007">RS-0007</a></th><td><span class="sev sev-high">high</span></td><td>RS-A11Y-013</td><td>Text contrast 2.32:1 is below 4.5:1 (#aaaaaa on #ffffff)</td><td><code>index.html:20</code></td><td>confirmed</td></tr>
+<tr id="RS-0008"><th scope="row"><a href="#h-RS-0008">RS-0008</a></th><td><span class="sev sev-high">high</span></td><td>RS-A11Y-013</td><td>Text contrast 2.85:1 is below 4.5:1 (#999999 on #ffffff)</td><td><code>styles.css:1</code></td><td>confirmed</td></tr>
+<tr id="RS-0009"><th scope="row"><a href="#h-RS-0009">RS-0009</a></th><td><span class="sev sev-medium">medium</span></td><td>RS-A11Y-002</td><td>Document has no lang attribute</td><td><code>index.html:2</code></td><td>confirmed</td></tr>
+<tr id="RS-0010"><th scope="row"><a href="#h-RS-0010">RS-0010</a></th><td><span class="sev sev-medium">medium</span></td><td>RS-A11Y-006</td><td>Positive tabindex overrides natural focus order</td><td><code>index.html:17</code></td><td>confirmed</td></tr>
+<tr id="RS-0011"><th scope="row"><a href="#h-RS-0011">RS-0011</a></th><td><span class="sev sev-medium">medium</span></td><td>RS-A11Y-008</td><td>Document has no title</td><td><code>index.html:2</code></td><td>confirmed</td></tr>
+<tr id="RS-0012"><th scope="row"><a href="#h-RS-0012">RS-0012</a></th><td><span class="sev sev-medium">medium</span></td><td>RS-A11Y-014</td><td>Interactive target smaller than 24x24 CSS px (.icon-btn)</td><td><code>styles.css:3</code></td><td>review-required</td></tr>
+<tr id="RS-0013"><th scope="row"><a href="#h-RS-0013">RS-0013</a></th><td><span class="sev sev-medium">medium</span></td><td>RS-MOT-001</td><td>Animations or transitions exist but no prefers-reduced-motion handling</td><td><code>styles.css:6</code></td><td>confirmed</td></tr>
+<tr id="RS-0014"><th scope="row"><a href="#h-RS-0014">RS-0014</a></th><td><span class="sev sev-medium">medium</span></td><td>RS-RESP-002</td><td>Fixed width 1200px can overflow narrow viewports</td><td><code>styles.css:1</code></td><td>review-required</td></tr>
+<tr id="RS-0015"><th scope="row"><a href="#h-RS-0015">RS-0015</a></th><td><span class="sev sev-medium">medium</span></td><td>RS-RESP-003</td><td>No responsive CSS found (media/container queries, clamp, grid auto-fit, flex-wrap)</td><td><code>styles.css:1</code></td><td>review-required</td></tr>
+<tr id="RS-0016"><th scope="row"><a href="#h-RS-0016">RS-0016</a></th><td><span class="sev sev-low">low</span></td><td>RS-A11Y-009</td><td>Heading level skips from h1 to h3</td><td><code>index.html:10</code></td><td>review-required</td></tr>
+<tr id="RS-0017"><th scope="row"><a href="#h-RS-0017">RS-0017</a></th><td><span class="sev sev-low">low</span></td><td>RS-A11Y-015</td><td>No main landmark</td><td><code>index.html:8</code></td><td>review-required</td></tr>
+<tr id="RS-0018"><th scope="row"><a href="#h-RS-0018">RS-0018</a></th><td><span class="sev sev-low">low</span></td><td>RS-CONT-001</td><td>Vague link text &quot;click here&quot;</td><td><code>index.html:14</code></td><td>confirmed</td></tr>
+<tr id="RS-0019"><th scope="row"><a href="#h-RS-0019">RS-0019</a></th><td><span class="sev sev-low">low</span></td><td>RS-PERF-001</td><td>Image has no explicit width and height</td><td><code>index.html:11</code></td><td>review-required</td></tr>
+<tr id="RS-0020"><th scope="row"><a href="#h-RS-0020">RS-0020</a></th><td><span class="sev sev-low">low</span></td><td>RS-VIS-001</td><td>Very small text (10px)</td><td><code>styles.css:4</code></td><td>confirmed</td></tr>
+<tr id="RS-0021"><th scope="row"><a href="#h-RS-0021">RS-0021</a></th><td><span class="sev sev-info">info</span></td><td>RS-TRUST-001</td><td>Urgency or scarcity wording needs review</td><td><code>index.html:19</code></td><td>review-required</td></tr>
 </tbody></table></div>
 <h2>Details</h2>
 <article class="card" aria-labelledby="h-RS-0001">
