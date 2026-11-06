@@ -623,6 +623,394 @@ x
 
 **Result:** rule did not fire
 
+## RS-A11Y-001 (role=img with no name): Image has no alt attribute
+
+Category: accessibility. Default severity: high. Criterion: WCAG 1.1.1.
+
+**Failing input**
+
+```html
+/* index.html */
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>T</title>
+</head>
+<body>
+<main>
+<div role="img"></div>
+</main>
+</body>
+</html>
+```
+
+**Result:** `RS-0001` [high/confirmed] Element with role="img" has no accessible name at `index.html:10`
+
+**Passing input**
+
+```html
+/* index.html */
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>T</title>
+</head>
+<body>
+<main>
+<div role="img" aria-label="Sales chart"></div>
+</main>
+</body>
+</html>
+```
+
+**Result:** rule did not fire
+
+## RS-A11Y-013 (tailwind arbitrary hex pair): Text contrast below minimum (measured)
+
+Category: accessibility. Default severity: high. Criterion: WCAG 1.4.3.
+
+**Failing input**
+
+```tsx
+/* Card.tsx */
+export const Card = () => <p className="text-[#cccccc] bg-[#ffffff]">Price</p>;
+```
+
+**Result:** `RS-0001` [high/review-required] Text contrast 1.61:1 is below 4.5:1 (#cccccc on #ffffff) at `Card.tsx:1`
+
+**Passing input**
+
+```tsx
+/* Card.tsx */
+export const Card = () => <p className="text-[#1a1a1a] bg-[#ffffff]">Price</p>;
+```
+
+**Result:** rule did not fire
+
+## RS-A11Y-013 (jsx style object): Text contrast below minimum (measured)
+
+Category: accessibility. Default severity: high. Criterion: WCAG 1.4.3.
+
+**Failing input**
+
+```tsx
+/* Card.tsx */
+export const Card = () => <p style={{ color: "#cccccc", backgroundColor: "#ffffff" }}>Price</p>;
+```
+
+**Result:** `RS-0001` [high/review-required] Text contrast 1.61:1 is below 4.5:1 (#cccccc on #ffffff) at `Card.tsx:1`
+
+**Passing input**
+
+```tsx
+/* Card.tsx */
+export const Card = () => <p style={{ color: "#1a1a1a", backgroundColor: "#ffffff" }}>Price</p>;
+```
+
+**Result:** rule did not fire
+
+## RS-A11Y-016: Duplicate id
+
+Category: accessibility. Default severity: high. Criterion: WCAG 4.1.2, 1.3.1.
+
+**Failing input**
+
+```html
+/* index.html */
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>T</title>
+</head>
+<body>
+<main>
+<label for="a">One</label><input id="a"><input id="a">
+</main>
+</body>
+</html>
+```
+
+**Result:** `RS-0001` [high/confirmed] Duplicate id "a" at `index.html:10`
+
+**Passing input**
+
+```html
+/* index.html */
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>T</title>
+</head>
+<body>
+<main>
+<label for="a">One</label><input id="a"><input id="b">
+</main>
+</body>
+</html>
+```
+
+**Result:** rule did not fire
+
+## RS-A11Y-017: Frame has no title
+
+Category: accessibility. Default severity: high. Criterion: WCAG 4.1.2, 2.4.1.
+
+**Failing input**
+
+```html
+/* index.html */
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>T</title>
+</head>
+<body>
+<main>
+<iframe src="pay.html"></iframe>
+</main>
+</body>
+</html>
+```
+
+**Result:** `RS-0001` [high/confirmed] Frame has no title at `index.html:10`
+
+**Passing input**
+
+```html
+/* index.html */
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>T</title>
+</head>
+<body>
+<main>
+<iframe src="pay.html" title="Payment form"></iframe>
+</main>
+</body>
+</html>
+```
+
+**Result:** rule did not fire
+
+## RS-A11Y-018: Navigation with no skip link
+
+Category: accessibility. Default severity: medium. Criterion: WCAG 2.4.1.
+
+**Failing input**
+
+```html
+/* index.html */
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>T</title>
+</head>
+<body>
+<main>
+<nav><a href="/home">Home</a></nav>
+</main>
+</body>
+</html>
+```
+
+**Result:** `RS-0001` [medium/review-required] Navigation with no skip link at `index.html:10`
+
+**Passing input**
+
+```html
+/* index.html */
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>T</title>
+</head>
+<body>
+<main>
+<a href="#main">Skip to content</a><nav><a href="/home">Home</a></nav>
+</main>
+</body>
+</html>
+```
+
+**Result:** rule did not fire
+
+## RS-A11Y-019: Email or telephone field has no autocomplete
+
+Category: accessibility. Default severity: medium. Criterion: WCAG 1.3.5.
+
+**Failing input**
+
+```html
+/* index.html */
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>T</title>
+</head>
+<body>
+<main>
+<label for="e">Email</label><input id="e" type="email">
+</main>
+</body>
+</html>
+```
+
+**Result:** `RS-0001` [medium/review-required] email field has no autocomplete attribute at `index.html:10`
+
+**Passing input**
+
+```html
+/* index.html */
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>T</title>
+</head>
+<body>
+<main>
+<label for="e">Email</label><input id="e" type="email" autocomplete="email">
+</main>
+</body>
+</html>
+```
+
+**Result:** rule did not fire
+
+## RS-A11Y-020: Heading has no text
+
+Category: accessibility. Default severity: medium. Criterion: WCAG 2.4.6, 1.3.1.
+
+**Failing input**
+
+```html
+/* index.html */
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>T</title>
+</head>
+<body>
+<main>
+<h2></h2>
+</main>
+</body>
+</html>
+```
+
+**Result:** `RS-0001` [medium/review-required] Heading h2 has no text at `index.html:10`
+
+**Passing input**
+
+```html
+/* index.html */
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>T</title>
+</head>
+<body>
+<main>
+<h2>Featured</h2>
+</main>
+</body>
+</html>
+```
+
+**Result:** rule did not fire
+
+## RS-A11Y-021: Control border contrast below 3:1
+
+Category: accessibility. Default severity: medium. Criterion: WCAG 1.4.11.
+
+**Failing input**
+
+```css
+/* a.css */
+button { background: #ffffff; border: 1px solid #dddddd; color: #1a1a1a; }
+```
+
+**Result:** `RS-0001` [medium/review-required] Control border contrast 1.36:1 is below 3:1 at `a.css:1`
+
+**Passing input**
+
+```css
+/* a.css */
+button { background: #ffffff; border: 1px solid #767676; color: #1a1a1a; }
+```
+
+**Result:** rule did not fire
+
+## RS-A11Y-022: Empty lang on a part of the page
+
+Category: accessibility. Default severity: medium. Criterion: WCAG 3.1.2.
+
+**Failing input**
+
+```html
+/* index.html */
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>T</title>
+</head>
+<body>
+<main>
+<p lang="">Bonjour</p>
+</main>
+</body>
+</html>
+```
+
+**Result:** `RS-0001` [medium/confirmed] <p> has an empty lang attribute at `index.html:10`
+
+**Passing input**
+
+```html
+/* index.html */
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>T</title>
+</head>
+<body>
+<main>
+<p lang="fr">Bonjour</p>
+</main>
+</body>
+</html>
+```
+
+**Result:** rule did not fire
+
 ## RS-RESP-001: No viewport meta tag
 
 Category: responsive. Default severity: medium. Criterion: WCAG 1.4.10.
@@ -1198,6 +1586,8 @@ These inputs look suspicious but are correct. The rule must stay silent.
 - `RS-A11Y-004`: button with text. Result: silent (correct)
 - `RS-A11Y-001`: img named by title is not reported (ACT 23a2a8 passed example). Result: silent (correct)
 - `RS-A11Y-001`: img hidden from the accessibility tree. Result: silent (correct)
+- `RS-A11Y-001`: role=img hidden from the accessibility tree. Result: silent (correct)
+- `RS-A11Y-016`: id inside a code sample. Result: silent (correct)
 - `RS-A11Y-004`: hidden button is not rendered. Result: silent (correct)
 - `RS-A11Y-013`: text-shadow changes effective contrast, so the pair is not judged. Result: silent (correct)
 - `RS-A11Y-004`: name supplied at runtime by data-l10n-id. Result: silent (correct)

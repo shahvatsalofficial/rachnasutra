@@ -107,7 +107,7 @@ Each finding has: ID (`RS-0001` style), rule ID, category, title, severity, conf
 | JSON, Markdown, HTML reports validate and show coverage | Met: JSON validated against the contract in tests; coverage in every format |
 | Generated skill files are valid | Met: 13 of 13 pass `verify` |
 | No source changes or network use in default mode | Met: test asserts files unchanged and no reports directory created |
-| Unit, integration and security tests pass | Met: 111 of 111 on the recorded run |
+| Unit, integration and security tests pass | Met: 134 of 134 on the recorded run |
 | README, contributor docs, security policy, licence present | Met |
 | Accurate creator attribution, no fake endorsements | Met |
 | One example reproduces a finding and its fix verification | Met: fix verification test and user guide journey 2 |

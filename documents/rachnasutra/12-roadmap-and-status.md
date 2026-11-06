@@ -10,11 +10,11 @@
 | planned | No code yet |
 | not-available | The CLI states it is unavailable and exits with code 3 |
 
-## Capability status (0.2.0)
+## Capability status (0.5.0)
 
 | Area | Status | Notes |
 |---|---|---|
-| Static audit CLI, 26 rules | implemented | Tests and fixtures |
+| Static audit CLI, 33 rules | implemented | Tests and fixtures. Includes duplicate id, frame title, skip link, email/tel autocomplete, empty heading, non-text border contrast, empty lang, `role="img"`, Tailwind arbitrary hex and JSX style colours |
 | Measured colour contrast | implemented | Literal values only |
 | JSON, Markdown, HTML, SARIF reports | implemented | Escaping tested |
 | Report contract and validation | implemented | `schemas/report.schema.json`, `validateReport` |
@@ -29,11 +29,13 @@
 | axe-core integration | not-available | Planned |
 | Lighthouse and Core Web Vitals | not-available | Planned |
 | Screenshots and visual baselines | not-available | Planned |
-| Container image | planned | CLI already headless |
+| Container image | implemented | `Dockerfile`, static CLI, no browser |
 | API or local-model provider modes | planned | Skills use the host model today |
-| Report viewer dashboard | partial | Self-contained HTML report only |
-| Gujarati README | planned | |
-| Rule examples and per-rule tests | implemented | 26 rules, 111 tests |
+| Report viewer dashboard | partial | One HTML report per run, plus `history` counts |
+| Rule examples and per-rule tests | implemented | 33 rules, 134 tests |
+| `history` command | implemented | Markdown and HTML counts of saved JSON reports |
+| Dockerfile | implemented | Static CLI only |
+| Gujarati README | implemented | `README.gu.md` |
 | ACT, axe-core and real-world validation | implemented | see [Validation and benchmarks](16-validation-and-benchmarks.md) |
 | Live host smoke tests | not done | protocol in [Host smoke tests](17-host-smoke-tests.md) |
 | Blind re-test on new repositories | planned | |

@@ -340,3 +340,35 @@ export function renderSarif(r: AuditResult): unknown {
     }],
   };
 }
+
+export interface HistoryRow {
+  file: string;
+  generatedAt: string;
+  total: number;
+  high: number;
+}
+
+/** Counts only. This is not a rendered visual diff. */
+export function renderHistoryMarkdown(rows: HistoryRow[]): string {
+  const lines = [
+    '# Audit history',
+    '',
+    'Each row is one saved JSON report. Counts are findings in that file. This is not a browser or screenshot comparison.',
+    '',
+    '| Report | Generated | Findings | High or critical |',
+    '|---|---|---|---|',
+    ...rows.map((r) => `| ${r.file} | ${r.generatedAt} | ${r.total} | ${r.high} |`),
+    '',
+  ];
+  if (rows.length >= 2) {
+    const a = rows[rows.length - 2];
+    const b = rows[rows.length - 1];
+    lines.push(`Latest change: ${a.file} had ${a.total} findings, ${b.file} has ${b.total}.`, '');
+  }
+  return lines.join('\n');
+}
+
+export function renderHistoryHtml(rows: HistoryRow[]): string {
+  const body = rows.map((r) => `<tr><td>${escHtml(r.file)}</td><td>${escHtml(r.generatedAt)}</td><td>${r.total}</td><td>${r.high}</td></tr>`).join('');
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Audit history</title></head><body><main><h1>Audit history</h1><p>Saved JSON reports only. No browser and no screenshot.</p><table><thead><tr><th>Report</th><th>Generated</th><th>Findings</th><th>High or critical</th></tr></thead><tbody>${body}</tbody></table></main></body></html>\n`;
+}

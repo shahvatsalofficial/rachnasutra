@@ -82,7 +82,8 @@ export interface TokenInventory {
 export interface AuditConfig {
   exclude: string[];
   disableRules: string[];
-  failOn?: Severity;
+  /** `confirmed-critical` fails on confirmed high and confirmed critical. The name is historical. */
+  failOn?: Severity | 'confirmed-critical';
   maxFiles?: number;
   imageBudgetKb?: number;
 }

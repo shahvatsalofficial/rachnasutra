@@ -109,6 +109,41 @@ function mk(
   return { ...base, file: doc.file.rel, line, evidence: [{ path: doc.file.rel, line, excerpt: excerpt(lineText(doc.text, line)) }] };
 }
 
+/** Tailwind arbitrary hex utilities and JSX style objects. Named palettes and the cascade are not resolved. */
+function reportUtilityContrast(d: Doc, t: string, push: (h: RawHit) => void): void {
+  const judge = (index: number, fgRaw: string, bgRaw: string, where: string): void => {
+    const f = parseColor(fgRaw);
+    const g = parseColor(bgRaw);
+    if (!f || !g) return;
+    const ratio = contrastRatio(f, g);
+    if (ratio >= 4.5) return;
+    push(mk(d, index, {
+      rule: 'RS-A11Y-013', category: 'accessibility',
+      title: `Text contrast ${ratio.toFixed(2)}:1 is below 4.5:1 (${fgRaw} on ${bgRaw})`,
+      severity: ratio < 3 ? 'high' : 'medium', confidence: 'medium',
+      criterion: 'WCAG 2.2: 1.4.3 Contrast (Minimum)',
+      user_impact: 'Low-vision users and anyone in bright light may be unable to read this text.',
+      recommended_fix: 'Darken the text or lighten the background until the ratio is at least 4.5:1.',
+      verification: 'Re-run the audit and check the rendered pair.',
+      limitations: where,
+    }));
+  };
+  for (const m of t.matchAll(/\b(?:class|className)\s*=\s*(?:"([^"]*)"|'([^']*)'|\{`([^`]*)`\})/g)) {
+    const cls = m[1] ?? m[2] ?? m[3] ?? '';
+    const fg = /(?:^|\s)text-\[(#[0-9a-fA-F]{3,6})\]/.exec(cls);
+    const bg = /(?:^|\s)bg-\[(#[0-9a-fA-F]{3,6})\]/.exec(cls);
+    if (fg && bg) judge(m.index, fg[1], bg[1], 'Tailwind arbitrary hex utilities on one class string. Named colours, opacity modifiers and the cascade are not resolved.');
+  }
+  for (const m of t.matchAll(/\bstyle=\{\{([\s\S]*?)\}\}/g)) {
+    if (/\.\.\./.test(m[1])) continue;
+    const fg = /(?:^|[,{])\s*color\s*:\s*['"]([^'"]+)['"]/.exec(m[1]);
+    const bg = /(?:^|[,{])\s*background(?:Color)?\s*:\s*['"]([^'"]+)['"]/.exec(m[1]);
+    if (fg && bg && !/textShadow|opacity|gradient/i.test(m[1])) {
+      judge(m.index, fg[1], bg[1], 'JSX style object with two literal colours. Theme variables and spreads are not resolved.');
+    }
+  }
+}
+
 /** Run all deterministic rules. Output order is stable: caller sorts. */
 export function runRules(ctx: RuleCtx): RawHit[] {
   const hits: RawHit[] = [];
@@ -159,6 +194,111 @@ export function runRules(ctx: RuleCtx): RawHit[] {
         }));
       }
     }
+
+    for (const m of t.matchAll(tagRe('div|span|svg|i|figure'))) {
+      if (!/\brole\s*=\s*["']img["']/i.test(m[2]) || hasSpread(m[2]) || isHidden(m[2])) continue;
+      const named = nonEmptyAttr(m[2], 'aria-label') || nonEmptyAttr(m[2], 'aria-labelledby') || nonEmptyAttr(m[2], 'title') || nonEmptyAttr(m[2], 'alt');
+      const after = t.slice(m.index, m.index + 600);
+      const close = after.search(new RegExp(`</${m[1]}>`, 'i'));
+      const chunk = close > 0 ? after.slice(0, close) : after.slice(0, 200);
+      const inner = contentName(chunk);
+      if (!named && inner !== 'named' && inner !== 'unknown') {
+        push(mk(d, m.index, {
+          rule: 'RS-A11Y-001', category: 'accessibility', title: 'Element with role="img" has no accessible name', severity: 'high', confidence: 'high',
+          criterion: 'WCAG 2.2: 1.1.1 Non-text Content',
+          user_impact: 'A graphic exposed as an image is announced with no description.',
+          recommended_fix: 'Add aria-label, or aria-hidden="true" when the graphic is decorative.',
+          verification: 'Re-run the audit and check the accessibility tree.',
+          limitations: 'A name computed from a distant aria-labelledby target is not resolved.',
+        }));
+      }
+    }
+
+    const ids = [...t.matchAll(/\bid\s*=\s*["']([^"']+)["']/gi)].filter((m) => !insideCode(t, m.index) && !TEMPLATED.test(m[1]));
+    const seenIds = new Map<string, number>();
+    for (const m of ids) {
+      const id = m[1];
+      const prev = seenIds.get(id);
+      if (prev !== undefined) {
+        push(mk(d, m.index, {
+          rule: 'RS-A11Y-016', category: 'accessibility', title: `Duplicate id "${id}"`, severity: 'high', confidence: 'high',
+          criterion: 'WCAG 2.2: 4.1.1 Parsing (obsolete) and 1.3.1, 4.1.2',
+          user_impact: 'Labels, skip links and aria-labelledby can point at the wrong element.',
+          recommended_fix: 'Give every id in the file a unique value.',
+          verification: 'Re-run the audit. In the browser, document.querySelectorAll("[id]") should not repeat a value in this file.',
+          limitations: 'The same id in two files can still collide after a template include. Only this file is checked.',
+        }));
+      } else seenIds.set(id, m.index);
+    }
+
+    for (const m of t.matchAll(tagRe('iframe'))) {
+      if (hasSpread(m[2]) || isHidden(m[2])) continue;
+      if (!nonEmptyAttr(m[2], 'title') && !nonEmptyAttr(m[2], 'aria-label') && !nonEmptyAttr(m[2], 'aria-labelledby')) {
+        push(mk(d, m.index, {
+          rule: 'RS-A11Y-017', category: 'accessibility', title: 'Frame has no title', severity: 'high', confidence: 'high',
+          criterion: 'WCAG 2.2: 2.4.1 Bypass Blocks, 4.1.2 Name, Role, Value',
+          user_impact: 'Screen-reader users hear an unnamed frame and cannot tell whether to enter it.',
+          recommended_fix: 'Add a title that says what the frame contains, for example title="Payment form".',
+          verification: 'Re-run the audit and listen to the frame in a screen reader.',
+          limitations: 'A title set by script after load is not visible here.',
+        }));
+      }
+    }
+
+    if (d.isHtmlDoc && /<nav\b/i.test(t) && !insideCode(t, t.search(/<nav\b/i)) && !/href\s*=\s*["']#[^"']+["']/.test(t)) {
+      push(mk(d, Math.max(0, t.search(/<nav\b/i)), {
+        rule: 'RS-A11Y-018', category: 'accessibility', title: 'Navigation with no skip link', severity: 'medium', confidence: 'medium',
+        criterion: 'WCAG 2.2: 2.4.1 Bypass Blocks',
+        user_impact: 'Keyboard users must tab through the whole navigation on every page.',
+        recommended_fix: 'Add a skip link as the first focusable control, for example <a href="#main">Skip to content</a>, and a matching id on <main>.',
+        verification: 'Tab once from the top of the page. The skip link should appear and move focus to the main content.',
+        limitations: 'A skip link in a shared layout file is not visible in this file. Any in-page href counts as a possible skip target.',
+      }));
+    }
+
+    for (const m of t.matchAll(tagRe('input'))) {
+      if (hasSpread(m[2]) || isHidden(m[2])) continue;
+      const type = (attrVal(m[2], 'type') ?? 'text').toLowerCase();
+      if (!['email', 'tel'].includes(type)) continue;
+      if (hasAttr(m[2], 'autocomplete')) continue;
+      push(mk(d, m.index, {
+        rule: 'RS-A11Y-019', category: 'accessibility', title: `${type} field has no autocomplete attribute`, severity: 'medium', confidence: 'medium',
+        criterion: 'WCAG 2.2: 1.3.5 Identify Input Purpose',
+        user_impact: 'Browsers and password managers cannot fill the field, and users retype personal data.',
+        recommended_fix: type === 'email' ? 'Add autocomplete="email".' : 'Add autocomplete="tel".',
+        verification: 'Re-run the audit, then use the browser autofill menu on the field.',
+        limitations: 'Only type=email and type=tel are checked. Other personal fields need a human look.',
+      }));
+    }
+
+    for (const m of t.matchAll(/<h([1-6])\b([^>]*)>([\s\S]*?)<\/h\1>/gi)) {
+      if (insideCode(t, m.index) || hasSpread(m[2])) continue;
+      const name = contentName(m[3]);
+      if (name === 'empty' || name === 'no-text') {
+        push(mk(d, m.index, {
+          rule: 'RS-A11Y-020', category: 'accessibility', title: `Heading h${m[1]} has no text`, severity: 'medium', confidence: 'medium',
+          criterion: 'WCAG 2.2: 1.3.1 Info and Relationships, 2.4.6 Headings and Labels',
+          user_impact: 'The heading outline contains an empty entry, so navigation by heading fails.',
+          recommended_fix: 'Put the visible heading text inside the element, or remove the heading.',
+          verification: 'Re-run the audit and open the browser heading outline.',
+          limitations: 'Text injected by script or a child component is not visible.',
+        }));
+      }
+    }
+
+    for (const m of t.matchAll(/<(?!html\b)([a-zA-Z][\w:-]*)\b([^>]*?)\slang\s*=\s*(["'])\s*\3/gi)) {
+      if (insideCode(t, m.index)) continue;
+      push(mk(d, m.index, {
+        rule: 'RS-A11Y-022', category: 'accessibility', title: `<${m[1]}> has an empty lang attribute`, severity: 'medium', confidence: 'high',
+        criterion: 'WCAG 2.2: 3.1.2 Language of Parts',
+        user_impact: 'Assistive technology may pronounce that passage with the wrong language.',
+        recommended_fix: 'Set lang to a real language tag, such as lang="fr", or remove the attribute.',
+        verification: 'Re-run the audit.',
+        limitations: 'The page language (the html element) is rule RS-A11Y-002. This rule only flags an empty lang on other elements.',
+      }));
+    }
+
+    reportUtilityContrast(d, t, push);
 
     if (d.isHtmlDoc) {
       for (const m of t.matchAll(/<html\b([^>]*)>/gi)) {
@@ -445,6 +585,27 @@ export function runRules(ctx: RuleCtx): RawHit[] {
         }
       }
 
+      const borderPaint = /(?:^|[;\s])border-color\s*:\s*(#[0-9a-fA-F]{3,6}\b|white|black|red|gray|grey|silver)\b|border\s*:\s*[^;{}]*?\s(#[0-9a-fA-F]{3,6}\b|white|black|red|gray|grey|silver)\b/.exec(body);
+      if (bg && borderPaint && /button|input|select|textarea|(^|[\s.#])a($|[\s:.,])|btn/i.test(selector) && !/text-shadow|opacity|gradient|filter|mix-blend/i.test(body)) {
+        const edge = parseColor(borderPaint[1] ?? borderPaint[2]);
+        const fill = parseColor(bg[1]);
+        if (edge && fill) {
+          const ratio = contrastRatio(edge, fill);
+          if (ratio < 3) {
+            hit(bodyAt + body.search(/border/), {
+              rule: 'RS-A11Y-021', category: 'accessibility',
+              title: `Control border contrast ${ratio.toFixed(2)}:1 is below 3:1`,
+              severity: 'medium', confidence: 'medium',
+              criterion: 'WCAG 2.2: 1.4.11 Non-text Contrast',
+              user_impact: 'The edge of the control can disappear against the background for low-vision users.',
+              recommended_fix: 'Darken the border or change the background until the ratio is at least 3:1.',
+              verification: 'Re-run the audit and check the rendered control with a contrast tool.',
+              limitations: 'Only a literal border and background in the same rule are measured. Focus rings and icons are not.',
+            });
+          }
+        }
+      }
+
       // focus outline removal
       if (/outline\s*:\s*(none|0)\b|outline-width\s*:\s*0/.test(body) && !/:focus-visible/.test(selector) && !/:not\(:focus/.test(selector)
         && (/:focus/.test(selector) || !/:active|:hover|:disabled|::|:before|:after/.test(selector))) {
@@ -608,6 +769,13 @@ export const RULE_CATALOG: RuleDoc[] = [
   { id: 'RS-A11Y-013', title: 'Text contrast below minimum (measured)', category: 'accessibility', severity: 'high', criterion: 'WCAG 1.4.3' },
   { id: 'RS-A11Y-014', title: 'Interactive target below 24x24 CSS px', category: 'accessibility', severity: 'medium', criterion: 'WCAG 2.5.8' },
   { id: 'RS-A11Y-015', title: 'No main landmark', category: 'accessibility', severity: 'low', criterion: 'WCAG 1.3.1, 2.4.1' },
+  { id: 'RS-A11Y-016', title: 'Duplicate id', category: 'accessibility', severity: 'high', criterion: 'WCAG 4.1.2, 1.3.1' },
+  { id: 'RS-A11Y-017', title: 'Frame has no title', category: 'accessibility', severity: 'high', criterion: 'WCAG 4.1.2, 2.4.1' },
+  { id: 'RS-A11Y-018', title: 'Navigation with no skip link', category: 'accessibility', severity: 'medium', criterion: 'WCAG 2.4.1' },
+  { id: 'RS-A11Y-019', title: 'Email or telephone field has no autocomplete', category: 'accessibility', severity: 'medium', criterion: 'WCAG 1.3.5' },
+  { id: 'RS-A11Y-020', title: 'Heading has no text', category: 'accessibility', severity: 'medium', criterion: 'WCAG 2.4.6, 1.3.1' },
+  { id: 'RS-A11Y-021', title: 'Control border contrast below 3:1', category: 'accessibility', severity: 'medium', criterion: 'WCAG 1.4.11' },
+  { id: 'RS-A11Y-022', title: 'Empty lang on a part of the page', category: 'accessibility', severity: 'medium', criterion: 'WCAG 3.1.2' },
   { id: 'RS-RESP-001', title: 'No viewport meta tag', category: 'responsive', severity: 'medium', criterion: 'WCAG 1.4.10' },
   { id: 'RS-RESP-002', title: 'Fixed width can overflow narrow viewports', category: 'responsive', severity: 'medium', criterion: 'WCAG 1.4.10' },
   { id: 'RS-RESP-003', title: 'No responsive CSS found', category: 'responsive', severity: 'medium' },

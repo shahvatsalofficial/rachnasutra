@@ -2,6 +2,11 @@
 
 Status of each item is tracked in [docs/status.md](docs/status.md). Dates are intentionally absent; items ship when tested.
 
+## Done in 0.5.0
+- 33 static rules, including `role="img"`, duplicate ids, frame titles, skip links, email/tel autocomplete, empty headings, non-text border contrast, empty `lang`, Tailwind arbitrary hex and JSX style colours
+- `history` counts for saved JSON reports, a static-CLI Dockerfile, a short Gujarati README, and doctor NOTE lines for audits that do not exist
+- 134 tests
+
 ## Done in 0.2.0
 - A failing and a passing test for every rule (111 tests); generated rule examples
 - Validation against W3C ACT test cases, axe-core and 12 real repositories, with a before/after case study; rule defects found by that work were fixed

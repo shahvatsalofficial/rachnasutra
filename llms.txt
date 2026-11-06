@@ -13,7 +13,7 @@
 - [Architecture](documents/rachnasutra/03-architecture.md): components, data flow, design decisions
 - [Technical reference](documents/rachnasutra/04-technical-reference.md): data model, algorithms, exit codes
 - [User guide](documents/rachnasutra/05-user-guide.md): install, run, fix, verify, CI
-- [Audit rules reference](documents/rachnasutra/06-audit-rules-reference.md): all 26 rules with limits
+- [Audit rules reference](documents/rachnasutra/06-audit-rules-reference.md): all 33 rules with limits
 - [Skills and agents](documents/rachnasutra/07-skills-and-agents.md): the 13 skills and orchestration
 - [Security and privacy](documents/rachnasutra/08-security-and-privacy.md): threat model and controls
 - [Legal and compliance](documents/rachnasutra/09-legal-and-compliance.md): licence, disclaimers, accessibility-law context
@@ -46,6 +46,6 @@
 - Read-only by default; no network, telemetry or model calls from the CLI; secrets redacted in reports.
 - Static analysis only in 0.2.0. Browser, screenshot, axe and Lighthouse audits are not available yet and exit with code 3.
 - Not a WCAG, ADA or other conformance certification. No quality score is produced.
-- 111 automated tests pass (Node 20, 22, 24 and 26); sample runs and raw outputs are in documents/rachnasutra/evidence/.
+- 134 automated tests pass; sample runs and raw outputs are in documents/rachnasutra/evidence/.
 - Validated against W3C ACT test cases (71% precision, 65% recall after fixes), compared with axe-core (which is more accurate), and audited on 12 public repositories; results and weaknesses are published in benchmarks/results/.
 - AI IDE skill loading has not yet been verified in live hosts.

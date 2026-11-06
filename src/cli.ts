@@ -4,7 +4,7 @@ import path from 'node:path';
 import { HOSTS, detectHosts, doctor, install, packageRoot, planInstall, uninstall } from './adapters.js';
 import { CONFIG_FILE, SEVERITY_ORDER, loadConfig, runAudit, validateConfig } from './audit.js';
 import { exists } from './fsutil.js';
-import { renderFixPlanHtml, renderFixPlanMarkdown, renderHtml, renderJson, renderMarkdown, renderSarif, renderTokensHtml, renderTokensMarkdown, renderVerifyHtml, renderVerifyMarkdown } from './report.js';
+import { renderFixPlanHtml, renderFixPlanMarkdown, renderHistoryHtml, renderHistoryMarkdown, renderHtml, renderJson, renderMarkdown, renderSarif, renderTokensHtml, renderTokensMarkdown, renderVerifyHtml, renderVerifyMarkdown, type HistoryRow } from './report.js';
 import type { AuditResult, Severity } from './types.js';
 import { compareToReport, verifyPackage } from './verify.js';
 
@@ -32,6 +32,7 @@ Deterministic commands (no AI, no network, read-only unless noted):
   verify --report <file> [path]  re-audit; writes verify.md and verify.html next to the JSON report
   export --format sarif [path]  print SARIF 2.1.0
   ci [path]                   audit with CI exit codes (--fail-on confirmed-critical|<severity>)
+  history [dir]               compare saved JSON reports; writes history.md and history.html
   config validate [path]      validate ${CONFIG_FILE}
   install | uninstall         aliases of skills install | uninstall
 
@@ -172,12 +173,15 @@ async function main(): Promise<number> {
 
     case 'doctor': {
       const res = await doctor(target);
-      res.push({ id: 'capability:static-audit', ok: true, message: 'available' });
-      res.push({ id: 'capability:browser-audit', ok: true, message: 'not-available (planned); not counted as failure' });
-      res.push({ id: 'capability:visual-review', ok: true, message: 'not-available (planned); not counted as failure' });
-      res.push({ id: 'model-requirement', ok: true, message: 'none for the CLI; skills use your IDE model' });
-      write(json ? JSON.stringify(res, null, 2) : res.map((r) => `${r.ok ? 'OK  ' : 'FAIL'} ${r.id}: ${r.message}${r.fix ? `\n     fix: ${r.fix}` : ''}`).join('\n'));
-      return res.every((r) => r.ok) ? EXIT.ok : EXIT.findings;
+      const rows: { id: string; ok: boolean; level: 'check' | 'note'; message: string; fix?: string }[] = [
+        ...res.map((r) => ({ ...r, level: 'check' as const })),
+        { id: 'capability:static-audit', ok: true, level: 'check', message: 'available' },
+        { id: 'capability:browser-audit', ok: true, level: 'note', message: 'not available in this version. No browser is launched. Not a pass.' },
+        { id: 'capability:visual-review', ok: true, level: 'note', message: 'not available in this version. No screenshot is taken. Not a pass.' },
+        { id: 'model-requirement', ok: true, level: 'note', message: 'none for the CLI. Skills use the IDE model. No host has been smoke-tested.' },
+      ];
+      write(json ? JSON.stringify(rows, null, 2) : rows.map((r) => `${r.level === 'note' ? 'NOTE' : r.ok ? 'OK  ' : 'FAIL'} ${r.id}: ${r.message}${r.fix ? `\n     fix: ${r.fix}` : ''}`).join('\n'));
+      return rows.every((r) => r.ok) ? EXIT.ok : EXIT.findings;
     }
 
     case 'skills':
@@ -309,6 +313,40 @@ async function main(): Promise<number> {
       const checks = await verifyPackage();
       write(json ? JSON.stringify(checks, null, 2) : checks.map((c) => `${c.ok ? 'PASS' : 'FAIL'} ${c.id}: ${c.message}`).join('\n'));
       return checks.every((c) => c.ok) ? EXIT.ok : EXIT.verifyFailed;
+    }
+
+    case 'history': {
+      const dir = target;
+      let names: string[] = [];
+      try {
+        names = (await fs.readdir(dir)).filter((n) => n.endsWith('.json')).sort();
+      } catch {
+        process.stderr.write(`No directory ${dir}\n`);
+        return EXIT.usage;
+      }
+      const rows: HistoryRow[] = [];
+      for (const name of names) {
+        try {
+          const data = JSON.parse(await fs.readFile(path.join(dir, name), 'utf8')) as { generatedAt?: string; findings?: { severity?: string }[] };
+          if (!Array.isArray(data.findings)) continue;
+          rows.push({
+            file: name,
+            generatedAt: data.generatedAt ?? '',
+            total: data.findings.length,
+            high: data.findings.filter((f) => f.severity === 'high' || f.severity === 'critical').length,
+          });
+        } catch {
+          // skip JSON that is not an audit report
+        }
+      }
+      rows.sort((a, b) => a.generatedAt.localeCompare(b.generatedAt) || a.file.localeCompare(b.file));
+      if (!rows.length) {
+        process.stderr.write(`No audit JSON in ${dir}\n`);
+        return EXIT.usage;
+      }
+      const out = args.flags.out ? path.resolve(String(args.flags.out)) : dir;
+      await writeReadable(out, 'history', renderHistoryMarkdown(rows), renderHistoryHtml(rows), dry);
+      return EXIT.ok;
     }
 
     case 'config': {

@@ -35,6 +35,8 @@ jobs:
       - run: npm run typecheck
       - run: npm test
       - run: npm run verify
+      - name: Generated HTML docs match the Markdown
+        run: npm run docs && git diff --exit-code -- documents/rachnasutra/html
       - name: Good fixture must have no findings
         run: node dist/cli.js audit fixtures/good-ui --no-report --fail-on info
       - name: Broken fixture must fail the gate

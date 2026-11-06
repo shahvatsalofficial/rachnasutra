@@ -8,7 +8,7 @@
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 ![Node](https://img.shields.io/badge/node-%3E%3D20-brightgreen)
 ![Runtime dependencies](https://img.shields.io/badge/runtime%20dependencies-0-brightgreen)
-![Tests](https://img.shields.io/badge/tests-111%20passing-brightgreen)
+![Tests](https://img.shields.io/badge/tests-134%20passing-brightgreen)
 
 **Quick links:** [Live docs](https://shahvatsalofficial.github.io/rachnasutra/) | [Documentation](documents/rachnasutra/00-overview.md) | [Validation](documents/rachnasutra/16-validation-and-benchmarks.md) | [Sample report](samples/broken-ui/latest.md) | [Test evidence](documents/rachnasutra/10-testing-and-evidence.md) | [Rules](documents/rachnasutra/06-audit-rules-reference.md) | [Legal and limits](documents/rachnasutra/09-legal-and-compliance.md)
 
@@ -118,8 +118,8 @@ Everything below is reproducible from this repository.
 
 | Evidence | Result | Where |
 |---|---|---|
-| Automated tests | **111 of 111 passing** locally on Node 20, 22, 24 and 26 (Windows 11). Blocking CI is Windows and Linux on Node 20, 22, 24 and 26. macOS is not in CI: GitHub cancels those jobs before a runner starts | [test-results.txt](documents/rachnasutra/evidence/test-results.txt) |
-| Every rule tested both ways | A failing and a passing input for all 26 rules, plus false-positive guards; the same inputs generate the docs | [rule examples](documents/rachnasutra/15-rule-examples.md) |
+| Automated tests | **134 of 134 passing** locally on Node 24 (this machine). Blocking CI is Windows and Linux on Node 20, 22, 24 and 26. macOS is not in CI: GitHub cancels those jobs before a runner starts | [test-results.txt](documents/rachnasutra/evidence/test-results.txt) |
+| Every rule tested both ways | A failing and a passing input for all 33 rules, plus false-positive guards; the same inputs generate the docs | [rule examples](documents/rachnasutra/15-rule-examples.md) |
 | W3C ACT test cases | 154 cases, 10 rules: **71% precision, 65% recall** after fixing defects the benchmark found (first run: 53% and 38%) | [act.md](benchmarks/results/act.md) |
 | Comparison with axe-core | axe-core is **more accurate** (92% / 83% against 81% / 73% on 7 comparable rules); RachnaSutra works on source files, offline, in CI | [act-vs-axe.md](benchmarks/results/act-vs-axe.md) |
 | 12 public repositories | 1,360 files, 767 findings; manual check of 95 findings: **77% clearly real, 93% real or context-dependent**; 7 false-positive patterns found and fixed | [real-world.md](benchmarks/results/real-world.md) |
@@ -143,7 +143,9 @@ Scanned 2 file(s). 21 finding(s): 0 critical, 8 high, 7 medium, 5 low, 1 info.
 
 ## Documentation
 
-The full documentation set is live at <https://shahvatsalofficial.github.io/rachnasutra/>. The same pages are in [`documents/rachnasutra/`](documents/rachnasutra/00-overview.md) as Markdown and as a self-contained HTML site (`documents/rachnasutra/html/index.html` works offline, in light and dark themes, and on phones).
+The full documentation set is live at <https://shahvatsalofficial.github.io/rachnasutra/>. The same pages are in [`documents/rachnasutra/`](documents/rachnasutra/00-overview.md) as Markdown and as a self-contained HTML site (`documents/rachnasutra/html/index.html` works offline, in light and dark themes, and on phones). A short Gujarati overview is in [README.gu.md](README.gu.md).
+
+`rachnasutra history <dir>` writes `history.md` and `history.html` from saved JSON reports. It counts findings. It does not compare screenshots. A container for the static CLI is `Dockerfile` (`node:22-bookworm-slim`). It does not add a browser.
 
 | Audience | Document |
 |---|---|

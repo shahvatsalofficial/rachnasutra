@@ -4,9 +4,21 @@ All notable changes follow [Semantic Versioning](https://semver.org/). Report sc
 
 ## Unreleased
 
-- Documentation site is live at <https://shahvatsalofficial.github.io/rachnasutra/>. `.github/workflows/pages.yml` deploys `documents/rachnasutra/html/` on pushes to `main`.
-- Published on npm as `rachnasutra` (public, account `shahvatsal`). Install with `npx rachnasutra` or `npm install --save-dev rachnasutra`.
-- Removed `.github/workflows/macos.yml`. Run 42096695892 queued for 15 minutes on `macos-15`, then GitHub cancelled both jobs with zero steps. That red check was not a test failure. Linux and Windows CI stays the gate. No macOS result is claimed.
+## 0.5.0
+
+- Seven static rules: duplicate `id` (RS-A11Y-016), frame title (017), skip link when a page has `<nav>` (018), `autocomplete` on email and tel (019), empty heading (020), control border contrast under 3:1 (021), empty `lang` on part of a page (022). `role="img"` is now an image for RS-A11Y-001. RS-A11Y-013 also measures Tailwind `text-[#hex]` with `bg-[#hex]` and a JSX `style={{ color, background }}` object. Named Tailwind colours, CSS modules and styled-components are still not resolved.
+- `rachnasutra history <dir>` writes `history.md` and `history.html` with finding counts from saved JSON. It is not a screenshot comparison.
+- `doctor` prints NOTE for browser, visual review and host smoke tests. Those lines are not a pass. The command still exits 0 when the installed files are fine.
+- `failOn` in `rachnasutra.config.json` accepts `confirmed-critical`. That gate fails on confirmed high and confirmed critical. The name is historical.
+- Docs home title no longer repeats. `package.json` homepage is the live docs site. `package-lock.json` version matches the package.
+- `Dockerfile` runs the static CLI on Node 22. No browser is installed in the image.
+- Short Gujarati overview: `README.gu.md`.
+- CI rebuilds the HTML docs and fails if the committed HTML drifted.
+- Documentation site is live at <https://shahvatsalofficial.github.io/rachnasutra/>.
+- npm `rachnasutra@0.4.0` is still the registry `latest` until 0.5.0 is published. A placeholder `0.0.0-stage` is also still listed. A normal install gets 0.4.0 until publish.
+- macOS stays out of CI. GitHub cancelled the queued jobs with zero steps. No macOS result is claimed.
+
+Not in 0.5.0, because a fake result would be worse than a gap: live proof that Claude, Cursor, Codex, Copilot or Gemini loads the 13 skills; a browser pass; beating the published axe-core numbers; a blind re-label of the benchmarks; Windsurf and Kiro adapters (their skill paths are not confirmed).
 
 ## 0.4.0
 

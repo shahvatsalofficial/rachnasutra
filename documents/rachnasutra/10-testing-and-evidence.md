@@ -7,10 +7,10 @@ This page contains the recorded results of the automated test suite and sample r
 | Item | Value |
 |---|---|
 | Command | `npm test` (build, then `node --test test/`) |
-| Node.js | v24.15.0 (the same suite also passed 111 of 111 on Node v20.20.2 locally) |
+| Node.js | v24 on this machine. CI also runs Node 20, 22, 24 and 26 |
 | Operating system | Windows 11 (Git Bash) |
-| Tests | 111 |
-| Passed | 111 |
+| Tests | 134 |
+| Passed | 134 |
 | Failed | 0 |
 | Skipped | 0 |
 | Duration | about 14 seconds |
@@ -49,7 +49,7 @@ Typecheck (`npm run typecheck`) and package verification (`node dist/cli.js veri
 
 ## Per-rule tests (added in 0.2.0)
 
-Tests 23 to 111 come from `fixtures/rule-cases.mjs`: for each of the 26 rules a failing input (the rule must fire, with file and line evidence) and a passing input (the rule must stay silent), plus 21 guard inputs that look wrong but are correct, including regressions found by the benchmarks. The same inputs generate [Rule examples](15-rule-examples.md). Independent validation beyond the author's own fixtures is on [Validation and benchmarks](16-validation-and-benchmarks.md).
+The rule tests come from `fixtures/rule-cases.mjs`: for each of the 33 rules a failing input (the rule must fire, with file and line evidence) and a passing input (the rule must stay silent), plus guard inputs that look wrong but are correct, including regressions found by the benchmarks. The same inputs generate [Rule examples](15-rule-examples.md). Independent validation beyond the author's own fixtures is on [Validation and benchmarks](16-validation-and-benchmarks.md).
 
 ## Sample run 1: intentionally broken fixture
 
@@ -112,7 +112,7 @@ node dist/cli.js verify
 node dist/cli.js audit fixtures/intentionally-broken-ui --format json,md,html,sarif --out reports
 ```
 
-Expected: 111 tests pass; `verify` prints only PASS lines; four report files are written.
+Expected: 134 tests pass; `verify` prints only PASS lines; four report files are written.
 
 ## Coverage of the test suite
 

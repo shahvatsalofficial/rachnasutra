@@ -10,7 +10,7 @@ Each rule lists the trigger, the reason it matters, how to fix it, and what it c
 
 ### RS-A11Y-001 Image has no alt attribute
 
-- **Trigger:** an `<img>` with no `alt` attribute and no prop spread, that is not hidden (`aria-hidden`, `hidden`, `display:none`), not presentational (`role="presentation"` or `none`) and has no `title`, `aria-label` or `aria-labelledby`.
+- **Trigger:** an `<img>` with no `alt` attribute and no prop spread, that is not hidden (`aria-hidden`, `hidden`, `display:none`), not presentational (`role="presentation"` or `none`) and has no `title`, `aria-label` or `aria-labelledby`. The same rule fires for `role="img"` on a `div`, `span`, `svg`, `i` or `figure` when that element has no accessible name.
 - **Why:** screen-reader users lose the information the image carries (1.1.1).
 - **Fix:** add meaningful alt text, or `alt=""` if purely decorative.
 - **Cannot see:** whether alt text is meaningful. **Confidence:** high.
@@ -100,6 +100,51 @@ Each rule lists the trigger, the reason it matters, how to fix it, and what it c
 - **Trigger:** an HTML document (with `<html>`, `<head>` or a doctype) that has a `<body>` and no `<main>` or `role="main"`. Skipped when the body uses template placeholders such as `{{ content }}` or `<slot>`.
 - **Why:** users cannot skip to primary content (1.3.1, 2.4.1).
 - **Cannot see:** layouts that inject `<main>`. **Confidence:** medium (review).
+
+### RS-A11Y-016 Duplicate id
+
+- **Trigger:** the same `id` value appears twice in one file, outside code samples and template placeholders.
+- **Why:** labels and `aria-labelledby` can point at the wrong element (1.3.1, 4.1.2). **Confidence:** high.
+- **Cannot see:** the same id split across included files.
+
+### RS-A11Y-017 Frame has no title
+
+- **Trigger:** an `<iframe>` with no non-empty `title`, `aria-label` or `aria-labelledby`, and no prop spread.
+- **Why:** the frame is announced with no name (4.1.2, 2.4.1). **Confidence:** high.
+
+### RS-A11Y-018 Navigation with no skip link
+
+- **Trigger:** an HTML document contains `<nav>` and no `href` that starts with `#`.
+- **Why:** keyboard users cannot skip repeated navigation (2.4.1). **Confidence:** medium (review).
+- **Cannot see:** a skip link that lives in another layout file.
+
+### RS-A11Y-019 Email or telephone field has no autocomplete
+
+- **Trigger:** `input type="email"` or `type="tel"` with no `autocomplete` attribute.
+- **Why:** browsers cannot identify the input purpose (1.3.5). **Confidence:** medium (review).
+- **Cannot see:** other personal fields such as a name typed as `type="text"`.
+
+### RS-A11Y-020 Heading has no text
+
+- **Trigger:** an `h1`–`h6` whose content has no text and no accessible name.
+- **Why:** the heading outline has an empty entry (2.4.6, 1.3.1). **Confidence:** medium (review).
+
+### RS-A11Y-021 Control border contrast below 3:1
+
+- **Trigger:** a button, link or form-control selector with a literal border colour and a literal background in the same rule, ratio under 3:1.
+- **Why:** the control edge can disappear (1.4.11). **Confidence:** medium (review).
+- **Cannot see:** focus rings, icons, or colours from another rule.
+
+### RS-A11Y-022 Empty lang on a part of the page
+
+- **Trigger:** an element other than `<html>` has `lang=""`.
+- **Why:** that passage can be pronounced with the wrong language (3.1.2). **Confidence:** high.
+- **Cannot see:** a missing `lang` on a foreign phrase. Only an empty value is flagged. The page language is RS-A11Y-002.
+
+### RS-A11Y-013 also reads utility colours
+
+- **Trigger, in addition to CSS colour pairs:** one `class` or `className` with both `text-[#hex]` and `bg-[#hex]`, or a JSX `style={{ color, background }}` object with two literal colours.
+- **Cannot see:** Tailwind named colours (`text-gray-400`), opacity modifiers, CSS variables and spreads. **Confidence:** medium (review).
 
 ## Responsive
 

@@ -296,7 +296,9 @@ test('CLI: audit writes Markdown, HTML and JSON reports by default and never tou
 test('CLI: doctor and config validate', async () => {
   const d = cli('doctor', GOOD);
   assert.equal(d.status, 0);
-  assert.match(d.stdout, /capability:browser-audit/);
+  assert.match(d.stdout, /NOTE capability:browser-audit/);
+  assert.match(d.stdout, /NOTE capability:visual-review/);
+  assert.doesNotMatch(d.stdout, /OK\s+capability:browser-audit/);
   const r = await tmp('conf');
   await put(r, 'rachnasutra.config.json', '{"bogus":1}');
   assert.equal(cli('config', 'validate', r).status, 2);
@@ -311,4 +313,17 @@ test('CLI: failOn from config is the default gate; --fail-on overrides it', asyn
   await put(r, 'rachnasutra.config.json', '{"failOn":"high"}');
   assert.equal(cli('audit', r).status, 1);
   assert.equal(cli('audit', r, '--fail-on', 'critical').status, 0);
+  await put(r, 'rachnasutra.config.json', '{"failOn":"confirmed-critical"}');
+  assert.equal(cli('config', 'validate', r).status, 0);
+  assert.equal(cli('audit', r).status, 1);
+});
+
+test('CLI: history writes a Markdown and HTML count of saved JSON reports', async () => {
+  const r = await tmp('history');
+  await put(r, 'a.json', JSON.stringify({ generatedAt: '2026-11-01T00:00:00.000Z', findings: [{ severity: 'high' }] }));
+  await put(r, 'b.json', JSON.stringify({ generatedAt: '2026-11-02T00:00:00.000Z', findings: [] }));
+  const h = cli('history', r);
+  assert.equal(h.status, 0);
+  assert.match(await readFile(path.join(r, 'history.md'), 'utf8'), /a\.json/);
+  assert.match(await readFile(path.join(r, 'history.html'), 'utf8'), /<table>/);
 });

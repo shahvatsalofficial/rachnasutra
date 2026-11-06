@@ -1,10 +1,10 @@
 # Implementation status
 
-Last updated for 0.2.0. Statuses: **implemented** (code + test), **adapter** (files follow documented layout, not smoke-tested in the live host), **planned** (no code), **not-available** (CLI reports it honestly).
+Last updated for 0.5.0. Statuses: **implemented** (code + test), **adapter** (files follow documented layout, not smoke-tested in the live host), **planned** (no code), **not-available** (CLI reports it honestly).
 
 | Area | Status | Notes |
 |---|---|---|
-| Static audit CLI, 26 rules | implemented | 111 tests; failing and passing case per rule in `fixtures/rule-cases.mjs` |
+| Static audit CLI, 33 rules | implemented | 134 tests; failing and passing case per rule in `fixtures/rule-cases.mjs` |
 | Validation: ACT, axe-core, 12 real repositories, case study | implemented | `benchmarks/`, `documents/rachnasutra/16-validation-and-benchmarks.md` |
 | Live host smoke tests | not done | `documents/rachnasutra/17-host-smoke-tests.md` |
 | Measured contrast (literal CSS pairs, inline styles) | implemented | cascade, gradients, images not resolved |
@@ -19,6 +19,13 @@ Last updated for 0.2.0. Statuses: **implemented** (code + test), **adapter** (fi
 | Windsurf, Kiro, VS Code-specific adapters | planned | use generic Agent Skills copy |
 | Browser audit (Playwright), axe-core, Lighthouse | planned | CLI exits 3 with a message |
 | Screenshot capture, visual baseline/compare | planned | CLI exits 3 with a message |
-| Report viewer dashboard | partial | self-contained accessible HTML report only |
-| Dockerfile / server mode | planned | CLI already runs headless with JSON output and exit codes |
+| `history` over saved JSON reports | implemented | Counts only. Not a screenshot diff |
+| Doctor lines for browser and visual | implemented | Printed as NOTE, not OK. Exit code stays 0 |
+| `failOn: confirmed-critical` in config | implemented | Means confirmed high or confirmed critical. The name is historical |
+| Docs page title | implemented | No longer repeats "RachnaSutra AI Documentation" |
+| Dockerfile | implemented | `node:22-bookworm-slim`, CLI entrypoint. Not a browser image |
+| Gujarati README | implemented | `README.gu.md`, short. Full docs stay English |
+| Tailwind named colours, CSS modules, styled-components | planned | Arbitrary `text-[#hex]` / `bg-[#hex]` and JSX style objects are implemented on RS-A11Y-013 |
+| Report viewer dashboard | partial | self-contained HTML report, plus `history` counts |
+| Server mode | planned | The Dockerfile runs the CLI. There is no long-running server |
 | Spec folders (`packages/`, `workflows/`, `rules/`, `adapters/`) | deliberately not created | single-package layout until needed; no empty modules |

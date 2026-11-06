@@ -155,10 +155,10 @@ function page(d, idx) {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${esc(d.title)} - RachnaSutra AI Documentation</title>
+<title>${esc(d.title.includes('RachnaSutra') ? d.title : `${d.title} - RachnaSutra AI`)}</title>
 <meta name="description" content="${esc(d.desc)}">
 <meta name="author" content="Vatsal Shah">
-<meta property="og:title" content="${esc(d.title)} - RachnaSutra AI">
+<meta property="og:title" content="${esc(d.title.includes('RachnaSutra') ? d.title : `${d.title} - RachnaSutra AI`)}">
 <meta property="og:description" content="${esc(d.desc)}">
 <meta property="og:type" content="article">
 <link rel="canonical" href="${d === docs[0] ? `${SITE}/` : `${SITE}/${d.out}`}">

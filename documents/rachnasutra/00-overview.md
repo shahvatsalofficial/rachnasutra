@@ -2,7 +2,7 @@
 
 RachnaSutra AI is an open-source UI/UX design engineering and auditing agent. It ships 13 portable Agent Skills, led by **RachnaSutra Prime**, and a keyless command-line tool that audits front-end source code for accessibility, responsive design, design-system, content and performance risks. This documentation set is written for four audiences: decision makers, product and design leads, engineers, and open-source contributors.
 
-> **Note:** This documentation describes version 0.4.0. The same pages are live at <https://shahvatsalofficial.github.io/rachnasutra/>. Every capability is labelled **implemented**, **adapter**, **planned** or **not-available**. Nothing planned is described as shipped.
+> **Note:** This documentation describes version 0.5.0. The same pages are live at <https://shahvatsalofficial.github.io/rachnasutra/>. Every capability is labelled **implemented**, **adapter**, **planned** or **not-available**. Nothing planned is described as shipped. Browser, screenshot and live-host checks are not shipped.
 
 ## Start here
 
@@ -43,9 +43,9 @@ RachnaSutra AI is an open-source UI/UX design engineering and auditing agent. It
 
 <div class="cards">
 <div class="card"><b>13</b><span>Agent Skills, led by RachnaSutra Prime</span></div>
-<div class="card"><b>26</b><span>deterministic static audit rules</span></div>
+<div class="card"><b>33</b><span>deterministic static audit rules</span></div>
 <div class="card"><b>4</b><span>report formats: JSON, Markdown, HTML, SARIF 2.1.0</span></div>
-<div class="card"><b>111/111</b><span>automated tests passing (see evidence)</span></div>
+<div class="card"><b>134/134</b><span>automated tests passing (see evidence)</span></div>
 <div class="card"><b>154</b><span>W3C ACT test cases benchmarked, results published including weaknesses</span></div>
 <div class="card"><b>1,360</b><span>files from 12 public repositories audited as real-world evidence</span></div>
 <div class="card"><b>0</b><span>runtime dependencies, no network, no telemetry</span></div>

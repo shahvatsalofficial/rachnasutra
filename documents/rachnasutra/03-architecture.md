@@ -50,7 +50,7 @@ RachnaSutra AI is a single TypeScript package with no runtime dependencies. It c
 |---|---|---|
 | CLI | `src/cli.ts` | Argument parsing, command dispatch, exit codes, output |
 | Audit orchestrator | `src/audit.ts` | Load config, walk files, run rules, sort, dedupe, fingerprint, assemble coverage and tokens |
-| Rules | `src/rules.ts` | All 26 rules and the rule catalogue |
+| Rules | `src/rules.ts` | All 33 rules and the rule catalogue |
 | Colour maths | `src/color.ts` | Colour parsing and WCAG contrast ratio |
 | Token inspector | `src/tokens.ts` | Counts of custom properties, colours, font sizes, spacing, radii |
 | File system | `src/fsutil.ts` | Bounded, symlink-safe walk; `safeJoin`; text reading |

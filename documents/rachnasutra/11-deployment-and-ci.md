@@ -73,6 +73,20 @@ A Dockerfile is not included in 0.2.0. The CLI already runs headlessly, so a min
 
 The tool is single-threaded and uses memory proportional to the largest files it reads.
 
+## Container
+
+`Dockerfile` uses `node:22-bookworm-slim`, runs `npm ci` and `npm run build`, and starts `node dist/cli.js`. Mount the project read-only and pass the audit command. The image has no browser. Example: `docker build -t rachnasutra .` then `docker run --rm -v "$PWD:/work:ro" -w /work rachnasutra audit /work`.
+
+## Saved-report history
+
+`rachnasutra history <directory>` reads every JSON audit in that directory and writes `history.md` and `history.html` next to them, or under `--out`. The table is finding counts. It does not open a browser and it does not diff screenshots.
+
+## Doctor
+
+`rachnasutra doctor` prints OK or FAIL for checks that can pass or fail. Browser audit, visual review and live host loading print NOTE. NOTE means not available. It is not a pass. The process still exits 0 when every real check passed.
+
+`failOn` may be `confirmed-critical`. That value fails the command when a finding is confirmed and high, or confirmed and critical. The word critical in the name is historical. `ci` uses this gate by default.
+
 ## Documentation site
 
 The HTML documentation is live at <https://shahvatsalofficial.github.io/rachnasutra/>. `.github/workflows/pages.yml` uploads `documents/rachnasutra/html/` with GitHub Pages. A push to `main` that changes the docs deploys it. `workflow_dispatch` can deploy the current `main` without a docs edit.

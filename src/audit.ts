@@ -10,7 +10,7 @@ export const SEVERITY_ORDER: Severity[] = ['critical', 'high', 'medium', 'low', 
 export const CONFIG_FILE = 'rachnasutra.config.json';
 
 export function toolVersion(): string {
-  return '0.4.0';
+  return '0.5.0';
 }
 
 export async function loadConfig(root: string): Promise<AuditConfig> {
@@ -31,7 +31,7 @@ export function validateConfig(o: unknown): string[] {
   for (const k of ['exclude', 'disableRules']) {
     if (c[k] !== undefined && !(Array.isArray(c[k]) && (c[k] as unknown[]).every((x) => typeof x === 'string'))) errs.push(`${k} must be a string array`);
   }
-  if (c.failOn !== undefined && !SEVERITY_ORDER.includes(c.failOn as Severity)) errs.push('failOn must be critical|high|medium|low|info');
+  if (c.failOn !== undefined && c.failOn !== 'confirmed-critical' && !SEVERITY_ORDER.includes(c.failOn as Severity)) errs.push('failOn must be confirmed-critical|critical|high|medium|low|info');
   for (const k of ['maxFiles', 'imageBudgetKb']) {
     if (c[k] !== undefined && !(typeof c[k] === 'number' && (c[k] as number) > 0)) errs.push(`${k} must be a positive number`);
   }
