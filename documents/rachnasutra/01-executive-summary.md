@@ -73,7 +73,7 @@ The manual labelling was done by the project author with AI assistance and is no
 
 ## Licence and ownership
 
-Created by Vatsal Shah. Apache License 2.0: free to use, modify and redistribute commercially, with a patent grant and attribution through the `NOTICE` file. See [Legal and compliance](09-legal-and-compliance.md).
+Created by [Vatsal Shah](https://shahvatsal.com). Official site: [shahvatsal.com](https://shahvatsal.com). Apache License 2.0: free to use, modify and redistribute commercially, with a patent grant and attribution through the `NOTICE` file. See [Legal and compliance](09-legal-and-compliance.md).
 
 ## Key risks and mitigations
 

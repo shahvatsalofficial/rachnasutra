@@ -16,7 +16,7 @@ RachnaSutra AI is an open-source **UI/UX design engineering and auditing agent**
 
 > **No extra API key.** Inside a supported AI IDE, the skills use that IDE's own model. The CLI is deterministic, offline and read-only: no model, no network, no telemetry.
 
-Created by **[Vatsal Shah](https://github.com/shahvatsalofficial)**. Licensed under Apache-2.0.
+Created by **[Vatsal Shah](https://shahvatsal.com)**. Official site: [shahvatsal.com](https://shahvatsal.com). Licensed under Apache-2.0.
 
 ## What it does
 

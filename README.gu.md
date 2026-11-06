@@ -32,4 +32,4 @@ npx rachnasutra audit .
 
 બ્રાઉઝર ઓડિટ Playwright ઇન્સ્ટોલ હોય ત્યારે ચાલે છે: `npx rachnasutra audit --mode browser`. સ્ક્રીનશોટ, axe-core અને Lighthouse લેબ સ્કોર લખાય છે. Playwright ન હોય તો exit 3. બનાવટી પરિણામ નથી.
 
-બનાવનાર [Vatsal Shah](https://github.com/shahvatsalofficial). Apache-2.0.
+બનાવનાર [Vatsal Shah](https://shahvatsal.com). સત્તાવાર સાઇટ: [shahvatsal.com](https://shahvatsal.com). Apache-2.0.

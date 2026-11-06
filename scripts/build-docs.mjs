@@ -163,7 +163,7 @@ function page(d, idx) {
 <meta property="og:type" content="article">
 <link rel="canonical" href="${d === docs[0] ? `${SITE}/` : `${SITE}/${d.out}`}">
 <meta name="color-scheme" content="light dark">
-<script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@type': 'TechArticle', headline: d.title, description: d.desc, author: { '@type': 'Person', name: 'Vatsal Shah' }, inLanguage: 'en', isPartOf: { '@type': 'SoftwareSourceCode', name: 'RachnaSutra AI', codeRepository: REPO, license: 'https://www.apache.org/licenses/LICENSE-2.0' } })}</script>
+<script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@type': 'TechArticle', headline: d.title, description: d.desc, author: { '@type': 'Person', name: 'Vatsal Shah', url: 'https://shahvatsal.com' }, inLanguage: 'en', isPartOf: { '@type': 'SoftwareSourceCode', name: 'RachnaSutra AI', codeRepository: REPO, license: 'https://www.apache.org/licenses/LICENSE-2.0' } })}</script>
 <style>${CSS}</style>
 </head>
 <body>
@@ -173,6 +173,7 @@ function page(d, idx) {
 <a class="brand" href="index.html"><span class="logo" aria-hidden="true">RS</span><span>RachnaSutra AI <small>docs v${esc(pkg.version)}</small></span></a>
 <div class="search"><label class="sr" for="q">Search documentation</label><input id="q" type="search" placeholder="Search docs (press /)" autocomplete="off" aria-controls="results"><ul id="results" role="listbox" hidden></ul></div>
 <button class="theme-btn" aria-label="Toggle colour theme">&#9680;</button>
+<a class="gh" href="https://shahvatsal.com" rel="noopener">shahvatsal.com</a>
 <a class="gh" href="${REPO}" rel="noopener">GitHub</a>
 </header>
 <div class="layout">
@@ -185,7 +186,7 @@ ${d.html}
 ${prev ? `<a class="prev" href="${prev.out}"><span>Previous</span>${esc(prev.title)}</a>` : '<span></span>'}
 ${next ? `<a class="next" href="${next.out}"><span>Next</span>${esc(next.title)}</a>` : '<span></span>'}
 </nav>
-<footer class="foot">RachnaSutra AI ${esc(pkg.version)} &middot; Created by Vatsal Shah &middot; Apache-2.0 &middot; <a href="${REPO}/blob/main/documents/rachnasutra/${d.file}" rel="noopener">View source of this page</a></footer>
+<footer class="foot">RachnaSutra AI ${esc(pkg.version)} &middot; Created by <a href="https://shahvatsal.com" rel="noopener">Vatsal Shah</a> &middot; <a href="https://shahvatsal.com" rel="noopener">shahvatsal.com</a> &middot; Apache-2.0 &middot; <a href="${REPO}/blob/main/documents/rachnasutra/${d.file}" rel="noopener">View source of this page</a></footer>
 </main>
 ${toc}
 </div>

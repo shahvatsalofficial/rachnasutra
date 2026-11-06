@@ -106,7 +106,7 @@ Triage reports from the private advisory channel. Acknowledge within 7 days. Fix
 
 ## Governance
 
-The project is currently maintained by Vatsal Shah. Decisions favour user safety and evidence quality. Significant changes (new network behaviour, telemetry, new runtime dependency) require an explicit design note in the pull request and must be opt-in.
+The project is currently maintained by [Vatsal Shah](https://shahvatsal.com). Official site: [shahvatsal.com](https://shahvatsal.com). Decisions favour user safety and evidence quality. Significant changes (new network behaviour, telemetry, new runtime dependency) require an explicit design note in the pull request and must be opt-in.
 
 ## Credentials hygiene
 
