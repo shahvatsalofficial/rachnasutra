@@ -19,7 +19,7 @@ All notable changes follow [Semantic Versioning](https://semver.org/). Report sc
 - Short Gujarati overview: `README.gu.md`.
 - CI rebuilds the HTML docs and fails if the committed HTML drifted.
 - Documentation site is live at <https://shahvatsalofficial.github.io/rachnasutra/>.
-- npm `rachnasutra@0.4.0` is still the registry `latest` until 0.5.0 is published. A placeholder `0.0.0-stage` is also still listed. A normal install gets 0.4.0 until publish.
+- npm `latest` is `0.5.0`, published from the `v0.5.0` tag by `.github/workflows/publish.yml`. A placeholder `0.0.0-stage` may still be listed. Unpublish of that stub needs an npm one-time password and is not done by the workflow.
 - macOS stays out of CI. GitHub cancelled the queued jobs with zero steps. No macOS result is claimed.
 
 Not in 0.5.0, because a fake result would be worse than a gap: live proof that Claude, Cursor, Codex, Copilot or Gemini loads the 13 skills; beating the published static axe-core numbers (92% / 83% against 81% / 73%); a blind re-label of the benchmarks; a macOS CI run; Windsurf and Kiro adapters (their skill paths are not confirmed). Browser mode calls axe-core on the rendered page. That does not change the static-rule comparison.
