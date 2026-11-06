@@ -25,6 +25,6 @@ jobs:
       - run: npm run build
       - name: Broken page must produce a screenshot and axe findings
         run: |
-          node dist/cli.js audit fixtures/intentionally-broken-ui --mode browser --out rachnasutra-reports --json > rachnasutra-reports/browser.json
-          grep -q 'axe/' rachnasutra-reports/browser.json
+          node dist/cli.js audit fixtures/intentionally-broken-ui --mode browser --format json --out rachnasutra-reports
+          grep -q 'axe/' rachnasutra-reports/latest.json
           test -s rachnasutra-reports/screenshot.png
