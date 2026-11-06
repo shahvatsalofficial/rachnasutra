@@ -64,7 +64,7 @@ Guidelines: avoid heavy parsing dependencies; skip when props are spread; cap ou
 
 Features of the generated site: sticky navigation, per-page table of contents, client-side search over all pages (press `/`), copy buttons on code, light and dark themes following the system with a manual toggle, responsive layout with a mobile menu, print stylesheet, skip link, visible focus, reduced-motion support, structured data (`TechArticle`) and canonical links.
 
-To publish later: copy `documents/rachnasutra/html/` to any static host or enable GitHub Pages from that folder. No build step is needed at the host.
+GitHub Pages publishes `documents/rachnasutra/html/` on every push to `main` that changes the docs. The workflow is `.github/workflows/pages.yml`. The live site is <https://shahvatsalofficial.github.io/rachnasutra/>. The build writes `.nojekyll` so GitHub serves the files as they are. No extra build runs on the host.
 
 ## Benchmarks
 

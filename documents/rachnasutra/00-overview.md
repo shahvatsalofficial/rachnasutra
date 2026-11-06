@@ -2,7 +2,7 @@
 
 RachnaSutra AI is an open-source UI/UX design engineering and auditing agent. It ships 13 portable Agent Skills, led by **RachnaSutra Prime**, and a keyless command-line tool that audits front-end source code for accessibility, responsive design, design-system, content and performance risks. This documentation set is written for four audiences: decision makers, product and design leads, engineers, and open-source contributors.
 
-> **Note:** This documentation describes version 0.2.0. Every capability is labelled **implemented**, **adapter**, **planned** or **not-available**. Nothing planned is described as shipped.
+> **Note:** This documentation describes version 0.4.0. The same pages are live at <https://shahvatsalofficial.github.io/rachnasutra/>. Every capability is labelled **implemented**, **adapter**, **planned** or **not-available**. Nothing planned is described as shipped.
 
 ## Start here
 
@@ -54,7 +54,7 @@ RachnaSutra AI is an open-source UI/UX design engineering and auditing agent. It
 
 ## How the documentation is built
 
-The Markdown files in `documents/rachnasutra/` are the source of truth. Run `node scripts/build-docs.mjs` to regenerate the HTML site in `documents/rachnasutra/html/`. The HTML is self-contained, works offline, supports light and dark themes, keyboard navigation, search and printing, and can be hosted on any static site. See the [Maintainer handbook](13-maintainer-handbook.md).
+The Markdown files in `documents/rachnasutra/` are the source of truth. Run `node scripts/build-docs.mjs` to regenerate the HTML site in `documents/rachnasutra/html/`. That folder is published to [shahvatsalofficial.github.io/rachnasutra](https://shahvatsalofficial.github.io/rachnasutra/). The HTML is self-contained, works offline, supports light and dark themes, keyboard navigation, search and printing. See the [Maintainer handbook](13-maintainer-handbook.md).
 
 ## Document conventions
 

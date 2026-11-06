@@ -73,6 +73,10 @@ A Dockerfile is not included in 0.2.0. The CLI already runs headlessly, so a min
 
 The tool is single-threaded and uses memory proportional to the largest files it reads.
 
+## Documentation site
+
+The HTML documentation is live at <https://shahvatsalofficial.github.io/rachnasutra/>. `.github/workflows/pages.yml` uploads `documents/rachnasutra/html/` with GitHub Pages. A push to `main` that changes the docs deploys it. `workflow_dispatch` can deploy the current `main` without a docs edit.
+
 ## Release and distribution
 
 Install from npm. Node 20 or newer. No API key.

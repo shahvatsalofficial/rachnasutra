@@ -3,6 +3,7 @@
 > Open-source UI/UX design engineering and audit agent. 13 portable Agent Skills (led by RachnaSutra Prime) plus a keyless, deterministic CLI for accessibility (WCAG 2.2 AA oriented), responsive design, design-system, content and performance review of front-end source code. Works with Claude Code, Cursor, OpenAI Codex, GitHub Copilot and Gemini CLI using the IDE's own model; no extra API key. Outputs JSON, Markdown, HTML and SARIF. Created by Vatsal Shah. Apache-2.0. Repository: https://github.com/shahvatsalofficial/rachnasutra
 
 ## Start here
+- [Live documentation](https://shahvatsalofficial.github.io/rachnasutra/): searchable HTML site
 - [README](README.md): overview, install, CLI, proof, FAQ, limits
 - [Documentation overview](documents/rachnasutra/00-overview.md): index of the full documentation set
 - [Executive summary](documents/rachnasutra/01-executive-summary.md): what it is, what is proven, what is not claimed

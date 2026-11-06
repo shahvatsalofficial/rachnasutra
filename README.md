@@ -10,7 +10,7 @@
 ![Runtime dependencies](https://img.shields.io/badge/runtime%20dependencies-0-brightgreen)
 ![Tests](https://img.shields.io/badge/tests-111%20passing-brightgreen)
 
-**Quick links:** [Documentation](documents/rachnasutra/00-overview.md) | [Validation](documents/rachnasutra/16-validation-and-benchmarks.md) | [Sample report](samples/broken-ui/latest.md) | [Test evidence](documents/rachnasutra/10-testing-and-evidence.md) | [Rules](documents/rachnasutra/06-audit-rules-reference.md) | [Legal and limits](documents/rachnasutra/09-legal-and-compliance.md)
+**Quick links:** [Live docs](https://shahvatsalofficial.github.io/rachnasutra/) | [Documentation](documents/rachnasutra/00-overview.md) | [Validation](documents/rachnasutra/16-validation-and-benchmarks.md) | [Sample report](samples/broken-ui/latest.md) | [Test evidence](documents/rachnasutra/10-testing-and-evidence.md) | [Rules](documents/rachnasutra/06-audit-rules-reference.md) | [Legal and limits](documents/rachnasutra/09-legal-and-compliance.md)
 
 RachnaSutra AI is an open-source **UI/UX design engineering and auditing agent**: 13 portable [Agent Skills](https://agentskills.io/specification) led by **RachnaSutra Prime**, plus a **keyless CLI** that audits front-end code for accessibility (WCAG 2.2 AA oriented), responsive design, design-system, content and performance risks. Reports come out as JSON, Markdown, accessible HTML and SARIF 2.1.0.
 
@@ -143,7 +143,7 @@ Scanned 2 file(s). 21 finding(s): 0 critical, 8 high, 7 medium, 5 low, 1 info.
 
 ## Documentation
 
-The full documentation set is in [`documents/rachnasutra/`](documents/rachnasutra/00-overview.md), as Markdown and as a self-contained, searchable HTML site (open `documents/rachnasutra/html/index.html`; it works offline, in light and dark themes, and on phones).
+The full documentation set is live at <https://shahvatsalofficial.github.io/rachnasutra/>. The same pages are in [`documents/rachnasutra/`](documents/rachnasutra/00-overview.md) as Markdown and as a self-contained HTML site (`documents/rachnasutra/html/index.html` works offline, in light and dark themes, and on phones).
 
 | Audience | Document |
 |---|---|

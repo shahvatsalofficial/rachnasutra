@@ -8,6 +8,7 @@ const srcDir = path.join(root, 'documents', 'rachnasutra');
 const outDir = path.join(srcDir, 'html');
 const pkg = JSON.parse(readFileSync(path.join(root, 'package.json'), 'utf8'));
 const REPO = 'https://github.com/shahvatsalofficial/rachnasutra';
+const SITE = 'https://shahvatsalofficial.github.io/rachnasutra';
 
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const slug = (s) => s.toLowerCase().replace(/<[^>]+>/g, '').replace(/&[a-z]+;/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
@@ -160,7 +161,7 @@ function page(d, idx) {
 <meta property="og:title" content="${esc(d.title)} - RachnaSutra AI">
 <meta property="og:description" content="${esc(d.desc)}">
 <meta property="og:type" content="article">
-<link rel="canonical" href="${REPO}/blob/main/documents/rachnasutra/${d.file}">
+<link rel="canonical" href="${d === docs[0] ? `${SITE}/` : `${SITE}/${d.out}`}">
 <meta name="color-scheme" content="light dark">
 <script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@type': 'TechArticle', headline: d.title, description: d.desc, author: { '@type': 'Person', name: 'Vatsal Shah' }, inLanguage: 'en', isPartOf: { '@type': 'SoftwareSourceCode', name: 'RachnaSutra AI', codeRepository: REPO, license: 'https://www.apache.org/licenses/LICENSE-2.0' } })}</script>
 <style>${CSS}</style>
@@ -214,4 +215,8 @@ if (existsSync(samplesSrc)) {
     for (const f of readdirSync(path.join(samplesSrc, d))) copyFileSync(path.join(samplesSrc, d, f), path.join(outDir, 'samples', d, f));
   }
 }
+writeFileSync(path.join(outDir, '.nojekyll'), '');
+writeFileSync(path.join(outDir, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\n`);
+const urls = [`${SITE}/`, ...docs.map((d) => `${SITE}/${d.out}`)];
+writeFileSync(path.join(outDir, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `  <url><loc>${u}</loc></url>`).join('\n')}\n</urlset>\n`);
 console.log(`built ${docs.length} pages into ${path.relative(root, outDir)}`);
