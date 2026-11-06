@@ -1,6 +1,6 @@
 # Implementation status
 
-Last updated for 0.5.0. Statuses: **implemented** (code + test), **adapter** (files follow documented layout, not smoke-tested in the live host), **planned** (no code), **not-available** (CLI reports it honestly).
+Last updated for 0.5.1. Statuses: **implemented** (code + test), **adapter** (files follow documented layout, not smoke-tested in the live host), **planned** (no code), **not-available** (CLI reports it honestly).
 
 | Area | Status | Notes |
 |---|---|---|

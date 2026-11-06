@@ -2,7 +2,7 @@
 
 RachnaSutra AI is an open-source UI/UX design engineering and auditing agent. It ships 13 portable Agent Skills, led by **RachnaSutra Prime**, and a keyless command-line tool that audits front-end source code for accessibility, responsive design, design-system, content and performance risks. This documentation set is written for four audiences: decision makers, product and design leads, engineers, and open-source contributors.
 
-> **Note:** This documentation describes version 0.5.0. The same pages are live at <https://shahvatsalofficial.github.io/rachnasutra/>. Every capability is labelled **implemented**, **adapter**, **planned** or **not-available**. Nothing planned is described as shipped. Browser, screenshot and live-host checks are not shipped.
+> **Note:** This documentation describes version 0.5.1. The same pages are live at <https://shahvatsalofficial.github.io/rachnasutra/>. Every capability is labelled **implemented**, **adapter**, **planned** or **not-available**. Nothing planned is described as shipped. Browser mode runs when Playwright is installed. Live-host checks are not shipped.
 
 ## Start here
 

@@ -10,7 +10,7 @@
 | planned | No code yet |
 | not-available | The CLI states it is unavailable and exits with code 3 |
 
-## Capability status (0.5.0)
+## Capability status (0.5.1)
 
 | Area | Status | Notes |
 |---|---|---|

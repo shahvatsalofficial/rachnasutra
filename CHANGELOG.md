@@ -4,7 +4,10 @@ All notable changes follow [Semantic Versioning](https://semver.org/). Report sc
 
 ## Unreleased
 
-- `.github/workflows/publish.yml` publishes the `package.json` version to npm on a manual run or a `vX.Y.Z` tag. It uses npm trusted publishing. No npm token is stored in GitHub.
+## 0.5.1
+
+- Dev dependency `lighthouse` is 13.6.0. The lockfile no longer contains vulnerable `minimatch` 9 or the OpenTelemetry instrumentation packages from the Lighthouse 12 tree. `npm ci` reports 0 vulnerabilities. Browser mode still records Lighthouse lab scores.
+- Tag `v0.5.1` publishes this version through `.github/workflows/publish.yml`.
 
 ## 0.5.0
 
