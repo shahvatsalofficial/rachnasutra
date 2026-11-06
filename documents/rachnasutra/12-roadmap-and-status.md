@@ -25,14 +25,14 @@
 | Claude Code, Cursor, Codex, Copilot hosts | adapter | Not smoke-tested live |
 | Gemini CLI host | experimental | Path unconfirmed |
 | Windsurf, Kiro, others | planned | Copy `skills/` manually |
-| Browser audit (Playwright) | not-available | Planned |
-| axe-core integration | not-available | Planned |
-| Lighthouse and Core Web Vitals | not-available | Planned |
-| Screenshots and visual baselines | not-available | Planned |
+| Browser audit (Playwright) | implemented when installed | `audit --mode browser`. Exit 3 if Playwright or a browser binary is missing |
+| axe-core integration | implemented when installed | Runs inside the browser mode. Findings use `axe/` rule ids |
+| Lighthouse and Core Web Vitals | partial | Browser mode attempts a lab run. Field data is not collected |
+| Screenshots and visual baselines | implemented when installed | `visual baseline` and `visual compare` (byte compare) |
 | Container image | implemented | `Dockerfile`, static CLI, no browser |
 | API or local-model provider modes | planned | Skills use the host model today |
 | Report viewer dashboard | partial | One HTML report per run, plus `history` counts |
-| Rule examples and per-rule tests | implemented | 33 rules, 134 tests |
+| Rule examples and per-rule tests | implemented | 33 rules, 140 tests |
 | `history` command | implemented | Markdown and HTML counts of saved JSON reports |
 | Dockerfile | implemented | Static CLI only |
 | Gujarati README | implemented | `README.gu.md` |

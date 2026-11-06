@@ -4,8 +4,10 @@ Status of each item is tracked in [docs/status.md](docs/status.md). Dates are in
 
 ## Done in 0.5.0
 - 33 static rules, including `role="img"`, duplicate ids, frame titles, skip links, email/tel autocomplete, empty headings, non-text border contrast, empty `lang`, Tailwind arbitrary hex and JSX style colours
-- `history` counts for saved JSON reports, a static-CLI Dockerfile, a short Gujarati README, and doctor NOTE lines for audits that do not exist
-- 134 tests
+- `history` counts for saved JSON reports, a static-CLI Dockerfile, a short Gujarati README, and doctor NOTE lines
+- Browser mode (screenshot, axe-core, Lighthouse lab) when Playwright is installed
+- Named Tailwind colours, CSS modules, and styled-component template strings
+- 140 tests
 
 ## Done in 0.2.0
 - A failing and a passing test for every rule (111 tests); generated rule examples

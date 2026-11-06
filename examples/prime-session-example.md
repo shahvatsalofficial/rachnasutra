@@ -10,7 +10,7 @@
 |---|---|
 | File read and search | available |
 | Shell and RachnaSutra CLI | available (`rachnasutra audit`, `doctor`) |
-| Browser, screenshots, vision | **not available**, so nothing below is rendered or visual |
+| Browser, screenshots, vision | not used in this example. Version 0.5.0 can run `audit --mode browser` when Playwright is installed. This write-up did not |
 | Network | not used |
 
 Mode: **read-only**. Target: `fixtures/intentionally-broken-ui` (2 files). No file will be edited without approval.
@@ -21,7 +21,7 @@ Only the specialists the task needs: `rachnasutra-access` (accessibility evidenc
 
 ## 3. Evidence
 
-Command: `rachnasutra audit fixtures/intentionally-broken-ui --json`. Result: 21 findings (8 high, 7 medium, 5 low, 1 info); 13 confirmed, 8 review required.
+Command: `rachnasutra audit fixtures/intentionally-broken-ui --json`. Result: 22 findings (8 high, 8 medium, 5 low, 1 info).
 
 Highest-severity findings, each verified against the source:
 

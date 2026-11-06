@@ -7,6 +7,19 @@ import { inspectTokens } from './tokens.js';
 import type { AuditConfig, AuditResult, CoverageEntry, Finding, Severity } from './types.js';
 
 export const SEVERITY_ORDER: Severity[] = ['critical', 'high', 'medium', 'low', 'info'];
+
+const CODE_EXT = new Set(['.js', '.jsx', '.ts', '.tsx', '.mjs', '.cjs']);
+
+/** Pull CSS out of styled-components and the css`` helper. Other CSS-in-JS shapes are left alone. */
+export function extractCssInJs(text: string): string {
+  const parts: string[] = [];
+  for (const m of text.matchAll(/(?:styled(?:\.[A-Za-z0-9]+|\([^)]*\))|css)`([^`]*)`/g)) {
+    const body = m[1].trim();
+    if (!body) continue;
+    parts.push(body.includes('{') ? body : `.extracted {\n${body}\n}`);
+  }
+  return parts.join('\n');
+}
 export const CONFIG_FILE = 'rachnasutra.config.json';
 
 export function toolVersion(): string {
@@ -62,11 +75,17 @@ export async function runAudit(rootArg: string, opts: AuditOptions = {}): Promis
   for (const f of corpus.files) {
     const isMarkup = MARKUP_EXT.has(f.ext);
     const isStyle = STYLE_EXT.has(f.ext);
-    if (!isMarkup && !isStyle) continue;
+    if (!isMarkup && !isStyle && !CODE_EXT.has(f.ext)) continue;
     const text = await readText(f);
     if (text === null) continue;
-    fileTypes[f.ext] = (fileTypes[f.ext] ?? 0) + 1;
-    docs.push({ file: f, text, kind: isMarkup ? 'markup' : 'style', isHtmlDoc: f.ext === '.html' || f.ext === '.htm' });
+    if (isMarkup || isStyle) {
+      fileTypes[f.ext] = (fileTypes[f.ext] ?? 0) + 1;
+      docs.push({ file: f, text, kind: isMarkup ? 'markup' : 'style', isHtmlDoc: f.ext === '.html' || f.ext === '.htm' });
+    }
+    const extracted = extractCssInJs(text);
+    if (extracted && CODE_EXT.has(f.ext)) {
+      docs.push({ file: f, text: extracted, kind: 'style', isHtmlDoc: false });
+    }
   }
 
   const raw = runRules({ docs, assets: corpus.assets, imageBudgetBytes: (config.imageBudgetKb ?? 500) * 1024 })

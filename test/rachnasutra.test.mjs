@@ -231,8 +231,8 @@ test('CLI: exit codes, json, not-available honesty, usage errors', async () => {
   assert.deepEqual(validateReport(JSON.parse(j.stdout)), []);
   const v = cli('visual', 'baseline');
   assert.equal(v.status, 3);
-  assert.match(v.stdout, /not available/i);
-  assert.equal(cli('audit', BROKEN, '--mode', 'browser').status, 3);
+  assert.match(v.stdout, /Nothing was rendered/i);
+  assert.equal(cli('audit', '--mode', 'browser').status, 3);
   assert.equal(cli('bogus').status, 2);
   assert.equal(cli('skills', 'install').status, 2);
   assert.equal(cli('accessibility', BROKEN, '--json').status, 0);

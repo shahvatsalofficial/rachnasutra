@@ -28,7 +28,7 @@ node dist/cli.js audit fixtures/intentionally-broken-ui
 ## Understand the console summary
 
 ```text
-Scanned 2 file(s). 21 finding(s): 0 critical, 8 high, 7 medium, 5 low, 1 info.
+Scanned 2 file(s). 22 finding(s): 0 critical, 8 high, 8 medium, 5 low, 1 info.
   RS-0001 [high/confirmed] RS-A11Y-001 index.html:11 - Image has no alt attribute
 ```
 

@@ -8,7 +8,7 @@ This page answers one question: **how do we know the audit is right?** Test fixt
 
 | Evidence | What was done | Headline result |
 |---|---|---|
-| Per-rule tests | A failing and a passing input for every one of the 33 rules, plus false-positive guards | 134 automated tests pass; all examples published in [Rule examples](15-rule-examples.md) |
+| Per-rule tests | A failing and a passing input for every one of the 33 rules, plus false-positive guards | 140 automated tests pass; all examples published in [Rule examples](15-rule-examples.md) |
 | W3C ACT test cases | 154 test cases from the ACT Rules Community Group, mapped to 10 rules | Precision 71%, recall 65% after fixes (53% and 38% on the first run) |
 | axe-core comparison | The same 109 ACT cases run through axe-core 4.10.2 and RachnaSutra | axe-core is better: 92% precision and 83% recall, against 81% and 73% |
 | Real-world audit | 12 public repositories, 1,360 files, 767 findings; 3 rounds of manual spot checks | Round 1: 77% strict precision, 93% lenient; seven false-positive patterns found and fixed |
@@ -159,14 +159,14 @@ The 17 remaining findings were reviewed and deliberately not changed: ten focus-
 |---|---|---|
 | A blind re-test on new repositories | Current numbers were used to improve the rules | Planned |
 | Independent labelling | Removes author bias | Open; contributions welcome |
-| Runtime evidence (browser, axe-core, screenshots) | Contrast, focus and computed names need rendering | Planned, see roadmap |
+| Runtime evidence (browser, axe-core, screenshots) | `audit --mode browser` renders `index.html`, saves a screenshot, and runs axe-core | Implemented when Playwright is installed. Screen-reader and keyboard paths stay manual. This does not change the static axe comparison above |
 | Live host smoke tests | Skills are only structurally verified | See [Host smoke tests](17-host-smoke-tests.md) |
 | Usage and community track record | Cannot be created in advance | Time |
 
 ## Reproduce
 
 ```bash
-npm install && npm test                      # 134 tests
+npm install && npm test                      # 140 tests
 npm run examples                             # regenerate rule examples
 node benchmarks/act.mjs                      # ACT benchmark (needs network)
 # axe-core comparison (installs axe-core and jsdom in a throwaway folder):

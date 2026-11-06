@@ -2,9 +2,9 @@
   "schemaVersion": "1.0.0",
   "tool": {
     "name": "rachnasutra",
-    "version": "0.4.0"
+    "version": "0.5.0"
   },
-  "generatedAt": "2026-11-05T19:28:05.857Z",
+  "generatedAt": "2026-11-06T19:17:42.837Z",
   "root": "<project>\\fixtures\\intentionally-broken-ui",
   "mode": "static",
   "filesScanned": 2,
@@ -324,6 +324,31 @@
     },
     {
       "id": "RS-0013",
+      "rule": "RS-A11Y-019",
+      "category": "accessibility",
+      "title": "email field has no autocomplete attribute",
+      "severity": "medium",
+      "confidence": "medium",
+      "criterion": "WCAG 2.2: 1.3.5 Identify Input Purpose",
+      "user_impact": "Browsers and password managers cannot fill the field, and users retype personal data.",
+      "recommended_fix": "Add autocomplete=\"email\".",
+      "verification": "Re-run the audit, then use the browser autofill menu on the field.",
+      "limitations": "Only type=email and type=tel are checked. Other personal fields need a human look.",
+      "file": "index.html",
+      "line": 16,
+      "evidence": [
+        {
+          "path": "index.html",
+          "line": 16,
+          "excerpt": "<input type=\"email\" placeholder=\"Email\">"
+        }
+      ],
+      "platform": "web",
+      "status": "review-required",
+      "fingerprint": "d5a33ed3df42"
+    },
+    {
+      "id": "RS-0014",
       "rule": "RS-MOT-001",
       "category": "motion",
       "title": "Animations or transitions exist but no prefers-reduced-motion handling",
@@ -348,7 +373,7 @@
       "fingerprint": "cd7575536288"
     },
     {
-      "id": "RS-0014",
+      "id": "RS-0015",
       "rule": "RS-RESP-002",
       "category": "responsive",
       "title": "Fixed width 1200px can overflow narrow viewports",
@@ -373,7 +398,7 @@
       "fingerprint": "3c2677a99757"
     },
     {
-      "id": "RS-0015",
+      "id": "RS-0016",
       "rule": "RS-RESP-003",
       "category": "responsive",
       "title": "No responsive CSS found (media/container queries, clamp, grid auto-fit, flex-wrap)",
@@ -397,7 +422,7 @@
       "fingerprint": "9c3dab4b3bd7"
     },
     {
-      "id": "RS-0016",
+      "id": "RS-0017",
       "rule": "RS-A11Y-009",
       "category": "accessibility",
       "title": "Heading level skips from h1 to h3",
@@ -422,7 +447,7 @@
       "fingerprint": "99a3c7a78030"
     },
     {
-      "id": "RS-0017",
+      "id": "RS-0018",
       "rule": "RS-A11Y-015",
       "category": "accessibility",
       "title": "No main landmark",
@@ -447,7 +472,7 @@
       "fingerprint": "5fc1dc510c8b"
     },
     {
-      "id": "RS-0018",
+      "id": "RS-0019",
       "rule": "RS-CONT-001",
       "category": "content",
       "title": "Vague link text \"click here\"",
@@ -472,7 +497,7 @@
       "fingerprint": "ab30e71ba71e"
     },
     {
-      "id": "RS-0019",
+      "id": "RS-0020",
       "rule": "RS-PERF-001",
       "category": "performance",
       "title": "Image has no explicit width and height",
@@ -496,7 +521,7 @@
       "fingerprint": "d1c68f89d33e"
     },
     {
-      "id": "RS-0020",
+      "id": "RS-0021",
       "rule": "RS-VIS-001",
       "category": "visual",
       "title": "Very small text (10px)",
@@ -521,7 +546,7 @@
       "fingerprint": "545e07e35298"
     },
     {
-      "id": "RS-0021",
+      "id": "RS-0022",
       "rule": "RS-TRUST-001",
       "category": "trust",
       "title": "Urgency or scarcity wording needs review",
@@ -549,7 +574,7 @@
     {
       "category": "accessibility (static)",
       "state": "partial",
-      "checks": 15,
+      "checks": 22,
       "detail": "Source patterns and measured literal colour contrast only. Keyboard, screen-reader and axe runtime checks were not run."
     },
     {
@@ -643,12 +668,12 @@
     "bySeverity": {
       "critical": 0,
       "high": 8,
-      "medium": 7,
+      "medium": 8,
       "low": 5,
       "info": 1
     },
     "byCategory": {
-      "accessibility": 14,
+      "accessibility": 15,
       "motion": 1,
       "responsive": 2,
       "content": 1,
@@ -657,6 +682,6 @@
       "trust": 1
     },
     "confirmed": 13,
-    "reviewRequired": 8
+    "reviewRequired": 9
   }
 }

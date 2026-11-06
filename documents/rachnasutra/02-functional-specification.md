@@ -34,11 +34,11 @@ These personas are **assumed**, not the result of user research.
 | FR-08 | Re-audit and compare with a baseline by fingerprint (resolved, remaining, introduced) | implemented | fix verification test |
 | FR-09 | Token inventory: custom properties, colours, font sizes, spacing, radii | implemented | CLI transcript |
 | FR-10 | Install, uninstall and dry-run skills for five hosts with hash tracking and conflict handling | implemented | install tests |
-| FR-11 | Report browser, screenshot and visual audits as not available (exit code 3) | implemented | CLI test |
+| FR-11 | Run a browser audit when Playwright is installed. Exit 3 with no invented result when it is not | implemented | CLI test |
 | FR-12 | Stable exit codes for CI | implemented | CLI test |
-| FR-13 | Run offline with no model and no API key | implemented | by design; no network code exists |
+| FR-13 | Run the default audit offline with no model and no API key | implemented | default audit does not open a network connection. Browser mode uses localhost only |
 | FR-14 | Thirteen skills with required sections and valid frontmatter | implemented | `rachnasutra verify` |
-| FR-15 | Browser audit with screenshots, axe and keyboard path | planned | not applicable |
+| FR-15 | Browser audit with a screenshot and axe-core | implemented when Playwright is installed | keyboard and screen-reader paths stay manual |
 
 ## Non-functional requirements
 
@@ -102,12 +102,12 @@ Each finding has: ID (`RS-0001` style), rule ID, category, title, severity, conf
 | Criterion | Result |
 |---|---|
 | Clean install works without an API key | Met: no runtime dependencies, no key code |
-| `doctor` states what is available and unavailable | Met: lists static audit as available; browser and visual as not available |
-| Static audit on a flawed fixture is deterministic and evidenced | Met: 21 findings, identical across runs |
+| `doctor` states what is available and unavailable | Met: static audit can pass or fail. Browser and visual print NOTE because doctor does not launch a browser |
+| Static audit on a flawed fixture is deterministic and evidenced | Met: 22 findings, identical across runs |
 | JSON, Markdown, HTML reports validate and show coverage | Met: JSON validated against the contract in tests; coverage in every format |
 | Generated skill files are valid | Met: 13 of 13 pass `verify` |
 | No source changes or network use in default mode | Met: test asserts files unchanged and no reports directory created |
-| Unit, integration and security tests pass | Met: 134 of 134 on the recorded run |
+| Unit, integration and security tests pass | Met: 140 of 140 on the recorded run |
 | README, contributor docs, security policy, licence present | Met |
 | Accurate creator attribution, no fake endorsements | Met |
 | One example reproduces a finding and its fix verification | Met: fix verification test and user guide journey 2 |

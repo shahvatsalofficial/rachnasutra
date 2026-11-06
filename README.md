@@ -8,7 +8,7 @@
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 ![Node](https://img.shields.io/badge/node-%3E%3D20-brightgreen)
 ![Runtime dependencies](https://img.shields.io/badge/runtime%20dependencies-0-brightgreen)
-![Tests](https://img.shields.io/badge/tests-134%20passing-brightgreen)
+![Tests](https://img.shields.io/badge/tests-140%20passing-brightgreen)
 
 **Quick links:** [Live docs](https://shahvatsalofficial.github.io/rachnasutra/) | [Documentation](documents/rachnasutra/00-overview.md) | [Validation](documents/rachnasutra/16-validation-and-benchmarks.md) | [Sample report](samples/broken-ui/latest.md) | [Test evidence](documents/rachnasutra/10-testing-and-evidence.md) | [Rules](documents/rachnasutra/06-audit-rules-reference.md) | [Legal and limits](documents/rachnasutra/09-legal-and-compliance.md)
 
@@ -31,7 +31,7 @@ Created by **[Vatsal Shah](https://github.com/shahvatsalofficial)**. Licensed un
 | Fix plan and fix verification against a saved baseline | `rachnasutra plan-fixes`, `rachnasutra verify --report` (each writes Markdown and HTML next to the JSON report) | No |
 | CI gate with stable exit codes | `rachnasutra ci` | No |
 | Visual critique, flows, copy, redesign proposals, implementation | the `rachnasutra-*` skills | Yes (your IDE's model) |
-| Browser, screenshot, axe and Lighthouse audits | **not available yet** | planned, see [docs/status.md](docs/status.md) |
+| Browser, screenshot, axe and Lighthouse | `rachnasutra audit --mode browser` when Playwright is installed. Exit 3 if it is not. No invented result | [docs/status.md](docs/status.md) |
 
 ## Quick start
 
@@ -58,7 +58,7 @@ Then ask your assistant: *"Use rachnasutra-prime to review this project's UI and
 ```bash
 git clone https://github.com/shahvatsalofficial/rachnasutra.git
 cd rachnasutra && npm install && npm run build
-node dist/cli.js audit fixtures/intentionally-broken-ui   # 21 findings with file:line evidence
+node dist/cli.js audit fixtures/intentionally-broken-ui   # 22 findings with file:line evidence
 node dist/cli.js audit fixtures/good-ui                   # 0 findings
 ```
 
@@ -118,24 +118,24 @@ Everything below is reproducible from this repository.
 
 | Evidence | Result | Where |
 |---|---|---|
-| Automated tests | **134 of 134 passing** locally on Node 24 (this machine). Blocking CI is Windows and Linux on Node 20, 22, 24 and 26. macOS is not in CI: GitHub cancels those jobs before a runner starts | [test-results.txt](documents/rachnasutra/evidence/test-results.txt) |
+| Automated tests | **140 of 140 passing** locally on Node 24 (this machine). Blocking CI is Windows and Linux on Node 20, 22, 24 and 26. macOS is not in CI: GitHub cancels those jobs before a runner starts | [test-results.txt](documents/rachnasutra/evidence/test-results.txt) |
 | Every rule tested both ways | A failing and a passing input for all 33 rules, plus false-positive guards; the same inputs generate the docs | [rule examples](documents/rachnasutra/15-rule-examples.md) |
 | W3C ACT test cases | 154 cases, 10 rules: **71% precision, 65% recall** after fixing defects the benchmark found (first run: 53% and 38%) | [act.md](benchmarks/results/act.md) |
 | Comparison with axe-core | axe-core is **more accurate** (92% / 83% against 81% / 73% on 7 comparable rules); RachnaSutra works on source files, offline, in CI | [act-vs-axe.md](benchmarks/results/act-vs-axe.md) |
 | 12 public repositories | 1,360 files, 767 findings; manual check of 95 findings: **77% clearly real, 93% real or context-dependent**; 7 false-positive patterns found and fixed | [real-world.md](benchmarks/results/real-world.md) |
 | Before and after on a real template | 14 findings resolved, 0 introduced; axe-core agrees | [case study](case-studies/clean-blog/README.md) |
-| Intentionally flawed fixture | **21 findings**, each with file and line; identical on every run | [sample report](samples/broken-ui/latest.md) |
+| Intentionally flawed fixture | **22 findings**, each with file and line; identical on every run | [sample report](samples/broken-ui/latest.md) |
 | Correct fixture | **0 findings** | [sample report](samples/good-ui/latest.md) |
 | Contrast maths | Matches WCAG reference ratios (21:1 black on white; 4.54:1 for `#767676` on white) | [tests](test/rachnasutra.test.mjs) |
 | Security tests | Secret redaction, path traversal, report escaping, prompt-injection text in audited files | [security doc](documents/rachnasutra/08-security-and-privacy.md) |
-| Unavailable features | Browser and visual audits exit with code 3 and say so | [CLI transcripts](documents/rachnasutra/evidence/cli-transcripts.txt) |
+| Browser mode | `audit --mode browser` on this machine used Edge, wrote `screenshot.png`, ran axe-core, and recorded Lighthouse lab scores. Exit 3 only when Playwright or a browser binary is missing | [status](docs/status.md) |
 
-What is **not** proven: the skills have not yet been verified inside live AI IDEs ([protocol and status](documents/rachnasutra/17-host-smoke-tests.md)); manual labelling of findings was done by the author with AI assistance, not independently; browser, screenshot and screen-reader testing are not implemented. Full discussion: [Validation and benchmarks](documents/rachnasutra/16-validation-and-benchmarks.md).
+What is **not** proven: the skills have not yet been verified inside live AI IDEs ([protocol and status](documents/rachnasutra/17-host-smoke-tests.md)); manual labelling of findings was done by the author with AI assistance, not independently; screen-reader and keyboard testing are still manual. The published static comparison with axe-core is unchanged (92% / 83% against 81% / 73%). Browser mode calls axe-core; it does not replace that comparison. Full discussion: [Validation and benchmarks](documents/rachnasutra/16-validation-and-benchmarks.md).
 
 Example output:
 
 ```text
-Scanned 2 file(s). 21 finding(s): 0 critical, 8 high, 7 medium, 5 low, 1 info.
+Scanned 2 file(s). 22 finding(s): 0 critical, 8 high, 8 medium, 5 low, 1 info.
   RS-0001 [high/confirmed] RS-A11Y-001 index.html:11 - Image has no alt attribute
   RS-0007 [high/confirmed] RS-A11Y-013 index.html:20 - Text contrast 2.32:1 is below 4.5:1 (#aaaaaa on #ffffff)
   RS-0006 [high/confirmed] RS-A11Y-010 styles.css:2 - Focus indicator removed (button:focus, a:focus)

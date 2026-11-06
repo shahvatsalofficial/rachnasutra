@@ -1,10 +1,10 @@
 # RachnaSutra AI - UI/UX audit report
 
-- Generated: 2026-11-05T19:28:06.609Z
+- Generated: 2026-11-06T19:17:43.556Z
 - Mode: static (read-only, no network, no model)
 - Root: `<project>\fixtures\good-ui`
 - Files scanned: 2 (.html: 1, .css: 1)
-- Tool: rachnasutra 0.4.0
+- Tool: rachnasutra 0.5.0
 
 ## Executive summary
 

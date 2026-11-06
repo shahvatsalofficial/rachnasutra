@@ -20,7 +20,7 @@
 | `ci` | audit with JSON default, default gate `confirmed-critical` | no |
 | `config validate` | validate `rachnasutra.config.json` | no |
 
-Not available: `visual ...` and `audit --mode browser` (exit 3).
+`audit --mode browser` and `visual baseline` / `visual compare` launch Playwright when it is installed. Exit 3 when Playwright or a browser binary is missing, or when the folder has no `index.html`. No result is invented.
 
 ## Exit codes
 

@@ -45,7 +45,7 @@ RachnaSutra AI is an open-source UI/UX design engineering and auditing agent. It
 <div class="card"><b>13</b><span>Agent Skills, led by RachnaSutra Prime</span></div>
 <div class="card"><b>33</b><span>deterministic static audit rules</span></div>
 <div class="card"><b>4</b><span>report formats: JSON, Markdown, HTML, SARIF 2.1.0</span></div>
-<div class="card"><b>134/134</b><span>automated tests passing (see evidence)</span></div>
+<div class="card"><b>140/140</b><span>automated tests passing (see evidence)</span></div>
 <div class="card"><b>154</b><span>W3C ACT test cases benchmarked, results published including weaknesses</span></div>
 <div class="card"><b>1,360</b><span>files from 12 public repositories audited as real-world evidence</span></div>
 <div class="card"><b>0</b><span>runtime dependencies, no network, no telemetry</span></div>

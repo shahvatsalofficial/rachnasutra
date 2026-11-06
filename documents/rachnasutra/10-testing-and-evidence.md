@@ -9,11 +9,11 @@ This page contains the recorded results of the automated test suite and sample r
 | Command | `npm test` (build, then `node --test test/`) |
 | Node.js | v24 on this machine. CI also runs Node 20, 22, 24 and 26 |
 | Operating system | Windows 11 (Git Bash) |
-| Tests | 134 |
-| Passed | 134 |
+| Tests | 140 |
+| Passed | 140 |
 | Failed | 0 |
 | Skipped | 0 |
-| Duration | about 14 seconds |
+| Duration | about 34 seconds |
 | Raw output | [test-results.txt](evidence/test-results.txt) |
 
 Typecheck (`npm run typecheck`) and package verification (`node dist/cli.js verify`, 24 PASS lines, 0 FAIL) were also run clean on the same commit.
@@ -55,7 +55,7 @@ The rule tests come from `fixtures/rule-cases.mjs`: for each of the 33 rules a f
 
 Command: `node dist/cli.js audit fixtures/intentionally-broken-ui`
 
-Result: **21 findings** (8 high, 7 medium, 5 low, 1 info) in 2 files.
+Result: **22 findings** (8 high, 8 medium, 5 low, 1 info) in 2 files.
 
 | ID | Severity / status | Rule | Location | Title |
 |---|---|---|---|---|
@@ -69,17 +69,18 @@ Result: **21 findings** (8 high, 7 medium, 5 low, 1 info) in 2 files.
 | RS-0008 | high / confirmed | RS-A11Y-013 | styles.css:1 | Text contrast 2.85:1 is below 4.5:1 (#999999 on #ffffff) |
 | RS-0009 | medium / confirmed | RS-A11Y-002 | index.html:2 | Document has no lang attribute |
 | RS-0010 | medium / confirmed | RS-A11Y-006 | index.html:17 | Positive tabindex overrides natural focus order |
-| RS-0011 | medium / confirmed | RS-A11Y-008 | index.html:3 | Document has no title |
+| RS-0011 | medium / confirmed | RS-A11Y-008 | index.html:2 | Document has no title |
 | RS-0012 | medium / review-required | RS-A11Y-014 | styles.css:3 | Interactive target smaller than 24x24 CSS px |
-| RS-0013 | medium / confirmed | RS-MOT-001 | styles.css:6 | No prefers-reduced-motion handling |
-| RS-0014 | medium / review-required | RS-RESP-002 | styles.css:1 | Fixed width 1200px can overflow narrow viewports |
-| RS-0015 | medium / review-required | RS-RESP-003 | styles.css:1 | No responsive CSS found |
-| RS-0016 | low / review-required | RS-A11Y-009 | index.html:10 | Heading level skips from h1 to h3 |
-| RS-0017 | low / review-required | RS-A11Y-015 | index.html:8 | No main landmark |
-| RS-0018 | low / confirmed | RS-CONT-001 | index.html:14 | Vague link text "click here" |
-| RS-0019 | low / review-required | RS-PERF-001 | index.html:11 | Image has no explicit width and height |
-| RS-0020 | low / confirmed | RS-VIS-001 | styles.css:4 | Very small text (10px) |
-| RS-0021 | info / review-required | RS-TRUST-001 | index.html:19 | Urgency or scarcity wording needs review |
+| RS-0013 | medium / review-required | RS-A11Y-019 | index.html:16 | email field has no autocomplete attribute |
+| RS-0014 | medium / confirmed | RS-MOT-001 | styles.css:6 | No prefers-reduced-motion handling |
+| RS-0015 | medium / review-required | RS-RESP-002 | styles.css:1 | Fixed width 1200px can overflow narrow viewports |
+| RS-0016 | medium / review-required | RS-RESP-003 | styles.css:1 | No responsive CSS found |
+| RS-0017 | low / review-required | RS-A11Y-009 | index.html:10 | Heading level skips from h1 to h3 |
+| RS-0018 | low / review-required | RS-A11Y-015 | index.html:8 | No main landmark |
+| RS-0019 | low / confirmed | RS-CONT-001 | index.html:14 | Vague link text "click here" |
+| RS-0020 | low / review-required | RS-PERF-001 | index.html:11 | Image has no explicit width and height |
+| RS-0021 | low / confirmed | RS-VIS-001 | styles.css:4 | Very small text (10px) |
+| RS-0022 | info / review-required | RS-TRUST-001 | index.html:19 | Urgency or scarcity wording needs review |
 
 Sample reports: [JSON](samples/broken-ui/latest.json), [Markdown](samples/broken-ui/latest.md), [HTML](samples/broken-ui/latest.html), [SARIF](samples/broken-ui/latest.sarif).
 
@@ -91,11 +92,11 @@ Result: **0 findings**. The fixture uses a language attribute, title, viewport, 
 
 A zero-finding result is not a conformance statement. It shows only that these static rules do not flag this input. Sample reports: [JSON](samples/good-ui/latest.json), [Markdown](samples/good-ui/latest.md), [HTML](samples/good-ui/latest.html).
 
-## Sample run 3: honest unavailability
+## Sample run 3: browser mode
 
-Command: `node dist/cli.js visual baseline`
+Command: `node dist/cli.js audit fixtures/intentionally-broken-ui --mode browser`
 
-Output: "Browser and visual audits are not available in this version... No browser was launched and no screenshot was taken." Exit code 3.
+When Playwright and Edge or Chromium are installed, this writes `screenshot.png`, adds axe-core findings, and prints Lighthouse lab scores. Exit code 3 only when Playwright or a browser binary is missing, or the folder has no `index.html`. The message then says nothing was rendered. No score is invented.
 
 ## Sample run 4: token inventory
 
@@ -112,7 +113,7 @@ node dist/cli.js verify
 node dist/cli.js audit fixtures/intentionally-broken-ui --format json,md,html,sarif --out reports
 ```
 
-Expected: 134 tests pass; `verify` prints only PASS lines; four report files are written.
+Expected: 140 tests pass; `verify` prints only PASS lines; four report files are written.
 
 ## Coverage of the test suite
 

@@ -7,9 +7,9 @@
 | Language | TypeScript 5.9 compiled to ES2022 modules |
 | Runtime | Node.js 20 or newer |
 | Runtime dependencies | None |
-| Dev dependencies | `typescript`, `@types/node` |
+| Dev dependencies | `typescript`, `@types/node`, and optional browser tools `playwright`, `@axe-core/playwright`, `lighthouse` |
 | Entry point | `dist/cli.js` (bin `rachnasutra`) |
-| Tests | `node --test` (runs `test/*.test.mjs`); 134 tests |
+| Tests | `node --test` (runs `test/*.test.mjs`); 140 tests |
 | Build | `npm run build` (`tsc`) |
 
 ## Result model

@@ -81,7 +81,10 @@
     "prepublishOnly": "npm test && npm run verify"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.11.0",
     "@types/node": "^26.6.6",
+    "lighthouse": "^12.8.2",
+    "playwright": "^1.56.1",
     "typescript": "^7.0.2"
   }
 }

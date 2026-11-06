@@ -2,9 +2,9 @@
   "schemaVersion": "1.0.0",
   "tool": {
     "name": "rachnasutra",
-    "version": "0.4.0"
+    "version": "0.5.0"
   },
-  "generatedAt": "2026-11-05T19:28:06.609Z",
+  "generatedAt": "2026-11-06T19:17:43.556Z",
   "root": "<project>\\fixtures\\good-ui",
   "mode": "static",
   "filesScanned": 2,
@@ -26,7 +26,7 @@
     {
       "category": "accessibility (static)",
       "state": "partial",
-      "checks": 15,
+      "checks": 22,
       "detail": "Source patterns and measured literal colour contrast only. Keyboard, screen-reader and axe runtime checks were not run."
     },
     {

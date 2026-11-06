@@ -713,6 +713,72 @@ export const Card = () => <p style={{ color: "#1a1a1a", backgroundColor: "#fffff
 
 **Result:** rule did not fire
 
+## RS-A11Y-013 (tailwind named colours): Text contrast below minimum (measured)
+
+Category: accessibility. Default severity: high. Criterion: WCAG 1.4.3.
+
+**Failing input**
+
+```tsx
+/* Card.tsx */
+export const Card = () => <p className="text-gray-400 bg-white">Price</p>;
+```
+
+**Result:** `RS-0001` [high/review-required] Text contrast 2.54:1 is below 4.5:1 (#9ca3af on #ffffff) at `Card.tsx:1`
+
+**Passing input**
+
+```tsx
+/* Card.tsx */
+export const Card = () => <p className="text-gray-900 bg-white">Price</p>;
+```
+
+**Result:** rule did not fire
+
+## RS-A11Y-013 (css module file): Text contrast below minimum (measured)
+
+Category: accessibility. Default severity: high. Criterion: WCAG 1.4.3.
+
+**Failing input**
+
+```css
+/* button.module.css */
+.price { color: #cccccc; background: #ffffff; }
+```
+
+**Result:** `RS-0001` [high/confirmed] Text contrast 1.61:1 is below 4.5:1 (#cccccc on #ffffff) at `button.module.css:1`
+
+**Passing input**
+
+```css
+/* button.module.css */
+.price { color: #1a1a1a; background: #ffffff; }
+```
+
+**Result:** rule did not fire
+
+## RS-A11Y-013 (styled-components template): Text contrast below minimum (measured)
+
+Category: accessibility. Default severity: high. Criterion: WCAG 1.4.3.
+
+**Failing input**
+
+```tsx
+/* Button.tsx */
+const B = styled.button`color: #cccccc; background: #ffffff;`;
+```
+
+**Result:** `RS-0001` [high/confirmed] Text contrast 1.61:1 is below 4.5:1 (#cccccc on #ffffff) at `Button.tsx:2`
+
+**Passing input**
+
+```tsx
+/* Button.tsx */
+const B = styled.button`color: #1a1a1a; background: #ffffff;`;
+```
+
+**Result:** rule did not fire
+
 ## RS-A11Y-016: Duplicate id
 
 Category: accessibility. Default severity: high. Criterion: WCAG 4.1.2, 1.3.1.

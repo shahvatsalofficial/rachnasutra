@@ -30,6 +30,6 @@ npx rachnasutra audit .
 
 ## શું ચાલતું નથી
 
-બ્રાઉઝર ઓડિટ, સ્ક્રીનશોટ અને Lighthouse આ વર્ઝનમાં નથી. આદેશ exit 3 આપે છે. કોઈ બનાવટી પરિણામ નથી.
+બ્રાઉઝર ઓડિટ Playwright ઇન્સ્ટોલ હોય ત્યારે ચાલે છે: `npx rachnasutra audit --mode browser`. સ્ક્રીનશોટ, axe-core અને Lighthouse લેબ સ્કોર લખાય છે. Playwright ન હોય તો exit 3. બનાવટી પરિણામ નથી.
 
 બનાવનાર [Vatsal Shah](https://github.com/shahvatsalofficial). Apache-2.0.

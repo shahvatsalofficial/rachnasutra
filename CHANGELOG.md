@@ -6,7 +6,9 @@ All notable changes follow [Semantic Versioning](https://semver.org/). Report sc
 
 ## 0.5.0
 
-- Seven static rules: duplicate `id` (RS-A11Y-016), frame title (017), skip link when a page has `<nav>` (018), `autocomplete` on email and tel (019), empty heading (020), control border contrast under 3:1 (021), empty `lang` on part of a page (022). `role="img"` is now an image for RS-A11Y-001. RS-A11Y-013 also measures Tailwind `text-[#hex]` with `bg-[#hex]` and a JSX `style={{ color, background }}` object. Named Tailwind colours, CSS modules and styled-components are still not resolved.
+- `audit --mode browser` launches Microsoft Edge or Chromium through Playwright, writes `screenshot.png`, runs axe-core, and attempts Lighthouse. `visual baseline` and `visual compare` save and byte-compare that screenshot. Exit 3 only when Playwright or a browser binary is missing. No result is invented.
+- RS-A11Y-013 now measures Tailwind named colours in `src/tw-color.ts` (`text-gray-400`, `bg-white`, and the listed gray, slate, red, blue, and green steps), `.module.css` files, and `styled.x` / `css` template strings.
+- Seven static rules: duplicate `id` (RS-A11Y-016), frame title (017), skip link when a page has `<nav>` (018), `autocomplete` on email and tel (019), empty heading (020), control border contrast under 3:1 (021), empty `lang` on part of a page (022). `role="img"` is now an image for RS-A11Y-001. RS-A11Y-013 also measures Tailwind `text-[#hex]` with `bg-[#hex]` and a JSX `style={{ color, background }}` object.
 - `rachnasutra history <dir>` writes `history.md` and `history.html` with finding counts from saved JSON. It is not a screenshot comparison.
 - `doctor` prints NOTE for browser, visual review and host smoke tests. Those lines are not a pass. The command still exits 0 when the installed files are fine.
 - `failOn` in `rachnasutra.config.json` accepts `confirmed-critical`. That gate fails on confirmed high and confirmed critical. The name is historical.
@@ -18,7 +20,7 @@ All notable changes follow [Semantic Versioning](https://semver.org/). Report sc
 - npm `rachnasutra@0.4.0` is still the registry `latest` until 0.5.0 is published. A placeholder `0.0.0-stage` is also still listed. A normal install gets 0.4.0 until publish.
 - macOS stays out of CI. GitHub cancelled the queued jobs with zero steps. No macOS result is claimed.
 
-Not in 0.5.0, because a fake result would be worse than a gap: live proof that Claude, Cursor, Codex, Copilot or Gemini loads the 13 skills; a browser pass; beating the published axe-core numbers; a blind re-label of the benchmarks; Windsurf and Kiro adapters (their skill paths are not confirmed).
+Not in 0.5.0, because a fake result would be worse than a gap: live proof that Claude, Cursor, Codex, Copilot or Gemini loads the 13 skills; beating the published static axe-core numbers (92% / 83% against 81% / 73%); a blind re-label of the benchmarks; a macOS CI run; Windsurf and Kiro adapters (their skill paths are not confirmed). Browser mode calls axe-core on the rendered page. That does not change the static-rule comparison.
 
 ## 0.4.0
 

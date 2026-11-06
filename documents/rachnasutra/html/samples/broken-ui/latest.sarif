@@ -6,7 +6,7 @@
       "tool": {
         "driver": {
           "name": "RachnaSutra AI",
-          "version": "0.4.0",
+          "version": "0.5.0",
           "informationUri": "https://github.com/shahvatsalofficial/rachnasutra",
           "rules": [
             {
@@ -150,6 +150,17 @@
               "properties": {
                 "category": "accessibility",
                 "criterion": "WCAG 1.3.1, 2.4.1"
+              }
+            },
+            {
+              "id": "RS-A11Y-019",
+              "name": "EmailOrTelephoneFieldHasNoAutocomplete",
+              "shortDescription": {
+                "text": "Email or telephone field has no autocomplete"
+              },
+              "properties": {
+                "category": "accessibility",
+                "criterion": "WCAG 1.3.5"
               }
             },
             {
@@ -554,6 +565,33 @@
           }
         },
         {
+          "ruleId": "RS-A11Y-019",
+          "level": "warning",
+          "message": {
+            "text": "email field has no autocomplete attribute. Fix: Add autocomplete=\"email\"."
+          },
+          "partialFingerprints": {
+            "rachnasutra": "d5a33ed3df42"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "index.html"
+                },
+                "region": {
+                  "startLine": 16
+                }
+              }
+            }
+          ],
+          "properties": {
+            "confidence": "medium",
+            "status": "review-required",
+            "id": "RS-0013"
+          }
+        },
+        {
           "ruleId": "RS-MOT-001",
           "level": "warning",
           "message": {
@@ -577,7 +615,7 @@
           "properties": {
             "confidence": "high",
             "status": "confirmed",
-            "id": "RS-0013"
+            "id": "RS-0014"
           }
         },
         {
@@ -604,7 +642,7 @@
           "properties": {
             "confidence": "medium",
             "status": "review-required",
-            "id": "RS-0014"
+            "id": "RS-0015"
           }
         },
         {
@@ -631,7 +669,7 @@
           "properties": {
             "confidence": "medium",
             "status": "review-required",
-            "id": "RS-0015"
+            "id": "RS-0016"
           }
         },
         {
@@ -658,7 +696,7 @@
           "properties": {
             "confidence": "medium",
             "status": "review-required",
-            "id": "RS-0016"
+            "id": "RS-0017"
           }
         },
         {
@@ -685,7 +723,7 @@
           "properties": {
             "confidence": "medium",
             "status": "review-required",
-            "id": "RS-0017"
+            "id": "RS-0018"
           }
         },
         {
@@ -712,7 +750,7 @@
           "properties": {
             "confidence": "high",
             "status": "confirmed",
-            "id": "RS-0018"
+            "id": "RS-0019"
           }
         },
         {
@@ -739,7 +777,7 @@
           "properties": {
             "confidence": "medium",
             "status": "review-required",
-            "id": "RS-0019"
+            "id": "RS-0020"
           }
         },
         {
@@ -766,7 +804,7 @@
           "properties": {
             "confidence": "high",
             "status": "confirmed",
-            "id": "RS-0020"
+            "id": "RS-0021"
           }
         },
         {
@@ -793,7 +831,7 @@
           "properties": {
             "confidence": "low",
             "status": "review-required",
-            "id": "RS-0021"
+            "id": "RS-0022"
           }
         }
       ]

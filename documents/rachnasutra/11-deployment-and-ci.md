@@ -83,7 +83,7 @@ The tool is single-threaded and uses memory proportional to the largest files it
 
 ## Doctor
 
-`rachnasutra doctor` prints OK or FAIL for checks that can pass or fail. Browser audit, visual review and live host loading print NOTE. NOTE means not available. It is not a pass. The process still exits 0 when every real check passed.
+`rachnasutra doctor` prints OK or FAIL for checks that can pass or fail. Browser audit, visual review and live host loading print NOTE. NOTE means doctor did not launch a browser and did not open a live IDE. It is not a pass. The process still exits 0 when every real check passed. `audit --mode browser` is a separate command.
 
 `failOn` may be `confirmed-critical`. That value fails the command when a finding is confirmed and high, or confirmed and critical. The word critical in the name is historical. `ci` uses this gate by default.
 

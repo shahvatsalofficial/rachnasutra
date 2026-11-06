@@ -1,4 +1,5 @@
 import { contrastRatio, parseColor } from './color.js';
+import { TW_COLOR } from './tw-color.js';
 import { excerpt } from './redact.js';
 import type { Category, Confidence, Evidence, Severity, SourceFile } from './types.js';
 
@@ -130,9 +131,13 @@ function reportUtilityContrast(d: Doc, t: string, push: (h: RawHit) => void): vo
   };
   for (const m of t.matchAll(/\b(?:class|className)\s*=\s*(?:"([^"]*)"|'([^']*)'|\{`([^`]*)`\})/g)) {
     const cls = m[1] ?? m[2] ?? m[3] ?? '';
-    const fg = /(?:^|\s)text-\[(#[0-9a-fA-F]{3,6})\]/.exec(cls);
-    const bg = /(?:^|\s)bg-\[(#[0-9a-fA-F]{3,6})\]/.exec(cls);
-    if (fg && bg) judge(m.index, fg[1], bg[1], 'Tailwind arbitrary hex utilities on one class string. Named colours, opacity modifiers and the cascade are not resolved.');
+    const fgHex = /(?:^|\s)text-\[(#[0-9a-fA-F]{3,6})\]/.exec(cls);
+    const bgHex = /(?:^|\s)bg-\[(#[0-9a-fA-F]{3,6})\]/.exec(cls);
+    const fgName = /(?:^|\s)text-([a-z]+(?:-\d{2,3})?)(?=\s|$)/.exec(cls);
+    const bgName = /(?:^|\s)bg-([a-z]+(?:-\d{2,3})?)(?=\s|$)/.exec(cls);
+    const fg = fgHex?.[1] ?? (fgName && !fgName[1].includes('/') ? TW_COLOR[fgName[1]] : undefined);
+    const bg = bgHex?.[1] ?? (bgName && !bgName[1].includes('/') ? TW_COLOR[bgName[1]] : undefined);
+    if (fg && bg) judge(m.index, fg, bg, 'Tailwind utilities on one class string. Opacity modifiers, CSS variables and the cascade are not resolved.');
   }
   for (const m of t.matchAll(/\bstyle=\{\{([\s\S]*?)\}\}/g)) {
     if (/\.\.\./.test(m[1])) continue;

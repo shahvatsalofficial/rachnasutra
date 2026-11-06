@@ -1,15 +1,15 @@
 # RachnaSutra AI - UI/UX audit report
 
-- Generated: 2026-11-05T19:28:05.857Z
+- Generated: 2026-11-06T19:17:42.837Z
 - Mode: static (read-only, no network, no model)
 - Root: `<project>\fixtures\intentionally-broken-ui`
 - Files scanned: 2 (.html: 1, .css: 1)
-- Tool: rachnasutra 0.4.0
+- Tool: rachnasutra 0.5.0
 
 ## Executive summary
 
-21 finding(s): 0 critical, 8 high, 7 medium, 5 low, 1 info.
-13 confirmed by deterministic pattern or measurement; 8 need human or runtime review.
+22 finding(s): 0 critical, 8 high, 8 medium, 5 low, 1 info.
+13 confirmed by deterministic pattern or measurement; 9 need human or runtime review.
 
 This is a static review. It does not certify WCAG conformance and gives no quality score, because large areas were not evaluated (see Coverage).
 
@@ -177,7 +177,18 @@ This is a static review. It does not certify WCAG conformance and gives no quali
 - Verify: Measure the rendered bounding box in a browser at the target viewport.
 - Limitations: Padding may enlarge the real target; selector-name match is heuristic.
 
-### RS-0013 - Animations or transitions exist but no prefers-reduced-motion handling
+### RS-0013 - email field has no autocomplete attribute
+
+- Rule: RS-A11Y-019 | Category: accessibility | Severity: **medium** | Confidence: medium | Status: review-required
+- Criterion: WCAG 2.2: 1.3.5 Identify Input Purpose
+- Location: `index.html:16`
+- Evidence: `<input type="email" placeholder="Email">`
+- User impact: Browsers and password managers cannot fill the field, and users retype personal data.
+- Fix: Add autocomplete="email".
+- Verify: Re-run the audit, then use the browser autofill menu on the field.
+- Limitations: Only type=email and type=tel are checked. Other personal fields need a human look.
+
+### RS-0014 - Animations or transitions exist but no prefers-reduced-motion handling
 
 - Rule: RS-MOT-001 | Category: motion | Severity: **medium** | Confidence: high | Status: confirmed
 - Criterion: WCAG 2.2: 2.3.3 Animation from Interactions (AAA, best practice)
@@ -188,7 +199,7 @@ This is a static review. It does not certify WCAG conformance and gives no quali
 - Verify: Enable "reduce motion" in the OS and confirm motion stops.
 - Limitations: Motion may be handled in JavaScript; only CSS was scanned.
 
-### RS-0014 - Fixed width 1200px can overflow narrow viewports
+### RS-0015 - Fixed width 1200px can overflow narrow viewports
 
 - Rule: RS-RESP-002 | Category: responsive | Severity: **medium** | Confidence: medium | Status: review-required
 - Criterion: WCAG 2.2: 1.4.10 Reflow
@@ -199,7 +210,7 @@ This is a static review. It does not certify WCAG conformance and gives no quali
 - Verify: Render at 320x568 and confirm no horizontal scroll.
 - Limitations: A parent container or media query may constrain the element; not rendered.
 
-### RS-0015 - No responsive CSS found (media/container queries, clamp, grid auto-fit, flex-wrap)
+### RS-0016 - No responsive CSS found (media/container queries, clamp, grid auto-fit, flex-wrap)
 
 - Rule: RS-RESP-003 | Category: responsive | Severity: **medium** | Confidence: medium | Status: review-required
 - Location: `styles.css:1`
@@ -209,7 +220,7 @@ This is a static review. It does not certify WCAG conformance and gives no quali
 - Verify: Render at 320, 390, 768, 1024 and 1440 widths and review each screenshot.
 - Limitations: CSS frameworks (Tailwind, Bootstrap) supply responsive rules not visible in source CSS.
 
-### RS-0016 - Heading level skips from h1 to h3
+### RS-0017 - Heading level skips from h1 to h3
 
 - Rule: RS-A11Y-009 | Category: accessibility | Severity: **low** | Confidence: medium | Status: review-required
 - Criterion: WCAG 2.2: 1.3.1 Info and Relationships
@@ -220,7 +231,7 @@ This is a static review. It does not certify WCAG conformance and gives no quali
 - Verify: Inspect the heading outline in the browser accessibility tree.
 - Limitations: Heading order across included partials is not visible to a single-file scan.
 
-### RS-0017 - No main landmark
+### RS-0018 - No main landmark
 
 - Rule: RS-A11Y-015 | Category: accessibility | Severity: **low** | Confidence: medium | Status: review-required
 - Criterion: WCAG 2.2: 1.3.1 Info and Relationships, 2.4.1 Bypass Blocks
@@ -231,7 +242,7 @@ This is a static review. It does not certify WCAG conformance and gives no quali
 - Verify: Check landmarks with a screen-reader landmark list or the browser accessibility tree.
 - Limitations: A shared layout file may provide <main> for this page.
 
-### RS-0018 - Vague link text "click here"
+### RS-0019 - Vague link text "click here"
 
 - Rule: RS-CONT-001 | Category: content | Severity: **low** | Confidence: high | Status: confirmed
 - Criterion: WCAG 2.2: 2.4.4 Link Purpose (In Context)
@@ -242,7 +253,7 @@ This is a static review. It does not certify WCAG conformance and gives no quali
 - Verify: Re-run the audit; review the page link list.
 - Limitations: Surrounding context may make the purpose clear to sighted users.
 
-### RS-0019 - Image has no explicit width and height
+### RS-0020 - Image has no explicit width and height
 
 - Rule: RS-PERF-001 | Category: performance | Severity: **low** | Confidence: medium | Status: review-required
 - Location: `index.html:11`
@@ -252,7 +263,7 @@ This is a static review. It does not certify WCAG conformance and gives no quali
 - Verify: Measure CLS in a lab run (Lighthouse) before and after; compare field data if available.
 - Limitations: CSS elsewhere may already reserve the space; not measured at runtime.
 
-### RS-0020 - Very small text (10px)
+### RS-0021 - Very small text (10px)
 
 - Rule: RS-VIS-001 | Category: visual | Severity: **low** | Confidence: high | Status: confirmed
 - Criterion: WCAG 2.2: 1.4.4 Resize Text (readability)
@@ -263,7 +274,7 @@ This is a static review. It does not certify WCAG conformance and gives no quali
 - Verify: View on a real phone at normal distance.
 - Limitations: Context (legal footers, labels) may justify small text; this is a readability signal.
 
-### RS-0021 - Urgency or scarcity wording needs review
+### RS-0022 - Urgency or scarcity wording needs review
 
 - Rule: RS-TRUST-001 | Category: trust | Severity: **info** | Confidence: low | Status: review-required
 - Location: `index.html:19`

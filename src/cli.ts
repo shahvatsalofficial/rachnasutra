@@ -2,6 +2,7 @@
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { HOSTS, detectHosts, doctor, install, packageRoot, planInstall, uninstall } from './adapters.js';
+import { BrowserMissing, runBrowserAudit, saveScreenshot } from './browser.js';
 import { CONFIG_FILE, SEVERITY_ORDER, loadConfig, runAudit, validateConfig } from './audit.js';
 import { exists } from './fsutil.js';
 import { renderFixPlanHtml, renderFixPlanMarkdown, renderHistoryHtml, renderHistoryMarkdown, renderHtml, renderJson, renderMarkdown, renderSarif, renderTokensHtml, renderTokensMarkdown, renderVerifyHtml, renderVerifyMarkdown, type HistoryRow } from './report.js';
@@ -36,8 +37,10 @@ Deterministic commands (no AI, no network, read-only unless noted):
   config validate [path]      validate ${CONFIG_FILE}
   install | uninstall         aliases of skills install | uninstall
 
-Not available in this version (exit 3, nothing is faked):
-  visual baseline|compare, audit --mode browser
+Browser mode (real browser, exit 3 only when Playwright is not installed):
+  audit --mode browser [path]   screenshot + axe-core + Lighthouse, then the static audit
+  visual baseline [path]        save .rachnasutra/visual/baseline.png
+  visual compare [path]         screenshot again and compare bytes to the baseline
 
 Options:
   --json  --no-report  --dry-run  --force  --host <id>  --target <dir>  --out <dir>  --format <list>
@@ -85,7 +88,8 @@ function textSummary(r: AuditResult): string {
     ...r.findings.slice(0, 40).map((f) => `  ${f.id} [${f.severity}/${f.status}] ${f.rule} ${f.file}${f.line ? `:${f.line}` : ''} - ${f.title}`),
   ];
   if (r.findings.length > 40) lines.push(`  ... ${r.findings.length - 40} more (use --format or --json)`);
-  lines.push('Not evaluated: browser runtime, visual review, screen-reader/keyboard testing, Core Web Vitals.', 'Static review only; this is not a WCAG conformance statement.');
+  const notRun = r.coverage.filter((c) => c.state === 'not-run').map((c) => c.category);
+  lines.push(notRun.length ? `Not evaluated: ${notRun.join(', ')}.` : 'Every listed coverage category ran.', 'This is not a WCAG conformance statement.');
   return lines.join('\n');
 }
 
@@ -147,9 +151,32 @@ async function main(): Promise<number> {
   const target = path.resolve(args.pos[0] ?? '.');
 
   if (cmd === 'visual' || (cmd === 'audit' && args.flags.mode === 'browser')) {
-    const msg = 'Browser and visual audits are not available in this version (planned: see docs/status.md). No browser was launched and no screenshot was taken. Use `audit --mode static`.';
-    write(json ? JSON.stringify({ available: false, message: msg }) : msg);
-    return EXIT.notAvailable;
+    try {
+      if (cmd === 'visual') {
+        const destDir = path.join(target, '.rachnasutra', 'visual');
+        const dest = path.join(destDir, sub === 'compare' ? 'current.png' : 'baseline.png');
+        const shot = await saveScreenshot(target, dest);
+        if (sub === 'compare') {
+          const baseline = path.join(destDir, 'baseline.png');
+          const [a, b] = await Promise.all([fs.readFile(baseline).catch(() => null), fs.readFile(dest)]);
+          if (!a) {
+            process.stderr.write('No baseline. Run: rachnasutra visual baseline\n');
+            return EXIT.usage;
+          }
+          const same = a.equals(b);
+          write(`${shot.channel} screenshot ${dest}\n${same ? 'Matches the baseline byte for byte.' : 'Differs from the baseline. Open both PNG files.'}`);
+          return same ? EXIT.ok : EXIT.findings;
+        }
+        write(`${shot.channel} screenshot written: ${shot.file}`);
+        return EXIT.ok;
+      }
+    } catch (e) {
+      if (e instanceof BrowserMissing) {
+        write(json ? JSON.stringify({ available: false, message: e.message }) : e.message);
+        return EXIT.notAvailable;
+      }
+      throw e;
+    }
   }
 
   switch (cmd) {
@@ -176,8 +203,8 @@ async function main(): Promise<number> {
       const rows: { id: string; ok: boolean; level: 'check' | 'note'; message: string; fix?: string }[] = [
         ...res.map((r) => ({ ...r, level: 'check' as const })),
         { id: 'capability:static-audit', ok: true, level: 'check', message: 'available' },
-        { id: 'capability:browser-audit', ok: true, level: 'note', message: 'not available in this version. No browser is launched. Not a pass.' },
-        { id: 'capability:visual-review', ok: true, level: 'note', message: 'not available in this version. No screenshot is taken. Not a pass.' },
+        { id: 'capability:browser-audit', ok: true, level: 'note', message: 'runs when Playwright is installed (`audit --mode browser`). Otherwise no browser is launched. Not a pass by itself.' },
+        { id: 'capability:visual-review', ok: true, level: 'note', message: 'screenshot baseline and compare run when Playwright is installed. Otherwise no screenshot is taken. Not a pass by itself.' },
         { id: 'model-requirement', ok: true, level: 'note', message: 'none for the CLI. Skills use the IDE model. No host has been smoke-tested.' },
       ];
       write(json ? JSON.stringify(rows, null, 2) : rows.map((r) => `${r.level === 'note' ? 'NOTE' : r.ok ? 'OK  ' : 'FAIL'} ${r.id}: ${r.message}${r.fix ? `\n     fix: ${r.fix}` : ''}`).join('\n'));
@@ -224,6 +251,39 @@ async function main(): Promise<number> {
     case 'accessibility':
     case 'ci': {
       const res = await runAudit(target, cmd === 'accessibility' ? { categories: ['accessibility'] } : {});
+      if (cmd === 'audit' && args.flags.mode === 'browser') {
+        try {
+          const out = path.resolve(String(args.flags.out ?? DEFAULT_REPORT_DIR));
+          const browser = await runBrowserAudit(target, out, res.findings.length + 1);
+          res.findings.push(...browser.findings);
+          res.limitations.push(`Browser ${browser.channel}. Screenshot: ${browser.screenshot}. ${browser.lighthouse}`);
+          const runtime = res.coverage.find((c) => c.category === 'browser runtime');
+          if (runtime) {
+            runtime.state = 'partial';
+            runtime.checks = browser.findings.length;
+            runtime.detail = `axe-core ran in ${browser.channel}. Screenshot saved. This is not a full manual test.`;
+          }
+          const visual = res.coverage.find((c) => c.category === 'visual review');
+          if (visual) {
+            visual.state = 'partial';
+            visual.checks = 1;
+            visual.detail = `Screenshot saved at ${browser.screenshot}. Compare is byte-for-byte, not a perceptual diff.`;
+          }
+          const cwv = res.coverage.find((c) => c.category === 'Core Web Vitals (lab and field)');
+          if (cwv && browser.lighthouse.startsWith('Lighthouse')) {
+            cwv.state = 'partial';
+            cwv.checks = 1;
+            cwv.detail = `${browser.lighthouse} Field data was not collected.`;
+          }
+          write(`Browser ${browser.channel}. Screenshot: ${browser.screenshot}\n${browser.lighthouse}`);
+        } catch (e) {
+          if (e instanceof BrowserMissing) {
+            write(json ? JSON.stringify({ available: false, message: e.message }) : e.message);
+            return EXIT.notAvailable;
+          }
+          throw e;
+        }
+      }
       if (cmd === 'ci') {
         if (!args.flags.format) args.flags.json = true;
       } else if (!args.flags.json && !args.flags.format && !args.flags.out && !args.flags['no-report']) {
@@ -377,12 +437,10 @@ async function main(): Promise<number> {
 }
 
 main().then(
-  (code) => {
-    process.exitCode = code;
-  },
+  (code) => process.exit(code),
   (e: Error) => {
     process.stderr.write(`rachnasutra: ${e.message}\n`);
     if (process.argv.includes('--verbose')) process.stderr.write(`${e.stack}\n`);
-    process.exitCode = EXIT.error;
+    process.exit(EXIT.error);
   },
 );
