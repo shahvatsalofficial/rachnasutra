@@ -4,6 +4,8 @@ All notable changes follow [Semantic Versioning](https://semver.org/). Report sc
 
 ## Unreleased
 
+- `.github/workflows/publish.yml` publishes the `package.json` version to npm on a manual run or a `vX.Y.Z` tag. It uses npm trusted publishing. No npm token is stored in GitHub.
+
 ## 0.5.0
 
 - `audit --mode browser` launches Microsoft Edge or Chromium through Playwright, writes `screenshot.png`, runs axe-core, and attempts Lighthouse. `visual baseline` and `visual compare` save and byte-compare that screenshot. Exit 3 only when Playwright or a browser binary is missing. No result is invented.

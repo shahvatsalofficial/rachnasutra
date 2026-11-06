@@ -104,13 +104,15 @@ The package name is `rachnasutra`. It is public. The npm account that publishes 
 
 Maintainer publish, from a clean `main` after CI is green:
 
-1. `node --version` is 20 or newer. `npm whoami` prints `shahvatsal`. If it does not, run `npm login` in a terminal. Do not paste the token into chat.
-2. `npm view rachnasutra version` must be the previous release, or 404 for the first publish. Do not publish a version that already exists.
-3. Bump `version` in `package.json` and `toolVersion()` in `src/audit.ts`. Add a `CHANGELOG.md` section. Commit and push. Wait until the Linux and Windows CI run is green.
-4. `npm publish --access public`. `prepublishOnly` runs `npm test` and `npm run verify`. If either fails, npm does not publish. If npm asks for a one-time password, enter it in that terminal.
-5. `npm view rachnasutra version` must print the version you just published. Tag it on GitHub if that tag does not exist: `git tag -a vX.Y.Z -m "vX.Y.Z"` then `git push origin vX.Y.Z`.
+1. Bump `version` in `package.json` and `toolVersion()` in `src/audit.ts`. Add a `CHANGELOG.md` section. Commit and push. Wait until the Linux and Windows CI run is green.
+2. Publish with GitHub Actions, not from a laptop. `.github/workflows/publish.yml` runs on **Actions → Publish → Run workflow**, and also when a tag `vX.Y.Z` is pushed. The tag must equal `package.json` `version`. The job refuses to publish a version that is already on npm. `prepublishOnly` still runs `npm test` and `npm run verify`.
+3. One-time setup on npm, as `shahvatsal`. Open the `rachnasutra` package on npmjs.com, then **Settings → Trusted Publisher → GitHub Actions**. Set the repository owner to `shahvatsalofficial`, the repository to `rachnasutra`, and the workflow filename to `publish.yml`. Leave the environment name empty. Save. Do not create an `NPM_TOKEN` secret. The Action uses GitHub's short-lived OIDC token.
+4. After that save, run the workflow, or push the tag: `git tag -a vX.Y.Z -m "vX.Y.Z"` then `git push origin vX.Y.Z`.
+5. `npm view rachnasutra version` must print the version you just published.
 
-Unpublish is only available for 72 hours, and only if nothing else depends on the version. Prefer a new patch version over an unpublish.
+A local `npm publish --access public` still works if `npm whoami` prints `shahvatsal`. npm will ask for a one-time password in that terminal. Do not paste the password or a token into chat.
+
+Unpublish is only available for 72 hours, and only if nothing else depends on the version. The publish workflow does not unpublish. Prefer a new patch version over an unpublish. Removing `0.0.0-stage` still needs `npm unpublish rachnasutra@0.0.0-stage` from a terminal, and npm will ask for the one-time password.
 
 ## Upgrade and rollback
 
