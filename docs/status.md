@@ -23,7 +23,7 @@ Last updated for 0.5.0. Statuses: **implemented** (code + test), **adapter** (fi
 | Doctor lines for browser and visual | implemented | Printed as NOTE, not OK. Exit code stays 0 |
 | `failOn: confirmed-critical` in config | implemented | Means confirmed high or confirmed critical. The name is historical |
 | Docs page title | implemented | No longer repeats "RachnaSutra AI Documentation" |
-| Dockerfile | implemented | `node:22-bookworm-slim`, CLI entrypoint. Not a browser image |
+| Dockerfile | implemented | `node:22-bookworm-slim`, CLI entrypoint. Not a browser image. GitHub Actions builds it on Ubuntu |
 | Gujarati README | implemented | `README.gu.md`, short. Full docs stay English |
 | Tailwind named colours, CSS modules, styled-components | implemented for a fixed palette | `text-gray-400` / `bg-white` and the scales in `src/tw-color.ts`. `.module.css` is normal CSS. `styled.x` and `css` template strings are extracted. Other CSS-in-JS is not |
 | Report viewer dashboard | partial | self-contained HTML report, plus `history` counts |

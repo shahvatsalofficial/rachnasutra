@@ -13,7 +13,7 @@ All notable changes follow [Semantic Versioning](https://semver.org/). Report sc
 - `doctor` prints NOTE for browser, visual review and host smoke tests. Those lines are not a pass. The command still exits 0 when the installed files are fine.
 - `failOn` in `rachnasutra.config.json` accepts `confirmed-critical`. That gate fails on confirmed high and confirmed critical. The name is historical.
 - Docs home title no longer repeats. `package.json` homepage is the live docs site. `package-lock.json` version matches the package.
-- `Dockerfile` runs the static CLI on Node 22. No browser is installed in the image.
+- `Dockerfile` runs the static CLI on Node 22. No browser is installed in the image. `.github/workflows/docker.yml` builds that image on Ubuntu. `.github/workflows/browser.yml` installs Chromium and checks that a broken page writes `screenshot.png` and axe findings.
 - Short Gujarati overview: `README.gu.md`.
 - CI rebuilds the HTML docs and fails if the committed HTML drifted.
 - Documentation site is live at <https://shahvatsalofficial.github.io/rachnasutra/>.

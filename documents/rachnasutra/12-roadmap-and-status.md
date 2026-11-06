@@ -29,7 +29,7 @@
 | axe-core integration | implemented when installed | Runs inside the browser mode. Findings use `axe/` rule ids |
 | Lighthouse and Core Web Vitals | partial | Browser mode attempts a lab run. Field data is not collected |
 | Screenshots and visual baselines | implemented when installed | `visual baseline` and `visual compare` (byte compare) |
-| Container image | implemented | `Dockerfile`, static CLI, no browser |
+| Container image | implemented | `Dockerfile`, static CLI, no browser. Built on GitHub Actions Ubuntu. Not built on the maintainer PC |
 | API or local-model provider modes | planned | Skills use the host model today |
 | Report viewer dashboard | partial | One HTML report per run, plus `history` counts |
 | Rule examples and per-rule tests | implemented | 33 rules, 140 tests |

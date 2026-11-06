@@ -75,7 +75,7 @@ The tool is single-threaded and uses memory proportional to the largest files it
 
 ## Container
 
-`Dockerfile` uses `node:22-bookworm-slim`, runs `npm ci` and `npm run build`, and starts `node dist/cli.js`. Mount the project read-only and pass the audit command. The image has no browser. Example: `docker build -t rachnasutra .` then `docker run --rm -v "$PWD:/work:ro" -w /work rachnasutra audit /work`.
+`Dockerfile` uses `node:22-bookworm-slim`, runs `npm ci --ignore-scripts` and `npm run build`, and starts `node dist/cli.js`. Mount the project read-only and pass the audit command. The image has no browser. `.github/workflows/docker.yml` builds it on Ubuntu and runs `version`. This PC has no Docker, so the image was not built here. Example: `docker build -t rachnasutra .` then `docker run --rm -v "$PWD:/work:ro" -w /work rachnasutra audit /work`.
 
 ## Saved-report history
 
