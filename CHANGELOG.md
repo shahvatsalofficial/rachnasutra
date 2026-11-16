@@ -4,6 +4,12 @@ All notable changes follow [Semantic Versioning](https://semver.org/). Report sc
 
 ## Unreleased
 
+## 0.5.2
+
+- Dev dependency `playwright` is 1.65.1 (patch). The GitHub Action `codeql-action/upload-sarif` is 4.39.3, pinned by SHA.
+- No change to rules, report formats or exit codes.
+- Tag `v0.5.2` publishes this version through `.github/workflows/publish.yml`.
+
 ## 0.5.1
 
 - Dev dependency `lighthouse` is 13.6.0. The lockfile no longer contains vulnerable `minimatch` 9 or the OpenTelemetry instrumentation packages from the Lighthouse 12 tree. `npm ci` reports 0 vulnerabilities. Browser mode still records Lighthouse lab scores.

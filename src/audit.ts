@@ -23,7 +23,7 @@ export function extractCssInJs(text: string): string {
 export const CONFIG_FILE = 'rachnasutra.config.json';
 
 export function toolVersion(): string {
-  return '0.5.1';
+  return '0.5.2';
 }
 
 export async function loadConfig(root: string): Promise<AuditConfig> {

@@ -6,7 +6,7 @@
       "tool": {
         "driver": {
           "name": "RachnaSutra AI",
-          "version": "0.5.1",
+          "version": "0.5.2",
           "informationUri": "https://github.com/shahvatsalofficial/rachnasutra",
           "rules": [
             {

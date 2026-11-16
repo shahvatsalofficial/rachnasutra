@@ -2,9 +2,9 @@
   "schemaVersion": "1.0.0",
   "tool": {
     "name": "rachnasutra",
-    "version": "0.5.1"
+    "version": "0.5.2"
   },
-  "generatedAt": "2026-11-06T19:46:25.862Z",
+  "generatedAt": "2026-11-16T17:37:01.260Z",
   "root": "<project>\\fixtures\\intentionally-broken-ui",
   "mode": "static",
   "filesScanned": 2,
