@@ -2,9 +2,9 @@
   "schemaVersion": "1.0.0",
   "tool": {
     "name": "rachnasutra",
-    "version": "0.5.1"
+    "version": "0.5.2"
   },
-  "generatedAt": "2026-11-06T19:46:26.797Z",
+  "generatedAt": "2026-11-16T17:40:55.746Z",
   "root": "<project>\\fixtures\\good-ui",
   "mode": "static",
   "filesScanned": 2,
