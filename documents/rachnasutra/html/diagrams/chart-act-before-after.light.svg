@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 242" width="1040" height="242" role="img" aria-labelledby="t d">
+<title id="t">ACT benchmark before and after fixing the defects it found</title>
+<desc id="d">Precision and recall rose from 53 and 38 percent on the first run to 71 and 65 percent after the fixes.</desc>
+<style>
+:root{--bg:#fbfaf7;--card:#ffffff;--fg:#1c1a17;--muted:#5b564f;--line:#bdb5a8;--brand:#8a3b12;--brand2:#f8e6da;--blue:#0b5cad;--blue2:#e4eefa;--green:#1d6b3f;--green2:#e2f3e9;--amber:#7a5200;--amber2:#fbf0d0;--red:#9a1f1f;--red2:#fbe4e4;--grid:#e7e2d8}
+text{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;fill:var(--fg)}
+.h{font-size:22px;font-weight:700}.t{font-size:15px;font-weight:700}.s{font-size:12.5px;fill:var(--muted)}.m{font-family:ui-monospace,Consolas,"Liberation Mono",monospace;font-size:12.5px}
+.n{font-size:12px;font-weight:700;fill:#fff}.ax{font-size:12px;fill:var(--muted)}.lbl{font-size:12px;font-weight:600;fill:var(--muted)}
+</style>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--muted)"/></marker></defs>
+<rect width="1040" height="242" fill="var(--bg)"/>
+<text x="24" y="36" class="h" text-anchor="start">What the benchmark taught us</text>
+<text x="24" y="58" class="s" text-anchor="start">The first run exposed real rule defects; they were fixed and each got a regression test. (Not a blind result.)</text>
+<line x1="284" y1="90" x2="284" y2="198" stroke="var(--grid)" stroke-width="1" />
+<text x="284" y="216" class="ax" text-anchor="middle">0%</text>
+<line x1="450.5" y1="90" x2="450.5" y2="198" stroke="var(--grid)" stroke-width="1" />
+<text x="450.5" y="216" class="ax" text-anchor="middle">25%</text>
+<line x1="617" y1="90" x2="617" y2="198" stroke="var(--grid)" stroke-width="1" />
+<text x="617" y="216" class="ax" text-anchor="middle">50%</text>
+<line x1="783.5" y1="90" x2="783.5" y2="198" stroke="var(--grid)" stroke-width="1" />
+<text x="783.5" y="216" class="ax" text-anchor="middle">75%</text>
+<line x1="950" y1="90" x2="950" y2="198" stroke="var(--grid)" stroke-width="1" />
+<text x="950" y="216" class="ax" text-anchor="middle">100%</text>
+<rect x="24" y="70" width="14" height="14" rx="3" fill="var(--blue)"/>
+<text x="44" y="82" class="ax" text-anchor="start">Precision</text>
+<rect x="214" y="70" width="14" height="14" rx="3" fill="var(--green)"/>
+<text x="234" y="82" class="ax" text-anchor="start">Recall</text>
+<text x="24" y="126" class="s" text-anchor="start">First run (before any fix)</text>
+<rect x="284" y="100" width="352.98" height="13" rx="3" fill="var(--blue)"/>
+<text x="644.98" y="112" class="ax" text-anchor="start">53%</text>
+<rect x="284" y="118" width="253.08" height="13" rx="3" fill="var(--green)"/>
+<text x="545.08" y="130" class="ax" text-anchor="start">38%</text>
+<text x="24" y="182" class="s" text-anchor="start">After fixes (v0.2.0)</text>
+<rect x="284" y="156" width="472.85999999999996" height="13" rx="3" fill="var(--blue)"/>
+<text x="764.8599999999999" y="168" class="ax" text-anchor="start">71%</text>
+<rect x="284" y="174" width="432.90000000000003" height="13" rx="3" fill="var(--green)"/>
+<text x="724.9000000000001" y="186" class="ax" text-anchor="start">65%</text>
+</svg>

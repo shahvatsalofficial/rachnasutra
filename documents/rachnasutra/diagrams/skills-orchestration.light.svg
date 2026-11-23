@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 610" width="1040" height="610" role="img" aria-labelledby="t d">
+<title id="t">How RachnaSutra Prime orchestrates the skills</title>
+<desc id="d">Prime detects capabilities, sets a read-only scope, runs the CLI, picks only the specialists needed, asks for approval, then canvas edits and verify proves the result.</desc>
+<style>
+:root{--bg:#fbfaf7;--card:#ffffff;--fg:#1c1a17;--muted:#5b564f;--line:#bdb5a8;--brand:#8a3b12;--brand2:#f8e6da;--blue:#0b5cad;--blue2:#e4eefa;--green:#1d6b3f;--green2:#e2f3e9;--amber:#7a5200;--amber2:#fbf0d0;--red:#9a1f1f;--red2:#fbe4e4;--grid:#e7e2d8}
+text{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;fill:var(--fg)}
+.h{font-size:22px;font-weight:700}.t{font-size:15px;font-weight:700}.s{font-size:12.5px;fill:var(--muted)}.m{font-family:ui-monospace,Consolas,"Liberation Mono",monospace;font-size:12.5px}
+.n{font-size:12px;font-weight:700;fill:#fff}.ax{font-size:12px;fill:var(--muted)}.lbl{font-size:12px;font-weight:600;fill:var(--muted)}
+</style>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--muted)"/></marker></defs>
+<rect width="1040" height="610" fill="var(--bg)"/>
+<text x="24" y="36" class="h" text-anchor="start">How the 13 skills work together</text>
+<text x="24" y="58" class="s" text-anchor="start">Prime picks only the specialists the task needs</text>
+<rect x="24" y="90" width="200" height="70" rx="12" fill="var(--card)" stroke="var(--line)" stroke-width="1.6"/>
+<text x="124" y="120.5" class="t" text-anchor="middle">You ask</text>
+<text x="124" y="139.5" class="s" text-anchor="middle">"review my UI"</text>
+<rect x="274" y="80" width="300" height="150" rx="12" fill="var(--brand2)" stroke="var(--brand)" stroke-width="1.6"/>
+<text x="424" y="122" class="t" text-anchor="middle">rachnasutra-prime</text>
+<text x="424" y="141" class="s" text-anchor="middle">1 detect what the host can do</text>
+<text x="424" y="160" class="s" text-anchor="middle">2 set read-only scope</text>
+<text x="424" y="179" class="s" text-anchor="middle">3 run the CLI as evidence</text>
+<text x="424" y="198" class="s" text-anchor="middle">4 choose specialists</text>
+<path d="M224 125 L274 125" fill="none" stroke="var(--muted)" stroke-width="1.8"  marker-end="url(#ah)"/>
+<rect x="640" y="80" width="184" height="50" rx="12" fill="var(--blue2)" stroke="var(--blue)" stroke-width="1.6"/>
+<text x="732" y="100.5" class="t" text-anchor="middle">rachnasutra-access</text>
+<text x="732" y="119.5" class="s" text-anchor="middle">WCAG 2.2</text>
+<rect x="840" y="80" width="184" height="50" rx="12" fill="var(--blue2)" stroke="var(--blue)" stroke-width="1.6"/>
+<text x="932" y="100.5" class="t" text-anchor="middle">rachnasutra-adapt</text>
+<text x="932" y="119.5" class="s" text-anchor="middle">responsive, TV</text>
+<rect x="640" y="142" width="184" height="50" rx="12" fill="var(--blue2)" stroke="var(--blue)" stroke-width="1.6"/>
+<text x="732" y="162.5" class="t" text-anchor="middle">rachnasutra-tokens</text>
+<text x="732" y="181.5" class="s" text-anchor="middle">design system</text>
+<rect x="840" y="142" width="184" height="50" rx="12" fill="var(--blue2)" stroke="var(--blue)" stroke-width="1.6"/>
+<text x="932" y="162.5" class="t" text-anchor="middle">rachnasutra-vision</text>
+<text x="932" y="181.5" class="s" text-anchor="middle">hierarchy</text>
+<rect x="640" y="204" width="184" height="50" rx="12" fill="var(--blue2)" stroke="var(--blue)" stroke-width="1.6"/>
+<text x="732" y="224.5" class="t" text-anchor="middle">rachnasutra-flow</text>
+<text x="732" y="243.5" class="s" text-anchor="middle">journeys, forms</text>
+<rect x="840" y="204" width="184" height="50" rx="12" fill="var(--blue2)" stroke="var(--blue)" stroke-width="1.6"/>
+<text x="932" y="224.5" class="t" text-anchor="middle">rachnasutra-content</text>
+<text x="932" y="243.5" class="s" text-anchor="middle">copy, i18n</text>
+<rect x="640" y="266" width="184" height="50" rx="12" fill="var(--blue2)" stroke="var(--blue)" stroke-width="1.6"/>
+<text x="732" y="286.5" class="t" text-anchor="middle">rachnasutra-motion</text>
+<text x="732" y="305.5" class="s" text-anchor="middle">reduced motion</text>
+<rect x="840" y="266" width="184" height="50" rx="12" fill="var(--blue2)" stroke="var(--blue)" stroke-width="1.6"/>
+<text x="932" y="286.5" class="t" text-anchor="middle">rachnasutra-speed</text>
+<text x="932" y="305.5" class="s" text-anchor="middle">web vitals</text>
+<rect x="640" y="328" width="184" height="50" rx="12" fill="var(--blue2)" stroke="var(--blue)" stroke-width="1.6"/>
+<text x="732" y="348.5" class="t" text-anchor="middle">rachnasutra-convert</text>
+<text x="732" y="367.5" class="s" text-anchor="middle">ethical CTAs</text>
+<rect x="840" y="328" width="184" height="50" rx="12" fill="var(--blue2)" stroke="var(--blue)" stroke-width="1.6"/>
+<text x="932" y="348.5" class="t" text-anchor="middle">rachnasutra-audit</text>
+<text x="932" y="367.5" class="s" text-anchor="middle">full report</text>
+<path d="M574 155 L640 155" fill="none" stroke="var(--muted)" stroke-width="1.8"  marker-end="url(#ah)"/>
+<polygon points="420,275 550,330 420,385 290,330" fill="var(--amber2)" stroke="var(--amber)" stroke-width="1.6"/>
+<text x="420" y="325.5" class="t" text-anchor="middle">You approve</text>
+<text x="420" y="342.5" class="t" text-anchor="middle">the change plan?</text>
+<path d="M424 230 L424 275" fill="none" stroke="var(--muted)" stroke-width="1.8"  marker-end="url(#ah)"/>
+<rect x="24" y="306" width="230" height="56" rx="12" fill="var(--card)" stroke="var(--line)" stroke-width="1.6"/>
+<text x="139" y="329.5" class="t" text-anchor="middle">No: stay read-only</text>
+<text x="139" y="348.5" class="s" text-anchor="middle">report only</text>
+<path d="M290 330 L254 330" fill="none" stroke="var(--muted)" stroke-width="1.8"  marker-end="url(#ah)"/>
+<rect x="640" y="420" width="376" height="56" rx="12" fill="var(--green2)" stroke="var(--green)" stroke-width="1.6"/>
+<text x="828" y="443.5" class="t" text-anchor="middle">rachnasutra-canvas</text>
+<text x="828" y="462.5" class="s" text-anchor="middle">smallest diff, behaviour preserved</text>
+<path d="M550 330 L600 330 L600 448 L640 448" fill="none" stroke="var(--muted)" stroke-width="1.8"  marker-end="url(#ah)"/>
+<text x="585" y="322" class="lbl" text-anchor="middle">yes</text>
+<rect x="640" y="510" width="376" height="56" rx="12" fill="var(--brand2)" stroke="var(--brand)" stroke-width="1.6"/>
+<text x="828" y="533.5" class="t" text-anchor="middle">rachnasutra-verify</text>
+<text x="828" y="552.5" class="s" text-anchor="middle">verify --report, tests, regressions first</text>
+<path d="M828 476 L828 510" fill="none" stroke="var(--muted)" stroke-width="1.8"  marker-end="url(#ah)"/>
+<text x="24" y="590" class="s" text-anchor="start">Without native subagents the same steps run one after another in a single conversation.</text>
+</svg>

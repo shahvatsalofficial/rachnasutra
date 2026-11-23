@@ -5,6 +5,7 @@ All notable changes follow [Semantic Versioning](https://semver.org/). Report sc
 ## Unreleased
 
 - Documentation overhaul: a designed home page, a five-minute tour with real output and screenshots, seven real-world scenarios, 14 diagrams and data charts (flow charts, decision tree, CI gate, skill orchestration, report anatomy, benchmark charts) that follow light and dark mode, grouped navigation, and figures added to the user guide, architecture, skills, CI and validation pages
+- Site redesign: website-style home page, top navigation, footer, light theme by default with a remembered dark toggle, theme-matched diagrams (light and dark SVG variants), tap-to-enlarge lightbox so wide diagrams are readable on phones, mobile drawer navigation
 - `npm run diagrams` regenerates the SVGs from the published benchmark data; `npm run images` recaptures the report screenshots
 
 ## 0.5.2

@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 422" width="1040" height="422" role="img" aria-labelledby="t d">
+<title id="t">Findings in the intentionally broken sample</title>
+<desc id="d">The broken sample page produces 22 findings; bars show counts by severity and by category.</desc>
+<style>
+:root{--bg:#fbfaf7;--card:#ffffff;--fg:#1c1a17;--muted:#5b564f;--line:#bdb5a8;--brand:#8a3b12;--brand2:#f8e6da;--blue:#0b5cad;--blue2:#e4eefa;--green:#1d6b3f;--green2:#e2f3e9;--amber:#7a5200;--amber2:#fbf0d0;--red:#9a1f1f;--red2:#fbe4e4;--grid:#e7e2d8}
+text{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;fill:var(--fg)}
+.h{font-size:22px;font-weight:700}.t{font-size:15px;font-weight:700}.s{font-size:12.5px;fill:var(--muted)}.m{font-family:ui-monospace,Consolas,"Liberation Mono",monospace;font-size:12.5px}
+.n{font-size:12px;font-weight:700;fill:#fff}.ax{font-size:12px;fill:var(--muted)}.lbl{font-size:12px;font-weight:600;fill:var(--muted)}
+</style>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--muted)"/></marker></defs>
+<rect width="1040" height="422" fill="var(--bg)"/>
+<text x="24" y="36" class="h" text-anchor="start">The broken sample: 22 findings</text>
+<text x="24" y="58" class="s" text-anchor="start">Counts by severity (left) and category (right), straight from samples/broken-ui/latest.json</text>
+<text x="24" y="96" class="t" text-anchor="start">By severity</text>
+<text x="540" y="96" class="t" text-anchor="start">By category</text>
+<text x="24" y="132" class="s" text-anchor="start">critical</text>
+<rect x="110" y="116" width="0" height="22" rx="4" fill="var(--red)"/>
+<text x="118" y="132" class="ax" text-anchor="start">0</text>
+<text x="24" y="168" class="s" text-anchor="start">high</text>
+<rect x="110" y="152" width="176" height="22" rx="4" fill="var(--red)"/>
+<text x="294" y="168" class="ax" text-anchor="start">8</text>
+<text x="24" y="204" class="s" text-anchor="start">medium</text>
+<rect x="110" y="188" width="176" height="22" rx="4" fill="var(--amber)"/>
+<text x="294" y="204" class="ax" text-anchor="start">8</text>
+<text x="24" y="240" class="s" text-anchor="start">low</text>
+<rect x="110" y="224" width="110" height="22" rx="4" fill="var(--blue)"/>
+<text x="228" y="240" class="ax" text-anchor="start">5</text>
+<text x="24" y="276" class="s" text-anchor="start">info</text>
+<rect x="110" y="260" width="22" height="22" rx="4" fill="var(--muted)"/>
+<text x="140" y="276" class="ax" text-anchor="start">1</text>
+<text x="540" y="132" class="s" text-anchor="start">accessibility</text>
+<rect x="650" y="116" width="330" height="22" rx="4" fill="var(--brand)"/>
+<text x="988" y="132" class="ax" text-anchor="start">15</text>
+<text x="540" y="168" class="s" text-anchor="start">responsive</text>
+<rect x="650" y="152" width="44" height="22" rx="4" fill="var(--brand)"/>
+<text x="702" y="168" class="ax" text-anchor="start">2</text>
+<text x="540" y="204" class="s" text-anchor="start">motion</text>
+<rect x="650" y="188" width="22" height="22" rx="4" fill="var(--brand)"/>
+<text x="680" y="204" class="ax" text-anchor="start">1</text>
+<text x="540" y="240" class="s" text-anchor="start">content</text>
+<rect x="650" y="224" width="22" height="22" rx="4" fill="var(--brand)"/>
+<text x="680" y="240" class="ax" text-anchor="start">1</text>
+<text x="540" y="276" class="s" text-anchor="start">performance</text>
+<rect x="650" y="260" width="22" height="22" rx="4" fill="var(--brand)"/>
+<text x="680" y="276" class="ax" text-anchor="start">1</text>
+<text x="540" y="312" class="s" text-anchor="start">visual</text>
+<rect x="650" y="296" width="22" height="22" rx="4" fill="var(--brand)"/>
+<text x="680" y="312" class="ax" text-anchor="start">1</text>
+<text x="540" y="348" class="s" text-anchor="start">trust</text>
+<rect x="650" y="332" width="22" height="22" rx="4" fill="var(--brand)"/>
+<text x="680" y="348" class="ax" text-anchor="start">1</text>
+</svg>

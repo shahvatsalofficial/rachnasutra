@@ -12,12 +12,16 @@ const readJson = (p) => JSON.parse(readFileSync(path.join(root, p), 'utf8'));
 const RULES = RULE_CATALOG.length;
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
-const STYLE = `<style>
-:root{--bg:#fbfaf7;--card:#ffffff;--fg:#1c1a17;--muted:#5b564f;--line:#bdb5a8;--brand:#8a3b12;--brand2:#f8e6da;--blue:#0b5cad;--blue2:#e4eefa;--green:#1d6b3f;--green2:#e2f3e9;--amber:#7a5200;--amber2:#fbf0d0;--red:#9a1f1f;--red2:#fbe4e4;--grid:#e7e2d8}
-@media (prefers-color-scheme:dark){:root{--bg:#12100e;--card:#1b1815;--fg:#f2eee7;--muted:#bdb5a8;--line:#575045;--brand:#f0a070;--brand2:#3a2417;--blue:#8fc0f0;--blue2:#14283d;--green:#8fd6a8;--green2:#16301f;--amber:#f0d070;--amber2:#33290d;--red:#ff9a9a;--red2:#3b1717;--grid:#2c2822}}
-text{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;fill:var(--fg)}
+const LIGHT = '--bg:#fbfaf7;--card:#ffffff;--fg:#1c1a17;--muted:#5b564f;--line:#bdb5a8;--brand:#8a3b12;--brand2:#f8e6da;--blue:#0b5cad;--blue2:#e4eefa;--green:#1d6b3f;--green2:#e2f3e9;--amber:#7a5200;--amber2:#fbf0d0;--red:#9a1f1f;--red2:#fbe4e4;--grid:#e7e2d8';
+const DARK = '--bg:#12100e;--card:#1b1815;--fg:#f2eee7;--muted:#bdb5a8;--line:#575045;--brand:#f0a070;--brand2:#3a2417;--blue:#8fc0f0;--blue2:#14283d;--green:#8fd6a8;--green2:#16301f;--amber:#f0d070;--amber2:#33290d;--red:#ff9a9a;--red2:#3b1717;--grid:#2c2822';
+const RULES_CSS = `text{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;fill:var(--fg)}
 .h{font-size:22px;font-weight:700}.t{font-size:15px;font-weight:700}.s{font-size:12.5px;fill:var(--muted)}.m{font-family:ui-monospace,Consolas,"Liberation Mono",monospace;font-size:12.5px}
-.n{font-size:12px;font-weight:700;fill:#fff}.ax{font-size:12px;fill:var(--muted)}.lbl{font-size:12px;font-weight:600;fill:var(--muted)}
+.n{font-size:12px;font-weight:700;fill:#fff}.ax{font-size:12px;fill:var(--muted)}.lbl{font-size:12px;font-weight:600;fill:var(--muted)}`;
+// theme: 'auto' follows the viewer's OS (used by GitHub and direct links); 'light' and 'dark' are fixed (used by the docs site toggle)
+const styleFor = (theme) => `<style>
+${theme === 'auto' ? `:root{${LIGHT}}
+@media (prefers-color-scheme:dark){:root{${DARK}}}` : `:root{${theme === 'dark' ? DARK : LIGHT}}`}
+${RULES_CSS}
 </style>
 <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--muted)"/></marker></defs>`;
 
@@ -74,17 +78,22 @@ class Svg {
   }
   line(x1, y1, x2, y2, cls = '') { return this.add(`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="var(--grid)" stroke-width="1" ${cls}/>`); }
   rect(x, y, w, h, fill, rx = 4) { return this.add(`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${rx}" fill="${fill}"/>`); }
-  render() {
+  render(theme = 'auto') {
     return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${this.w} ${this.h}" width="${this.w}" height="${this.h}" role="img" aria-labelledby="t d">
 <title id="t">${esc(this.title)}</title>
 <desc id="d">${esc(this.desc)}</desc>
-${STYLE}
+${styleFor(theme)}
 <rect width="${this.w}" height="${this.h}" fill="var(--bg)"/>
 ${this.parts.join('\n')}
 </svg>
 `;
   }
-  save(name) { writeFileSync(path.join(outDir, name), this.render()); console.log('wrote', name); }
+  save(name) {
+    writeFileSync(path.join(outDir, name), this.render('auto'));
+    writeFileSync(path.join(outDir, name.replace(/\.svg$/, '.light.svg')), this.render('light'));
+    writeFileSync(path.join(outDir, name.replace(/\.svg$/, '.dark.svg')), this.render('dark'));
+    console.log('wrote', name);
+  }
 }
 
 // ---------- 1. how it works ----------

@@ -1,74 +1,90 @@
-<div class="hero">
+<section class="hero-band">
+<div class="wrap hero">
+<div>
 <span class="eyebrow">Open source &middot; Apache-2.0 &middot; v{{version}}</span>
-<h1>Find, fix and prove UI and accessibility problems.</h1>
-<p class="lead">RachnaSutra AI reads your front-end code, tells you exactly what is wrong and where, and then proves the fix worked. One command writes easy-to-read Markdown and HTML reports. No account. No API key. Your code never leaves your machine.</p>
+<h1>Find, fix and <em>prove</em> UI and accessibility problems.</h1>
+<p class="lead">RachnaSutra AI reads your front-end code, tells you exactly what is wrong and where, then proves the fix worked. One command writes easy-to-read HTML and Markdown reports. No account, no API key, and your code never leaves your machine.</p>
 <div class="btns">
 <a class="btn primary" href="18-quick-tour.html">Take the 5-minute tour</a>
 <a class="btn" href="19-real-world-scenarios.html">See real-world scenarios</a>
-<a class="btn" href="https://github.com/shahvatsalofficial/rachnasutra" rel="noopener">Star on GitHub</a>
+</div>
+<p class="hero-note">Run <code>npx rachnasutra audit .</code> in any front-end project. Node.js 20 or newer.</p>
+</div>
+<div class="frame" aria-label="A real audit report">
+<div class="bar"><i></i><i></i><i></i><span>rachnasutra-reports/latest.html</span></div>
+<a href="images/report-desktop.png" class="zoom" aria-label="Enlarge the sample report"><img src="images/report-desktop.png" alt="A real HTML audit report with summary tiles and a Fix these first list" width="1200" height="900"></a>
 </div>
 </div>
+</section>
 
-<div class="term" role="region" aria-label="Quick start commands" tabindex="0"><span class="c"># audit a project: reads files, never changes them</span>
-<span class="p">$</span> npx rachnasutra audit .
-Scanned 2 file(s). 22 finding(s): 0 critical, 8 high, 8 medium, 5 low, 1 info.
-  RS-0001 [high/confirmed] index.html:11 - Image has no alt attribute
-  RS-0007 [high/confirmed] index.html:20 - Text contrast 2.32:1 is below 4.5:1
-Open the report in your browser: rachnasutra-reports/latest.html
-
-<span class="c"># after fixing: prove it, and keep it fixed</span>
-<span class="p">$</span> npx rachnasutra verify --report rachnasutra-reports/latest.json .
-Resolved: 4  Remaining: 18  Introduced: 0</div>
-
+<div class="wrap">
 <div class="stats">
-<div class="stat"><b>{{rules}}</b><span>static rules, each with a failing and a passing test</span></div>
+<div class="stat"><b>{{rules}}</b><span>static rules, each tested failing and passing</span></div>
 <div class="stat"><b>{{tests}}</b><span>automated tests</span></div>
 <div class="stat"><b>{{skills}}</b><span>agent skills for AI IDEs</span></div>
-<div class="stat"><b>0</b><span>API keys, accounts or telemetry</span></div>
 <div class="stat"><b>4</b><span>report formats: HTML, Markdown, JSON, SARIF</span></div>
+<div class="stat"><b>0</b><span>API keys, accounts or telemetry</span></div>
 </div>
 
-<h2 id="why">Why people use it</h2>
+<div class="section" id="why">
+<h2>Why people use it</h2>
+<p class="sub">Most accessibility tools hand you a score and a long list. This one hands you evidence, an honest list of what it did not check, and a way to prove the fix.</p>
 <div class="grid3">
 <div class="feature"><div class="ico">1</div><h3>Evidence, not opinions</h3><p>Every finding shows the file, the line, the exact code and the fix. Contrast is measured, not guessed.</p></div>
-<div class="feature"><div class="ico">2</div><h3>It says what it did not check</h3><p>A coverage table lists what ran, what partly ran and what did not. Nothing unrun is shown as a pass. No fake score.</p></div>
+<div class="feature"><div class="ico">2</div><h3>It says what it did not check</h3><p>A coverage table lists what ran, what partly ran and what did not. Nothing unrun is shown as a pass, and there is no fake score.</p></div>
 <div class="feature"><div class="ico">3</div><h3>Reports anyone can read</h3><p>A self-contained HTML page and a Markdown copy start with "Fix these first". Share them with a client or paste them into a pull request.</p></div>
 <div class="feature"><div class="ico">4</div><h3>Proof the fix worked</h3><p><code>verify</code> compares against your baseline: resolved, remaining, and anything new you broke.</p></div>
 <div class="feature"><div class="ico">5</div><h3>A CI gate you can trust</h3><p>Exit code 1 only for confirmed, deterministic problems, so pull requests are blocked by facts and never by taste.</p></div>
 <div class="feature"><div class="ico">6</div><h3>Works with your AI IDE</h3><p>{{skills}} skills teach Claude Code, Cursor, Codex, Copilot and Gemini CLI to review safely, ask before editing, and verify afterwards.</p></div>
 </div>
-
-<h2 id="how">How it works</h2>
-<figure class="shot"><a href="diagrams/how-it-works.svg" class="zoom"><img src="diagrams/how-it-works.svg" alt="Your project is audited into reports, you read and fix, verify proves the fix, a CI gate keeps it fixed" loading="lazy"></a><figcaption>The whole loop. Steps 1 to 4 take minutes; steps 5 to 8 are the habit that keeps a site accessible.</figcaption></figure>
-
-<h2 id="see">See what you get</h2>
-<figure class="shot"><a href="images/report-desktop.png" class="zoom"><img src="images/report-desktop.png" alt="A real HTML audit report with summary tiles and a Fix these first list" loading="lazy"></a><figcaption>A real report, generated from the sample page in this repository.</figcaption></figure>
-
-<h2 id="stories">Pick your situation</h2>
-<div class="grid3">
-<a class="feature" href="19-real-world-scenarios.html#1-the-week-before-launch-check"><h3>Launching Friday</h3><p>Find and fix the few problems that block the most people, in one afternoon.</p></a>
-<a class="feature" href="19-real-world-scenarios.html#2-stop-regressions-in-pull-requests"><h3>Stop regressions</h3><p>One CI line so a fixed problem can never come back unnoticed.</p></a>
-<a class="feature" href="19-real-world-scenarios.html#3-a-report-a-client-can-read"><h3>Report for a client</h3><p>An honest, readable answer to "is it accessible?" without legal overreach.</p></a>
-<a class="feature" href="19-real-world-scenarios.html#4-a-legacy-site-with-hundreds-of-findings"><h3>Hundreds of findings</h3><p>Turn an overwhelming list into a short, ordered plan.</p></a>
-<a class="feature" href="19-real-world-scenarios.html#5-taming-a-design-system"><h3>Messy design system</h3><p>A numbered inventory of colours and spacing, then a migration plan.</p></a>
-<a class="feature" href="19-real-world-scenarios.html#6-let-your-ai-ide-run-the-review"><h3>Use my AI IDE</h3><p>Install the skills and ask for a review; nothing is edited until you approve.</p></a>
 </div>
 
-<h2 id="honest">Honest about its limits</h2>
-<p>Static analysis finds a portion of accessibility problems. It does not certify WCAG, ADA or any other conformance, and a clean report is not proof of an accessible site. On the W3C ACT test cases the rules reach 71% precision and 65% recall, and axe-core, which analyses a real browser DOM, is more accurate. We publish those numbers and the weaknesses behind them.</p>
-<figure class="shot"><a href="diagrams/chart-vs-axe.svg" class="zoom"><img src="diagrams/chart-vs-axe.svg" alt="Bar chart comparing RachnaSutra and axe-core precision and recall on seven ACT rules" loading="lazy"></a><figcaption>Real benchmark data, weaknesses included. <a href="16-validation-and-benchmarks.html">Read the full validation</a>.</figcaption></figure>
+<div class="section" id="how">
+<h2>How it works</h2>
+<p class="sub">Four minutes to the first fix; the rest is the habit that keeps a site accessible.</p>
+<figure class="shot"><a href="diagrams/how-it-works.svg" class="zoom" aria-label="Enlarge: how RachnaSutra works end to end"><img class="t-light" src="diagrams/how-it-works.light.svg" alt="Your project is audited into reports, you read and fix, verify proves the fix, a CI gate keeps it fixed" loading="lazy"><img class="t-dark" src="diagrams/how-it-works.dark.svg" alt="Your project is audited into reports, you read and fix, verify proves the fix, a CI gate keeps it fixed" loading="lazy"></a><span class="hint">Tap to enlarge</span></figure>
+</div>
+</div>
 
-<h2 id="start">Start in 30 seconds</h2>
+<div class="band"><div class="wrap">
+<div class="section" id="stories">
+<h2>Pick your situation</h2>
+<p class="sub">Seven realistic scenarios, each with the exact commands and what you will see.</p>
+<div class="grid3">
+<a class="feature" href="19-real-world-scenarios.html#1-the-week-before-launch-check"><h3>Launching Friday</h3><p>Find and fix the few problems that block the most people, in one afternoon.</p><span class="go">Read scenario &rarr;</span></a>
+<a class="feature" href="19-real-world-scenarios.html#2-stop-regressions-in-pull-requests"><h3>Stop regressions</h3><p>One CI line so a fixed problem can never come back unnoticed.</p><span class="go">Read scenario &rarr;</span></a>
+<a class="feature" href="19-real-world-scenarios.html#3-a-report-a-client-can-read"><h3>Report for a client</h3><p>An honest, readable answer to "is it accessible?" without legal overreach.</p><span class="go">Read scenario &rarr;</span></a>
+<a class="feature" href="19-real-world-scenarios.html#4-a-legacy-site-with-hundreds-of-findings"><h3>Hundreds of findings</h3><p>Turn an overwhelming list into a short, ordered plan.</p><span class="go">Read scenario &rarr;</span></a>
+<a class="feature" href="19-real-world-scenarios.html#5-taming-a-design-system"><h3>Messy design system</h3><p>A numbered inventory of colours and spacing, then a migration plan.</p><span class="go">Read scenario &rarr;</span></a>
+<a class="feature" href="19-real-world-scenarios.html#6-let-your-ai-ide-run-the-review"><h3>Use my AI IDE</h3><p>Install the skills and ask for a review; nothing is edited until you approve.</p><span class="go">Read scenario &rarr;</span></a>
+</div>
+</div>
+</div></div>
+
+<div class="wrap">
+<div class="section" id="honest">
+<h2>Honest about its limits</h2>
+<p class="sub">Static analysis finds a portion of accessibility problems. It does not certify WCAG, ADA or any other conformance, and a clean report is not proof of an accessible site. On the W3C ACT test cases the rules reach 71% precision and 65% recall, and axe-core, which analyses a real browser DOM, is more accurate. We publish those numbers and the weaknesses behind them.</p>
+<figure class="shot"><a href="diagrams/chart-vs-axe.svg" class="zoom" aria-label="Enlarge: RachnaSutra and axe-core precision and recall"><img class="t-light" src="diagrams/chart-vs-axe.light.svg" alt="Bar chart comparing RachnaSutra and axe-core precision and recall on seven ACT rules" loading="lazy"><img class="t-dark" src="diagrams/chart-vs-axe.dark.svg" alt="Bar chart comparing RachnaSutra and axe-core precision and recall on seven ACT rules" loading="lazy"></a><figcaption>Real benchmark data, weaknesses included. <a href="16-validation-and-benchmarks.html">Read the full validation</a>.</figcaption><span class="hint">Tap to enlarge</span></figure>
+</div>
+
+<div class="section" id="start">
+<h2>Start in 30 seconds</h2>
 <ol class="steps">
 <li><strong>Run it.</strong> <code>npx rachnasutra audit .</code> in any front-end project. Node.js 20 or newer.</li>
 <li><strong>Open the report.</strong> <code>rachnasutra-reports/latest.html</code> opens in any browser.</li>
 <li><strong>Fix the top items, then verify.</strong> <code>npx rachnasutra verify --report rachnasutra-reports/latest.json .</code></li>
 <li><strong>Add the gate.</strong> <code>npx rachnasutra ci .</code> in your pipeline.</li>
 </ol>
-<div class="btns">
-<a class="btn primary" href="18-quick-tour.html">Full tour</a>
-<a class="btn" href="05-user-guide.html">User guide</a>
-<a class="btn" href="06-audit-rules-reference.html">All rules</a>
-<a class="btn" href="14-faq-and-glossary.html">FAQ</a>
-<a class="btn" href="00-overview.html">Documentation map</a>
+</div>
+
+<div class="cta">
+<h2>Ready to find out what your UI is hiding?</h2>
+<p>Free, open source and offline. Your code never leaves your machine.</p>
+<div class="btns" style="justify-content:center">
+<a class="btn" href="18-quick-tour.html">Take the tour</a>
+<a class="btn ghost" href="05-user-guide.html">User guide</a>
+<a class="btn ghost" href="https://github.com/shahvatsalofficial/rachnasutra" rel="noopener">Star on GitHub</a>
+</div>
+</div>
 </div>

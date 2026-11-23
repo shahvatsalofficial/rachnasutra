@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 400" width="1040" height="400" role="img" aria-labelledby="t d">
+<title id="t">Inside one audit run</title>
+<desc id="d">Six steps: walk files within limits, read and classify them, run rules, filter and deduplicate, assign status, render reports.</desc>
+<style>
+:root{--bg:#12100e;--card:#1b1815;--fg:#f2eee7;--muted:#bdb5a8;--line:#575045;--brand:#f0a070;--brand2:#3a2417;--blue:#8fc0f0;--blue2:#14283d;--green:#8fd6a8;--green2:#16301f;--amber:#f0d070;--amber2:#33290d;--red:#ff9a9a;--red2:#3b1717;--grid:#2c2822}
+text{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;fill:var(--fg)}
+.h{font-size:22px;font-weight:700}.t{font-size:15px;font-weight:700}.s{font-size:12.5px;fill:var(--muted)}.m{font-family:ui-monospace,Consolas,"Liberation Mono",monospace;font-size:12.5px}
+.n{font-size:12px;font-weight:700;fill:#fff}.ax{font-size:12px;fill:var(--muted)}.lbl{font-size:12px;font-weight:600;fill:var(--muted)}
+</style>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--muted)"/></marker></defs>
+<rect width="1040" height="400" fill="var(--bg)"/>
+<text x="24" y="36" class="h" text-anchor="start">Inside one audit run</text>
+<text x="24" y="58" class="s" text-anchor="start">Deterministic: same files in, same findings and IDs out</text>
+<rect x="24" y="96" width="148" height="170" rx="12" fill="var(--card)" stroke="var(--line)" stroke-width="1.6"/>
+<text x="98" y="148" class="t" text-anchor="middle">Walk</text>
+<text x="98" y="167" class="s" text-anchor="middle">bounded: 5,000 files,</text>
+<text x="98" y="186" class="s" text-anchor="middle">512 KB each, 15 s</text>
+<text x="98" y="205" class="s" text-anchor="middle">skips node_modules,</text>
+<text x="98" y="224" class="s" text-anchor="middle">symlinks, build output</text>
+<circle cx="28" cy="100" r="12" fill="var(--line)"/>
+<text x="28" y="104.5" class="n" text-anchor="middle">1</text>
+<path d="M172 181 L192 181" fill="none" stroke="var(--muted)" stroke-width="1.8"  marker-end="url(#ah)"/>
+<rect x="192" y="96" width="148" height="170" rx="12" fill="var(--card)" stroke="var(--line)" stroke-width="1.6"/>
+<text x="266" y="148" class="t" text-anchor="middle">Read</text>
+<text x="266" y="167" class="s" text-anchor="middle">markup: html, jsx, tsx,</text>
+<text x="266" y="186" class="s" text-anchor="middle">vue, svelte, astro</text>
+<text x="266" y="205" class="s" text-anchor="middle">styles: css, scss, less</text>
+<text x="266" y="224" class="s" text-anchor="middle">and &lt;style&gt; blocks</text>
+<circle cx="196" cy="100" r="12" fill="var(--line)"/>
+<text x="196" y="104.5" class="n" text-anchor="middle">2</text>
+<path d="M340 181 L360 181" fill="none" stroke="var(--muted)" stroke-width="1.8"  marker-end="url(#ah)"/>
+<rect x="360" y="96" width="148" height="170" rx="12" fill="var(--brand2)" stroke="var(--brand)" stroke-width="1.6"/>
+<text x="434" y="148" class="t" text-anchor="middle">Apply rules</text>
+<text x="434" y="167" class="s" text-anchor="middle">33 rules, pure functions</text>
+<text x="434" y="186" class="s" text-anchor="middle">of file text</text>
+<text x="434" y="205" class="s" text-anchor="middle">contrast is measured,</text>
+<text x="434" y="224" class="s" text-anchor="middle">not guessed</text>
+<circle cx="364" cy="100" r="12" fill="var(--brand)"/>
+<text x="364" y="104.5" class="n" text-anchor="middle">3</text>
+<path d="M508 181 L528 181" fill="none" stroke="var(--muted)" stroke-width="1.8"  marker-end="url(#ah)"/>
+<rect x="528" y="96" width="148" height="170" rx="12" fill="var(--blue2)" stroke="var(--blue)" stroke-width="1.6"/>
+<text x="602" y="148" class="t" text-anchor="middle">Filter + dedupe</text>
+<text x="602" y="167" class="s" text-anchor="middle">config: exclude,</text>
+<text x="602" y="186" class="s" text-anchor="middle">disableRules</text>
+<text x="602" y="205" class="s" text-anchor="middle">fingerprint per finding</text>
+<text x="602" y="224" class="s" text-anchor="middle">sorted by severity</text>
+<circle cx="532" cy="100" r="12" fill="var(--blue)"/>
+<text x="532" y="104.5" class="n" text-anchor="middle">4</text>
+<path d="M676 181 L696 181" fill="none" stroke="var(--muted)" stroke-width="1.8"  marker-end="url(#ah)"/>
+<rect x="696" y="96" width="148" height="170" rx="12" fill="var(--amber2)" stroke="var(--amber)" stroke-width="1.6"/>
+<text x="770" y="148" class="t" text-anchor="middle">Status</text>
+<text x="770" y="167" class="s" text-anchor="middle">high confidence =</text>
+<text x="770" y="186" class="s" text-anchor="middle">confirmed</text>
+<text x="770" y="205" class="s" text-anchor="middle">heuristic =</text>
+<text x="770" y="224" class="s" text-anchor="middle">review-required</text>
+<circle cx="700" cy="100" r="12" fill="var(--amber)"/>
+<text x="700" y="104.5" class="n" text-anchor="middle">5</text>
+<path d="M844 181 L864 181" fill="none" stroke="var(--muted)" stroke-width="1.8"  marker-end="url(#ah)"/>
+<rect x="864" y="96" width="148" height="170" rx="12" fill="var(--green2)" stroke="var(--green)" stroke-width="1.6"/>
+<text x="938" y="148" class="t" text-anchor="middle">Render</text>
+<text x="938" y="167" class="s" text-anchor="middle">Markdown, HTML, JSON</text>
+<text x="938" y="186" class="s" text-anchor="middle">SARIF on request</text>
+<text x="938" y="205" class="s" text-anchor="middle">secrets redacted,</text>
+<text x="938" y="224" class="s" text-anchor="middle">HTML escaped</text>
+<circle cx="868" cy="100" r="12" fill="var(--green)"/>
+<text x="868" y="104.5" class="n" text-anchor="middle">6</text>
+<rect x="24" y="300" width="490" height="70" rx="12" fill="var(--card)" stroke="var(--line)" stroke-width="1.6"/>
+<text x="269" y="330.5" class="t" text-anchor="middle">Optional: audit --mode browser</text>
+<text x="269" y="349.5" class="s" text-anchor="middle">real browser screenshot, axe-core, Lighthouse, then the static audit</text>
+<rect x="550" y="300" width="466" height="70" rx="12" fill="var(--card)" stroke="var(--line)" stroke-width="1.6"/>
+<text x="783" y="330.5" class="t" text-anchor="middle">Not scored on purpose</text>
+<text x="783" y="349.5" class="s" text-anchor="middle">coverage table shows what ran, what partly ran and what did not</text>
+</svg>

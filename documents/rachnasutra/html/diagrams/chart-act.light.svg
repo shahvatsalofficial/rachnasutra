@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 746" width="1040" height="746" role="img" aria-labelledby="t d">
+<title id="t">Precision and recall on W3C ACT test cases</title>
+<desc id="d">Horizontal bars of precision and recall for each mapped ACT rule, current results.</desc>
+<style>
+:root{--bg:#fbfaf7;--card:#ffffff;--fg:#1c1a17;--muted:#5b564f;--line:#bdb5a8;--brand:#8a3b12;--brand2:#f8e6da;--blue:#0b5cad;--blue2:#e4eefa;--green:#1d6b3f;--green2:#e2f3e9;--amber:#7a5200;--amber2:#fbf0d0;--red:#9a1f1f;--red2:#fbe4e4;--grid:#e7e2d8}
+text{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;fill:var(--fg)}
+.h{font-size:22px;font-weight:700}.t{font-size:15px;font-weight:700}.s{font-size:12.5px;fill:var(--muted)}.m{font-family:ui-monospace,Consolas,"Liberation Mono",monospace;font-size:12.5px}
+.n{font-size:12px;font-weight:700;fill:#fff}.ax{font-size:12px;fill:var(--muted)}.lbl{font-size:12px;font-weight:600;fill:var(--muted)}
+</style>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--muted)"/></marker></defs>
+<rect width="1040" height="746" fill="var(--bg)"/>
+<text x="24" y="36" class="h" text-anchor="start">W3C ACT test cases: precision and recall</text>
+<text x="24" y="58" class="s" text-anchor="start">Static analysis cannot render pages, so contrast and focus rules show low recall. That is reported, not hidden.</text>
+<line x1="354" y1="90" x2="354" y2="702" stroke="var(--grid)" stroke-width="1" />
+<text x="354" y="720" class="ax" text-anchor="middle">0%</text>
+<line x1="503" y1="90" x2="503" y2="702" stroke="var(--grid)" stroke-width="1" />
+<text x="503" y="720" class="ax" text-anchor="middle">25%</text>
+<line x1="652" y1="90" x2="652" y2="702" stroke="var(--grid)" stroke-width="1" />
+<text x="652" y="720" class="ax" text-anchor="middle">50%</text>
+<line x1="801" y1="90" x2="801" y2="702" stroke="var(--grid)" stroke-width="1" />
+<text x="801" y="720" class="ax" text-anchor="middle">75%</text>
+<line x1="950" y1="90" x2="950" y2="702" stroke="var(--grid)" stroke-width="1" />
+<text x="950" y="720" class="ax" text-anchor="middle">100%</text>
+<rect x="24" y="70" width="14" height="14" rx="3" fill="var(--blue)"/>
+<text x="44" y="82" class="ax" text-anchor="start">Precision</text>
+<rect x="214" y="70" width="14" height="14" rx="3" fill="var(--green)"/>
+<text x="234" y="82" class="ax" text-anchor="start">Recall</text>
+<text x="24" y="126" class="s" text-anchor="start">23a2a8 Image has non-empty accessible name</text>
+<rect x="354" y="100" width="298" height="13" rx="3" fill="var(--blue)"/>
+<text x="660" y="112" class="ax" text-anchor="start">50%</text>
+<rect x="354" y="118" width="238.4" height="13" rx="3" fill="var(--green)"/>
+<text x="600.4" y="130" class="ax" text-anchor="start">40%</text>
+<text x="24" y="182" class="s" text-anchor="start">b5c3f8 HTML page has lang attribute</text>
+<rect x="354" y="156" width="596" height="13" rx="3" fill="var(--blue)"/>
+<text x="958" y="168" class="ax" text-anchor="start">100%</text>
+<rect x="354" y="174" width="596" height="13" rx="3" fill="var(--green)"/>
+<text x="958" y="186" class="ax" text-anchor="start">100%</text>
+<text x="24" y="238" class="s" text-anchor="start">2779a5 HTML page has non-empty title</text>
+<rect x="354" y="212" width="496.66666666666674" height="13" rx="3" fill="var(--blue)"/>
+<text x="858.6666666666667" y="224" class="ax" text-anchor="start">83%</text>
+<rect x="354" y="230" width="596" height="13" rx="3" fill="var(--green)"/>
+<text x="958" y="242" class="ax" text-anchor="start">100%</text>
+<text x="24" y="294" class="s" text-anchor="start">b4f0c3 Meta viewport allows for zoom</text>
+<rect x="354" y="268" width="596" height="13" rx="3" fill="var(--blue)"/>
+<text x="958" y="280" class="ax" text-anchor="start">100%</text>
+<rect x="354" y="286" width="447" height="13" rx="3" fill="var(--green)"/>
+<text x="809" y="298" class="ax" text-anchor="start">75%</text>
+<text x="24" y="350" class="s" text-anchor="start">97a4e1 Button has non-empty accessible name</text>
+<rect x="354" y="324" width="476.8" height="13" rx="3" fill="var(--blue)"/>
+<text x="838.8" y="336" class="ax" text-anchor="start">80%</text>
+<rect x="354" y="342" width="476.8" height="13" rx="3" fill="var(--green)"/>
+<text x="838.8" y="354" class="ax" text-anchor="start">80%</text>
+<text x="24" y="406" class="s" text-anchor="start">c487ae Link has non-empty accessible name</text>
+<rect x="354" y="380" width="536.4" height="13" rx="3" fill="var(--blue)"/>
+<text x="898.4" y="392" class="ax" text-anchor="start">90%</text>
+<rect x="354" y="398" width="487.6363636363637" height="13" rx="3" fill="var(--green)"/>
+<text x="849.6363636363637" y="410" class="ax" text-anchor="start">82%</text>
+<text x="24" y="462" class="s" text-anchor="start">e086e5 Form field has non-empty accessible na...</text>
+<rect x="354" y="436" width="357.59999999999997" height="13" rx="3" fill="var(--blue)"/>
+<text x="719.5999999999999" y="448" class="ax" text-anchor="start">60%</text>
+<rect x="354" y="454" width="255.42857142857142" height="13" rx="3" fill="var(--green)"/>
+<text x="617.4285714285714" y="466" class="ax" text-anchor="start">43%</text>
+<text x="24" y="518" class="s" text-anchor="start">80f0bf Audio or video avoids automatically pl...</text>
+<rect x="354" y="492" width="238.4" height="13" rx="3" fill="var(--blue)"/>
+<text x="600.4" y="504" class="ax" text-anchor="start">40%</text>
+<rect x="354" y="510" width="596" height="13" rx="3" fill="var(--green)"/>
+<text x="958" y="522" class="ax" text-anchor="start">100%</text>
+<text x="24" y="574" class="s" text-anchor="start">afw4f7 Text has minimum contrast</text>
+<rect x="354" y="548" width="198.66666666666663" height="13" rx="3" fill="var(--blue)"/>
+<text x="560.6666666666666" y="560" class="ax" text-anchor="start">33%</text>
+<rect x="354" y="566" width="149" height="13" rx="3" fill="var(--green)"/>
+<text x="511" y="578" class="ax" text-anchor="start">25%</text>
+<text x="24" y="630" class="s" text-anchor="start">oj04fd Element in sequential focus order has ...</text>
+<text x="360" y="615" class="ax" text-anchor="start">n/a</text>
+<rect x="354" y="622" width="2" height="13" rx="3" fill="var(--green)"/>
+<text x="362" y="634" class="ax" text-anchor="start">0%</text>
+<text x="24" y="686" class="s" text-anchor="start">All mapped rules</text>
+<rect x="354" y="660" width="422.16666666666674" height="13" rx="3" fill="var(--blue)"/>
+<text x="784.1666666666667" y="672" class="ax" text-anchor="start">71%</text>
+<rect x="354" y="678" width="389.6923076923077" height="13" rx="3" fill="var(--green)"/>
+<text x="751.6923076923076" y="690" class="ax" text-anchor="start">65%</text>
+</svg>
