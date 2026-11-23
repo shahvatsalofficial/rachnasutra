@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 600" width="1040" height="600" role="img" aria-labelledby="t d">
+<title id="t">Anatomy of an audit report</title>
+<desc id="d">A mock layout of the HTML report with seven numbered parts: how to read, summary tiles, fix these first, coverage, findings table, detail cards and limitations.</desc>
+<style>
+:root{--bg:#fbfaf7;--card:#ffffff;--fg:#1c1a17;--muted:#5b564f;--line:#bdb5a8;--brand:#8a3b12;--brand2:#f8e6da;--blue:#0b5cad;--blue2:#e4eefa;--green:#1d6b3f;--green2:#e2f3e9;--amber:#7a5200;--amber2:#fbf0d0;--red:#9a1f1f;--red2:#fbe4e4;--grid:#e7e2d8}
+@media (prefers-color-scheme:dark){:root{--bg:#12100e;--card:#1b1815;--fg:#f2eee7;--muted:#bdb5a8;--line:#575045;--brand:#f0a070;--brand2:#3a2417;--blue:#8fc0f0;--blue2:#14283d;--green:#8fd6a8;--green2:#16301f;--amber:#f0d070;--amber2:#33290d;--red:#ff9a9a;--red2:#3b1717;--grid:#2c2822}}
+text{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;fill:var(--fg)}
+.h{font-size:22px;font-weight:700}.t{font-size:15px;font-weight:700}.s{font-size:12.5px;fill:var(--muted)}.m{font-family:ui-monospace,Consolas,"Liberation Mono",monospace;font-size:12.5px}
+.n{font-size:12px;font-weight:700;fill:#fff}.ax{font-size:12px;fill:var(--muted)}.lbl{font-size:12px;font-weight:600;fill:var(--muted)}
+</style>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--muted)"/></marker></defs>
+<rect width="1040" height="600" fill="var(--bg)"/>
+<text x="24" y="36" class="h" text-anchor="start">Anatomy of the HTML report</text>
+<text x="24" y="58" class="s" text-anchor="start">The same sections appear in the Markdown report</text>
+<rect x="24" y="80" width="560" height="500" rx="14" fill="var(--card)" stroke="var(--line)" stroke-width="1.6"/>
+<rect x="44" y="100" width="520" height="40" rx="8" fill="var(--blue2)" stroke="var(--blue)" stroke-width="1.4"/>
+<text x="72" y="124" class="t" text-anchor="start">How to read this</text>
+<circle cx="52" cy="108" r="12" fill="var(--blue)"/>
+<text x="52" y="112.5" class="n" text-anchor="middle">1</text>
+<rect x="44" y="150" width="520" height="60" rx="8" fill="var(--card)" stroke="var(--line)" stroke-width="1.4"/>
+<text x="72" y="174" class="t" text-anchor="start">Summary tiles</text>
+<rect x="60" y="182" width="60" height="20" rx="5" fill="var(--line)" opacity=".45"/>
+<rect x="130" y="182" width="60" height="20" rx="5" fill="var(--line)" opacity=".45"/>
+<rect x="200" y="182" width="60" height="20" rx="5" fill="var(--line)" opacity=".45"/>
+<rect x="270" y="182" width="60" height="20" rx="5" fill="var(--line)" opacity=".45"/>
+<rect x="340" y="182" width="60" height="20" rx="5" fill="var(--line)" opacity=".45"/>
+<rect x="410" y="182" width="60" height="20" rx="5" fill="var(--line)" opacity=".45"/>
+<rect x="480" y="182" width="60" height="20" rx="5" fill="var(--line)" opacity=".45"/>
+<circle cx="52" cy="158" r="12" fill="var(--line)"/>
+<text x="52" y="162.5" class="n" text-anchor="middle">2</text>
+<rect x="44" y="220" width="520" height="80" rx="8" fill="var(--green2)" stroke="var(--green)" stroke-width="1.4"/>
+<text x="72" y="244" class="t" text-anchor="start">Fix these first</text>
+<rect x="60" y="256" width="380" height="8" rx="4" fill="var(--line)"/>
+<rect x="60" y="272" width="320" height="8" rx="4" fill="var(--line)"/>
+<rect x="60" y="288" width="350" height="8" rx="4" fill="var(--line)"/>
+<circle cx="52" cy="228" r="12" fill="var(--green)"/>
+<text x="52" y="232.5" class="n" text-anchor="middle">3</text>
+<rect x="44" y="310" width="520" height="70" rx="8" fill="var(--amber2)" stroke="var(--amber)" stroke-width="1.4"/>
+<text x="72" y="334" class="t" text-anchor="start">Coverage</text>
+<circle cx="52" cy="318" r="12" fill="var(--amber)"/>
+<text x="52" y="322.5" class="n" text-anchor="middle">4</text>
+<rect x="44" y="390" width="520" height="80" rx="8" fill="var(--brand2)" stroke="var(--brand)" stroke-width="1.4"/>
+<text x="72" y="414" class="t" text-anchor="start">Findings table</text>
+<rect x="60" y="426" width="480" height="8" rx="4" fill="var(--line)"/>
+<rect x="60" y="442" width="480" height="8" rx="4" fill="var(--line)"/>
+<rect x="60" y="458" width="480" height="8" rx="4" fill="var(--line)"/>
+<circle cx="52" cy="398" r="12" fill="var(--brand)"/>
+<text x="52" y="402.5" class="n" text-anchor="middle">5</text>
+<rect x="44" y="480" width="520" height="52" rx="8" fill="var(--blue2)" stroke="var(--blue)" stroke-width="1.4"/>
+<text x="72" y="504" class="t" text-anchor="start">Detail cards</text>
+<circle cx="52" cy="488" r="12" fill="var(--blue)"/>
+<text x="52" y="492.5" class="n" text-anchor="middle">6</text>
+<rect x="44" y="540" width="520" height="28" rx="8" fill="var(--red2)" stroke="var(--red)" stroke-width="1.4"/>
+<text x="72" y="564" class="t" text-anchor="start">Limitations</text>
+<circle cx="52" cy="548" r="12" fill="var(--red)"/>
+<text x="52" y="552.5" class="n" text-anchor="middle">7</text>
+<text x="620" y="108" class="t" text-anchor="start">1 How to read this</text>
+<text x="620" y="127" class="s" text-anchor="start">Four plain rules: confirmed vs review</text>
+<text x="620" y="144" class="s" text-anchor="start">required, where to start, what the</text>
+<text x="620" y="161" class="s" text-anchor="start">report is not</text>
+<text x="620" y="178" class="t" text-anchor="start">2 Summary tiles</text>
+<text x="620" y="197" class="s" text-anchor="start">Counts by severity, plus confirmed and</text>
+<text x="620" y="214" class="s" text-anchor="start">review-required totals</text>
+<text x="620" y="248" class="t" text-anchor="start">3 Fix these first</text>
+<text x="620" y="267" class="s" text-anchor="start">Up to five confirmed findings, each with</text>
+<text x="620" y="284" class="s" text-anchor="start">file:line and the exact fix</text>
+<text x="620" y="318" class="t" text-anchor="start">4 Coverage</text>
+<text x="620" y="337" class="s" text-anchor="start">Evaluated, partial, not-run: nothing</text>
+<text x="620" y="354" class="s" text-anchor="start">unrun is shown as a pass</text>
+<text x="620" y="388" class="t" text-anchor="start">5 Findings table</text>
+<text x="620" y="407" class="s" text-anchor="start">Every finding: ID, severity, rule,</text>
+<text x="620" y="424" class="s" text-anchor="start">location, status</text>
+<text x="620" y="458" class="t" text-anchor="start">6 Detail cards</text>
+<text x="620" y="477" class="s" text-anchor="start">Evidence excerpt, WCAG criterion, user</text>
+<text x="620" y="494" class="s" text-anchor="start">impact, fix, how to verify, limits</text>
+<text x="620" y="528" class="t" text-anchor="start">7 Limitations</text>
+<text x="620" y="547" class="s" text-anchor="start">Static review only; not a WCAG</text>
+<text x="620" y="564" class="s" text-anchor="start">certificate; no invented score</text>
+</svg>

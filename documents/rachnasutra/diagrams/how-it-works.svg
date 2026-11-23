@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 470" width="1040" height="470" role="img" aria-labelledby="t d">
+<title id="t">How RachnaSutra works end to end</title>
+<desc id="d">Your project is audited into Markdown, HTML, JSON and SARIF reports. You fix the code, verify against the saved baseline, and a CI gate keeps regressions out.</desc>
+<style>
+:root{--bg:#fbfaf7;--card:#ffffff;--fg:#1c1a17;--muted:#5b564f;--line:#bdb5a8;--brand:#8a3b12;--brand2:#f8e6da;--blue:#0b5cad;--blue2:#e4eefa;--green:#1d6b3f;--green2:#e2f3e9;--amber:#7a5200;--amber2:#fbf0d0;--red:#9a1f1f;--red2:#fbe4e4;--grid:#e7e2d8}
+@media (prefers-color-scheme:dark){:root{--bg:#12100e;--card:#1b1815;--fg:#f2eee7;--muted:#bdb5a8;--line:#575045;--brand:#f0a070;--brand2:#3a2417;--blue:#8fc0f0;--blue2:#14283d;--green:#8fd6a8;--green2:#16301f;--amber:#f0d070;--amber2:#33290d;--red:#ff9a9a;--red2:#3b1717;--grid:#2c2822}}
+text{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;fill:var(--fg)}
+.h{font-size:22px;font-weight:700}.t{font-size:15px;font-weight:700}.s{font-size:12.5px;fill:var(--muted)}.m{font-family:ui-monospace,Consolas,"Liberation Mono",monospace;font-size:12.5px}
+.n{font-size:12px;font-weight:700;fill:#fff}.ax{font-size:12px;fill:var(--muted)}.lbl{font-size:12px;font-weight:600;fill:var(--muted)}
+</style>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--muted)"/></marker></defs>
+<rect width="1040" height="470" fill="var(--bg)"/>
+<text x="24" y="36" class="h" text-anchor="start">From code to confidence</text>
+<text x="24" y="58" class="s" text-anchor="start">Read-only audit, evidence in every finding, a loop that proves the fix worked</text>
+<rect x="24" y="96" width="210" height="100" rx="12" fill="var(--card)" stroke="var(--line)" stroke-width="1.6"/>
+<text x="129" y="132" class="t" text-anchor="middle">Your project</text>
+<text x="129" y="151" class="s" text-anchor="middle">HTML, CSS, SCSS, JSX,</text>
+<text x="129" y="170" class="s" text-anchor="middle">TSX, Vue, Svelte, Astro</text>
+<circle cx="28" cy="100" r="12" fill="var(--line)"/>
+<text x="28" y="104.5" class="n" text-anchor="middle">1</text>
+<rect x="290" y="96" width="230" height="100" rx="12" fill="var(--brand2)" stroke="var(--brand)" stroke-width="1.6"/>
+<text x="405" y="132" class="t m" text-anchor="middle">rachnasutra audit .</text>
+<text x="405" y="151" class="s m" text-anchor="middle">33 static rules</text>
+<text x="405" y="170" class="s m" text-anchor="middle">optional real browser + axe</text>
+<circle cx="294" cy="100" r="12" fill="var(--brand)"/>
+<text x="294" y="104.5" class="n" text-anchor="middle">2</text>
+<rect x="576" y="96" width="210" height="100" rx="12" fill="var(--blue2)" stroke="var(--blue)" stroke-width="1.6"/>
+<text x="681" y="132" class="t" text-anchor="middle">Reports</text>
+<text x="681" y="151" class="s" text-anchor="middle">latest.html  latest.md</text>
+<text x="681" y="170" class="s" text-anchor="middle">latest.json  (+ SARIF)</text>
+<circle cx="580" cy="100" r="12" fill="var(--blue)"/>
+<text x="580" y="104.5" class="n" text-anchor="middle">3</text>
+<rect x="836" y="96" width="180" height="100" rx="12" fill="var(--green2)" stroke="var(--green)" stroke-width="1.6"/>
+<text x="926" y="132" class="t" text-anchor="middle">You read</text>
+<text x="926" y="151" class="s" text-anchor="middle">"Fix these first"</text>
+<text x="926" y="170" class="s" text-anchor="middle">evidence + exact fix</text>
+<circle cx="840" cy="100" r="12" fill="var(--green)"/>
+<text x="840" y="104.5" class="n" text-anchor="middle">4</text>
+<path d="M234 146 L290 146" fill="none" stroke="var(--muted)" stroke-width="1.8"  marker-end="url(#ah)"/>
+<path d="M520 146 L576 146" fill="none" stroke="var(--muted)" stroke-width="1.8"  marker-end="url(#ah)"/>
+<path d="M786 146 L836 146" fill="none" stroke="var(--muted)" stroke-width="1.8"  marker-end="url(#ah)"/>
+<rect x="836" y="290" width="180" height="100" rx="12" fill="var(--amber2)" stroke="var(--amber)" stroke-width="1.6"/>
+<text x="926" y="326" class="t" text-anchor="middle">Fix the code</text>
+<text x="926" y="345" class="s" text-anchor="middle">small diffs</text>
+<text x="926" y="364" class="s" text-anchor="middle">you or an AI skill</text>
+<circle cx="840" cy="294" r="12" fill="var(--amber)"/>
+<text x="840" y="298.5" class="n" text-anchor="middle">5</text>
+<path d="M926 196 L926 290" fill="none" stroke="var(--muted)" stroke-width="1.8"  marker-end="url(#ah)"/>
+<rect x="576" y="290" width="210" height="100" rx="12" fill="var(--brand2)" stroke="var(--brand)" stroke-width="1.6"/>
+<text x="681" y="326" class="t m" text-anchor="middle">verify --report</text>
+<text x="681" y="345" class="s m" text-anchor="middle">resolved / remaining</text>
+<text x="681" y="364" class="s m" text-anchor="middle">/ introduced</text>
+<circle cx="580" cy="294" r="12" fill="var(--brand)"/>
+<text x="580" y="298.5" class="n" text-anchor="middle">6</text>
+<path d="M836 340 L786 340" fill="none" stroke="var(--muted)" stroke-width="1.8"  marker-end="url(#ah)"/>
+<rect x="290" y="290" width="230" height="100" rx="12" fill="var(--green2)" stroke="var(--green)" stroke-width="1.6"/>
+<text x="405" y="326" class="t m" text-anchor="middle">rachnasutra ci .</text>
+<text x="405" y="345" class="s m" text-anchor="middle">exit 1 blocks a PR on</text>
+<text x="405" y="364" class="s m" text-anchor="middle">confirmed high findings</text>
+<circle cx="294" cy="294" r="12" fill="var(--green)"/>
+<text x="294" y="298.5" class="n" text-anchor="middle">7</text>
+<path d="M576 340 L520 340" fill="none" stroke="var(--muted)" stroke-width="1.8"  marker-end="url(#ah)"/>
+<rect x="24" y="290" width="210" height="100" rx="12" fill="var(--card)" stroke="var(--line)" stroke-width="1.6"/>
+<text x="129" y="326" class="t" text-anchor="middle">Safe to merge</text>
+<text x="129" y="345" class="s" text-anchor="middle">plus manual keyboard and</text>
+<text x="129" y="364" class="s" text-anchor="middle">screen-reader checks</text>
+<circle cx="28" cy="294" r="12" fill="var(--line)"/>
+<text x="28" y="298.5" class="n" text-anchor="middle">8</text>
+<path d="M290 340 L234 340" fill="none" stroke="var(--muted)" stroke-width="1.8"  marker-end="url(#ah)"/>
+<path d="M690 290 L690 244 L926 244 L926 290" fill="none" stroke="var(--muted)" stroke-width="1.8" stroke-dasharray="6 5" marker-end="url(#ah)"/>
+<text x="808" y="236" class="lbl" text-anchor="middle">new findings? fix again</text>
+<text x="24" y="440" class="s" text-anchor="start">Your source files are never changed by the audit. Reports go to ./rachnasutra-reports.</text>
+</svg>

@@ -36,6 +36,10 @@ RachnaSutra AI is a single TypeScript package with no runtime dependencies. It c
 <figcaption>Solid arrows are data flow. The dashed arrow shows skills invoking the CLI when the host allows shell access.</figcaption>
 </figure>
 
+![Inside one audit run: walk, read, apply rules, filter and dedupe, assign status, render](diagrams/audit-pipeline.svg "The audit pipeline. Same files in, same findings and IDs out.")
+
+![End to end: project, audit, reports, fix, verify, CI gate](diagrams/how-it-works.svg "How the pieces connect from a developer point of view.")
+
 ## Design goals
 
 1. **Evidence over opinion.** Every output is traceable to source text or a measurement.

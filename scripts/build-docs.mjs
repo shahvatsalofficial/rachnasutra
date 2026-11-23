@@ -60,6 +60,13 @@ function convert(md) {
       out.push(buf.join('\n'));
       continue;
     }
+    const img = /^!\[([^\]]*)\]\(([^)\s]+)(?:\s+"([^"]*)")?\)\s*$/.exec(line);
+    if (img) {
+      const [, alt, src, cap] = img;
+      out.push(`<figure class="shot"><a href="${esc(src)}" class="zoom"><img src="${esc(src)}" alt="${esc(alt)}" loading="lazy" decoding="async"></a>${cap ? `<figcaption>${inline(cap)}</figcaption>` : ''}</figure>`);
+      i++;
+      continue;
+    }
     const h = /^(#{1,4})\s+(.*)$/.exec(line);
     if (h) {
       const level = h[1].length;
@@ -125,7 +132,7 @@ function convert(md) {
       continue;
     }
     const buf = [];
-    while (i < lines.length && lines[i].trim() && !/^(#{1,4}\s|```|>\s?|\s*([-*]|\d+\.)\s|<(svg|div|figure|details|section|table)\b)/.test(lines[i]) && !(lines[i].includes('|') && lines[i + 1] && isTableSep(lines[i + 1]))) buf.push(lines[i++]);
+    while (i < lines.length && lines[i].trim() && !/^(#{1,4}\s|```|>\s?|!\[|\s*([-*]|\d+\.)\s|<(svg|div|figure|details|section|table)\b)/.test(lines[i]) && !(lines[i].includes('|') && lines[i + 1] && isTableSep(lines[i + 1]))) buf.push(lines[i++]);
     out.push(`<p>${inline(buf.join(' '))}</p>`);
   }
   return { html: out.join('\n'), toc };
@@ -134,21 +141,52 @@ function convert(md) {
 const CSS = readFileSync(path.join(import.meta.dirname, 'docs-style.css'), 'utf8');
 const JS = readFileSync(path.join(import.meta.dirname, 'docs-script.js'), 'utf8');
 
+// Sidebar groups and reading order. Files are matched by their number prefix.
+const GROUPS = [
+  ['Start here', ['00', '18', '19', '05']],
+  ['Understand', ['01', '02', '03', '07']],
+  ['Reference', ['04', '06', '15', '14']],
+  ['Trust and evidence', ['08', '09', '10', '16', '17']],
+  ['Operate and contribute', ['11', '12', '13']],
+];
 const files = readdirSync(srcDir).filter((f) => /^\d\d-.*\.md$/.test(f)).sort();
-const docs = files.map((f) => {
+const loaded = files.map((f) => {
   const md = readFileSync(path.join(srcDir, f), 'utf8');
   const title = /^#\s+(.*)$/m.exec(md)?.[1].replace(/`/g, '') ?? f;
-  const desc = (md.split('\n').find((l) => l.trim() && !l.startsWith('#') && !l.startsWith('>') && !l.startsWith('|') && !l.startsWith('-')) ?? '').replace(/[*`[\]]/g, '').replace(/\(([^)]+)\)/g, '').slice(0, 200);
+  const desc = (md.split('\n').find((l) => l.trim() && !l.startsWith('#') && !l.startsWith('>') && !l.startsWith('|') && !l.startsWith('-') && !l.startsWith('!')) ?? '').replace(/[*`[\]]/g, '').replace(/\(([^)]+)\)/g, '').slice(0, 200);
   const { html, toc } = convert(md);
-  return { file: f, out: f.replace(/\.md$/, '.html'), title, desc, html, toc, text: md.replace(/[#*`|>\-]/g, ' ').replace(/\s+/g, ' ') };
+  return { num: f.slice(0, 2), file: f, out: f.replace(/\.md$/, '.html'), title, desc, html, toc, text: md.replace(/[#*`|>\-]/g, ' ').replace(/\s+/g, ' ') };
 });
+const listed = new Set(GROUPS.flatMap(([, n]) => n));
+const groups = GROUPS.map(([name, nums]) => ({ name, items: nums.map((n) => loaded.find((d) => d.num === n)).filter(Boolean) }));
+const extra = loaded.filter((d) => !listed.has(d.num));
+if (extra.length) groups.push({ name: 'More', items: extra });
+const docs = groups.flatMap((g) => g.items);
+docs.forEach((d) => { d.group = groups.find((g) => g.items.includes(d)).name; });
 
-const searchIndex = docs.map((d) => ({ t: d.title, u: d.out, x: d.text.slice(0, 6000) }));
+// Optional hand-written landing page: documents/rachnasutra/home.html (an HTML fragment).
+// Facts the home page quotes are read from the repository so they cannot go stale.
+async function facts() {
+  let rules = '?';
+  try { rules = String((await import('../dist/rules.js')).RULE_CATALOG.length); } catch { /* dist not built */ }
+  const tests = /^ℹ tests (\d+)/m.exec(existsSync(path.join(srcDir, 'evidence', 'test-results.txt')) ? readFileSync(path.join(srcDir, 'evidence', 'test-results.txt'), 'utf8') : '')?.[1] ?? '?';
+  const skills = existsSync(path.join(root, 'skills')) ? String(readdirSync(path.join(root, 'skills'), { withFileTypes: true }).filter((e) => e.isDirectory()).length) : '13';
+  return { version: pkg.version, rules, tests, skills };
+}
+const F = await facts();
+const fill = (h) => h.replace(/\{\{(version|rules|tests|skills)\}\}/g, (_, k) => F[k]);
+const homePath = path.join(srcDir, 'home.html');
+const home = existsSync(homePath)
+  ? { file: 'home.html', out: 'index.html', home: true, group: '', title: 'RachnaSutra AI: UI/UX audit and accessibility agent skills for Claude Code, Cursor, Codex, Copilot and Gemini CLI', desc: 'Open-source UI/UX and accessibility auditor. One command writes Markdown, HTML and JSON reports with file and line evidence, a fix-and-verify loop, a CI gate, and 13 agent skills. No API key, no telemetry.', html: fill(readFileSync(homePath, 'utf8')), toc: [], text: fill(readFileSync(homePath, 'utf8')).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ') }
+  : null;
+
+const searchIndex = [...(home ? [home] : []), ...docs].map((d) => ({ t: d.title.length > 80 ? 'RachnaSutra AI home' : d.title, u: d.out, x: d.text.slice(0, 6000) }));
 
 function page(d, idx) {
-  const prev = docs[idx - 1];
-  const next = docs[idx + 1];
-  const nav = docs.map((x) => `<li><a href="${x.out}"${x === d ? ' aria-current="page"' : ''}>${esc(x.title)}</a></li>`).join('');
+  const prev = d.home ? null : docs[idx - 1];
+  const next = d.home ? docs[0] : docs[idx + 1];
+  const navItem = (x) => `<li><a href="${x.out}"${x === d ? ' aria-current="page"' : ''}>${esc(x.title)}</a></li>`;
+  const nav = `<li><a href="index.html"${d.home ? ' aria-current="page"' : ''}>Home</a></li>${groups.map((g) => `<li class="grp"><span>${esc(g.name)}</span><ol>${g.items.map(navItem).join('')}</ol></li>`).join('')}`;
   const toc = d.toc.length ? `<nav class="toc" aria-label="On this page"><h2>On this page</h2><ul>${d.toc.map((t) => `<li class="l${t.level}"><a href="#${t.id}">${esc(t.text)}</a></li>`).join('')}</ul></nav>` : '';
   return `<!doctype html>
 <html lang="en">
@@ -161,12 +199,15 @@ function page(d, idx) {
 <meta property="og:title" content="${esc(d.title.includes('RachnaSutra') ? d.title : `${d.title} - RachnaSutra AI`)}">
 <meta property="og:description" content="${esc(d.desc)}">
 <meta property="og:type" content="article">
-<link rel="canonical" href="${d === docs[0] ? `${SITE}/` : `${SITE}/${d.out}`}">
+<link rel="canonical" href="${d.home ? `${SITE}/` : `${SITE}/${d.out}`}">
+<meta property="og:url" content="${d.home ? `${SITE}/` : `${SITE}/${d.out}`}">
+<meta property="og:image" content="${SITE}/images/social-preview.png">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="color-scheme" content="light dark">
 <script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@type': 'TechArticle', headline: d.title, description: d.desc, author: { '@type': 'Person', name: 'Vatsal Shah', url: 'https://shahvatsal.com' }, inLanguage: 'en', isPartOf: { '@type': 'SoftwareSourceCode', name: 'RachnaSutra AI', codeRepository: REPO, license: 'https://www.apache.org/licenses/LICENSE-2.0' } })}</script>
 <style>${CSS}</style>
 </head>
-<body>
+<body class="${d.home ? 'is-home' : ''}">
 <a class="skip" href="#content">Skip to content</a>
 <header class="topbar">
 <button class="menu-btn" aria-controls="sidebar" aria-expanded="false" aria-label="Open navigation">&#9776;</button>
@@ -184,9 +225,9 @@ ${d.html}
 </article>
 <nav class="pager" aria-label="Previous and next">
 ${prev ? `<a class="prev" href="${prev.out}"><span>Previous</span>${esc(prev.title)}</a>` : '<span></span>'}
-${next ? `<a class="next" href="${next.out}"><span>Next</span>${esc(next.title)}</a>` : '<span></span>'}
+${next ? `<a class="next" href="${next.out}"><span>${d.home ? 'Start reading' : 'Next'}</span>${esc(next.title)}</a>` : '<span></span>'}
 </nav>
-<footer class="foot">RachnaSutra AI ${esc(pkg.version)} &middot; Created by <a href="https://shahvatsal.com" rel="noopener">Vatsal Shah</a> &middot; <a href="https://shahvatsal.com" rel="noopener">shahvatsal.com</a> &middot; Apache-2.0 &middot; <a href="${REPO}/blob/main/documents/rachnasutra/${d.file}" rel="noopener">View source of this page</a></footer>
+<footer class="foot">RachnaSutra AI ${esc(pkg.version)} &middot; Created by <a href="https://shahvatsal.com" rel="noopener">Vatsal Shah</a> &middot; <a href="https://shahvatsal.com" rel="noopener">shahvatsal.com</a> &middot; Apache-2.0 &middot; <a href="${REPO}/blob/main/documents/rachnasutra/${d.file}" rel="noopener">Edit this page on GitHub</a></footer>
 </main>
 ${toc}
 </div>
@@ -199,9 +240,18 @@ ${toc}
 
 mkdirSync(outDir, { recursive: true });
 docs.forEach((d, i) => writeFileSync(path.join(outDir, d.out), page(d, i)));
-// index.html is the first document's landing page
-const first = docs[0];
-writeFileSync(path.join(outDir, 'index.html'), page(first, 0));
+// index.html is the hand-written home page when present, else the first document
+writeFileSync(path.join(outDir, 'index.html'), home ? page(home, -1) : page(docs[0], 0));
+for (const dir of ['diagrams', 'images']) {
+  const src = path.join(srcDir, dir);
+  if (!existsSync(src)) continue;
+  mkdirSync(path.join(outDir, dir), { recursive: true });
+  for (const f of readdirSync(src)) copyFileSync(path.join(src, f), path.join(outDir, dir, f));
+}
+if (existsSync(path.join(root, 'assets', 'social-preview.png'))) {
+  mkdirSync(path.join(outDir, 'images'), { recursive: true });
+  copyFileSync(path.join(root, 'assets', 'social-preview.png'), path.join(outDir, 'images', 'social-preview.png'));
+}
 for (const f of ['test-results.txt', 'cli-transcripts.txt']) {
   const src = path.join(srcDir, 'evidence', f);
   if (existsSync(src)) {

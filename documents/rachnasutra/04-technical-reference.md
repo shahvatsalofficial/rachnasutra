@@ -76,6 +76,8 @@ Threshold is 4.5:1, or 3:1 for large text (font size 24px or more, or 18.66px or
 
 ### Confidence assignment
 
+![A rule fires; deterministic evidence becomes confirmed, heuristics become review-required](diagrams/finding-status.svg "How a finding gets its status.")
+
 | Confidence | Meaning | Example |
 |---|---|---|
 | high | Deterministic pattern or measurement | `<img>` with no `alt` |

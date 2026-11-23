@@ -20,6 +20,10 @@ This page answers one question: **how do we know the audit is right?** Test fixt
 
 ## 2. W3C ACT Rules test cases
 
+![Precision and recall for each mapped ACT rule](diagrams/chart-act.svg "Current precision and recall per ACT rule.")
+
+![Precision and recall before and after fixing defects the benchmark found](diagrams/chart-act-before-after.svg "Not a blind result: the fixes were informed by the failing cases.")
+
 The ACT Rules Community Group publishes machine-readable test cases (CC BY 4.0) with expected outcomes `passed`, `failed` and `inapplicable`. Ten ACT rules map to ten RachnaSutra checks. Each case page is audited in static mode. A `failed` case where our rule fires is a true positive; a `passed` or `inapplicable` case where it fires is a false positive.
 
 ### First run, before any change
@@ -78,6 +82,8 @@ Full lists of missed and false-alarm cases: [act.md](../../benchmarks/results/ac
 
 ## 3. Comparison with axe-core
 
+![RachnaSutra and axe-core precision and recall on seven ACT rules](diagrams/chart-vs-axe.svg "axe-core is more accurate; RachnaSutra works on source files, offline.")
+
 axe-core 4.10.2 (run in jsdom) and RachnaSutra were run on the same inputs for the seven rules both can express.
 
 | ACT rule | Cases | RachnaSutra P / R | axe-core P / R |
@@ -96,6 +102,8 @@ axe-core 4.10.2 (run in jsdom) and RachnaSutra were run on the same inputs for t
 On 509 real HTML files the two tools agreed on most findings; the differences are published in [act-vs-axe.md](../../benchmarks/results/act-vs-axe.md). Many "axe-only" language and title results come from partial template files, where jsdom invents an `<html>` element that the source does not contain, so they should not be read as RachnaSutra misses. The 29 "RachnaSutra-only" form-label results are mostly placeholder-only inputs (the policy difference above).
 
 ## 4. Real-world audit of public repositories
+
+![Findings per audited public repository](diagrams/chart-repos.svg "A big count is not a verdict on a project.")
 
 Twelve public repositories were cloned at depth 1 and audited statically; no code from them was executed.
 
@@ -118,6 +126,8 @@ Twelve public repositories were cloned at depth 1 and audited statically; no cod
 Commits and per-rule counts are in [real-world.md](../../benchmarks/results/real-world.md). A large count is not a verdict on a project: several are documentation sites, test pages and design-system demos with deliberately minimal markup.
 
 ### Manual precision check
+
+![Manual precision check per round: true positives, context-dependent and false positives](diagrams/chart-real-world.svg "Labels by the author with AI assistance; not independent.")
 
 Findings were sampled at random (seeded, up to 6 per rule) and each was read in its source context. Labels: **TP** (real pattern, plausible concern), **CD** (context-dependent: template, runtime text, intentional demo, or a policy difference) and **FP** (wrong claim or mis-parse).
 

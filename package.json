@@ -78,7 +78,9 @@
     "samples": "npm run build && node dist/cli.js audit fixtures/intentionally-broken-ui --format json,md,html,sarif --out samples/broken-ui && node dist/cli.js audit fixtures/good-ui --format json,md,html --out samples/good-ui && node scripts/sanitize-paths.mjs samples",
     "examples": "npm run build && node scripts/gen-rule-examples.mjs",
     "prepare": "npm run build",
-    "prepublishOnly": "npm test && npm run verify"
+    "prepublishOnly": "npm test && npm run verify",
+    "diagrams": "npm run build && node scripts/gen-diagrams.mjs",
+    "images": "node scripts/capture-images.mjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.11.0",

@@ -4,6 +4,9 @@ All notable changes follow [Semantic Versioning](https://semver.org/). Report sc
 
 ## Unreleased
 
+- Documentation overhaul: a designed home page, a five-minute tour with real output and screenshots, seven real-world scenarios, 14 diagrams and data charts (flow charts, decision tree, CI gate, skill orchestration, report anatomy, benchmark charts) that follow light and dark mode, grouped navigation, and figures added to the user guide, architecture, skills, CI and validation pages
+- `npm run diagrams` regenerates the SVGs from the published benchmark data; `npm run images` recaptures the report screenshots
+
 ## 0.5.2
 
 - Dev dependency `playwright` is 1.65.1 (patch). The GitHub Action `codeql-action/upload-sarif` is 4.39.3, pinned by SHA.

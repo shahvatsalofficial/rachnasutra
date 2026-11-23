@@ -30,6 +30,8 @@ The format follows the open Agent Skills specification (https://agentskills.io/s
 
 ## How Prime orchestrates
 
+![Prime detects capabilities, sets scope, runs the CLI, picks specialists, asks approval, edits with canvas, proves with verify](diagrams/skills-orchestration.svg "Prime only runs the specialists the task needs.")
+
 1. **Understand** the request and the repository.
 2. **Detect capabilities:** file access, shell, the RachnaSutra CLI, browser, screenshots, vision model, network. Missing ones are labelled `not tested`.
 3. **Set scope:** read-only by default; state exclusions.

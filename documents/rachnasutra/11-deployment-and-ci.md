@@ -41,6 +41,8 @@ The first step fails the job (exit 1) when a confirmed high or critical finding 
 
 ## Choosing a gate
 
+![A pull request runs rachnasutra ci; exit 0 allows merge, exit 1 blocks](diagrams/ci-gate.svg "The gate fails only on confirmed findings.")
+
 | Gate | Command | Use when |
 |---|---|---|
 | Confirmed critical or high | `rachnasutra ci .` | Default; low risk of false-positive blocks |

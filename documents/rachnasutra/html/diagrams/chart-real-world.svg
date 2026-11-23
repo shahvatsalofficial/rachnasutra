@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 360" width="1040" height="360" role="img" aria-labelledby="t d">
+<title id="t">Manual precision check on real repositories</title>
+<desc id="d">Stacked bars per round showing findings judged real, context-dependent or false positive.</desc>
+<style>
+:root{--bg:#fbfaf7;--card:#ffffff;--fg:#1c1a17;--muted:#5b564f;--line:#bdb5a8;--brand:#8a3b12;--brand2:#f8e6da;--blue:#0b5cad;--blue2:#e4eefa;--green:#1d6b3f;--green2:#e2f3e9;--amber:#7a5200;--amber2:#fbf0d0;--red:#9a1f1f;--red2:#fbe4e4;--grid:#e7e2d8}
+@media (prefers-color-scheme:dark){:root{--bg:#12100e;--card:#1b1815;--fg:#f2eee7;--muted:#bdb5a8;--line:#575045;--brand:#f0a070;--brand2:#3a2417;--blue:#8fc0f0;--blue2:#14283d;--green:#8fd6a8;--green2:#16301f;--amber:#f0d070;--amber2:#33290d;--red:#ff9a9a;--red2:#3b1717;--grid:#2c2822}}
+text{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;fill:var(--fg)}
+.h{font-size:22px;font-weight:700}.t{font-size:15px;font-weight:700}.s{font-size:12.5px;fill:var(--muted)}.m{font-family:ui-monospace,Consolas,"Liberation Mono",monospace;font-size:12.5px}
+.n{font-size:12px;font-weight:700;fill:#fff}.ax{font-size:12px;fill:var(--muted)}.lbl{font-size:12px;font-weight:600;fill:var(--muted)}
+</style>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--muted)"/></marker></defs>
+<rect width="1040" height="360" fill="var(--bg)"/>
+<text x="24" y="36" class="h" text-anchor="start">Real repositories: are the findings right?</text>
+<text x="24" y="58" class="s" text-anchor="start">Sampled findings, read in context and labelled by the author with AI assistance (not independent)</text>
+<rect x="24" y="70" width="14" height="14" rx="3" fill="var(--green)"/>
+<text x="44" y="82" class="ax" text-anchor="start">True positive</text>
+<rect x="224" y="70" width="14" height="14" rx="3" fill="var(--amber)"/>
+<text x="244" y="82" class="ax" text-anchor="start">Context-dependent</text>
+<rect x="424" y="70" width="14" height="14" rx="3" fill="var(--red)"/>
+<text x="444" y="82" class="ax" text-anchor="start">False positive</text>
+<text x="24" y="134" class="s" text-anchor="start">Round 1: all rules, before fixes</text>
+<text x="24" y="152" class="ax" text-anchor="start">95 findings</text>
+<rect x="300" y="118" width="522.5263157894736" height="34" rx="4" fill="var(--green)"/>
+<text x="561.2631578947369" y="140" class="n" text-anchor="middle">73</text>
+<rect x="822.5263157894736" y="118" width="107.36842105263158" height="34" rx="4" fill="var(--amber)"/>
+<text x="876.2105263157895" y="140" class="n" text-anchor="middle">15</text>
+<rect x="929.8947368421052" y="118" width="50.10526315789473" height="34" rx="4" fill="var(--red)"/>
+<text x="954.9473684210526" y="140" class="n" text-anchor="middle">7</text>
+<text x="24" y="204" class="s" text-anchor="start">Round 2: 7 changed rules</text>
+<text x="24" y="222" class="ax" text-anchor="start">33 findings</text>
+<rect x="300" y="188" width="350.3030303030303" height="34" rx="4" fill="var(--green)"/>
+<text x="475.1515151515151" y="210" class="n" text-anchor="middle">17</text>
+<rect x="650.3030303030303" y="188" width="267.8787878787879" height="34" rx="4" fill="var(--amber)"/>
+<text x="784.2424242424242" y="210" class="n" text-anchor="middle">13</text>
+<rect x="918.1818181818181" y="188" width="61.81818181818182" height="34" rx="4" fill="var(--red)"/>
+<text x="949.090909090909" y="210" class="n" text-anchor="middle">3</text>
+<text x="24" y="274" class="s" text-anchor="start">Round 3: 3 changed rules</text>
+<text x="24" y="292" class="ax" text-anchor="start">13 findings</text>
+<rect x="300" y="258" width="366.15384615384613" height="34" rx="4" fill="var(--green)"/>
+<text x="483.0769230769231" y="280" class="n" text-anchor="middle">7</text>
+<rect x="666.1538461538462" y="258" width="313.84615384615387" height="34" rx="4" fill="var(--amber)"/>
+<text x="823.0769230769231" y="280" class="n" text-anchor="middle">6</text>
+<text x="24" y="340" class="s" text-anchor="start">Fixes for the false positives found in rounds 1 and 2 were added with regression tests. Rounds 2 and 3 re-sampled only the changed rules.</text>
+</svg>

@@ -53,6 +53,8 @@ The rule tests come from `fixtures/rule-cases.mjs`: for each of the 33 rules a f
 
 ## Sample run 1: intentionally broken fixture
 
+![Findings in the broken sample by severity and by category](diagrams/chart-severity.svg "Counts straight from samples/broken-ui/latest.json.")
+
 Command: `node dist/cli.js audit fixtures/intentionally-broken-ui`
 
 Result: **22 findings** (8 high, 8 medium, 5 low, 1 info) in 2 files.

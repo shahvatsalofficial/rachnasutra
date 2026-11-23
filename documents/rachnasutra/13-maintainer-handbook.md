@@ -70,6 +70,10 @@ GitHub Pages publishes `documents/rachnasutra/html/` on every push to `main` tha
 
 Scripts live in `benchmarks/` and are opt-in (network or third-party tools). Run `node benchmarks/act.mjs` after any rule change and compare with the published numbers in [Validation and benchmarks](16-validation-and-benchmarks.md). When a rule is changed because of a benchmark finding, add a regression case so the fix is permanent, and say in the changelog that the benchmark is no longer blind for that rule.
 
+## Diagrams, charts and screenshots
+
+Diagrams and charts are generated SVGs in `documents/rachnasutra/diagrams/`. Run `npm run diagrams` to regenerate them: flow charts are laid out in `scripts/gen-diagrams.mjs`, and the charts read the real data in `benchmarks/results/` and `samples/`, so they update when the data does. SVGs follow the reader's light or dark preference and need no scripts. Report screenshots in `documents/rachnasutra/images/` come from `npm run images` (needs Playwright and a browser). Reference an image from Markdown as `![alt text](diagrams/name.svg "caption")`. The home page is the hand-written `documents/rachnasutra/home.html`; the numbers it quotes (rules, tests, skills, version) are filled in from the repository when you run `npm run docs`.
+
 ## Refreshing evidence
 
 ```bash

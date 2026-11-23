@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 420" width="1040" height="420" role="img" aria-labelledby="t d">
+<title id="t">How a finding becomes confirmed or review-required</title>
+<desc id="d">A rule fires on a line. If the evidence is a deterministic pattern or a measurement it is high confidence and confirmed; if it is a heuristic it is medium or low and review-required.</desc>
+<style>
+:root{--bg:#fbfaf7;--card:#ffffff;--fg:#1c1a17;--muted:#5b564f;--line:#bdb5a8;--brand:#8a3b12;--brand2:#f8e6da;--blue:#0b5cad;--blue2:#e4eefa;--green:#1d6b3f;--green2:#e2f3e9;--amber:#7a5200;--amber2:#fbf0d0;--red:#9a1f1f;--red2:#fbe4e4;--grid:#e7e2d8}
+@media (prefers-color-scheme:dark){:root{--bg:#12100e;--card:#1b1815;--fg:#f2eee7;--muted:#bdb5a8;--line:#575045;--brand:#f0a070;--brand2:#3a2417;--blue:#8fc0f0;--blue2:#14283d;--green:#8fd6a8;--green2:#16301f;--amber:#f0d070;--amber2:#33290d;--red:#ff9a9a;--red2:#3b1717;--grid:#2c2822}}
+text{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;fill:var(--fg)}
+.h{font-size:22px;font-weight:700}.t{font-size:15px;font-weight:700}.s{font-size:12.5px;fill:var(--muted)}.m{font-family:ui-monospace,Consolas,"Liberation Mono",monospace;font-size:12.5px}
+.n{font-size:12px;font-weight:700;fill:#fff}.ax{font-size:12px;fill:var(--muted)}.lbl{font-size:12px;font-weight:600;fill:var(--muted)}
+</style>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--muted)"/></marker></defs>
+<rect width="1040" height="420" fill="var(--bg)"/>
+<text x="24" y="36" class="h" text-anchor="start">Confirmed or review-required?</text>
+<text x="24" y="58" class="s" text-anchor="start">The report never pretends a guess is a fact</text>
+<rect x="24" y="100" width="200" height="80" rx="12" fill="var(--card)" stroke="var(--line)" stroke-width="1.6"/>
+<text x="124" y="135.5" class="t" text-anchor="middle">A line in your code</text>
+<text x="124" y="154.5" class="s" text-anchor="middle">&lt;img src="a.png"&gt;</text>
+<rect x="274" y="100" width="190" height="80" rx="12" fill="var(--brand2)" stroke="var(--brand)" stroke-width="1.6"/>
+<text x="369" y="135.5" class="t" text-anchor="middle">A rule fires</text>
+<text x="369" y="154.5" class="s" text-anchor="middle">RS-A11Y-001</text>
+<path d="M224 140 L274 140" fill="none" stroke="var(--muted)" stroke-width="1.8"  marker-end="url(#ah)"/>
+<path d="M464 140 L520 140" fill="none" stroke="var(--muted)" stroke-width="1.8"  marker-end="url(#ah)"/>
+<polygon points="640,85 760,140 640,195 520,140" fill="var(--amber2)" stroke="var(--amber)" stroke-width="1.6"/>
+<text x="640" y="135.5" class="t" text-anchor="middle">Deterministic pattern</text>
+<text x="640" y="152.5" class="t" text-anchor="middle">or a measurement?</text>
+<rect x="840" y="90" width="176" height="70" rx="12" fill="var(--green2)" stroke="var(--green)" stroke-width="1.6"/>
+<text x="928" y="111" class="t" text-anchor="middle">confirmed</text>
+<text x="928" y="130" class="s" text-anchor="middle">confidence: high</text>
+<text x="928" y="149" class="s" text-anchor="middle">can gate CI</text>
+<rect x="840" y="200" width="176" height="70" rx="12" fill="var(--amber2)" stroke="var(--amber)" stroke-width="1.6"/>
+<text x="928" y="221" class="t" text-anchor="middle">review-required</text>
+<text x="928" y="240" class="s" text-anchor="middle">confidence: medium/low</text>
+<text x="928" y="259" class="s" text-anchor="middle">a person checks</text>
+<path d="M760 125 L800 125 L800 125 L840 125" fill="none" stroke="var(--muted)" stroke-width="1.8"  marker-end="url(#ah)"/>
+<text x="800" y="112" class="lbl" text-anchor="middle">yes</text>
+<path d="M640 195 L640 235 L840 235" fill="none" stroke="var(--muted)" stroke-width="1.8"  marker-end="url(#ah)"/>
+<text x="740" y="227" class="lbl" text-anchor="middle">heuristic</text>
+<rect x="24" y="300" width="460" height="80" rx="12" fill="var(--green2)" stroke="var(--green)" stroke-width="1.6"/>
+<text x="254" y="326" class="t" text-anchor="middle">Examples: confirmed</text>
+<text x="254" y="345" class="s" text-anchor="middle">missing alt, zoom disabled, measured contrast 2.32:1</text>
+<text x="254" y="364" class="s" text-anchor="middle">positive tabindex, empty lang</text>
+<rect x="540" y="300" width="476" height="80" rx="12" fill="var(--amber2)" stroke="var(--amber)" stroke-width="1.6"/>
+<text x="778" y="326" class="t" text-anchor="middle">Examples: review-required</text>
+<text x="778" y="345" class="s" text-anchor="middle">form field with no label (a wrapper may add one)</text>
+<text x="778" y="364" class="s" text-anchor="middle">fixed width over 600px, target size from selector name</text>
+</svg>

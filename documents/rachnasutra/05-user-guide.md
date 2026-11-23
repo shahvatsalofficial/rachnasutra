@@ -1,5 +1,7 @@
 # User guide
 
+![Which command to run for each goal](diagrams/which-command.svg "Start from your goal and pick the command.")
+
 ## Requirements
 
 - Node.js 20 or newer (`node --version`).
@@ -49,6 +51,10 @@ By default this writes **Markdown, HTML and JSON** reports to `./rachnasutra-rep
 | A different folder or formats | `--out <dir> --format json,md,html,sarif` |
 | SARIF for code scanning | `rachnasutra export --format sarif .` |
 
+![Anatomy of the HTML report](diagrams/report-anatomy.svg "The seven parts of every report.")
+
+![The HTML report as seen in a browser](images/report-desktop.png "A real report generated from the sample page.")
+
 ### Reading a finding
 
 | Field | How to use it |
@@ -61,7 +67,11 @@ By default this writes **Markdown, HTML and JSON** reports to `./rachnasutra-rep
 | Verification | How to prove it is fixed |
 | Limitations | Why it might be a false positive |
 
+
+
 ## Fix and verify
+
+![Baseline, plan, fix, verify; repeat until nothing new is introduced](diagrams/fix-verify-loop.svg "The loop that proves a fix worked.")
 
 ```bash
 rachnasutra audit .                                    # baseline: latest.md, latest.html, latest.json

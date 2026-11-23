@@ -5,6 +5,8 @@
 ## Start here
 - [Live documentation](https://shahvatsalofficial.github.io/rachnasutra/): searchable HTML site
 - [README](README.md): overview, install, CLI, proof, FAQ, limits
+- [Five-minute tour](documents/rachnasutra/18-quick-tour.md): run, read, fix, verify with real output
+- [Real-world scenarios](documents/rachnasutra/19-real-world-scenarios.md): launch week, PR gate, client report, legacy site, design system, AI IDE, browser sign-off
 - [Documentation overview](documents/rachnasutra/00-overview.md): index of the full documentation set
 - [Executive summary](documents/rachnasutra/01-executive-summary.md): what it is, what is proven, what is not claimed
 

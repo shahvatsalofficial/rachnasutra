@@ -9,6 +9,8 @@ RachnaSutra AI helps teams find, fix and verify user-interface quality problems.
 
 Tagline: **Design Beautifully. Audit Precisely. Deliver Delight.**
 
+![How RachnaSutra works end to end](diagrams/how-it-works.svg "Audit, read, fix, verify, gate.")
+
 ## The problem
 
 - Accessibility and responsive defects are common, costly to fix late, and carry legal and reputational risk.
@@ -32,7 +34,7 @@ All items below are backed by automated tests or captured output. See [Testing a
 
 | Claim | Evidence |
 |---|---|
-| The audit finds 21 distinct issues in an intentionally flawed fixture, each with file and line | Test "broken fixture yields deterministic, evidenced findings"; sample report |
+| The audit finds 22 distinct issues in an intentionally flawed fixture, each with file and line | Test "broken fixture yields deterministic, evidenced findings"; sample report |
 | The audit reports zero findings on a correct fixture and on correct inline snippets | Tests "good fixture has zero findings", "rules do not fire on correct inline snippets" |
 | Contrast is measured, not guessed, and matches WCAG reference ratios | Test "contrast math matches WCAG reference values" (21:1 and 4.54:1) |
 | Reports are escaped against markup injection | Test "malicious content is escaped in HTML and Markdown reports" |
