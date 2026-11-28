@@ -1,6 +1,6 @@
 # RachnaSutra AI - UI/UX audit report
 
-- Generated: 2026-11-16T17:40:54.289Z
+- Generated: 2026-11-28T13:43:14.142Z
 - Mode: static (read-only, no network, no model)
 - Root: `<project>\fixtures\intentionally-broken-ui`
 - Files scanned: 2 (.html: 1, .css: 1)

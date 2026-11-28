@@ -10,7 +10,7 @@
 | `skills list` | list bundled skills | no |
 | `skills install --host <id> [--target dir] [--dry-run] [--force]` | install skills; conflicting files block unless `--force` (backup kept) | yes, inside target |
 | `skills uninstall --host <id>` | remove only unmodified files it installed | yes |
-| `audit` | static audit; writes `latest.md`, `latest.html`, `latest.json` to `./rachnasutra-reports` by default; `--no-report`, `--format json,md,html,sarif`, `--out dir`, `--json`, `--fail-on <sev>` | yes, report files (skip with `--no-report`, `--json` or `--format` without `--out`) |
+| `audit` | static audit; writes `latest.md`, `latest.html`, `latest.json` to `./rachnasutra-reports` by default; `--no-report`, `--format json,md,html,sarif`, `--out dir`, `--json`, `--fail-on <sev>`, `--no-excerpts`, `--allow-empty` | yes, report files (skip with `--no-report`, `--json` or `--format` without `--out`) |
 | `accessibility` | audit limited to the accessibility category; same report files as `audit` | yes (same options) |
 | `design-system inspect` | token inventory; writes `tokens.md` and `tokens.html` to `./rachnasutra-reports` (`--out`, `--no-report`, `--json`) | yes, unless `--no-report` or `--json` |
 | `plan-fixes --report file` | ordered fix proposal; writes `fix-plan.md` and `fix-plan.html` next to the JSON report (`--out`, `--no-report`) | yes, unless `--no-report` or `--json` |
@@ -22,9 +22,19 @@
 
 `audit --mode browser` and `visual baseline` / `visual compare` launch Playwright when it is installed. Exit 3 when Playwright or a browser binary is missing, or when the folder has no `index.html`. No result is invented.
 
+## Options
+
+Write a value as `--key value` or `--key=value`. An unknown flag, a missing value or a bad value exits 2 before any work starts.
+
+- `--out dir` without `--format` writes `md`, `html` and `json`. Several formats need `--out`.
+- `--no-excerpts` replaces source excerpts with `[omitted]` and records only the project folder name. Titles can still quote short source text, such as link wording.
+- `--allow-empty` lets a gate pass when no supported file was found.
+
 ## Exit codes
 
-`0` ok, `1` findings at or above `--fail-on` (or install conflict), `2` usage or invalid config, `3` capability not available, `4` verification failed, `5` error.
+`0` ok, `1` findings at or above `--fail-on` (or install conflict), `2` usage or invalid config, `3` capability not available, `4` verification failed, `5` error, or a gate that could not see the whole project (file or time limit reached, unreadable files, or no supported file).
+
+A path that does not exist or is not a directory exits 2.
 
 `--fail-on` accepts `critical|high|medium|low|info` or `confirmed-critical` (any confirmed finding with severity critical or high).
 

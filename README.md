@@ -8,7 +8,7 @@
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 ![Node](https://img.shields.io/badge/node-%3E%3D20-brightgreen)
 ![Runtime dependencies](https://img.shields.io/badge/runtime%20dependencies-0-brightgreen)
-![Tests](https://img.shields.io/badge/tests-140%20passing-brightgreen)
+![Tests](https://img.shields.io/badge/tests-152%20passing-brightgreen)
 
 **Quick links:** [Live docs](https://shahvatsalofficial.github.io/rachnasutra/) | [5-minute tour](documents/rachnasutra/18-quick-tour.md) | [Real-world scenarios](documents/rachnasutra/19-real-world-scenarios.md) | [Documentation](documents/rachnasutra/00-overview.md) | [Validation](documents/rachnasutra/16-validation-and-benchmarks.md) | [Sample report](samples/broken-ui/latest.md) | [Test evidence](documents/rachnasutra/10-testing-and-evidence.md) | [Rules](documents/rachnasutra/06-audit-rules-reference.md) | [Legal and limits](documents/rachnasutra/09-legal-and-compliance.md)
 
@@ -118,7 +118,7 @@ Everything below is reproducible from this repository.
 
 | Evidence | Result | Where |
 |---|---|---|
-| Automated tests | **140 of 140 passing** locally on Node 24 (this machine). Blocking CI is Windows and Linux on Node 20, 22, 24 and 26. macOS is not in CI: GitHub cancels those jobs before a runner starts | [test-results.txt](documents/rachnasutra/evidence/test-results.txt) |
+| Automated tests | **152 of 152 passing** locally on Node 24 (this machine). Blocking CI is Windows and Linux on Node 20, 22, 24 and 26. macOS is not in CI: GitHub cancels those jobs before a runner starts | [test-results.txt](https://github.com/shahvatsalofficial/rachnasutra/blob/main/documents/rachnasutra/evidence/test-results.txt) |
 | Every rule tested both ways | A failing and a passing input for all 33 rules, plus false-positive guards; the same inputs generate the docs | [rule examples](documents/rachnasutra/15-rule-examples.md) |
 | W3C ACT test cases | 154 cases, 10 rules: **71% precision, 65% recall** after fixing defects the benchmark found (first run: 53% and 38%) | [act.md](benchmarks/results/act.md) |
 | Comparison with axe-core | axe-core is **more accurate** (92% / 83% against 81% / 73% on 7 comparable rules); RachnaSutra works on source files, offline, in CI | [act-vs-axe.md](benchmarks/results/act-vs-axe.md) |
@@ -126,7 +126,7 @@ Everything below is reproducible from this repository.
 | Before and after on a real template | 14 findings resolved, 0 introduced; axe-core agrees | [case study](case-studies/clean-blog/README.md) |
 | Intentionally flawed fixture | **22 findings**, each with file and line; identical on every run | [sample report](samples/broken-ui/latest.md) |
 | Correct fixture | **0 findings** | [sample report](samples/good-ui/latest.md) |
-| Contrast maths | Matches WCAG reference ratios (21:1 black on white; 4.54:1 for `#767676` on white) | [tests](test/rachnasutra.test.mjs) |
+| Contrast maths | Matches WCAG reference ratios (21:1 black on white; 4.54:1 for `#767676` on white) | [tests](https://github.com/shahvatsalofficial/rachnasutra/blob/main/test/rachnasutra.test.mjs) |
 | Security tests | Secret redaction, path traversal, report escaping, prompt-injection text in audited files | [security doc](documents/rachnasutra/08-security-and-privacy.md) |
 | Browser mode | `audit --mode browser` on this machine used Edge, wrote `screenshot.png`, ran axe-core, and recorded Lighthouse lab scores. Exit 3 only when Playwright or a browser binary is missing | [status](docs/status.md) |
 

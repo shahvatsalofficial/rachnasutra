@@ -50,6 +50,7 @@ By default this writes **Markdown, HTML and JSON** reports to `./rachnasutra-rep
 | Machine-readable output on stdout | `--json` |
 | A different folder or formats | `--out <dir> --format json,md,html,sarif` |
 | SARIF for code scanning | `rachnasutra export --format sarif .` |
+| A report without source text or local paths | `--no-excerpts` |
 
 ![Anatomy of the HTML report](diagrams/report-anatomy.svg "The seven parts of every report.")
 
@@ -168,11 +169,12 @@ The WCAG checklist is in `skills/rachnasutra-access/references/wcag-22-aa-checkl
 | Symptom | Cause and fix |
 |---|---|
 | `Scanned 0 file(s)` | The path has no supported files, or they are in an ignored folder. Check the path and `exclude` |
-| `truncated` is true | A limit was hit. Narrow the path or raise `maxFiles` |
+| `truncated` is true | A limit was hit. Narrow the path or raise `maxFiles`. A gate exits 5 |
+| `gate not passed` (exit 5) | The scan was partial or empty. Check the path; use `--allow-empty` only when no UI files is expected |
 | Many `RS-A11Y-005` hits in a component library project | Labels are supplied by wrappers. Treat as review-required |
 | `Blocked: N conflicting file(s)` | You edited installed skills. Use `--dry-run` to inspect, `--force` to overwrite |
-| Exit code 3 | You asked for a browser or visual audit. Not available yet |
-| Exit code 2 on `config validate` | Unknown key or rule ID in the config |
+| Exit code 3 | Browser mode could not start: Playwright, a browser or `index.html` is missing |
+| Exit code 2 | Unknown flag, bad value, missing folder, or invalid config |
 | `npx github:...` fails | The repository may be private or Node is below 20 |
 
 ## Getting help

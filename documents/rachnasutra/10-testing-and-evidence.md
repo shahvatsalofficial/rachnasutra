@@ -9,18 +9,20 @@ This page contains the recorded results of the automated test suite and sample r
 | Command | `npm test` (build, then `node --test test/`) |
 | Node.js | v24 on this machine. CI also runs Node 20, 22, 24 and 26 |
 | Operating system | Windows 11 (Git Bash) |
-| Tests | 140 |
-| Passed | 140 |
+| Tests | 152 |
+| Passed | 152 |
 | Failed | 0 |
 | Skipped | 0 |
 | Duration | about 34 seconds |
 | Raw output | [test-results.txt](evidence/test-results.txt) |
 
-Typecheck (`npm run typecheck`) and package verification (`node dist/cli.js verify`, 24 PASS lines, 0 FAIL) were also run clean on the same commit.
+Typecheck (`npm run typecheck`) and package verification (`node dist/cli.js verify`, 29 PASS lines, 0 FAIL) were also run clean on the same commit.
 
-> **Note:** Locally the suite was run on Windows with Node 20, 22, 24 and 26. The blocking CI matrix is Windows and Linux on Node 20, 22, 24 and 26. macOS is not in CI. GitHub queued `macos-15` for 15 minutes on run 42096695892, then cancelled both jobs before any step. That is a missing runner, not a failed test. No macOS result is claimed.
+> **Note:** The recorded run used Node 24 on Windows. The blocking CI matrix is Windows and Linux on Node 20, 22, 24 and 26. macOS is not in CI. GitHub queued `macos-15` for 15 minutes on run 42096695892, then cancelled both jobs before any step. That is a missing runner, not a failed test. No macOS result is claimed.
 
 ## What each test proves
+
+Regression tests for flags, gates, redaction, verification, CSS-in-JS lines, the scanner, speed and the browser-mode server are in `test/hardening.test.mjs`.
 
 | # | Test | Proves |
 |---|---|---|
@@ -115,7 +117,7 @@ node dist/cli.js verify
 node dist/cli.js audit fixtures/intentionally-broken-ui --format json,md,html,sarif --out reports
 ```
 
-Expected: 140 tests pass; `verify` prints only PASS lines; four report files are written.
+Expected: 152 tests pass; `verify` prints only PASS lines; four report files are written.
 
 ## Coverage of the test suite
 

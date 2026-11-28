@@ -4,6 +4,26 @@ All notable changes follow [Semantic Versioning](https://semver.org/). Report sc
 
 ## Unreleased
 
+Behaviour changes. Read these before upgrading a pipeline.
+
+- Unknown flags, missing or bad values, and a path that is not a directory now exit 2. `--base-url`, `--viewport`, `--profile`, `--level` and `--url` did nothing and are now rejected
+- A gate (`ci`, `--fail-on` or `failOn`) exits 5 when the scan was partial, files were unreadable, or no supported file was found. `--allow-empty` permits the empty case
+- `--out` without `--format` writes `md`, `html` and `json`
+- `dist`, `build`, `out`, `target`, `vendor`, `coverage` and `reports` are skipped only at the scan root or beside a project file, so more files can be scanned
+- Template files (`.php`, `.erb`, `.ejs`, `.cshtml`, `.hbs`, `.njk`, `.liquid`, `.twig`) and `.pcss` are now scanned
+- CSS-in-JS findings report the true source line, so their fingerprints change once. Lines with newly redacted secrets also change fingerprint
+
+Fixes and additions
+
+- `--key=value` flags work. `--no-excerpts` removes source excerpts and the absolute path from reports
+- Redaction also covers unquoted environment values, JSON keys, prefixed names, JWT, Bearer, Stripe and npm tokens, URL passwords, titles and browser findings
+- `verify --report` pairs identical findings one to one, keeps the baseline's category scope, and lists browser findings as not re-checked
+- The version comes from `package.json` only
+- CSS-in-JS: `.attrs`, TypeScript generics, `createGlobalStyle` and `injectGlobal`
+- Large files scan in near-linear time (a 144 KB generated page: 18 s before, 0.3 s now, on the development machine)
+- Browser mode sends MIME types, uses a free debugging port and answers a malformed URL with 400
+- `verify` passes in the installed npm package, and CI tests the packed tarball
+
 - Documentation overhaul: a designed home page, a five-minute tour with real output and screenshots, seven real-world scenarios, 14 diagrams and data charts (flow charts, decision tree, CI gate, skill orchestration, report anatomy, benchmark charts) that follow light and dark mode, grouped navigation, and figures added to the user guide, architecture, skills, CI and validation pages
 - Site redesign: website-style home page, top navigation, footer, light theme by default with a remembered dark toggle, theme-matched diagrams (light and dark SVG variants), tap-to-enlarge lightbox so wide diagrams are readable on phones, mobile drawer navigation
 - `npm run diagrams` regenerates the SVGs from the published benchmark data; `npm run images` recaptures the report screenshots

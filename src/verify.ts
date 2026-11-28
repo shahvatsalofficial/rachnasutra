@@ -102,6 +102,8 @@ export interface Comparison {
   resolved: Finding[];
   remaining: Finding[];
   introduced: Finding[];
+  /** Baseline findings this static re-check cannot judge (browser results). */
+  notRechecked: number;
 }
 
 /** Fix verification: re-run the audit and compare to a saved report by fingerprint. */
@@ -114,19 +116,41 @@ export async function compareToReport(reportPath: string, root: string): Promise
   }
   const errors = validateReport(baseline);
   if (errors.length) return { errors };
-  const current = await runAudit(root);
-  const key = (f: Finding): string => `${f.fingerprint}`;
-  const cur = new Map(current.findings.map((f) => [key(f), f]));
-  const base = new Map(baseline.findings.map((f) => [key(f), f]));
+  // re-run with the baseline's scope; browser (axe) results cannot be re-checked statically
+  const current = await runAudit(root, { categories: baseline.categories });
+  const checkable = baseline.findings.filter((f) => !f.rule.startsWith('axe/'));
+  const { matched: remaining, unmatched: resolved } = matchByFingerprint(checkable, current.findings);
   return {
     errors: [],
     current,
     comparison: {
       baselineTotal: baseline.findings.length,
       currentTotal: current.findings.length,
-      resolved: baseline.findings.filter((f) => !cur.has(key(f))),
-      remaining: baseline.findings.filter((f) => cur.has(key(f))),
-      introduced: current.findings.filter((f) => !base.has(key(f))),
+      resolved,
+      remaining,
+      introduced: matchByFingerprint(current.findings, checkable).unmatched,
+      notRechecked: baseline.findings.length - checkable.length,
     },
   };
+}
+
+/**
+ * Pair findings one to one. Two identical lines share a fingerprint, so a count matters:
+ * fixing one of two copies must show one resolved. Exact line matches pair first.
+ */
+function matchByFingerprint(from: Finding[], against: Finding[]): { matched: Finding[]; unmatched: Finding[] } {
+  const pool = new Map<string, (number | null)[]>();
+  for (const f of against) pool.set(f.fingerprint, [...(pool.get(f.fingerprint) ?? []), f.line ?? null]);
+  const taken = new Set<Finding>();
+  const take = (f: Finding, sameLine: boolean): void => {
+    const lines = pool.get(f.fingerprint);
+    if (!lines?.length || taken.has(f)) return;
+    const i = sameLine ? lines.indexOf(f.line ?? null) : 0;
+    if (i < 0) return;
+    lines.splice(i, 1);
+    taken.add(f);
+  };
+  for (const f of from) take(f, true);
+  for (const f of from) take(f, false);
+  return { matched: from.filter((f) => taken.has(f)), unmatched: from.filter((f) => !taken.has(f)) };
 }

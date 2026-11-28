@@ -55,7 +55,7 @@ Not implemented. When added it must require explicit authorization, an origin al
 | Redaction is pattern-based | Unusual secret formats can pass through. Do not publish reports without review |
 | Regex parsing | Crafted input could cause slow matching; time and file limits bound this |
 | AI host behaviour | Skills reduce but cannot eliminate prompt-injection risk in a model |
-| Report files contain code excerpts | Treat reports as sensitive as source |
+| Report files contain code excerpts | Treat reports as sensitive as source, or run with `--no-excerpts` (titles can still quote short source text) |
 
 ## Responsible disclosure
 
