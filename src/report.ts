@@ -178,6 +178,7 @@ export interface VerifyView {
   resolved: Finding[];
   remaining: Finding[];
   introduced: Finding[];
+  notRechecked?: number;
 }
 
 function findingBullet(f: Finding): string {
@@ -238,6 +239,7 @@ export function renderVerifyMarkdown(c: VerifyView): string {
     `- Resolved: ${c.resolved.length}`,
     `- Still open: ${c.remaining.length}`,
     `- New findings: ${c.introduced.length}`,
+    ...(c.notRechecked ? [`- Browser findings not re-checked: ${c.notRechecked}`] : []),
     '',
     c.introduced.length
       ? 'New findings appeared. Treat this as a regression and review them before shipping.'
@@ -261,6 +263,7 @@ export function renderVerifyHtml(c: VerifyView): string {
 <div class="stat" role="listitem"><b>${c.remaining.length}</b>still open</div>
 <div class="stat" role="listitem"><b>${c.introduced.length}</b>new</div>
 </div>
+${c.notRechecked ? `<p class="muted">Browser findings not re-checked: ${c.notRechecked}.</p>` : ''}
 <p class="note">${c.introduced.length ? 'New findings appeared. Treat this as a regression and review them before shipping.' : 'No new findings. Static rules did not see a regression.'}</p>
 ${section('Resolved', c.resolved)}
 ${section('Still open', c.remaining)}

@@ -49,3 +49,14 @@ jobs:
           test $? -eq 1
       - name: Production dependencies must be empty
         run: npm ls --omit=dev --depth=0
+      - name: The packed tarball installs and passes verify
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm pack --pack-destination "$RUNNER_TEMP"
+          mkdir "$RUNNER_TEMP/consumer"
+          cd "$RUNNER_TEMP/consumer"
+          npm init -y > /dev/null
+          npm install --no-audit --no-fund "$RUNNER_TEMP"/rachnasutra-*.tgz
+          npx --no-install rachnasutra verify
+          npx --no-install rachnasutra --version

@@ -3,7 +3,7 @@ import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { HOSTS, detectHosts, doctor, install, packageRoot, planInstall, uninstall } from './adapters.js';
 import { BrowserMissing, runBrowserAudit, saveScreenshot } from './browser.js';
-import { CONFIG_FILE, SEVERITY_ORDER, loadConfig, runAudit, validateConfig } from './audit.js';
+import { CONFIG_FILE, SEVERITY_ORDER, UsageError, loadConfig, runAudit, toolVersion, validateConfig } from './audit.js';
 import { exists } from './fsutil.js';
 import { renderFixPlanHtml, renderFixPlanMarkdown, renderHistoryHtml, renderHistoryMarkdown, renderHtml, renderJson, renderMarkdown, renderSarif, renderTokensHtml, renderTokensMarkdown, renderVerifyHtml, renderVerifyMarkdown, type HistoryRow } from './report.js';
 import type { AuditResult, Severity } from './types.js';
@@ -12,6 +12,9 @@ import { compareToReport, verifyPackage } from './verify.js';
 const EXIT = { ok: 0, findings: 1, usage: 2, notAvailable: 3, verifyFailed: 4, error: 5 } as const;
 const NOT_AVAILABLE = ['visual', 'browser'];
 const DEFAULT_REPORT_DIR = 'rachnasutra-reports';
+const VALUE_FLAGS = new Set(['host', 'target', 'out', 'format', 'fail-on', 'report', 'mode']);
+const BOOL_FLAGS = new Set(['json', 'no-report', 'dry-run', 'force', 'verbose', 'version', 'help', 'allow-empty', 'no-excerpts']);
+const FORMATS = ['json', 'md', 'html', 'sarif'];
 
 const HELP = `RachnaSutra AI - Design Beautifully. Audit Precisely. Deliver Delight.
 
@@ -44,9 +47,15 @@ Browser mode (real browser, exit 3 only when Playwright is not installed):
 
 Options:
   --json  --no-report  --dry-run  --force  --host <id>  --target <dir>  --out <dir>  --format <list>
-  --fail-on <sev|confirmed-critical>  --verbose  --version  --help
+  --fail-on <sev|confirmed-critical>  --allow-empty  --no-excerpts  --report <file>  --mode static|browser
+  --verbose  --version  --help
+  Values may be written as --key value or --key=value. Unknown flags are an error.
 
-Exit codes: 0 ok | 1 findings at/above threshold | 2 usage | 3 not available | 4 verify failed | 5 error
+  --allow-empty   let a gate pass when no supported file was found
+  --no-excerpts   leave source excerpts and the absolute project path out of reports
+
+Exit codes: 0 ok | 1 findings at/above threshold | 2 usage | 3 not available | 4 verify failed
+            5 error, or a gate that could not see the whole project
 `;
 
 interface Args {
@@ -58,16 +67,43 @@ interface Args {
 function parse(argv: string[]): Args {
   const flags: Args['flags'] = {};
   const pos: string[] = [];
-  const withValue = new Set(['host', 'target', 'out', 'format', 'fail-on', 'report', 'mode', 'base-url', 'viewport', 'profile', 'level', 'url']);
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
-    if (a.startsWith('--')) {
-      const key = a.slice(2);
-      if (withValue.has(key)) flags[key] = argv[++i] ?? '';
-      else flags[key] = true;
-    } else pos.push(a);
+    if (!a.startsWith('--')) {
+      pos.push(a);
+      continue;
+    }
+    const eq = a.indexOf('=');
+    const key = a.slice(2, eq < 0 ? undefined : eq);
+    if (VALUE_FLAGS.has(key)) {
+      const value = eq < 0 ? argv[++i] : a.slice(eq + 1);
+      if (!value || value.startsWith('--')) throw new UsageError(`--${key} needs a value.`);
+      flags[key] = value;
+    } else if (BOOL_FLAGS.has(key)) {
+      if (eq >= 0) throw new UsageError(`--${key} takes no value.`);
+      flags[key] = true;
+    } else throw new UsageError(`Unknown flag --${key}. See: rachnasutra --help`);
   }
   return { cmd: pos.shift(), pos, flags };
+}
+
+/** Reject bad option values before any work is done. */
+function checkValues(flags: Args['flags']): void {
+  const th = flags['fail-on'] as string | undefined;
+  if (th && th !== 'confirmed-critical' && !SEVERITY_ORDER.includes(th as Severity)) {
+    throw new UsageError(`--fail-on must be confirmed-critical|${SEVERITY_ORDER.join('|')}, not "${th}".`);
+  }
+  const bad = formatList(flags).filter((f) => !FORMATS.includes(f));
+  if (bad.length) throw new UsageError(`Unknown format "${bad[0]}". Use ${FORMATS.join(',')}.`);
+  if (formatList(flags).length > 1 && !flags.out) throw new UsageError('Several formats need --out <dir>.');
+  if (flags.mode && flags.mode !== 'static' && flags.mode !== 'browser') throw new UsageError(`--mode must be static or browser, not "${String(flags.mode)}".`);
+}
+
+const formatList = (flags: Args['flags']): string[] => String(flags.format ?? '').split(',').map((s) => s.trim()).filter(Boolean);
+
+async function requireDir(dir: string): Promise<void> {
+  const stat = await fs.stat(dir).catch(() => null);
+  if (!stat?.isDirectory()) throw new UsageError(stat ? `Not a directory: ${dir}` : `No such directory: ${dir}`);
 }
 
 const write = (s: string): void => void process.stdout.write(s.endsWith('\n') ? s : `${s}\n`);
@@ -78,6 +114,24 @@ function failCode(res: AuditResult, th: string | undefined): number {
   const i = SEVERITY_ORDER.indexOf(th as Severity);
   if (i < 0) return EXIT.usage;
   return res.findings.some((f) => SEVERITY_ORDER.indexOf(f.severity) <= i) ? EXIT.findings : EXIT.ok;
+}
+
+/** Why a clean result cannot be trusted as a pass, if it cannot. */
+function gateGap(r: AuditResult, allowEmpty: boolean): string | undefined {
+  if (r.truncated) return 'The scan stopped at a file or time limit. Raise maxFiles or add exclude entries.';
+  if (r.skipped.unreadable) return `${r.skipped.unreadable} file(s) or folder(s) could not be read.`;
+  if (!r.filesScanned && !allowEmpty) return 'No supported file was scanned. Check the path, or pass --allow-empty.';
+  return undefined;
+}
+
+/** Privacy mode: keep file and line, drop source text and the absolute path. */
+function stripSource(r: AuditResult): void {
+  // browser mode also writes screenshot paths into limitations and coverage details
+  const local = (s: string): string => s.replaceAll(r.root + path.sep, '').replaceAll(process.cwd() + path.sep, '');
+  r.limitations = r.limitations.map(local);
+  for (const c of r.coverage) c.detail = local(c.detail);
+  r.root = path.basename(r.root);
+  for (const f of r.findings) for (const e of f.evidence) e.excerpt = '[omitted]';
 }
 
 function textSummary(r: AuditResult): string {
@@ -94,9 +148,10 @@ function textSummary(r: AuditResult): string {
 }
 
 async function emitAudit(res: AuditResult, args: Args): Promise<void> {
-  const formats = String(args.flags.format ?? '').split(',').map((s) => s.trim()).filter(Boolean);
+  let formats = formatList(args.flags);
   const outDir = args.flags.out ? path.resolve(String(args.flags.out)) : undefined;
-  if (!formats.length || !outDir) {
+  if (outDir && !formats.length) formats = args.flags.json ? ['json'] : ['md', 'html', 'json'];
+  if (!outDir) {
     if (args.flags.json || formats.includes('json')) write(renderJson(res));
     else if (formats.includes('md')) write(renderMarkdown(res));
     else if (formats.includes('sarif')) write(JSON.stringify(renderSarif(res), null, 2));
@@ -111,7 +166,6 @@ async function emitAudit(res: AuditResult, args: Args): Promise<void> {
   const written: string[] = [];
   if (!args.flags['dry-run']) await fs.mkdir(outDir, { recursive: true });
   for (const f of formats) {
-    if (!files[f]) throw new Error(`Unknown format "${f}". Use json,md,html,sarif.`);
     if (!args.flags['dry-run']) await fs.writeFile(path.join(outDir, names[f]), files[f], 'utf8');
     written.push(path.join(outDir, names[f]));
   }
@@ -137,8 +191,7 @@ async function main(): Promise<number> {
   const dry = Boolean(args.flags['dry-run']);
 
   if (args.flags.version || args.cmd === 'version') {
-    const pkg = JSON.parse(await fs.readFile(path.join(packageRoot(), 'package.json'), 'utf8')) as { version: string };
-    write(json ? JSON.stringify({ version: pkg.version }) : pkg.version);
+    write(json ? JSON.stringify({ version: toolVersion() }) : toolVersion());
     return EXIT.ok;
   }
   if (!args.cmd || args.flags.help || args.cmd === 'help') {
@@ -146,9 +199,12 @@ async function main(): Promise<number> {
     return args.cmd || args.flags.help ? EXIT.ok : EXIT.usage;
   }
 
+  checkValues(args.flags);
   const cmd = args.cmd;
   const sub = ['skills', 'design-system', 'config', 'visual'].includes(cmd) ? args.pos.shift() : undefined;
   const target = path.resolve(args.pos[0] ?? '.');
+  const readsProject = ['audit', 'accessibility', 'ci', 'export', 'design-system', 'init', 'config', 'visual'].includes(cmd) || (cmd === 'verify' && args.flags.report);
+  if (readsProject) await requireDir(target);
 
   if (cmd === 'visual' || (cmd === 'audit' && args.flags.mode === 'browser')) {
     try {
@@ -284,8 +340,9 @@ async function main(): Promise<number> {
           throw e;
         }
       }
+      if (args.flags['no-excerpts']) stripSource(res);
       if (cmd === 'ci') {
-        if (!args.flags.format) args.flags.json = true;
+        if (!args.flags.format && !args.flags.out) args.flags.json = true;
       } else if (!args.flags.json && !args.flags.format && !args.flags.out && !args.flags['no-report']) {
         // default: easy-to-read Markdown + HTML (+ JSON) report files next to where the command is run
         args.flags.format = 'md,html,json';
@@ -293,11 +350,18 @@ async function main(): Promise<number> {
       }
       await emitAudit(res, args);
       const cfgFail = (await loadConfig(target)).failOn;
-      return failCode(res, (args.flags['fail-on'] as string | undefined) ?? cfgFail ?? (cmd === 'ci' ? 'confirmed-critical' : undefined));
+      const threshold = (args.flags['fail-on'] as string | undefined) ?? cfgFail ?? (cmd === 'ci' ? 'confirmed-critical' : undefined);
+      const code = failCode(res, threshold);
+      if (code !== EXIT.ok || !threshold) return code;
+      const gap = gateGap(res, Boolean(args.flags['allow-empty']));
+      if (!gap) return EXIT.ok;
+      process.stderr.write(`rachnasutra: gate not passed. ${gap}\n`);
+      return EXIT.error;
     }
 
     case 'export': {
       const res = await runAudit(target);
+      if (args.flags['no-excerpts']) stripSource(res);
       if (String(args.flags.format ?? 'sarif') !== 'sarif') {
         process.stderr.write('export supports --format sarif\n');
         return EXIT.usage;
@@ -366,6 +430,7 @@ async function main(): Promise<number> {
           `Resolved: ${c.resolved.length}  Remaining: ${c.remaining.length}  Introduced: ${c.introduced.length}`,
           ...c.resolved.map((f) => `  resolved   ${f.rule} ${f.file}${f.line ? `:${f.line}` : ''}`),
           ...c.introduced.map((f) => `  introduced ${f.rule} ${f.file}${f.line ? `:${f.line}` : ''} - ${f.title}`),
+          ...(c.notRechecked ? [`Not re-checked: ${c.notRechecked} browser finding(s). Run audit --mode browser again.`] : []),
           'Static re-check only; manual accessibility and visual verification are still needed.',
         ].join('\n'));
         return c.introduced.length ? EXIT.verifyFailed : EXIT.ok;
@@ -441,6 +506,6 @@ main().then(
   (e: Error) => {
     process.stderr.write(`rachnasutra: ${e.message}\n`);
     if (process.argv.includes('--verbose')) process.stderr.write(`${e.stack}\n`);
-    process.exit(EXIT.error);
+    process.exit(e instanceof UsageError ? EXIT.usage : EXIT.error);
   },
 );

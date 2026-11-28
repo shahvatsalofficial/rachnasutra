@@ -57,7 +57,7 @@ export interface Corpus {
   root: string;
   files: SourceFile[];
   assets: Asset[];
-  skipped: { ignoredDirs: number; tooLarge: number; binary: number; symlinks: number; overBudget: number; excluded: number };
+  skipped: { ignoredDirs: number; tooLarge: number; binary: number; symlinks: number; overBudget: number; excluded: number; unreadable: number };
   truncated: boolean;
 }
 
@@ -94,6 +94,8 @@ export interface AuditResult {
   generatedAt: string;
   root: string;
   mode: 'static';
+  /** Present when the run was limited to some rule categories. */
+  categories?: string[];
   filesScanned: number;
   fileTypes: Record<string, number>;
   skipped: Corpus['skipped'];

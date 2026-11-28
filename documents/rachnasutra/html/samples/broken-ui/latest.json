@@ -4,7 +4,7 @@
     "name": "rachnasutra",
     "version": "0.5.2"
   },
-  "generatedAt": "2026-11-16T17:40:54.289Z",
+  "generatedAt": "2026-11-28T13:43:14.142Z",
   "root": "<project>\\fixtures\\intentionally-broken-ui",
   "mode": "static",
   "filesScanned": 2,
@@ -18,7 +18,8 @@
     "binary": 0,
     "symlinks": 0,
     "overBudget": 0,
-    "excluded": 0
+    "excluded": 0,
+    "unreadable": 0
   },
   "truncated": false,
   "findings": [

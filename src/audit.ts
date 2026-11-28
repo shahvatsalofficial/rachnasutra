@@ -1,6 +1,8 @@
 import { createHash } from 'node:crypto';
-import { promises as fs } from 'node:fs';
+import { promises as fs, readFileSync } from 'node:fs';
 import path from 'node:path';
+import { packageRoot } from './adapters.js';
+import { redact } from './redact.js';
 import { exists, readText, walk, clearTextCache } from './fsutil.js';
 import { MARKUP_EXT, RULE_CATALOG, STYLE_EXT, runRules, type Doc, type RawHit } from './rules.js';
 import { inspectTokens } from './tokens.js';
@@ -9,30 +11,81 @@ import type { AuditConfig, AuditResult, CoverageEntry, Finding, Severity } from 
 export const SEVERITY_ORDER: Severity[] = ['critical', 'high', 'medium', 'low', 'info'];
 
 const CODE_EXT = new Set(['.js', '.jsx', '.ts', '.tsx', '.mjs', '.cjs']);
+const SERVER_TAG_EXT = new Set(['.php', '.erb', '.ejs', '.cshtml']);
 
-/** Pull CSS out of styled-components and the css`` helper. Other CSS-in-JS shapes are left alone. */
-export function extractCssInJs(text: string): string {
-  const parts: string[] = [];
-  for (const m of text.matchAll(/(?:styled(?:\.[A-Za-z0-9]+|\([^)]*\))|css)`([^`]*)`/g)) {
-    const body = m[1].trim();
-    if (!body) continue;
-    parts.push(body.includes('{') ? body : `.extracted {\n${body}\n}`);
+const CSS_IN_JS = /\b(?:styled(?:\.[A-Za-z0-9]+|\([^()]*\))(?:\.attrs\((?:[^()]|\([^()]*\))*\))?|css|createGlobalStyle|injectGlobal)(?:<(?:[^`<>]|<[^`<>]*>)*>)?`/g;
+
+/** Index of the closing backtick of a template starting at `from`, plus the `${...}` ranges inside it. */
+function scanTemplate(text: string, from: number): { end: number; holes: [number, number][] } {
+  const holes: [number, number][] = [];
+  for (let i = from; i < text.length; i++) {
+    if (text[i] === '\\') i++;
+    else if (text[i] === '`') return { end: i, holes };
+    else if (text[i] === '$' && text[i + 1] === '{') {
+      // shortcut: braces inside quoted strings in an interpolation are counted too; parse JS if that ever matters
+      const open = i;
+      let depth = 0;
+      for (i += 1; i < text.length; i++) {
+        if (text[i] === '`') i = scanTemplate(text, i + 1).end;
+        else if (text[i] === '{') depth++;
+        else if (text[i] === '}' && --depth === 0) break;
+      }
+      holes.push([open, i + 1]);
+    }
   }
-  return parts.join('\n');
+  return { end: -1, holes };
+}
+
+/**
+ * Pull CSS out of styled-components, emotion and the css`` helper. The result has the same length and line
+ * breaks as the source, with everything that is not CSS blanked, so findings point at the true line.
+ * Object styles and other CSS-in-JS shapes are left alone.
+ */
+export function extractCssInJs(text: string): string {
+  let out: string[] | undefined;
+  for (const m of text.matchAll(CSS_IN_JS)) {
+    const start = m.index + m[0].length;
+    const { end, holes } = scanTemplate(text, start);
+    if (end < 0 || !text.slice(start, end).trim()) continue;
+    out ??= text.replace(/[^\r\n]/g, ' ').split('');
+    for (let i = start; i < end; i++) out[i] = text[i];
+    for (const [a, b] of holes) for (let i = a; i < b; i++) if (text[i] !== '\n' && text[i] !== '\r') out[i] = 'X';
+    const own = out.slice(start, end).join('');
+    if (!own.includes('{')) {
+      // flat declarations need a selector: it goes into the blanked characters before and after the body
+      out[start - 2] = 'x';
+      out[start - 1] = '{';
+      out[end] = '}';
+    }
+  }
+  return out ? out.join('') : '';
 }
 export const CONFIG_FILE = 'rachnasutra.config.json';
 
+let version: string | undefined;
+
+/** package.json is the only place the version is written. */
 export function toolVersion(): string {
-  return '0.5.2';
+  version ??= (JSON.parse(readFileSync(path.join(packageRoot(), 'package.json'), 'utf8')) as { version: string }).version;
+  return version;
 }
+
+/** A user mistake (bad path or config), reported as a usage error instead of a crash. */
+export class UsageError extends Error {}
 
 export async function loadConfig(root: string): Promise<AuditConfig> {
   const p = path.join(root, CONFIG_FILE);
   const def: AuditConfig = { exclude: [], disableRules: [] };
   if (!(await exists(p))) return def;
-  const errs = validateConfig(JSON.parse(await fs.readFile(p, 'utf8')) as unknown);
-  if (errs.length) throw new Error(`${CONFIG_FILE} invalid: ${errs.join('; ')}`);
-  return { ...def, ...(JSON.parse(await fs.readFile(p, 'utf8')) as Partial<AuditConfig>) };
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(await fs.readFile(p, 'utf8'));
+  } catch (e) {
+    throw new UsageError(`${p} is not readable JSON: ${(e as Error).message}`);
+  }
+  const errs = validateConfig(parsed);
+  if (errs.length) throw new UsageError(`${CONFIG_FILE} invalid: ${errs.join('; ')}`);
+  return { ...def, ...(parsed as Partial<AuditConfig>) };
 }
 
 export function validateConfig(o: unknown): string[] {
@@ -80,11 +133,13 @@ export async function runAudit(rootArg: string, opts: AuditOptions = {}): Promis
     if (text === null) continue;
     if (isMarkup || isStyle) {
       fileTypes[f.ext] = (fileTypes[f.ext] ?? 0) + 1;
-      docs.push({ file: f, text, kind: isMarkup ? 'markup' : 'style', isHtmlDoc: f.ext === '.html' || f.ext === '.htm' });
+      // server tags (<?php ?>, <% %>) become same-length filler so their ">" cannot cut an HTML tag short
+      const scanned = SERVER_TAG_EXT.has(f.ext) ? text.replace(/<[?%][\s\S]*?[?%]>/g, (x) => x.replace(/[^\r\n]/g, 'T')) : text;
+      docs.push({ file: f, text: scanned, source: text, kind: isMarkup ? 'markup' : 'style', isHtmlDoc: f.ext === '.html' || f.ext === '.htm' });
     }
     const extracted = extractCssInJs(text);
     if (extracted && CODE_EXT.has(f.ext)) {
-      docs.push({ file: f, text: extracted, kind: 'style', isHtmlDoc: false });
+      docs.push({ file: f, text: extracted, source: text, kind: 'style', isHtmlDoc: false });
     }
   }
 
@@ -106,6 +161,7 @@ export async function runAudit(rootArg: string, opts: AuditOptions = {}): Promis
     findings.push({
       id: `RS-${String(findings.length + 1).padStart(4, '0')}`,
       ...h,
+      title: redact(h.title),
       platform: 'web',
       status: h.confidence === 'high' ? 'confirmed' : 'review-required',
       fingerprint: fp,
@@ -142,6 +198,7 @@ export async function runAudit(rootArg: string, opts: AuditOptions = {}): Promis
     generatedAt: new Date().toISOString(),
     root,
     mode: 'static',
+    ...(opts.categories ? { categories: opts.categories } : {}),
     filesScanned: docs.length,
     fileTypes,
     skipped: corpus.skipped,

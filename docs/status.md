@@ -4,7 +4,7 @@ Last updated for 0.5.2. Statuses: **implemented** (code + test), **adapter** (fi
 
 | Area | Status | Notes |
 |---|---|---|
-| Static audit CLI, 33 rules | implemented | 140 tests; failing and passing case per rule in `fixtures/rule-cases.mjs` |
+| Static audit CLI, 33 rules | implemented | 152 tests; failing and passing case per rule in `fixtures/rule-cases.mjs` |
 | Validation: ACT, axe-core, 12 real repositories, case study | implemented | `benchmarks/`, `documents/rachnasutra/16-validation-and-benchmarks.md` |
 | Live host smoke tests | not done | `documents/rachnasutra/17-host-smoke-tests.md` |
 | Measured contrast (literal CSS pairs, inline styles) | implemented | cascade, gradients, images not resolved |

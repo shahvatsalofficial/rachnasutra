@@ -3,9 +3,13 @@ import path from 'node:path';
 import type { Asset, Corpus, SourceFile } from './types.js';
 
 const IGNORED_DIRS = new Set([
-  'node_modules', '.git', 'dist', 'build', 'out', 'target', 'vendor', '.venv', 'venv', '__pycache__',
-  '.next', '.nuxt', '.svelte-kit', 'coverage', '.idea', '.vscode', '.rachnasutra', 'reports', 'rachnasutra-reports', 'graphify-out',
+  'node_modules', '.git', '.venv', 'venv', '__pycache__',
+  '.next', '.nuxt', '.svelte-kit', '.idea', '.vscode', '.rachnasutra', 'rachnasutra-reports', 'graphify-out',
 ]);
+/** Often generated, but also ordinary source folder names (src/reports, app/build). */
+const OUTPUT_DIRS = new Set(['dist', 'build', 'out', 'target', 'vendor', 'coverage', 'reports']);
+/** A folder holding one of these is a project root, so its output folders are generated ones. */
+const PROJECT_MARKERS = new Set(['package.json', 'pom.xml', 'Cargo.toml', 'composer.json', 'go.mod', 'build.gradle', 'build.gradle.kts']);
 
 const IMAGE_EXT = new Set(['.png', '.jpg', '.jpeg', '.gif', '.webp', '.avif', '.svg']);
 const BINARY_EXT = new Set([
@@ -46,7 +50,7 @@ export async function walk(root: string, opts: WalkOptions = {}): Promise<Corpus
   const start = Date.now();
   const files: SourceFile[] = [];
   const assets: Asset[] = [];
-  const skipped = { ignoredDirs: 0, tooLarge: 0, binary: 0, symlinks: 0, overBudget: 0, excluded: 0 };
+  const skipped = { ignoredDirs: 0, tooLarge: 0, binary: 0, symlinks: 0, overBudget: 0, excluded: 0, unreadable: 0 };
   let truncated = false;
   const absRoot = path.resolve(root);
 
@@ -56,8 +60,10 @@ export async function walk(root: string, opts: WalkOptions = {}): Promise<Corpus
     try {
       entries = await fs.readdir(dir, { withFileTypes: true });
     } catch {
+      skipped.unreadable++;
       return;
     }
+    const projectRoot = dir === absRoot || entries.some((e) => PROJECT_MARKERS.has(e.name));
     entries.sort((a, b) => a.name.localeCompare(b.name));
     for (const e of entries) {
       if (Date.now() - start > timeBudgetMs || files.length >= maxFiles) {
@@ -76,7 +82,7 @@ export async function walk(root: string, opts: WalkOptions = {}): Promise<Corpus
         continue;
       }
       if (e.isDirectory()) {
-        if (IGNORED_DIRS.has(e.name)) {
+        if (IGNORED_DIRS.has(e.name) || (projectRoot && OUTPUT_DIRS.has(e.name))) {
           skipped.ignoredDirs++;
           continue;
         }
@@ -89,6 +95,7 @@ export async function walk(root: string, opts: WalkOptions = {}): Promise<Corpus
       try {
         size = (await fs.stat(abs)).size;
       } catch {
+        skipped.unreadable++;
         continue;
       }
       if (IMAGE_EXT.has(ext)) assets.push({ rel, size });

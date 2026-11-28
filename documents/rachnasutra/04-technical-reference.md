@@ -9,7 +9,7 @@
 | Runtime dependencies | None |
 | Dev dependencies | `typescript`, `@types/node`, and optional browser tools `playwright`, `@axe-core/playwright`, `lighthouse` |
 | Entry point | `dist/cli.js` (bin `rachnasutra`) |
-| Tests | `node --test` (runs `test/*.test.mjs`); 140 tests |
+| Tests | `node --test` (runs `test/*.test.mjs`); 152 tests |
 | Build | `npm run build` (`tsc`) |
 
 ## Result model
@@ -43,7 +43,9 @@ Defined in `src/types.ts`.
 
 ## File walking (`src/fsutil.ts`)
 
-- Ignores: `node_modules`, `.git`, `dist`, `build`, `out`, `target`, `vendor`, `.venv`, `venv`, `__pycache__`, `.next`, `.nuxt`, `.svelte-kit`, `coverage`, `.idea`, `.vscode`, `.rachnasutra`, `reports`, `graphify-out`.
+- Always ignores: `node_modules`, `.git`, `.venv`, `venv`, `__pycache__`, `.next`, `.nuxt`, `.svelte-kit`, `.idea`, `.vscode`, `.rachnasutra`, `rachnasutra-reports`, `graphify-out`.
+- Ignores `dist`, `build`, `out`, `target`, `vendor`, `coverage` and `reports` only at the scan root or beside a project file (`package.json`, `pom.xml`, `Cargo.toml`, `composer.json`, `go.mod`, `build.gradle`). Elsewhere, such as `src/reports`, they are source folders.
+- Markup files: `.html`, `.htm`, `.jsx`, `.tsx`, `.vue`, `.svelte`, `.astro`, `.ejs`, `.hbs`, `.handlebars`, `.njk`, `.liquid`, `.twig`, `.erb`, `.cshtml`, `.php`. Style files: `.css`, `.scss`, `.less`, `.pcss`, `.postcss`.
 - Symlinks are counted and skipped.
 - User `exclude` entries match a path or a path prefix.
 - Image files (png, jpg, gif, webp, avif, svg) are measured for size; raster images are not read as text.
@@ -109,7 +111,7 @@ Patterns mask AWS access keys, GitHub tokens (`ghp_`, `gho_`, ...), fine-grained
 
 - `verifyPackage()` checks that all 13 skills exist, each has valid frontmatter (name equal to the directory, valid characters, description under 1,024 characters), required sections, fewer than 500 lines, required root files, and that relative README links resolve.
 - `validateReport()` checks the report contract.
-- `compareToReport()` re-audits and compares fingerprints: resolved (in baseline, not now), remaining (in both), introduced (now only).
+- `compareToReport()` re-audits with the baseline's category scope and pairs findings one to one by fingerprint: resolved (in baseline, not now), remaining (in both), introduced (now only). Two identical lines count twice. Browser (`axe/`) findings are counted as not re-checked.
 
 ## Exit codes
 
@@ -117,10 +119,10 @@ Patterns mask AWS access keys, GitHub tokens (`ghp_`, `gho_`, ...), fine-grained
 |---|---|---|
 | 0 | ok | Success, or no finding at or above the threshold |
 | 1 | findings | Threshold reached; install conflict; `doctor` check failed |
-| 2 | usage | Bad command, flag or config |
+| 2 | usage | Bad command, flag, value, path or config |
 | 3 | notAvailable | Browser or visual audit requested |
 | 4 | verifyFailed | Package check failed; new findings introduced; report invalid |
-| 5 | error | Unexpected error |
+| 5 | error | Unexpected error, or a gate over a partial or empty scan |
 
 ## Configuration schema
 

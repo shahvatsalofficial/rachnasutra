@@ -32,7 +32,7 @@
 | Container image | implemented | `Dockerfile`, static CLI, no browser. Built on GitHub Actions Ubuntu. Not built on the maintainer PC |
 | API or local-model provider modes | planned | Skills use the host model today |
 | Report viewer dashboard | partial | One HTML report per run, plus `history` counts |
-| Rule examples and per-rule tests | implemented | 33 rules, 140 tests |
+| Rule examples and per-rule tests | implemented | 33 rules, 152 tests |
 | `history` command | implemented | Markdown and HTML counts of saved JSON reports |
 | Dockerfile | implemented | Static CLI only |
 | Gujarati README | implemented | `README.gu.md` |

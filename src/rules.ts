@@ -32,21 +32,57 @@ export interface Doc {
   text: string;
   kind: 'markup' | 'style' | 'other';
   isHtmlDoc: boolean;
+  /** Original file text when `text` was rewritten (same line breaks). Excerpts come from here. */
+  source?: string;
 }
 
-export const MARKUP_EXT = new Set(['.html', '.htm', '.jsx', '.tsx', '.vue', '.svelte', '.astro']);
-export const STYLE_EXT = new Set(['.css', '.scss', '.less']);
+export const MARKUP_EXT = new Set(['.html', '.htm', '.jsx', '.tsx', '.vue', '.svelte', '.astro', '.ejs', '.hbs', '.handlebars', '.njk', '.liquid', '.twig', '.erb', '.cshtml', '.php']);
+export const STYLE_EXT = new Set(['.css', '.scss', '.less', '.pcss', '.postcss']);
 
 const MAX_HITS_PER_RULE_PER_FILE = 15;
 
+/** Per-file lookups, built once. Without them every hit rescans the file and large files take quadratic time. */
+let memoText: string | undefined;
+const memo = new Map<string, number[]>();
+let lineMemo: { text: string; lines: string[] } | undefined;
+
+/** Sorted start offsets of every match of a global regex in the text. */
+function positions(text: string, re: RegExp): number[] {
+  if (text !== memoText) {
+    memo.clear();
+    memoText = text;
+  }
+  const key = `${re.source}/${re.flags}`;
+  let at = memo.get(key);
+  if (!at) memo.set(key, (at = Array.from(text.matchAll(re), (m) => m.index)));
+  return at;
+}
+
+/** How many sorted offsets are below the index. */
+function countBelow(at: number[], index: number): number {
+  let lo = 0;
+  let hi = at.length;
+  while (lo < hi) {
+    const mid = (lo + hi) >> 1;
+    if (at[mid] < index) lo = mid + 1;
+    else hi = mid;
+  }
+  return lo;
+}
+
+/** Offset of the last match before the index, or -1. */
+const lastBefore = (text: string, re: RegExp, index: number): number => {
+  const at = positions(text, re);
+  return at[countBelow(at, index) - 1] ?? -1;
+};
+
 export function lineAt(text: string, index: number): number {
-  let n = 1;
-  for (let i = 0; i < index && i < text.length; i++) if (text.charCodeAt(i) === 10) n++;
-  return n;
+  return countBelow(positions(text, /\n/g), index) + 1;
 }
 
 function lineText(text: string, line: number): string {
-  return text.split(/\r?\n/)[line - 1] ?? '';
+  if (lineMemo?.text !== text) lineMemo = { text, lines: text.split(/\r?\n/) };
+  return lineMemo.lines[line - 1] ?? '';
 }
 
 /** Attribute-aware tag matcher: tolerates `>` inside quoted values and JSX braces. */
@@ -68,8 +104,7 @@ const nonEmptyAttr = (attrs: string, name: string): boolean => {
 };
 /** True when the index sits inside <pre>, <code>, a Jekyll highlight block or a Markdown fence (a code sample, not a document). */
 function insideCode(t: string, index: number): boolean {
-  const before = t.slice(0, index);
-  const count = (re: RegExp): number => (before.match(re) ?? []).length;
+  const count = (re: RegExp): number => countBelow(positions(t, re), index);
   return count(/<(pre|code)\b/gi) > count(/<\/(pre|code)>/gi) || count(/\{%\s*highlight/g) > count(/\{%\s*endhighlight/g) || count(/```/g) % 2 === 1;
 }
 /** Template or runtime-localisation syntax means the final text or markup is not visible to a static scan. */
@@ -107,7 +142,7 @@ function mk(
   base: Omit<RawHit, 'file' | 'line' | 'evidence'>,
 ): RawHit {
   const line = lineAt(doc.text, index);
-  return { ...base, file: doc.file.rel, line, evidence: [{ path: doc.file.rel, line, excerpt: excerpt(lineText(doc.text, line)) }] };
+  return { ...base, file: doc.file.rel, line, evidence: [{ path: doc.file.rel, line, excerpt: excerpt(lineText(doc.source ?? doc.text, line)) }] };
 }
 
 /** Tailwind arbitrary hex utilities and JSX style objects. Named palettes and the cascade are not resolved. */
@@ -433,6 +468,7 @@ export function runRules(ctx: RuleCtx): RawHit[] {
     }
 
     // form controls without labels
+    const hasHtmlFor = /htmlFor/.test(t);
     const labelFor = new Set([...t.matchAll(/<label\b[^>]*\bfor\s*=\s*["']([^"']+)["']/gi)].map((m) => m[1]));
     for (const m of t.matchAll(tagRe('input|select|textarea'))) {
       const a = m[2];
@@ -441,13 +477,10 @@ export function runRules(ctx: RuleCtx): RawHit[] {
       if (hasSpread(a) || isHidden(a) || nonEmptyAttr(a, 'aria-label') || nonEmptyAttr(a, 'aria-labelledby') || nonEmptyAttr(a, 'title')) continue;
       const id = attrVal(a, 'id');
       if (id && labelFor.has(id)) continue;
-      if (/htmlFor/.test(t) && id) continue;
-      const before = t.slice(0, m.index);
-      const lastOpen = Math.max(before.lastIndexOf('<label'), before.lastIndexOf('<Label'));
-      const lastClose = Math.max(before.lastIndexOf('</label'), before.lastIndexOf('</Label'));
-      if (lastOpen > lastClose) continue;
+      if (id && hasHtmlFor) continue;
+      if (lastBefore(t, /<[Ll]abel/g, m.index) > lastBefore(t, /<\/[Ll]abel/g, m.index)) continue;
       // a control nested in a button or summary is named by that element's content
-      if (Math.max(before.lastIndexOf('<button'), before.lastIndexOf('<summary')) > Math.max(before.lastIndexOf('</button'), before.lastIndexOf('</summary'))) continue;
+      if (lastBefore(t, /<(?:button|summary)/g, m.index) > lastBefore(t, /<\/(?:button|summary)/g, m.index)) continue;
       push(mk(d, m.index, {
         rule: 'RS-A11Y-005', category: 'accessibility', title: 'Form control has no programmatic label', severity: 'high', confidence: 'medium',
         criterion: 'WCAG 2.2: 1.3.1 Info and Relationships, 3.3.2 Labels or Instructions, 4.1.2',
@@ -556,7 +589,7 @@ export function runRules(ctx: RuleCtx): RawHit[] {
     }
 
     // SCSS interpolation (#{...}) contains braces; blank it out with same-length filler so offsets stay valid
-    for (const m of b.text.replace(/#\{[^{}]*\}/g, (x) => 'X'.repeat(x.length)).matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
+    for (const m of b.text.replace(/#\{[^{}]*\}/g, (x) => 'X'.repeat(x.length)).matchAll(/(?<![^{}])([^{}]+)\{([^{}]*)\}/g)) {
       const selector = cleanSelector(m[1]);
       const body = m[2];
       const bodyAt = m.index + m[0].indexOf('{') + 1;

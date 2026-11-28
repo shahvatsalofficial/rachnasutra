@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto';
 import { createServer } from 'node:http';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
+import { redact } from './redact.js';
 import type { Finding, Severity } from './types.js';
 
 export class BrowserMissing extends Error {
@@ -45,10 +46,38 @@ async function launchBrowser(port: number): Promise<{ browser: PwBrowser; channe
   }
 }
 
-function serve(dir: string): Promise<{ url: string; close: () => Promise<void> }> {
+const MIME: Record<string, string> = {
+  '.html': 'text/html; charset=utf-8', '.htm': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8',
+  '.js': 'text/javascript; charset=utf-8', '.mjs': 'text/javascript; charset=utf-8', '.json': 'application/json; charset=utf-8',
+  '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.gif': 'image/gif',
+  '.webp': 'image/webp', '.avif': 'image/avif', '.ico': 'image/x-icon', '.woff': 'font/woff', '.woff2': 'font/woff2',
+  '.ttf': 'font/ttf', '.otf': 'font/otf', '.txt': 'text/plain; charset=utf-8', '.xml': 'application/xml', '.wasm': 'application/wasm',
+};
+
+/** A port the operating system reports as free right now. */
+function freePort(): Promise<number> {
+  return new Promise((resolve, reject) => {
+    const s = createServer();
+    s.once('error', reject);
+    s.listen(0, '127.0.0.1', () => {
+      const addr = s.address();
+      s.close(() => resolve(typeof addr === 'object' && addr ? addr.port : 0));
+    });
+  });
+}
+
+/** Local static server for the page under test. */
+export function serve(dir: string): Promise<{ url: string; close: () => Promise<void> }> {
   const root = path.resolve(dir);
   const server = createServer(async (req, res) => {
-    const pathname = decodeURIComponent(new URL(req.url ?? '/', 'http://127.0.0.1').pathname);
+    let pathname: string;
+    try {
+      pathname = decodeURIComponent(new URL(req.url ?? '/', 'http://127.0.0.1').pathname);
+    } catch {
+      res.statusCode = 400;
+      res.end();
+      return;
+    }
     const rel = pathname === '/' ? 'index.html' : pathname.replace(/^\/+/, '');
     const abs = path.resolve(root, rel);
     if (abs !== root && !abs.startsWith(root + path.sep)) {
@@ -58,6 +87,7 @@ function serve(dir: string): Promise<{ url: string; close: () => Promise<void> }
     }
     try {
       const buf = await readFile(abs);
+      res.setHeader('content-type', MIME[path.extname(abs).toLowerCase()] ?? 'application/octet-stream');
       res.end(buf);
     } catch {
       res.statusCode = 404;
@@ -75,18 +105,19 @@ function serve(dir: string): Promise<{ url: string; close: () => Promise<void> }
 
 function finding(n: number, rule: string, title: string, severity: Severity, file: string, excerpt: string): Finding {
   const fingerprint = createHash('sha256').update(`${rule}|${file}|${excerpt}`).digest('hex').slice(0, 12);
+  const shown = redact(excerpt).slice(0, 240);
   return {
     id: `RS-${String(n).padStart(4, '0')}`,
     rule,
     category: 'accessibility',
-    title,
+    title: redact(title),
     severity,
     confidence: 'high',
     status: 'confirmed',
     platform: 'web',
     file,
     line: 1,
-    evidence: [{ path: file, line: 1, excerpt: excerpt.slice(0, 240) }],
+    evidence: [{ path: file, line: 1, excerpt: shown }],
     user_impact: 'A rendered-page check reported this. Static source rules cannot see it.',
     recommended_fix: 'Open the page in a browser and fix the cited element. Re-run with --mode browser.',
     verification: 'Re-run `rachnasutra audit --mode browser`.',
@@ -112,7 +143,7 @@ export async function runBrowserAudit(root: string, outDir: string, startId: num
   } catch {
     throw new BrowserMissing(`No index.html in ${root}. Nothing was rendered.`);
   }
-  const debugPort = 9400 + Math.floor(Math.random() * 100);
+  const debugPort = await freePort();
   const { browser, channel } = await launchBrowser(debugPort);
   const site = await serve(root);
   await mkdir(outDir, { recursive: true });
